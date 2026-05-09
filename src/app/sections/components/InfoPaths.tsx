@@ -38,11 +38,12 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     });
 
     gsap.from("#explode-bg", {
-      y: -300,
-      opacity: 0,
+      y: 700,
+      opacity: 0.3,
       scrollTrigger: {
         trigger: "#exploded",
         start: "top bottom",
+        end: "130%",
         scrub: true,
       },
     });
@@ -54,6 +55,20 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
         toggleActions: "play none none reverse",
       },
     });
+
+    const tl2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#exploded",
+        start: "top top",
+        end: "+=120%",
+        pin: true,
+        pinSpacing: true,
+        scrub: true,
+      },
+    });
+
+    tl2.to("#explode-h2", { y: -150, duration: 1, ease: "none" }, 0);
+    tl2.to(sectionRef.current, { opacity: 0, duration: 0.05 }, 0.95);
 
     gsap.from(para.lines, {
       y: "100%",
@@ -166,7 +181,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           <circle cx="3" cy="309" r="3" fill="#D9D9D9" />
         </svg>
 
-        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box">
+        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
           <div
             className="size-14 p-2 bg-white/15  rounded-lg"
             style={{ boxShadow: infoGlass }}
@@ -177,7 +192,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
         </div>
       </div>
       <div className="w-full absolute bottom-0 left-1/2">
-        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box">
+        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
           <div
             className="size-14 p-2 bg-white/15  rounded-lg"
             style={{ boxShadow: infoGlass }}

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import InfoPaths from "@/app/sections/components.tsx/InfoPaths";
+import InfoPaths from "@/app/sections/components/InfoPaths";
 
 gsap.registerPlugin(ScrollTrigger);
 

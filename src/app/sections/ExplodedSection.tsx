@@ -1,12 +1,12 @@
-import InfoPaths from "./components.tsx/InfoPaths";
+import InfoPaths from "./components/InfoPaths";
 
 const ExplodedSection = () => {
   return (
     <div
-      className="w-full h-screen py-30 px-16 relative overflow-hidden "
+      className="w-full h-screen py-20 px-16 relative overflow-hidden "
       id="exploded"
     >
-      <div className="h-full flex flex-col justify-between pb-20">
+      <div className="h-full flex flex-col justify-between ">
         <p className="text-2xl max-w-100" id="explode-p">
           Dignity by Design. Proximity-based tamper detection with biometric
           verification.
@@ -18,7 +18,7 @@ const ExplodedSection = () => {
         </div>
       </div>
 
-      <div className="w-200 absolute left-0 top-[10%]" id="explode-bg">
+      <div className="w-200 absolute left-0 top-[-20%]" id="explode-bg">
         <SectionBg />
       </div>
     </div>

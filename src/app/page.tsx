@@ -1,6 +1,7 @@
 import WatchScene from "@/components/WatchScene";
 import Hero from "./sections/Hero";
 import ExplodedSection from "./sections/ExplodedSection";
+import PlatformSection from "./sections/PlatformSection";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <WatchScene />
       <Hero />
       <ExplodedSection />
+      <PlatformSection />
     </main>
   );
 }
