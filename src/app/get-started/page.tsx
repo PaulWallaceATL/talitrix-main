@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import Footer from "@/components/Footer";
+import ShaderHero from "@/components/ShaderHero";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import AuroraBlur from "@/components/react-bits/aurora-blur";
 import GetStartedForm from "./GetStartedForm";
+import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
   title: "Get Started | Talitrix",
@@ -35,14 +38,18 @@ const steps = [
 export default function GetStartedPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <PageHero
+      <ShaderHero
         eyebrow="Get Started"
         title={
-          <>
-            Deploy the
-            <br />
-            <span className="text-white/60">new standard.</span>
-          </>
+          <StaggeredText
+            as="h1"
+            text={"Deploy the\nnew standard."}
+            className="text-5xl md:text-7xl leading-[1.05]"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
         }
         subtitle="Request a briefing on Talitrix ONE and see the unified ecosystem in action."
         body={
@@ -51,6 +58,19 @@ export default function GetStartedPage() {
             tailored briefing for your agency's leadership and operational
             teams.
           </p>
+        }
+        background={
+          <AuroraBlur
+            layers={orangeAurora}
+            skyLayers={blackSky}
+            speed={0.85}
+            bloomIntensity={2.1}
+            brightness={0.65}
+            saturation={1.1}
+            verticalFade={0.85}
+            movementX={-1.5}
+            movementY={-2}
+          />
         }
       />
 

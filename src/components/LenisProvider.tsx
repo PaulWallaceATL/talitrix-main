@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { usePathname } from "next/navigation";
 import ReactLenis, { useLenis } from "lenis/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,6 +25,14 @@ const ScrollTriggerSyncer = () => {
 };
 
 const LenisProvider = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+  // Lenis is wired to the home page's scroll-driven watch animation.
+  // Inner pages use native scroll so the html/body height clamp doesn't
+  // block scrolling.
+  if (pathname !== "/") {
+    return <>{children}</>;
+  }
+
   return (
     <ReactLenis root options={lenisOptions}>
       <ScrollTriggerSyncer />

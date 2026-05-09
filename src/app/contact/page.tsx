@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import Footer from "@/components/Footer";
+import ShaderHero from "@/components/ShaderHero";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import AuroraBlur from "@/components/react-bits/aurora-blur";
 import ContactForm from "./ContactForm";
+import {
+  subtleOrangeAurora,
+  blackSky,
+} from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
   title: "Contact | Talitrix",
@@ -35,16 +41,33 @@ const channels = [
 export default function ContactPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <PageHero
+      <ShaderHero
         eyebrow="Contact"
         title={
-          <>
-            Talk with the
-            <br />
-            <span className="text-white/60">Talitrix team.</span>
-          </>
+          <StaggeredText
+            as="h1"
+            text={"Talk with the\nTalitrix team."}
+            className="text-5xl md:text-7xl leading-[1.05]"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
         }
         subtitle="Whether you're scoping a deployment or asking a single question — we're easy to reach."
+        background={
+          <AuroraBlur
+            layers={subtleOrangeAurora}
+            skyLayers={blackSky}
+            speed={0.7}
+            bloomIntensity={1.8}
+            brightness={0.55}
+            saturation={1.0}
+            verticalFade={0.85}
+            movementX={-1.2}
+            movementY={-1.6}
+          />
+        }
       />
 
       <section className="relative px-16 py-24 border-b border-border-gray">
@@ -94,9 +117,7 @@ export default function ContactPage() {
           </div>
 
           <div className="lg:col-span-7">
-            <div
-              className="border border-border-gray rounded-2xl p-10 bg-white/[0.02] relative overflow-hidden"
-            >
+            <div className="border border-border-gray rounded-2xl p-10 bg-white/[0.02] relative overflow-hidden">
               <div className="absolute -top-32 -right-20 w-[400px] h-[400px] bg-primary/10 blur-[150px] pointer-events-none" />
               <div className="relative z-10">
                 <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-3">

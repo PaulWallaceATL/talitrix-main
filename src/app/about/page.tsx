@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
+import ShaderHero from "@/components/ShaderHero";
+import AuroraBlur from "@/components/react-bits/aurora-blur";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import { BlurHighlight } from "@/components/react-bits/blur-highlight";
+import DepthCard from "@/components/react-bits/depth-card";
+import SynapticShift from "@/components/react-bits/synaptic-shift";
+import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
   title: "About | Talitrix",
@@ -62,23 +68,40 @@ const timeline = [
 export default function AboutPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <PageHero
+      <ShaderHero
         eyebrow="About Talitrix"
         title={
-          <>
-            Redefining
-            <br />
-            the Category.
-          </>
+          <StaggeredText
+            as="h1"
+            text={"Redefining\nthe Category."}
+            className="text-5xl md:text-7xl leading-[1.05]"
+            segmentBy="words"
+            duration={0.8}
+            delay={70}
+            blur
+          />
         }
         subtitle="Technology designed around people, not punishment."
         body={
           <p>
             Talitrix is setting the global standard in monitoring and
-            supervision technology — delivering an industry-defining ecosystem
-            that makes criminal-justice professionals more effective,
-            participants more successful, and communities safer.
+            supervision technology — delivering an industry-defining
+            ecosystem that makes criminal-justice professionals more
+            effective, participants more successful, and communities safer.
           </p>
+        }
+        background={
+          <AuroraBlur
+            layers={orangeAurora}
+            skyLayers={blackSky}
+            speed={0.9}
+            bloomIntensity={2.4}
+            brightness={0.7}
+            saturation={1.1}
+            verticalFade={0.85}
+            movementX={-1.5}
+            movementY={-2}
+          />
         }
       >
         <div className="flex flex-wrap gap-4 mt-10">
@@ -87,7 +110,7 @@ export default function AboutPage() {
             Explore Talitrix ONE
           </CTAButton>
         </div>
-      </PageHero>
+      </ShaderHero>
 
       <section className="relative px-16 py-32 border-b border-border-gray">
         <div className="max-w-5xl">
@@ -99,31 +122,60 @@ export default function AboutPage() {
             <br />
             <span className="text-white/60">One company correcting it.</span>
           </h2>
-          <div className="space-y-6 text-lg text-white/75 leading-relaxed max-w-3xl">
+
+          <BlurHighlight
+            highlightedBits={[
+              "rehabilitative tool",
+              "comic-book villain's tracking device",
+              "back to its original purpose",
+              "first independent wrist-worn GPS monitoring device",
+            ]}
+            highlightColor="rgba(248, 122, 19, 0.4)"
+            highlightClassName="text-white"
+            blurAmount={6}
+            inactiveOpacity={0.35}
+            blurDuration={1.1}
+            highlightDuration={0.9}
+            viewportOptions={{ once: true, amount: 0.4 }}
+            className="space-y-6 text-lg text-white/85 leading-relaxed max-w-3xl"
+          >
             <p>
               In the early 1960s, Harvard researchers developed the first
               wearable electronic monitoring technology as a rehabilitative
-              tool — rooted in positive behavioral reinforcement and outcomes.
+              tool — rooted in positive behavioral reinforcement and
+              outcomes.
             </p>
             <p>
-              By 1983, the industry had commercialized a different vision: the
-              ankle monitor, inspired by a comic-book villain's tracking
+              By 1983, the industry had commercialized a different vision:
+              the ankle monitor, inspired by a comic-book villain's tracking
               device. For the next four decades, the category prioritized
               surveillance over success — and disconnected from the outcomes
               it claimed to support.
             </p>
-            <p className="text-white">
+            <p>
               Talitrix was built to change that. We brought the technology to
               the wrist — and back to its original purpose. We built the
               T-Band, the industry's first independent wrist-worn GPS
-              monitoring device, and developed a complete ecosystem around it.
+              monitoring device, and developed a complete ecosystem around
+              it.
             </p>
-          </div>
+          </BlurHighlight>
         </div>
       </section>
 
       <section className="relative px-16 py-32 border-b border-border-gray overflow-hidden">
-        <div className="absolute top-1/2 -right-32 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 blur-[180px] pointer-events-none" />
+        <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+          <SynapticShift
+            color="#f87a13"
+            speed={0.3}
+            scale={0.4}
+            intensity={1.2}
+            falloff={1.4}
+            complexity={8}
+            breathing
+          />
+        </div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
 
         <div className="relative z-10">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
@@ -137,7 +189,7 @@ export default function AboutPage() {
             {timeline.map((item) => (
               <div
                 key={item.year}
-                className="bg-background p-8 flex flex-col gap-4 min-h-[260px]"
+                className="bg-background/80 backdrop-blur-md p-8 flex flex-col gap-4 min-h-[260px]"
               >
                 <span className="text-primary text-sm tracking-widest">
                   {item.year}
@@ -152,9 +204,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-32 border-b border-border-gray">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-4">
+      <section className="relative px-16 py-32 border-b border-border-gray overflow-hidden">
+        <div className="absolute -top-20 right-0 w-[600px] h-[600px] bg-primary/10 blur-[200px] pointer-events-none" />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 mb-16">
+          <div className="lg:col-span-5">
             <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
               What we believe
             </span>
@@ -167,23 +221,26 @@ export default function AboutPage() {
               What we built is shaped by what we believe.
             </p>
           </div>
+        </div>
 
-          <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-            {principles.map((p, i) => (
-              <div
-                key={p.title}
-                className="bg-background p-8 flex flex-col gap-3 min-h-[200px]"
-              >
-                <span className="text-xs text-white/40 tracking-widest">
-                  0{i + 1}
-                </span>
-                <h3 className="text-xl text-primary">{p.title}</h3>
-                <p className="text-white/70 leading-relaxed text-sm">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {principles.map((p, i) => (
+            <DepthCard
+              key={p.title}
+              title={p.title}
+              description={p.body}
+              width={340}
+              height={260}
+              borderRadius="20px"
+              maxRotation={12}
+              maxTranslation={14}
+              spotlight
+              spotlightColor="rgba(248, 122, 19, 0.18)"
+              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-7 flex flex-col justify-end"
+              revealAnimation="fade"
+              staggerDelay={80 + i * 30}
+            />
+          ))}
         </div>
       </section>
 

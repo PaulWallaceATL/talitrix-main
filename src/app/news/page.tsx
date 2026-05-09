@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import Footer from "@/components/Footer";
-import CTAButton from "@/components/CTAButton";
 import Link from "next/link";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import HalftoneWave from "@/components/react-bits/halftone-wave";
+import FrameBorder from "@/components/react-bits/frame-border";
 
 export const metadata: Metadata = {
   title: "News | Talitrix",
@@ -80,44 +81,79 @@ const articles = [
 export default function NewsPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <PageHero
-        eyebrow="News"
-        title={
-          <>
-            Field reports.
-            <br />
-            <span className="text-white/60">From the new standard.</span>
-          </>
-        }
-        subtitle="Announcements, briefings, and perspective from the team setting the new standard in monitoring and supervision technology."
-      />
+      <section className="relative w-full overflow-hidden border-b border-border-gray">
+        <div className="absolute inset-0 z-0 opacity-60">
+          <HalftoneWave
+            colorA="#f87a13"
+            colorB="#ffba80"
+            backgroundColor="#000000"
+            speed={0.5}
+            gridDensity={90}
+            dotSize={0.42}
+            softness={1.4}
+            opacity={0.85}
+            rotation={15}
+          />
+        </div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-background/40 to-background pointer-events-none" />
+
+        <div className="relative z-10 px-16 pt-48 pb-32 max-w-7xl">
+          <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
+            News
+          </span>
+          <StaggeredText
+            as="h1"
+            text={"Field reports.\nFrom the new standard."}
+            className="text-5xl md:text-7xl leading-[1.05] mb-6"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
+          <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed">
+            Announcements, briefings, and perspective from the team setting
+            the new standard in monitoring and supervision technology.
+          </p>
+        </div>
+      </section>
 
       <section className="relative px-16 py-24 border-b border-border-gray overflow-hidden">
         <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
 
-        <Link
-          href={featured.href}
-          className="relative z-10 block group"
-        >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border border-border-gray rounded-2xl p-12 bg-white/[0.02] hover:bg-white/[0.04] transition-colors">
-            <div className="lg:col-span-3 flex flex-col gap-3">
-              <span className="text-primary text-xs uppercase tracking-[0.3em]">
-                Featured · {featured.category}
-              </span>
-              <span className="text-white/50 text-sm">{featured.date}</span>
+        <Link href={featured.href} className="relative z-10 block group">
+          <div className="relative rounded-2xl overflow-hidden">
+            <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+              <FrameBorder
+                color="#f87a13"
+                backgroundColor="#000000"
+                speed={0.7}
+                borderWidth={0.06}
+                noiseStrength={0.5}
+                intensity={1.4}
+                opacity={0.85}
+              />
             </div>
-            <div className="lg:col-span-9 flex flex-col gap-6">
-              <h2 className="text-3xl md:text-5xl leading-tight group-hover:text-primary transition-colors">
-                {featured.title}
-              </h2>
-              <p className="text-white/70 text-lg leading-relaxed max-w-3xl">
-                {featured.excerpt}
-              </p>
-              <div className="pt-2">
-                <span className="text-primary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                  Read the announcement
-                  <span>→</span>
+
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 border border-border-gray rounded-2xl p-12 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] transition-colors">
+              <div className="lg:col-span-3 flex flex-col gap-3">
+                <span className="text-primary text-xs uppercase tracking-[0.3em]">
+                  Featured · {featured.category}
                 </span>
+                <span className="text-white/50 text-sm">{featured.date}</span>
+              </div>
+              <div className="lg:col-span-9 flex flex-col gap-6">
+                <h2 className="text-3xl md:text-5xl leading-tight group-hover:text-primary transition-colors">
+                  {featured.title}
+                </h2>
+                <p className="text-white/70 text-lg leading-relaxed max-w-3xl">
+                  {featured.excerpt}
+                </p>
+                <div className="pt-2">
+                  <span className="text-primary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Read the announcement
+                    <span>→</span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -135,20 +171,25 @@ export default function NewsPage() {
             </h2>
           </div>
           <div className="flex gap-4 flex-wrap">
-            {["All", "Platform", "Field Report", "Perspective", "Engineering", "Courts"].map(
-              (cat, i) => (
-                <button
-                  key={cat}
-                  className={`px-4 py-2 rounded-full border text-sm transition-colors ${
-                    i === 0
-                      ? "border-primary text-primary"
-                      : "border-border-gray text-white/65 hover:text-white hover:border-white/40"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ),
-            )}
+            {[
+              "All",
+              "Platform",
+              "Field Report",
+              "Perspective",
+              "Engineering",
+              "Courts",
+            ].map((cat, i) => (
+              <button
+                key={cat}
+                className={`px-4 py-2 rounded-full border text-sm transition-colors ${
+                  i === 0
+                    ? "border-primary text-primary"
+                    : "border-border-gray text-white/65 hover:text-white hover:border-white/40"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
 

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
+import ShaderHero from "@/components/ShaderHero";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import SynapticShift from "@/components/react-bits/synaptic-shift";
+import DepthCard from "@/components/react-bits/depth-card";
 
 export const metadata: Metadata = {
   title: "Services | Talitrix",
@@ -14,88 +17,68 @@ const services = [
     number: "01",
     title: "Implementation & Deployment",
     body: "A guided rollout aligned to your agency's operational realities — from intake configuration to in-field T-Band fitting. We deliver the plan, the people, and the playbooks.",
-    items: [
-      "Project planning & milestone mapping",
-      "Hardware provisioning & logistics",
-      "Configuration of ONE Intake, JMS, and Probation modules",
-      "Pilot, parallel-run, and full cutover support",
-    ],
   },
   {
     number: "02",
     title: "Training & Enablement",
     body: "Role-based training programs ensure every user — supervisors, officers, command staff, and IT — operates the platform with confidence on day one.",
-    items: [
-      "Officer & supervisor T-App training",
-      "Command staff dashboard training",
-      "On-site, virtual, and on-demand options",
-      "Certification & continuing education tracks",
-    ],
   },
   {
     number: "03",
     title: "Integration & Interoperability",
     body: "Talitrix ONE is built to work with the systems your agency already trusts. Our integration team connects to RMS, JMS, court calendaring, identity, and state systems with documented chain-of-custody.",
-    items: [
-      "Records, court, and CJIS-compliant integrations",
-      "Identity provider & SSO support",
-      "Public-safety partner ecosystem",
-      "Documented data lineage & audit trails",
-    ],
   },
   {
     number: "04",
     title: "24/7 Monitoring Center",
     body: "Talitrix-operated monitoring, escalation, and alert triage — staffed by trained operators who know the platform end-to-end. A force multiplier for agencies of any size.",
-    items: [
-      "Real-time alert triage",
-      "Tiered escalation playbooks",
-      "Documented incident timelines",
-      "Coverage available 24/7/365",
-    ],
   },
   {
     number: "05",
     title: "Expert Witness Support",
     body: "When supervision evidence enters the courtroom, the record must hold up. Our expert witness team supports prosecutors, defense, and judges with credible, transparent testimony grounded in the Talitrix Score and chain of custody.",
-    items: [
-      "Court-admissible documentation",
-      "Talitrix Score explainability",
-      "Pre-trial and trial preparation",
-      "Independent expert testimony",
-    ],
   },
   {
     number: "06",
     title: "Customer Success",
     body: "Dedicated success managers ensure ongoing alignment between platform capabilities and agency outcomes — from quarterly business reviews to operational tuning.",
-    items: [
-      "Named success manager",
-      "Quarterly business reviews",
-      "Outcomes & KPI reporting",
-      "Roadmap & feature prioritization",
-    ],
   },
 ];
 
 const phases = [
-  { phase: "Discover", body: "Operational walk-through, stakeholder alignment, and outcomes mapping." },
-  { phase: "Design", body: "Configuration, integration plan, training plan, and cutover strategy." },
-  { phase: "Deploy", body: "Hardware logistics, parallel run, training delivery, and go-live." },
-  { phase: "Drive", body: "Ongoing optimization, customer success, and outcomes measurement." },
+  {
+    phase: "Discover",
+    body: "Operational walk-through, stakeholder alignment, and outcomes mapping.",
+  },
+  {
+    phase: "Design",
+    body: "Configuration, integration plan, training plan, and cutover strategy.",
+  },
+  {
+    phase: "Deploy",
+    body: "Hardware logistics, parallel run, training delivery, and go-live.",
+  },
+  {
+    phase: "Drive",
+    body: "Ongoing optimization, customer success, and outcomes measurement.",
+  },
 ];
 
 export default function ServicesPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <PageHero
+      <ShaderHero
         eyebrow="Services"
         title={
-          <>
-            More than software.
-            <br />
-            <span className="text-white/60">A complete service model.</span>
-          </>
+          <StaggeredText
+            as="h1"
+            text={"More than software.\nA complete service model."}
+            className="text-5xl md:text-7xl leading-[1.05]"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
         }
         subtitle="Talitrix delivers the people, the playbooks, and the partnership behind every deployment."
         body={
@@ -106,6 +89,19 @@ export default function ServicesPage() {
             confidence on day one — and for outcomes that hold up over time.
           </p>
         }
+        background={
+          <div className="w-full h-full">
+            <SynapticShift
+              color="#f87a13"
+              speed={0.45}
+              scale={0.55}
+              intensity={1.6}
+              falloff={1.2}
+              complexity={9}
+              breathing
+            />
+          </div>
+        }
       >
         <div className="flex flex-wrap gap-4 mt-10">
           <CTAButton href="/get-started">Request a Briefing</CTAButton>
@@ -113,7 +109,7 @@ export default function ServicesPage() {
             Talk with our team
           </CTAButton>
         </div>
-      </PageHero>
+      </ShaderHero>
 
       <section className="relative px-16 py-32 border-b border-border-gray overflow-hidden">
         <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
@@ -145,7 +141,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-32 border-b border-border-gray">
+      <section className="relative px-16 py-32 border-b border-border-gray overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-16">
           <div className="lg:col-span-5">
             <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
@@ -164,29 +160,23 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-          {services.map((s) => (
-            <div
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {services.map((s, i) => (
+            <DepthCard
               key={s.title}
-              className="bg-background p-8 flex flex-col gap-4 min-h-[400px]"
-            >
-              <span className="text-xs text-white/40 tracking-widest">
-                {s.number}
-              </span>
-              <h3 className="text-2xl text-primary">{s.title}</h3>
-              <p className="text-white/70 leading-relaxed text-sm">{s.body}</p>
-              <ul className="flex flex-col gap-2 mt-2">
-                {s.items.map((i) => (
-                  <li
-                    key={i}
-                    className="flex gap-2 text-sm text-white/70"
-                  >
-                    <span className="text-primary mt-0.5">·</span>
-                    <span>{i}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              title={s.title}
+              description={s.body}
+              width={340}
+              height={300}
+              borderRadius="20px"
+              maxRotation={10}
+              maxTranslation={12}
+              spotlight
+              spotlightColor="rgba(248, 122, 19, 0.2)"
+              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-6 flex flex-col justify-end"
+              revealAnimation="fade"
+              staggerDelay={70 + i * 25}
+            />
           ))}
         </div>
       </section>

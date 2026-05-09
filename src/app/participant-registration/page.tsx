@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import Footer from "@/components/Footer";
+import ShaderHero from "@/components/ShaderHero";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import AuroraBlur from "@/components/react-bits/aurora-blur";
 import RegistrationForm from "./RegistrationForm";
+import { warmAurora, warmSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
   title: "Participant Registration | Talitrix",
@@ -45,14 +48,18 @@ const support = [
 export default function ParticipantRegistrationPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <PageHero
+      <ShaderHero
         eyebrow="Participant Registration"
         title={
-          <>
-            Welcome.
-            <br />
-            <span className="text-white/60">Let's get you set up.</span>
-          </>
+          <StaggeredText
+            as="h1"
+            text={"Welcome.\nLet's get you set up."}
+            className="text-5xl md:text-7xl leading-[1.05]"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
         }
         subtitle="Activate your Talitrix account and the Talitrix Participant App."
         body={
@@ -61,6 +68,19 @@ export default function ParticipantRegistrationPage() {
             communication, and the tools you need to succeed. Registration
             takes about five minutes.
           </p>
+        }
+        background={
+          <AuroraBlur
+            layers={warmAurora}
+            skyLayers={warmSky}
+            speed={0.7}
+            bloomIntensity={2}
+            brightness={0.7}
+            saturation={1.05}
+            verticalFade={0.85}
+            movementX={-1}
+            movementY={-1.5}
+          />
         }
       />
 

@@ -1,13 +1,34 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
+import ShaderHero from "@/components/ShaderHero";
+import AuroraBlur from "@/components/react-bits/aurora-blur";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import AgenticBall from "@/components/react-bits/agentic-ball";
+import SimpleGraph from "@/components/react-bits/simple-graph";
+import HalftoneWave from "@/components/react-bits/halftone-wave";
+import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
   title: "Talitrix ONE | The Unified Ecosystem",
   description:
     "Talitrix ONE is a closed-loop ecosystem connecting hardware, software, and behavioral intelligence into one continuous platform — built for the full justice lifecycle.",
 };
+
+const scoreData = [
+  { value: 32, label: "Day 1" },
+  { value: 38, label: "Day 5" },
+  { value: 41, label: "Day 10" },
+  { value: 47, label: "Day 15" },
+  { value: 55, label: "Day 20" },
+  { value: 62, label: "Day 25" },
+  { value: 68, label: "Day 30" },
+  { value: 74, label: "Day 35" },
+  { value: 79, label: "Day 40" },
+  { value: 84, label: "Day 45" },
+  { value: 88, label: "Day 50" },
+  { value: 91, label: "Day 55" },
+];
 
 const modules = [
   {
@@ -70,45 +91,47 @@ const modules = [
       "Caseload visibility across teams",
     ],
   },
-  {
-    id: "score",
-    number: "05",
-    eyebrow: "The Talitrix Score",
-    title: "Behavioral Intelligence and Defensible Data.",
-    headline: "Move from reactive supervision to proactive intervention.",
-    body: "The Talitrix Score transforms behavioral data into measurable intelligence, giving supervision teams earlier visibility into risk, stronger context for intervention, and a defensible record of participant behavior over time. By connecting alerts, activity, and intervention history into one continuous view, agencies can make more informed decisions and strengthen accountability across supervision.",
-    bullets: [
-      "Continuous behavioral signal aggregation",
-      "Earlier risk identification",
-      "Transparent, explainable scoring",
-      "Court-admissible evidentiary record",
-      "Expert witness support available",
-    ],
-  },
 ];
 
 export default function TalitrixOnePage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <PageHero
+      <ShaderHero
         eyebrow="The Platform"
         title={
-          <>
-            Talitrix ONE.
-            <br />
-            <span className="text-white/60">The Unified Ecosystem.</span>
-          </>
+          <StaggeredText
+            as="h1"
+            text={"Talitrix ONE.\nThe Unified Ecosystem."}
+            className="text-5xl md:text-7xl leading-[1.05]"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
         }
         subtitle="A connected ecosystem built for the full justice lifecycle."
         body={
           <p>
             Talitrix ONE is a closed-loop ecosystem that connects hardware,
             software, and behavioral intelligence into one continuous
-            platform. Built to support the full justice lifecycle, its modular
-            architecture allows agencies to deploy what they need while
-            maintaining continuity across facilities, supervision teams, and
-            community-based programs.
+            platform. Built to support the full justice lifecycle, its
+            modular architecture allows agencies to deploy what they need
+            while maintaining continuity across facilities, supervision
+            teams, and community-based programs.
           </p>
+        }
+        background={
+          <AuroraBlur
+            layers={orangeAurora}
+            skyLayers={blackSky}
+            speed={0.85}
+            bloomIntensity={2.2}
+            brightness={0.65}
+            saturation={1.1}
+            verticalFade={0.8}
+            movementX={-1.6}
+            movementY={-2.2}
+          />
         }
       >
         <div className="flex flex-wrap gap-4 mt-10">
@@ -117,11 +140,16 @@ export default function TalitrixOnePage() {
             Contact Sales
           </CTAButton>
         </div>
-      </PageHero>
+      </ShaderHero>
 
       <section className="relative px-16 py-24 border-b border-border-gray">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-          {modules.map((m) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
+          {[...modules, {
+            id: "score",
+            number: "05",
+            eyebrow: "The Talitrix Score",
+            title: "Behavioral Intelligence.",
+          }].map((m) => (
             <a
               key={m.id}
               href={`#${m.id}`}
@@ -139,20 +167,71 @@ export default function TalitrixOnePage() {
         </div>
       </section>
 
-      {modules.map((m, i) => (
+      {/* T-Band module — paired with AgenticBall visual */}
+      <section
+        id="tband"
+        className="relative px-16 py-32 border-b border-border-gray overflow-hidden"
+      >
+        <div className="absolute -top-40 -left-32 w-[600px] h-[600px] bg-primary/15 blur-[200px] pointer-events-none" />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            <span className="text-xs text-white/40 tracking-widest">
+              {modules[0].number} · {modules[0].eyebrow}
+            </span>
+            <h2 className="text-4xl md:text-5xl leading-tight">
+              {modules[0].headline}
+            </h2>
+            <h3 className="text-xl text-primary mt-2">{modules[0].title}</h3>
+            <p className="text-lg text-white/75 leading-relaxed">
+              {modules[0].body}
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+              {modules[0].bullets.map((b) => (
+                <li
+                  key={b}
+                  className="flex gap-3 text-sm text-white/80 border border-border-gray rounded-lg p-4 bg-white/[0.02]"
+                >
+                  <span className="text-primary">✦</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="pt-2">
+              <CTAButton href="/get-started" variant="ghost">
+                Request a deep dive
+              </CTAButton>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 h-[480px] relative">
+            <AgenticBall
+              speed={0.6}
+              complexity={5}
+              swirl={0.6}
+              hueRotation={0}
+              saturation={1.4}
+              brightness={1.1}
+              backgroundColor="#000000"
+              className="rounded-2xl border border-border-gray overflow-hidden"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Intake & Jail & Probation modules */}
+      {modules.slice(1).map((m, i) => (
         <section
           key={m.id}
           id={m.id}
           className={`relative px-16 py-32 border-b border-border-gray overflow-hidden ${
-            i % 2 === 1 ? "bg-white/[0.02]" : ""
+            i % 2 === 0 ? "bg-white/[0.02]" : ""
           }`}
         >
           <div
-            className={`absolute pointer-events-none ${
-              i % 2 === 0
-                ? "-top-40 -left-32 w-[600px] h-[600px]"
-                : "-bottom-40 -right-32 w-[600px] h-[600px]"
-            } bg-primary/10 blur-[180px]`}
+            className={`absolute pointer-events-none w-[600px] h-[600px] bg-primary/10 blur-[180px] ${
+              i % 2 === 0 ? "-top-40 -right-32" : "-bottom-40 -left-32"
+            }`}
           />
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16">
@@ -190,6 +269,106 @@ export default function TalitrixOnePage() {
         </section>
       ))}
 
+      {/* Talitrix Score module — paired with SimpleGraph */}
+      <section
+        id="score"
+        className="relative px-16 py-32 border-b border-border-gray overflow-hidden"
+      >
+        <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
+          <HalftoneWave
+            colorA="#f87a13"
+            colorB="#ff9a4d"
+            backgroundColor="#000000"
+            speed={0.6}
+            gridDensity={70}
+            dotSize={0.4}
+            softness={1.2}
+            opacity={0.7}
+          />
+        </div>
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-background/40 to-background pointer-events-none" />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            <span className="text-xs text-white/40 tracking-widest">
+              05 · The Talitrix Score
+            </span>
+            <h2 className="text-4xl md:text-5xl leading-tight">
+              Move from reactive supervision to proactive intervention.
+            </h2>
+            <h3 className="text-xl text-primary mt-4">
+              Behavioral Intelligence and Defensible Data.
+            </h3>
+          </div>
+
+          <div className="lg:col-span-7 flex flex-col gap-8">
+            <p className="text-lg text-white/75 leading-relaxed">
+              The Talitrix Score transforms behavioral data into measurable
+              intelligence, giving supervision teams earlier visibility into
+              risk, stronger context for intervention, and a defensible
+              record of participant behavior over time. By connecting
+              alerts, activity, and intervention history into one
+              continuous view, agencies can make more informed decisions and
+              strengthen accountability across supervision.
+            </p>
+
+            <div className="border border-border-gray rounded-2xl p-6 bg-white/[0.03] backdrop-blur-sm">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <span className="text-xs text-white/50 tracking-widest uppercase">
+                    Sample Score Trajectory
+                  </span>
+                  <h4 className="text-lg mt-1">
+                    Participant compliance · last 60 days
+                  </h4>
+                </div>
+                <span className="text-primary text-sm">+184%</span>
+              </div>
+              <SimpleGraph
+                data={scoreData}
+                lineColor="#f87a13"
+                dotColor="#f87a13"
+                height={220}
+                showGrid
+                gridStyle="dashed"
+                gridLines="horizontal"
+                gradientFade
+                graphLineThickness={2.5}
+                animateOnScroll
+                animateOnce
+                curved
+                showDots={false}
+                calculatePercentageDifference={false}
+              />
+            </div>
+
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                "Continuous behavioral signal aggregation",
+                "Earlier risk identification",
+                "Transparent, explainable scoring",
+                "Court-admissible evidentiary record",
+                "Expert witness support available",
+              ].map((b) => (
+                <li
+                  key={b}
+                  className="flex gap-3 text-sm text-white/80 border border-border-gray rounded-lg p-4 bg-white/[0.02]"
+                >
+                  <span className="text-primary">✦</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="pt-2">
+              <CTAButton href="/get-started" variant="ghost">
+                Request a deep dive
+              </CTAButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="relative px-16 py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-4xl">
@@ -202,7 +381,8 @@ export default function TalitrixOnePage() {
           <p className="text-white/70 text-xl leading-relaxed mb-10 max-w-2xl">
             One unified platform, behavioral intelligence, and operational
             efficiency — helping agencies act earlier, work smarter, and
-            improve outcomes for participants and the communities they serve.
+            improve outcomes for participants and the communities they
+            serve.
           </p>
           <div className="flex flex-wrap gap-4">
             <CTAButton href="/get-started">Request a Briefing</CTAButton>

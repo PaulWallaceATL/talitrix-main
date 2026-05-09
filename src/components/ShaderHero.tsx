@@ -1,35 +1,31 @@
 import React from "react";
 
-type PageHeroProps = {
+type ShaderHeroProps = {
   eyebrow?: string;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
   body?: React.ReactNode;
+  background: React.ReactNode;
   align?: "left" | "center";
-  glow?: boolean;
   children?: React.ReactNode;
 };
 
-const PageHero = ({
+const ShaderHero = ({
   eyebrow,
   title,
   subtitle,
   body,
+  background,
   align = "left",
-  glow = true,
   children,
-}: PageHeroProps) => {
+}: ShaderHeroProps) => {
   return (
     <section className="relative w-full overflow-hidden border-b border-border-gray">
-      {glow && (
-        <>
-          <div className="absolute -top-40 -left-32 w-[700px] h-[700px] bg-primary/20 blur-[180px] pointer-events-none" />
-          <div className="absolute -bottom-32 -right-32 w-[600px] h-[600px] bg-primary/10 blur-[200px] pointer-events-none" />
-        </>
-      )}
+      <div className="absolute inset-0 z-0">{background}</div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-background/30 to-background pointer-events-none" />
 
       <div
-        className={`relative z-10 px-16 pt-48 pb-28 max-w-7xl ${
+        className={`relative z-10 px-16 pt-48 pb-32 max-w-7xl ${
           align === "center" ? "mx-auto text-center" : ""
         }`}
       >
@@ -38,9 +34,9 @@ const PageHero = ({
             {eyebrow}
           </span>
         )}
-        <h1 className="text-5xl md:text-7xl leading-[1.05] mb-6">{title}</h1>
+        <div className="text-5xl md:text-7xl leading-[1.05] mb-6">{title}</div>
         {subtitle && (
-          <p className="text-xl md:text-2xl text-white/75 max-w-3xl leading-relaxed mb-6">
+          <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed mb-6">
             {subtitle}
           </p>
         )}
@@ -55,4 +51,4 @@ const PageHero = ({
   );
 };
 
-export default PageHero;
+export default ShaderHero;

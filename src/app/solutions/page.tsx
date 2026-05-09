@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
+import ShaderHero from "@/components/ShaderHero";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import { Globe } from "@/components/react-bits/globe";
+import DepthCard from "@/components/react-bits/depth-card";
 
 export const metadata: Metadata = {
   title: "Solutions | Talitrix",
@@ -30,8 +33,7 @@ const segments = [
     number: "02",
     eyebrow: "For Pretrial & Community Supervision Leaders",
     headline: "Proactive Intervention, Not Reactive Administration.",
-    subheadline:
-      "Manage high caseloads with confidence and clarity.",
+    subheadline: "Manage high caseloads with confidence and clarity.",
     body: "Effective supervision depends on having the full picture in one place. Talitrix ONE gives supervision teams a single, unified view of participant activity, compliance, and case history — reducing administrative friction and improving operational efficiency. With the Supervisor T-App, teams have instant access to live compliance data and court-ready documentation, creating more time for active case management, earlier intervention, and stronger participant outcomes.",
     bullets: [
       "Unified participant activity & compliance view",
@@ -60,8 +62,7 @@ const segments = [
     number: "04",
     eyebrow: "For Participants",
     headline: "Support, Clarity, and Dignity.",
-    subheadline:
-      "A system designed to help participants succeed.",
+    subheadline: "A system designed to help participants succeed.",
     body: "Talitrix removes the barriers between people committed to rebuilding their lives and the support they need to do it. The T-Band is designed to be worn without broadcasting justice involvement, preserving dignity in the workplace and community. The Talitrix Participant App serves as a compliance support tool, providing proactive alerts and clear communication to help participants understand their obligations and correct behavior before a violation is recorded.",
     bullets: [
       "Wrist-worn T-Band designed for dignity",
@@ -75,48 +76,78 @@ const segments = [
 export default function SolutionsPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <PageHero
-        eyebrow="Solutions"
-        title={
-          <>
-            Built for the
-            <br />
-            people who run it.
-          </>
-        }
-        subtitle="Talitrix ONE is shaped by the realities of the agencies, courts, and participants it serves."
-        body={
-          <p>
-            Modern supervision demands more than another point solution. It
-            demands continuity — and a platform that adapts to the operational
-            realities of every stakeholder in the lifecycle.
-          </p>
-        }
-      >
-        <div className="flex flex-wrap gap-4 mt-10">
-          <CTAButton href="/get-started">Request a Briefing</CTAButton>
-          <CTAButton href="/talitrix-one" variant="secondary">
-            Explore the Platform
-          </CTAButton>
+      <section className="relative w-full overflow-hidden border-b border-border-gray">
+        <div className="absolute inset-0 z-0 opacity-80">
+          <Globe
+            primaryColor="#f87a13"
+            neutralColor="rgba(255, 122, 19, 0.35)"
+            atmosphereColor="#f87a13"
+            globeColor="#0a0a0a"
+            showAtmosphere
+            autoRotateSpeed={0.4}
+            arcCount={6}
+            arcInterval={1500}
+            arcAnimationDuration={1800}
+            cameraAltitude={2.4}
+            interactive={false}
+            pointSize={0.18}
+            atmosphereAltitude={0.18}
+            globeOpacity={0.85}
+          />
         </div>
-      </PageHero>
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-background via-background/60 to-background/30 pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
+
+        <div className="relative z-10 px-16 pt-48 pb-32 max-w-7xl">
+          <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
+            Solutions
+          </span>
+          <StaggeredText
+            as="h1"
+            text={"Built for the\npeople who run it."}
+            className="text-5xl md:text-7xl leading-[1.05] mb-6"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
+          <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed mb-6">
+            Talitrix ONE is shaped by the realities of the agencies, courts,
+            and participants it serves.
+          </p>
+          <p className="text-base md:text-lg text-white/65 max-w-3xl leading-relaxed">
+            Modern supervision demands more than another point solution. It
+            demands continuity — and a platform that adapts to the
+            operational realities of every stakeholder in the lifecycle.
+          </p>
+          <div className="flex flex-wrap gap-4 mt-10">
+            <CTAButton href="/get-started">Request a Briefing</CTAButton>
+            <CTAButton href="/talitrix-one" variant="secondary">
+              Explore the Platform
+            </CTAButton>
+          </div>
+        </div>
+      </section>
 
       <section className="relative px-16 py-24 border-b border-border-gray">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-          {segments.map((s) => (
-            <a
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
+          {segments.map((s, i) => (
+            <DepthCard
               key={s.id}
+              title={s.headline}
+              description={s.eyebrow.replace("For ", "")}
+              width={300}
+              height={260}
+              borderRadius="20px"
+              maxRotation={10}
+              maxTranslation={12}
+              spotlight
+              spotlightColor="rgba(248, 122, 19, 0.22)"
               href={`#${s.id}`}
-              className="bg-background p-8 flex flex-col gap-3 hover:bg-white/5 transition-colors min-h-[180px]"
-            >
-              <span className="text-xs text-white/40 tracking-widest">
-                {s.number}
-              </span>
-              <span className="text-primary text-xs uppercase tracking-widest">
-                {s.eyebrow.replace("For ", "")}
-              </span>
-              <h3 className="text-lg leading-tight">{s.headline}</h3>
-            </a>
+              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-6 flex flex-col justify-between"
+              revealAnimation="slide"
+              staggerDelay={70 + i * 30}
+            />
           ))}
         </div>
       </section>
