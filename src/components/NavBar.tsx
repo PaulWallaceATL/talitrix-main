@@ -7,6 +7,9 @@ import { usePathname } from "next/navigation";
 const NavBar = () => {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isAdmin = pathname?.startsWith("/admin") ?? false;
+
+  if (isAdmin) return null;
 
   return (
     <header

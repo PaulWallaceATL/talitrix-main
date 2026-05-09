@@ -4,6 +4,7 @@ import Link from "next/link";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
 import FrameBorder from "@/components/react-bits/frame-border";
+import { supabaseAdmin, type NewsArticle } from "@/lib/supabase";
 
 export const metadata: Metadata = {
   title: "News | Talitrix",
@@ -11,74 +12,95 @@ export const metadata: Metadata = {
     "Announcements, briefings, and field reports from Talitrix — the team setting the new standard in monitoring and supervision technology.",
 };
 
-const featured = {
-  category: "Announcement",
-  date: "May 2026",
-  title:
-    "Talitrix unveils the T-Band — the first independent wrist-worn GPS supervision device.",
-  excerpt:
-    "The T-Band brings continuous biometric, location, and tamper-detection capabilities into one dignified, wrist-worn form factor — purpose-built for the realities of modern community supervision.",
-  href: "/news/t-band-launch",
-};
+export const dynamic = "force-dynamic";
 
-const articles = [
+const FALLBACK_ARTICLES = [
   {
+    slug: "talitrix-one-overview",
     category: "Platform",
-    date: "April 2026",
-    title:
-      "Talitrix ONE: a unified ecosystem for the full justice lifecycle.",
+    published_at: "2026-04-01",
+    title: "Talitrix ONE: a unified ecosystem for the full justice lifecycle.",
     excerpt:
       "Inside the architecture connecting hardware, software, and behavioral intelligence into one continuous platform.",
-    href: "/news/talitrix-one-overview",
+    featured: false,
   },
   {
+    slug: "pilot-outcomes",
     category: "Field Report",
-    date: "April 2026",
+    published_at: "2026-04-15",
     title:
       "From reactive supervision to proactive intervention — early outcomes from pilot agencies.",
     excerpt:
       "Six pilot agencies report improvements in caseload visibility, intervention timing, and documentation quality during the first 90 days on Talitrix ONE.",
-    href: "/news/pilot-outcomes",
+    featured: false,
   },
   {
+    slug: "dignity-by-design",
     category: "Perspective",
-    date: "March 2026",
-    title:
-      "Dignity by Design: rebuilding the category from the wrist up.",
+    published_at: "2026-03-15",
+    title: "Dignity by Design: rebuilding the category from the wrist up.",
     excerpt:
       "Why Talitrix moved electronic monitoring back to the original, rehabilitative vision — and what that means for participants, supervisors, and communities.",
-    href: "/news/dignity-by-design",
+    featured: false,
   },
-  {
-    category: "Engineering",
-    date: "March 2026",
-    title:
-      "Multi-carrier SIM, 20Hz skin-detection, and the path to high-confidence tamper detection.",
-    excerpt:
-      "A look inside the engineering decisions behind the T-Band's reliability, battery life, and biometric verification flow.",
-    href: "/news/engineering-tband",
-  },
-  {
-    category: "Courts",
-    date: "February 2026",
-    title:
-      "Talitrix Score: explainable behavioral intelligence for the courtroom.",
-    excerpt:
-      "How Talitrix translates participant behavior into transparent, defensible data — and what courts need to know about admissibility and chain of custody.",
-    href: "/news/talitrix-score-courts",
-  },
-  {
-    category: "Company",
-    date: "January 2026",
-    title:
-      "Setting the global standard: Talitrix expands its leadership team.",
-    excerpt:
-      "New additions across product, engineering, and customer success accelerate the company's mission to redefine modern supervision.",
-    href: "/news/leadership-expansion",
-  },
-];
+] satisfies Array<
+  Pick<
+    NewsArticle,
+    "slug" | "category" | "title" | "excerpt" | "featured" | "published_at"
+  >
+>;
 
-export default function NewsPage() {
+const FALLBACK_FEATURED = {
+  slug: "t-band-launch",
+  category: "Announcement",
+  published_at: "2026-05-01",
+  title:
+    "Talitrix unveils the T-Band — the first independent wrist-worn GPS supervision device.",
+  excerpt:
+    "The T-Band brings continuous biometric, location, and tamper-detection capabilities into one dignified, wrist-worn form factor — purpose-built for the realities of modern community supervision.",
+  featured: true,
+};
+
+function fmt(date: string | null | undefined): string {
+  if (!date) return "";
+  return new Date(date).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "long",
+  });
+}
+
+async function loadArticles(): Promise<{
+  featured: typeof FALLBACK_FEATURED | NewsArticle;
+  articles: Array<NewsArticle | (typeof FALLBACK_ARTICLES)[number]>;
+}> {
+  try {
+    const { data, error } = await supabaseAdmin()
+      .from("news_articles")
+      .select("*")
+      .eq("published", true)
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    const all = (data ?? []) as NewsArticle[];
+    if (all.length === 0) {
+      return { featured: FALLBACK_FEATURED, articles: FALLBACK_ARTICLES };
+    }
+
+    const featured = all.find((a) => a.featured) ?? all[0];
+    const others = all.filter((a) => a.id !== featured.id);
+    return { featured, articles: others };
+  } catch {
+    return { featured: FALLBACK_FEATURED, articles: FALLBACK_ARTICLES };
+  }
+}
+
+export default async function NewsPage() {
+  const { featured, articles } = await loadArticles();
+
+  const featuredHref = `/news/${featured.slug}`;
+  const featuredDate = fmt(featured.published_at);
+
   return (
     <main className="bg-background text-foreground min-h-screen">
       <section className="relative w-full overflow-hidden border-b border-border-gray">
@@ -120,7 +142,7 @@ export default function NewsPage() {
       <section className="relative px-16 py-24 border-b border-border-gray overflow-hidden">
         <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
 
-        <Link href={featured.href} className="relative z-10 block group">
+        <Link href={featuredHref} className="relative z-10 block group">
           <div className="relative rounded-2xl overflow-hidden">
             <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
               <FrameBorder
@@ -139,7 +161,7 @@ export default function NewsPage() {
                 <span className="text-primary text-xs uppercase tracking-[0.3em]">
                   Featured · {featured.category}
                 </span>
-                <span className="text-white/50 text-sm">{featured.date}</span>
+                <span className="text-white/50 text-sm">{featuredDate}</span>
               </div>
               <div className="lg:col-span-9 flex flex-col gap-6">
                 <h2 className="text-3xl md:text-5xl leading-tight group-hover:text-primary transition-colors">
@@ -193,33 +215,37 @@ export default function NewsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-          {articles.map((a) => (
-            <Link
-              key={a.title}
-              href={a.href}
-              className="bg-background p-8 flex flex-col gap-4 min-h-[280px] hover:bg-white/[0.04] transition-colors group"
-            >
-              <div className="flex items-center justify-between text-xs text-white/50">
-                <span className="text-primary tracking-widest uppercase">
-                  {a.category}
-                </span>
-                <span>{a.date}</span>
-              </div>
-              <h3 className="text-xl leading-tight group-hover:text-primary transition-colors">
-                {a.title}
-              </h3>
-              <p className="text-white/65 text-sm leading-relaxed line-clamp-4">
-                {a.excerpt}
-              </p>
-              <div className="mt-auto pt-2">
-                <span className="text-primary text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                  Read more <span>→</span>
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {articles.length === 0 ? (
+          <p className="text-white/60">No additional stories yet.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
+            {articles.map((a) => (
+              <Link
+                key={a.slug}
+                href={`/news/${a.slug}`}
+                className="bg-background p-8 flex flex-col gap-4 min-h-[280px] hover:bg-white/[0.04] transition-colors group"
+              >
+                <div className="flex items-center justify-between text-xs text-white/50">
+                  <span className="text-primary tracking-widest uppercase">
+                    {a.category}
+                  </span>
+                  <span>{fmt(a.published_at)}</span>
+                </div>
+                <h3 className="text-xl leading-tight group-hover:text-primary transition-colors">
+                  {a.title}
+                </h3>
+                <p className="text-white/65 text-sm leading-relaxed line-clamp-4">
+                  {a.excerpt}
+                </p>
+                <div className="mt-auto pt-2">
+                  <span className="text-primary text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Read more <span>→</span>
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="relative px-16 py-32 overflow-hidden">

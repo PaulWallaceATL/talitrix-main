@@ -15,16 +15,37 @@ const idTypes = [
 ];
 
 export default function RegistrationForm() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success">(
-    "idle",
-  );
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [agree, setAgree] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 800));
-    setStatus("success");
+    setErrorMessage(null);
+
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    (data as Record<string, unknown>).agree = agree;
+
+    try {
+      const res = await fetch("/api/participant-registration", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        throw new Error(j.error || "Submission failed.");
+      }
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Something went wrong.",
+      );
+    }
   };
 
   if (status === "success") {
@@ -147,6 +168,10 @@ export default function RegistrationForm() {
           Continue to Step 2
         </SubmitButton>
       </div>
+
+      {status === "error" && errorMessage && (
+        <p className="text-sm text-red-400">{errorMessage}</p>
+      )}
     </form>
   );
 }

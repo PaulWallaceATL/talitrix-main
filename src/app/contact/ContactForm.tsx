@@ -17,15 +17,35 @@ const inquiryTypes = [
 ];
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "loading" | "success">(
-    "idle",
-  );
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus("loading");
-    await new Promise((r) => setTimeout(r, 800));
-    setStatus("success");
+    setErrorMessage(null);
+
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        throw new Error(j.error || "Submission failed.");
+      }
+      setStatus("success");
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error ? err.message : "Something went wrong.",
+      );
+    }
   };
 
   if (status === "success") {
@@ -83,6 +103,10 @@ export default function ContactForm() {
           Send Message
         </SubmitButton>
       </div>
+
+      {status === "error" && errorMessage && (
+        <p className="text-sm text-red-400">{errorMessage}</p>
+      )}
 
       <p className="text-xs text-white/40 max-w-lg">
         By submitting this form you agree to our privacy policy. Talitrix uses
