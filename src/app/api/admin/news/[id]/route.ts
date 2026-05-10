@@ -83,6 +83,24 @@ export async function PATCH(req: Request, ctx: Ctx) {
     updates.published_at = body.published_at;
   }
 
+  const metaTitle = str(body.meta_title, 80);
+  const metaDescription = str(body.meta_description, 200);
+  const ogImageUrl = str(body.og_image_url, 500);
+  const authorName = str(body.author_name, 120);
+
+  if ("meta_title" in body) updates.meta_title = metaTitle;
+  if ("meta_description" in body) updates.meta_description = metaDescription;
+  if ("og_image_url" in body) updates.og_image_url = ogImageUrl;
+  if ("author_name" in body) updates.author_name = authorName;
+  if ("keywords" in body) {
+    updates.keywords = Array.isArray(body.keywords)
+      ? (body.keywords as unknown[])
+          .map((k) => (typeof k === "string" ? k.trim() : ""))
+          .filter((k) => k.length > 0 && k.length <= 60)
+          .slice(0, 20)
+      : null;
+  }
+
   if (Object.keys(updates).length === 0) {
     return NextResponse.json({ error: "Nothing to update." }, { status: 400 });
   }

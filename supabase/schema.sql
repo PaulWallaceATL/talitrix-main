@@ -41,6 +41,14 @@ create table if not exists public.news_articles (
   updated_at    timestamptz not null default now()
 );
 
+-- SEO fields (added in v2 — safe to re-run on existing tables)
+alter table public.news_articles
+  add column if not exists meta_title       text,
+  add column if not exists meta_description text,
+  add column if not exists keywords         text[],
+  add column if not exists og_image_url     text,
+  add column if not exists author_name      text;
+
 create index if not exists news_articles_published_idx
   on public.news_articles (published, published_at desc);
 

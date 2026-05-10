@@ -5,60 +5,40 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
 import FrameBorder from "@/components/react-bits/frame-border";
 import { supabaseAdmin, type NewsArticle } from "@/lib/supabase";
-
-export const metadata: Metadata = {
-  title: "News | Talitrix",
-  description:
-    "Announcements, briefings, and field reports from Talitrix — the team setting the new standard in monitoring and supervision technology.",
-};
+import { getSiteUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
-const FALLBACK_ARTICLES = [
-  {
-    slug: "talitrix-one-overview",
-    category: "Platform",
-    published_at: "2026-04-01",
-    title: "Talitrix ONE: a unified ecosystem for the full justice lifecycle.",
-    excerpt:
-      "Inside the architecture connecting hardware, software, and behavioral intelligence into one continuous platform.",
-    featured: false,
-  },
-  {
-    slug: "pilot-outcomes",
-    category: "Field Report",
-    published_at: "2026-04-15",
-    title:
-      "From reactive supervision to proactive intervention — early outcomes from pilot agencies.",
-    excerpt:
-      "Six pilot agencies report improvements in caseload visibility, intervention timing, and documentation quality during the first 90 days on Talitrix ONE.",
-    featured: false,
-  },
-  {
-    slug: "dignity-by-design",
-    category: "Perspective",
-    published_at: "2026-03-15",
-    title: "Dignity by Design: rebuilding the category from the wrist up.",
-    excerpt:
-      "Why Talitrix moved electronic monitoring back to the original, rehabilitative vision — and what that means for participants, supervisors, and communities.",
-    featured: false,
-  },
-] satisfies Array<
-  Pick<
-    NewsArticle,
-    "slug" | "category" | "title" | "excerpt" | "featured" | "published_at"
-  >
->;
+const SITE = getSiteUrl();
 
-const FALLBACK_FEATURED = {
-  slug: "t-band-launch",
-  category: "Announcement",
-  published_at: "2026-05-01",
-  title:
-    "Talitrix unveils the T-Band — the first independent wrist-worn GPS supervision device.",
-  excerpt:
-    "The T-Band brings continuous biometric, location, and tamper-detection capabilities into one dignified, wrist-worn form factor — purpose-built for the realities of modern community supervision.",
-  featured: true,
+export const metadata: Metadata = {
+  title: "News & Field Reports | Talitrix",
+  description:
+    "Announcements, field reports, and engineering deep-dives from Talitrix — the team setting the new standard in wrist-worn GPS supervision and the Talitrix ONE platform.",
+  alternates: { canonical: `${SITE}/news` },
+  openGraph: {
+    type: "website",
+    url: `${SITE}/news`,
+    siteName: "Talitrix",
+    title: "News & Field Reports | Talitrix",
+    description:
+      "Announcements, field reports, and engineering deep-dives from Talitrix — wrist-worn GPS supervision and the Talitrix ONE platform.",
+    images: [
+      {
+        url: `${SITE}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Talitrix",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "News & Field Reports | Talitrix",
+    description:
+      "Announcements, field reports, and engineering deep-dives from Talitrix.",
+    images: [`${SITE}/og-image.png`],
+  },
 };
 
 function fmt(date: string | null | undefined): string {
@@ -69,10 +49,7 @@ function fmt(date: string | null | undefined): string {
   });
 }
 
-async function loadArticles(): Promise<{
-  featured: typeof FALLBACK_FEATURED | NewsArticle;
-  articles: Array<NewsArticle | (typeof FALLBACK_ARTICLES)[number]>;
-}> {
+async function loadArticles(): Promise<NewsArticle[]> {
   try {
     const { data, error } = await supabaseAdmin()
       .from("news_articles")
@@ -80,29 +57,53 @@ async function loadArticles(): Promise<{
       .eq("published", true)
       .order("published_at", { ascending: false, nullsFirst: false })
       .order("created_at", { ascending: false });
-
     if (error) throw error;
-    const all = (data ?? []) as NewsArticle[];
-    if (all.length === 0) {
-      return { featured: FALLBACK_FEATURED, articles: FALLBACK_ARTICLES };
-    }
-
-    const featured = all.find((a) => a.featured) ?? all[0];
-    const others = all.filter((a) => a.id !== featured.id);
-    return { featured, articles: others };
+    return (data ?? []) as NewsArticle[];
   } catch {
-    return { featured: FALLBACK_FEATURED, articles: FALLBACK_ARTICLES };
+    return [];
   }
 }
 
 export default async function NewsPage() {
-  const { featured, articles } = await loadArticles();
+  const all = await loadArticles();
+  const featured = all.find((a) => a.featured) ?? all[0] ?? null;
+  const others = featured ? all.filter((a) => a.id !== featured.id) : [];
 
-  const featuredHref = `/news/${featured.slug}`;
-  const featuredDate = fmt(featured.published_at);
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "Talitrix News",
+    url: `${SITE}/news`,
+    publisher: {
+      "@type": "Organization",
+      name: "Talitrix",
+      url: SITE,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE}/talitrix-logo.svg`,
+      },
+    },
+    blogPost: all.map((a) => ({
+      "@type": "BlogPosting",
+      headline: a.title,
+      description: a.meta_description ?? a.excerpt,
+      url: `${SITE}/news/${a.slug}`,
+      datePublished: a.published_at ?? a.created_at,
+      dateModified: a.updated_at,
+      author: {
+        "@type": "Organization",
+        name: a.author_name ?? "Talitrix",
+      },
+    })),
+  };
 
   return (
     <main className="bg-background text-foreground min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
+
       <section className="relative w-full overflow-hidden border-b border-border-gray">
         <div className="absolute inset-0 z-0 opacity-60">
           <HalftoneWave
@@ -139,87 +140,109 @@ export default async function NewsPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-24 border-b border-border-gray overflow-hidden">
-        <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
+      {featured && (
+        <section className="relative px-16 py-24 border-b border-border-gray overflow-hidden">
+          <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
 
-        <Link href={featuredHref} className="relative z-10 block group">
-          <div className="relative rounded-2xl overflow-hidden">
-            <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
-              <FrameBorder
-                color="#f87a13"
-                backgroundColor="#000000"
-                speed={0.7}
-                borderWidth={0.06}
-                noiseStrength={0.5}
-                intensity={1.4}
-                opacity={0.85}
-              />
-            </div>
-
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 border border-border-gray rounded-2xl p-12 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] transition-colors">
-              <div className="lg:col-span-3 flex flex-col gap-3">
-                <span className="text-primary text-xs uppercase tracking-[0.3em]">
-                  Featured · {featured.category}
-                </span>
-                <span className="text-white/50 text-sm">{featuredDate}</span>
+          <Link
+            href={`/news/${featured.slug}`}
+            className="relative z-10 block group"
+          >
+            <div className="relative rounded-2xl overflow-hidden">
+              <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+                <FrameBorder
+                  color="#f87a13"
+                  backgroundColor="#000000"
+                  speed={0.7}
+                  borderWidth={0.06}
+                  noiseStrength={0.5}
+                  intensity={1.4}
+                  opacity={0.85}
+                />
               </div>
-              <div className="lg:col-span-9 flex flex-col gap-6">
-                <h2 className="text-3xl md:text-5xl leading-tight group-hover:text-primary transition-colors">
-                  {featured.title}
-                </h2>
-                <p className="text-white/70 text-lg leading-relaxed max-w-3xl">
-                  {featured.excerpt}
-                </p>
-                <div className="pt-2">
-                  <span className="text-primary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                    Read the announcement
-                    <span>→</span>
+
+              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 border border-border-gray rounded-2xl p-12 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] transition-colors">
+                <div className="lg:col-span-3 flex flex-col gap-3">
+                  <span className="text-primary text-xs uppercase tracking-[0.3em]">
+                    Featured · {featured.category}
                   </span>
+                  <span className="text-white/50 text-sm">
+                    {fmt(featured.published_at)}
+                  </span>
+                </div>
+                <div className="lg:col-span-9 flex flex-col gap-6">
+                  <h2 className="text-3xl md:text-5xl leading-tight group-hover:text-primary transition-colors">
+                    {featured.title}
+                  </h2>
+                  <p className="text-white/70 text-lg leading-relaxed max-w-3xl">
+                    {featured.excerpt}
+                  </p>
+                  <div className="pt-2">
+                    <span className="text-primary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                      Read the announcement
+                      <span>→</span>
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Link>
-      </section>
+          </Link>
+        </section>
+      )}
 
       <section className="relative px-16 py-24 border-b border-border-gray">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-12">
           <div>
             <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-4">
-              The Latest
+              {others.length > 0 ? "The Latest" : "Coming Soon"}
             </span>
             <h2 className="text-4xl md:text-5xl leading-tight">
-              Recent stories.
+              {others.length > 0 ? "Recent stories." : "First stories incoming."}
             </h2>
           </div>
-          <div className="flex gap-4 flex-wrap">
-            {[
-              "All",
-              "Platform",
-              "Field Report",
-              "Perspective",
-              "Engineering",
-              "Courts",
-            ].map((cat, i) => (
-              <button
-                key={cat}
-                className={`px-4 py-2 rounded-full border text-sm transition-colors ${
-                  i === 0
-                    ? "border-primary text-primary"
-                    : "border-border-gray text-white/65 hover:text-white hover:border-white/40"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          {others.length > 0 && (
+            <div className="flex gap-4 flex-wrap">
+              {[
+                "All",
+                "Platform",
+                "Field Report",
+                "Perspective",
+                "Engineering",
+                "Courts",
+              ].map((cat, i) => (
+                <button
+                  key={cat}
+                  className={`px-4 py-2 rounded-full border text-sm transition-colors ${
+                    i === 0
+                      ? "border-primary text-primary"
+                      : "border-border-gray text-white/65 hover:text-white hover:border-white/40"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        {articles.length === 0 ? (
-          <p className="text-white/60">No additional stories yet.</p>
+        {others.length === 0 && !featured ? (
+          <div className="p-12 rounded-2xl border border-border-gray bg-white/[0.02] text-center">
+            <p className="text-white/70 text-lg max-w-xl mx-auto">
+              The Talitrix newsroom is just getting started. Subscribe below
+              and you&apos;ll get the first field reports and announcements as
+              they ship.
+            </p>
+          </div>
+        ) : others.length === 0 ? (
+          <div className="p-12 rounded-2xl border border-border-gray bg-white/[0.02] text-center">
+            <p className="text-white/70">
+              More stories are queued up. Subscribe below to get the next one
+              the moment it&apos;s published.
+            </p>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-            {articles.map((a) => (
+            {others.map((a) => (
               <Link
                 key={a.slug}
                 href={`/news/${a.slug}`}

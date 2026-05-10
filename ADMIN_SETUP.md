@@ -37,6 +37,8 @@ The script is idempotent — you can re-run it safely. It creates:
 Add the following in **Vercel → Project → Settings → Environment Variables**
 (set them for **Production**, **Preview**, and **Development**, then redeploy):
 
+### Required
+
 | Name                              | Where to find it                                                             | Notes                                                                                             |
 | --------------------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | `NEXT_PUBLIC_SUPABASE_URL`        | Supabase → Project Settings → **API** → "Project URL"                         | Public                                                                                             |
@@ -45,7 +47,20 @@ Add the following in **Vercel → Project → Settings → Environment Variables
 | `ADMIN_PASSWORD`                  | You choose                                                                    | The single password used to sign in at `/admin/login`. Pick something long and random.            |
 | `ADMIN_SESSION_SECRET`            | You generate                                                                  | Used to sign the admin session cookie. Must be ≥ 16 chars. Generate with `openssl rand -hex 32`.   |
 
-For local development add the same five values to `.env.local`:
+### Required for AI article generation (the ✦ "Generate Article" button)
+
+| Name             | Where to find it                                                          | Notes                                                                                                       |
+| ---------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `OPENAI_API_KEY` | [platform.openai.com → API keys](https://platform.openai.com/api-keys)     | **Secret.** Server-only. Without this, the AI panel returns a clear error and the rest of the admin still works. |
+| `OPENAI_MODEL`   | _Optional_ — defaults to `gpt-4o`                                          | Override to e.g. `gpt-4o-mini` for cheaper drafts, or a newer model when one ships.                          |
+
+### Strongly recommended for SEO
+
+| Name                   | Value                                                              | Why                                                                                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL` | Your real production origin (e.g. `https://talitrix.com`)          | Used as the `metadataBase`, in canonical URLs, Open Graph tags, JSON-LD, the sitemap, and `robots.txt`. If unset, the app falls back to the Vercel deployment URL.    |
+
+For local development add everything you set above to `.env.local`:
 
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://YOUR-PROJECT.supabase.co
@@ -53,6 +68,11 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOi...
 SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOi...
 ADMIN_PASSWORD=replace-with-a-long-passphrase
 ADMIN_SESSION_SECRET=replace-with-openssl-rand-hex-32
+
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o            # optional
+
+NEXT_PUBLIC_SITE_URL=https://talitrix.com
 ```
 
 > Rotating `ADMIN_SESSION_SECRET` immediately invalidates every active admin
@@ -70,7 +90,62 @@ Use **Sign out** in the sidebar to clear the cookie.
 
 ---
 
-## 4. What lives where
+## 4. Generating articles with AI
+
+In **Admin → News → New Article** there's a glowing "✦ AI Assistant" panel
+at the top:
+
+1. Drop a brief into the textbox — what the article is about, any numbers
+   you want included, the angle, key terms you want to rank for.
+2. Pick a category (the AI uses it as a hint).
+3. (Optional) Add tone notes — e.g. "punchy and short", "lead with the
+   policy implications".
+4. Click **✦ Generate Article**.
+
+The model returns:
+
+- A keyword-rich, properly-cased **title** (50–95 chars sweet spot).
+- A clean URL **slug** (`a-z`, `0-9`, dashes only).
+- A 1–2 sentence **excerpt** for the news index and social cards.
+- The full **article body** (700–1300 words) with section headings.
+- A **meta_title** (50–60 chars) and **meta_description** (150–160 chars).
+- 5–12 SEO **keywords** in priority order.
+
+Every field is editable before you save. The system prompt is tuned to
+Talitrix's voice ("Dignity by Design", trade-publication tone, no marketing
+fluff, never invent named pilot agencies or statistics).
+
+You can change the model with `OPENAI_MODEL` (default `gpt-4o`).
+
+---
+
+## 5. SEO & discoverability
+
+The site ships with aggressive, on-by-default SEO:
+
+- **`metadataBase`** + canonical URLs on every page (`NEXT_PUBLIC_SITE_URL`).
+- **Open Graph** + **Twitter Cards** on every page (with per-article images
+  when set in the editor; otherwise falls back to `/public/og-image.png`).
+- **JSON-LD** structured data:
+  - `Organization` site-wide (in `<head>` via the root layout).
+  - `Blog` on `/news`.
+  - `NewsArticle` + `BreadcrumbList` on each article page.
+- Auto-generated **sitemap** at `/sitemap.xml` that pulls every published
+  article from Supabase with `lastmod` from `updated_at`.
+- Auto-generated **robots.txt** at `/robots.txt` that disallows `/admin`
+  and `/api/admin` and points to the sitemap.
+- Per-article **meta_title**, **meta_description**, **keywords**, **author**,
+  and **og_image_url** — all editable, all auto-filled by the AI generator.
+- Reading-time estimate, `wordCount`, `articleSection`, and `timeRequired`
+  in the article JSON-LD.
+
+> Add `/public/og-image.png` (1200×630) for the default social image. If you
+> want per-article social images, paste a CDN URL into the "Social Image URL"
+> field in the editor.
+
+---
+
+## 6. What lives where
 
 ```
 src/
@@ -78,7 +153,11 @@ src/
   lib/
     admin-auth.ts                           # Password + signed cookie logic
     supabase.ts                             # Supabase clients (admin/anon)
+    seo.ts                                  # Site URL helpers + Organization JSON-LD
   app/
+    layout.tsx                              # Site-wide metadata, OG, Organization JSON-LD
+    sitemap.ts                              # Dynamic /sitemap.xml (static + DB articles)
+    robots.ts                               # /robots.txt — blocks /admin and /api/admin
     api/
       contact/route.ts                      # Public POST  → contact_submissions
       get-started/route.ts                  # Public POST  → get_started_submissions
@@ -88,6 +167,7 @@ src/
         logout/route.ts                     # Clears the admin session cookie
         news/route.ts                       # GET list / POST create
         news/[id]/route.ts                  # GET / PATCH / DELETE
+        news/generate/route.ts              # POST → OpenAI structured article draft
         submissions/[type]/[id]/route.ts    # DELETE a submission
     admin/
       login/                                # Login page (no sidebar)
@@ -95,16 +175,16 @@ src/
       (authed)/                             # Everything below requires the cookie
         layout.tsx                          # Sidebar shell
         page.tsx                            # Dashboard with counts
-        news/                               # List / new / edit
+        news/                               # List / new / edit (with AI panel + SEO)
         submissions/[type]/                 # contact | get-started | participant-registration
     news/
       page.tsx                              # Reads published articles from Supabase
-      [slug]/page.tsx                       # Public article page
+      [slug]/page.tsx                       # Public article page (Article + Breadcrumb JSON-LD)
 ```
 
 ---
 
-## 5. Behavior of the public forms
+## 7. Behavior of the public forms
 
 The three forms (`/contact`, `/get-started`, `/participant-registration`) now
 POST to their respective `/api/...` endpoints. On success the user sees the
@@ -114,7 +194,7 @@ in the admin dashboard within seconds.
 
 ---
 
-## 6. Hardening checklist (when you're ready)
+## 8. Hardening checklist (when you're ready)
 
 - Rotate `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` regularly.
 - Add basic rate-limiting to `/api/contact`, `/api/get-started`,

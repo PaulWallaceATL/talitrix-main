@@ -72,6 +72,13 @@ export async function POST(req: Request) {
       ? new Date().toISOString()
       : str(body.published_at, 60);
 
+  const keywords = Array.isArray(body.keywords)
+    ? (body.keywords as unknown[])
+        .map((k) => (typeof k === "string" ? k.trim() : ""))
+        .filter((k) => k.length > 0 && k.length <= 60)
+        .slice(0, 20)
+    : null;
+
   const { data, error } = await supabaseAdmin()
     .from("news_articles")
     .insert({
@@ -83,6 +90,11 @@ export async function POST(req: Request) {
       featured,
       published,
       published_at: published ? published_at : null,
+      meta_title: str(body.meta_title, 80),
+      meta_description: str(body.meta_description, 200),
+      keywords,
+      og_image_url: str(body.og_image_url, 500),
+      author_name: str(body.author_name, 120),
     })
     .select()
     .single();
