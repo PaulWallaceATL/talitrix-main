@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
@@ -203,6 +204,19 @@ export default async function ArticlePage({ params }: { params: Params }) {
           <p className="text-xl text-white/75 leading-relaxed">
             {article.excerpt}
           </p>
+
+          {article.og_image_url && (
+            <div className="relative aspect-[16/9] mt-6 rounded-2xl overflow-hidden border border-border-gray bg-white/[0.02]">
+              <Image
+                src={article.og_image_url}
+                alt={article.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 896px"
+                className="object-cover"
+              />
+            </div>
+          )}
         </header>
 
         <div className="flex flex-col gap-6 text-lg text-white/85 leading-relaxed">

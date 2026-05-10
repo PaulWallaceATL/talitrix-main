@@ -33,6 +33,48 @@ export function supabaseAnon(): SupabaseClient {
   return cachedAnon;
 }
 
+const NEWS_IMAGES_BUCKET = "news-images";
+
+let bucketEnsured = false;
+export async function ensureNewsImagesBucket(): Promise<void> {
+  if (bucketEnsured) return;
+  const sb = supabaseAdmin();
+  const { data: buckets, error } = await sb.storage.listBuckets();
+  if (error) throw error;
+  const exists = buckets?.some((b) => b.name === NEWS_IMAGES_BUCKET);
+  if (!exists) {
+    const { error: createErr } = await sb.storage.createBucket(
+      NEWS_IMAGES_BUCKET,
+      {
+        public: true,
+        fileSizeLimit: 10 * 1024 * 1024, // 10 MB
+        allowedMimeTypes: ["image/png", "image/jpeg", "image/webp"],
+      },
+    );
+    if (createErr) throw createErr;
+  }
+  bucketEnsured = true;
+}
+
+export async function uploadNewsImage(
+  filename: string,
+  bytes: Uint8Array,
+  contentType = "image/png",
+): Promise<string> {
+  await ensureNewsImagesBucket();
+  const sb = supabaseAdmin();
+  const { error } = await sb.storage
+    .from(NEWS_IMAGES_BUCKET)
+    .upload(filename, bytes, {
+      contentType,
+      upsert: true,
+      cacheControl: "31536000",
+    });
+  if (error) throw error;
+  const { data } = sb.storage.from(NEWS_IMAGES_BUCKET).getPublicUrl(filename);
+  return data.publicUrl;
+}
+
 export type NewsArticle = {
   id: string;
   slug: string;

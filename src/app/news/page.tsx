@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 import Link from "next/link";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
@@ -171,6 +172,18 @@ export default async function NewsPage() {
                   </span>
                 </div>
                 <div className="lg:col-span-9 flex flex-col gap-6">
+                  {featured.og_image_url && (
+                    <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border-gray">
+                      <Image
+                        src={featured.og_image_url}
+                        alt={featured.title}
+                        fill
+                        priority
+                        sizes="(max-width: 1024px) 100vw, 800px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+                  )}
                   <h2 className="text-3xl md:text-5xl leading-tight group-hover:text-primary transition-colors">
                     {featured.title}
                   </h2>
@@ -246,24 +259,37 @@ export default async function NewsPage() {
               <Link
                 key={a.slug}
                 href={`/news/${a.slug}`}
-                className="bg-background p-8 flex flex-col gap-4 min-h-[280px] hover:bg-white/[0.04] transition-colors group"
+                className="bg-background flex flex-col min-h-[280px] hover:bg-white/[0.04] transition-colors group"
               >
-                <div className="flex items-center justify-between text-xs text-white/50">
-                  <span className="text-primary tracking-widest uppercase">
-                    {a.category}
-                  </span>
-                  <span>{fmt(a.published_at)}</span>
-                </div>
-                <h3 className="text-xl leading-tight group-hover:text-primary transition-colors">
-                  {a.title}
-                </h3>
-                <p className="text-white/65 text-sm leading-relaxed line-clamp-4">
-                  {a.excerpt}
-                </p>
-                <div className="mt-auto pt-2">
-                  <span className="text-primary text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                    Read more <span>→</span>
-                  </span>
+                {a.og_image_url && (
+                  <div className="relative aspect-[16/9] overflow-hidden border-b border-border-gray bg-white/[0.02]">
+                    <Image
+                      src={a.og_image_url}
+                      alt={a.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                )}
+                <div className="p-8 flex flex-col gap-4 flex-1">
+                  <div className="flex items-center justify-between text-xs text-white/50">
+                    <span className="text-primary tracking-widest uppercase">
+                      {a.category}
+                    </span>
+                    <span>{fmt(a.published_at)}</span>
+                  </div>
+                  <h3 className="text-xl leading-tight group-hover:text-primary transition-colors">
+                    {a.title}
+                  </h3>
+                  <p className="text-white/65 text-sm leading-relaxed line-clamp-4">
+                    {a.excerpt}
+                  </p>
+                  <div className="mt-auto pt-2">
+                    <span className="text-primary text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                      Read more <span>→</span>
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}

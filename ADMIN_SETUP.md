@@ -47,12 +47,13 @@ Add the following in **Vercel → Project → Settings → Environment Variables
 | `ADMIN_PASSWORD`                  | You choose                                                                    | The single password used to sign in at `/admin/login`. Pick something long and random.            |
 | `ADMIN_SESSION_SECRET`            | You generate                                                                  | Used to sign the admin session cookie. Must be ≥ 16 chars. Generate with `openssl rand -hex 32`.   |
 
-### Required for AI article generation (the ✦ "Generate Article" button)
+### Required for AI article generation (the ✦ "Generate Article" button + auto-newsroom)
 
-| Name             | Where to find it                                                          | Notes                                                                                                       |
-| ---------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `OPENAI_API_KEY` | [platform.openai.com → API keys](https://platform.openai.com/api-keys)     | **Secret.** Server-only. Without this, the AI panel returns a clear error and the rest of the admin still works. |
-| `OPENAI_MODEL`   | _Optional_ — defaults to `gpt-4o`                                          | Override to e.g. `gpt-4o-mini` for cheaper drafts, or a newer model when one ships.                          |
+| Name                | Where to find it                                                          | Notes                                                                                                                                                  |
+| ------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `OPENAI_API_KEY`    | [platform.openai.com → API keys](https://platform.openai.com/api-keys)     | **Secret.** Server-only. Without this, the AI panels return a clear error and the rest of the admin still works.                                       |
+| `OPENAI_MODEL`      | _Optional_ — defaults to `gpt-4o`                                          | Text model. Override to `gpt-4o-mini` for cheaper drafts, or a newer model when one ships.                                                              |
+| `OPENAI_IMAGE_MODEL`| _Optional_ — defaults to `gpt-image-1`                                     | Image model used by the one-click auto-generator. Falls back to `dall-e-3` if you set it that way.                                                      |
 
 ### Strongly recommended for SEO
 
@@ -92,30 +93,62 @@ Use **Sign out** in the sidebar to clear the cookie.
 
 ## 4. Generating articles with AI
 
-In **Admin → News → New Article** there's a glowing "✦ AI Assistant" panel
-at the top:
+There are two AI flows — pick whichever fits the moment:
 
-1. Drop a brief into the textbox — what the article is about, any numbers
-   you want included, the angle, key terms you want to rank for.
-2. Pick a category (the AI uses it as a hint).
-3. (Optional) Add tone notes — e.g. "punchy and short", "lead with the
-   policy implications".
-4. Click **✦ Generate Article**.
+### A. ✦ Auto-newsroom (one click → 1–5 full articles)
 
-The model returns:
+On **Admin → News** there's a glowing **"✦ Auto-generate articles"** panel at
+the top of the page.
 
-- A keyword-rich, properly-cased **title** (50–95 chars sweet spot).
-- A clean URL **slug** (`a-z`, `0-9`, dashes only).
-- A 1–2 sentence **excerpt** for the news index and social cards.
-- The full **article body** (700–1300 words) with section headings.
-- A **meta_title** (50–60 chars) and **meta_description** (150–160 chars).
-- 5–12 SEO **keywords** in priority order.
+1. Pick a count (**1–5**).
+2. Optional toggles:
+   - **Use live web research** — runs an OpenAI web search first to anchor
+     the topics in the current state of community supervision, electronic
+     monitoring, pretrial reform, etc.
+   - **Publish immediately** — uncheck to save as drafts.
+3. Click **✦ Generate N articles**.
 
-Every field is editable before you save. The system prompt is tuned to
-Talitrix's voice ("Dignity by Design", trade-publication tone, no marketing
-fluff, never invent named pilot agencies or statistics).
+Behind the scenes, for each article the server:
 
-You can change the model with `OPENAI_MODEL` (default `gpt-4o`).
+1. Plans a unique, on-brand topic (with web-research context if enabled).
+2. Generates a structured article (title, slug, category, excerpt, body,
+   meta title, meta description, keywords) in Talitrix's voice.
+3. Generates a 1536×1024 cinematic editorial hero image with `gpt-image-1`.
+4. Uploads the image to Supabase Storage (auto-creates the `news-images`
+   public bucket on first use).
+5. Inserts the row into `news_articles` with the storage URL set as
+   `og_image_url` so it appears on the article page, the index, **and** in
+   the Open Graph / Twitter card.
+
+Typical run: **15–35 seconds per article**, parallelized.
+
+### B. ✦ AI Assistant (one article from your brief)
+
+On **Admin → News → New Article** the existing "✦ AI Assistant" panel is
+still there for when you want manual control:
+
+1. Drop a brief into the textbox.
+2. Pick a category and (optional) tone notes.
+3. Click **✦ Generate Article** — fills every field, you edit, then save.
+
+### Model + voice notes
+
+The system prompt is tuned to Talitrix's voice ("Dignity by Design",
+trade-publication tone, no marketing fluff, never invent named pilot
+agencies or statistics).
+
+- Text model: `OPENAI_MODEL` (default `gpt-4o`).
+- Image model: `OPENAI_IMAGE_MODEL` (default `gpt-image-1`).
+
+### Supabase Storage requirement
+
+The auto-newsroom needs a public bucket named **`news-images`**. The first
+auto-generation run will create it for you using the service role key — no
+manual setup required. If you want to verify or pre-create it manually:
+
+- Supabase → **Storage → New bucket** → name `news-images`, **Public bucket**
+  ON, file size limit 10 MB, allowed MIME types `image/png, image/jpeg,
+  image/webp`.
 
 ---
 
@@ -167,7 +200,8 @@ src/
         logout/route.ts                     # Clears the admin session cookie
         news/route.ts                       # GET list / POST create
         news/[id]/route.ts                  # GET / PATCH / DELETE
-        news/generate/route.ts              # POST → OpenAI structured article draft
+        news/generate/route.ts              # POST → OpenAI single structured article draft
+        news/auto/route.ts                  # POST → research + 1–5 full articles + images
         submissions/[type]/[id]/route.ts    # DELETE a submission
     admin/
       login/                                # Login page (no sidebar)
