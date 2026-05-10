@@ -38,12 +38,11 @@ const NavBar = () => {
             <Link
               href={nav.href}
               key={i}
-              className={`flex gap-1 transition-colors hover:text-primary ${
+              className={`transition-colors hover:text-primary ${
                 active ? "text-primary" : ""
               }`}
             >
-              {nav.label}{" "}
-              <span className="text-xs text-white/70">0{i + 1}</span>
+              {nav.label}
             </Link>
           );
         })}
