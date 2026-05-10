@@ -44,7 +44,7 @@ export default function GetStartedPage() {
           <StaggeredText
             as="h1"
             text={"Deploy the\nnew standard."}
-            className="text-5xl md:text-7xl leading-[1.05]"
+            className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
             delay={70}
@@ -74,14 +74,14 @@ export default function GetStartedPage() {
         }
       />
 
-      <section className="relative px-16 py-24 border-b border-border-gray">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-5 flex flex-col gap-10">
+      <section className="relative px-6 md:px-16 py-16 md:py-24 border-b border-border-gray">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-5 flex flex-col gap-8 md:gap-10">
             <div>
               <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-4">
                 What Happens Next
               </span>
-              <h2 className="text-3xl md:text-4xl leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl leading-tight">
                 Four steps to a tailored briefing.
               </h2>
             </div>
@@ -90,7 +90,7 @@ export default function GetStartedPage() {
               {steps.map((s) => (
                 <div
                   key={s.number}
-                  className="bg-background p-6 flex gap-5 items-start"
+                  className="bg-background p-5 sm:p-6 flex gap-4 sm:gap-5 items-start"
                 >
                   <span className="text-primary text-sm tracking-widest pt-1">
                     {s.number}
@@ -115,14 +115,16 @@ export default function GetStartedPage() {
           </div>
 
           <div className="lg:col-span-7">
-            <div className="border border-border-gray rounded-2xl p-10 bg-white/[0.02] relative overflow-hidden">
+            <div className="border border-border-gray rounded-2xl p-6 sm:p-8 md:p-10 bg-white/[0.02] relative overflow-hidden">
               <div className="absolute -top-32 -right-20 w-[400px] h-[400px] bg-primary/10 blur-[150px] pointer-events-none" />
               <div className="relative z-10">
                 <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-3">
                   Request a Briefing
                 </span>
-                <h2 className="text-3xl mb-2">Tell us about your agency.</h2>
-                <p className="text-white/60 mb-8">
+                <h2 className="text-2xl sm:text-3xl mb-2">
+                  Tell us about your agency.
+                </h2>
+                <p className="text-white/60 mb-6 sm:mb-8">
                   Every field is confidential. We respond within one business
                   day.
                 </p>

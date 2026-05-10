@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="relative border-t border-border-gray bg-black overflow-hidden">
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] bg-primary/10 blur-[180px] pointer-events-none" />
 
-      <div className="relative z-10 px-16 py-20 grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div className="relative z-10 px-6 md:px-16 py-12 md:py-20 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
         <div className="md:col-span-4 flex flex-col gap-6">
           <Image
             src="/talitrix-logo.svg"
@@ -20,16 +20,16 @@ const Footer = () => {
             The new standard in monitoring and supervision technology.
             One platform. Complete continuity.
           </p>
-          <div className="flex gap-3 pt-2">
+          <div className="flex flex-wrap gap-3 pt-2">
             <Link
               href="/get-started"
-              className="rounded-full px-6 py-3 bg-white/10 hover:bg-primary/30 backdrop-blur-md text-sm transition-colors border border-white/15"
+              className="rounded-full px-5 sm:px-6 py-3 bg-white/10 hover:bg-primary/30 backdrop-blur-md text-sm transition-colors border border-white/15"
             >
               Request a Briefing
             </Link>
             <Link
               href="/contact"
-              className="rounded-full px-6 py-3 bg-transparent hover:bg-white/5 text-sm transition-colors border border-white/15"
+              className="rounded-full px-5 sm:px-6 py-3 bg-transparent hover:bg-white/5 text-sm transition-colors border border-white/15"
             >
               Contact Sales
             </Link>
@@ -56,9 +56,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="relative z-10 border-t border-border-gray px-16 py-6 flex flex-col md:flex-row justify-between gap-4 text-xs text-white/50">
+      <div className="relative z-10 border-t border-border-gray px-6 md:px-16 py-6 flex flex-col md:flex-row justify-between gap-4 text-xs text-white/50">
         <span>© {new Date().getFullYear()} Talitrix. All rights reserved.</span>
-        <div className="flex gap-6">
+        <div className="flex gap-4 sm:gap-6 flex-wrap">
           <Link href="/privacy" className="hover:text-white">
             Privacy
           </Link>

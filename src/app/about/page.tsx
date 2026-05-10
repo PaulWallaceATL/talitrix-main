@@ -74,7 +74,7 @@ export default function AboutPage() {
           <StaggeredText
             as="h1"
             text={"Redefining\nthe Category."}
-            className="text-5xl md:text-7xl leading-[1.05]"
+            className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.8}
             delay={70}
@@ -112,12 +112,12 @@ export default function AboutPage() {
         </div>
       </ShaderHero>
 
-      <section className="relative px-16 py-32 border-b border-border-gray">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray">
         <div className="max-w-5xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             Our Story
           </span>
-          <h2 className="text-4xl md:text-5xl mb-10 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-10 leading-tight">
             Forty years off course.
             <br />
             <span className="text-white/60">One company correcting it.</span>
@@ -137,7 +137,7 @@ export default function AboutPage() {
             blurDuration={1.1}
             highlightDuration={0.9}
             viewportOptions={{ once: true, amount: 0.4 }}
-            className="space-y-6 text-lg text-white/85 leading-relaxed max-w-3xl"
+            className="space-y-6 text-base sm:text-lg text-white/85 leading-relaxed max-w-3xl"
           >
             <p>
               In the early 1960s, Harvard researchers developed the first
@@ -163,7 +163,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-32 border-b border-border-gray overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
           <SynapticShift
             color="#f87a13"
@@ -181,7 +181,7 @@ export default function AboutPage() {
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             Timeline
           </span>
-          <h2 className="text-4xl md:text-5xl mb-16 leading-tight max-w-2xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-12 md:mb-16 leading-tight max-w-2xl">
             From rehabilitation to surveillance — and back again.
           </h2>
 
@@ -189,7 +189,7 @@ export default function AboutPage() {
             {timeline.map((item) => (
               <div
                 key={item.year}
-                className="bg-background/80 backdrop-blur-md p-8 flex flex-col gap-4 min-h-[260px]"
+                className="bg-background/80 backdrop-blur-md p-6 sm:p-8 flex flex-col gap-4 min-h-[220px] sm:min-h-[260px]"
               >
                 <span className="text-primary text-sm tracking-widest">
                   {item.year}
@@ -204,15 +204,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-32 border-b border-border-gray overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
         <div className="absolute -top-20 right-0 w-[600px] h-[600px] bg-primary/10 blur-[200px] pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 mb-16">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
           <div className="lg:col-span-5">
             <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
               What we believe
             </span>
-            <h2 className="text-4xl md:text-5xl leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
               Built on
               <br />
               conviction.
@@ -244,14 +244,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-32 overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-4xl">
-          <h2 className="text-4xl md:text-6xl leading-[1.1] mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8">
             Today, Talitrix is setting the global standard in monitoring and
             supervision technology.
           </h2>
-          <p className="text-white/70 text-xl leading-relaxed mb-10 max-w-2xl">
+          <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
             And we are just getting started.
           </p>
           <div className="flex flex-wrap gap-4">

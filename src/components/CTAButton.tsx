@@ -18,7 +18,7 @@ const CTAButton = ({
     return (
       <Link
         href={href}
-        className={`inline-flex items-center justify-center rounded-full px-8 py-4 bg-white/15 backdrop-blur-md transition-transform hover:scale-[1.02] hover:bg-white/20 text-base ${className}`}
+        className={`inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-3.5 sm:py-4 bg-white/15 backdrop-blur-md transition-transform hover:scale-[1.02] hover:bg-white/20 text-sm sm:text-base ${className}`}
         style={{
           boxShadow:
             "0px 19px 65.2px rgba(248, 122, 19, 0.25), inset -3px -1px 10.9px rgba(255, 255, 255, 0.29), inset 0px 0px 2px #ffffff",
@@ -33,7 +33,7 @@ const CTAButton = ({
     return (
       <Link
         href={href}
-        className={`inline-flex items-center justify-center rounded-full px-8 py-4 border border-white/20 hover:bg-white/5 text-base transition-colors ${className}`}
+        className={`inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-3.5 sm:py-4 border border-white/20 hover:bg-white/5 text-sm sm:text-base transition-colors ${className}`}
       >
         {children}
       </Link>

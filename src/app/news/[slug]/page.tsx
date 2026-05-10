@@ -179,7 +179,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd) }}
       />
 
-      <article className="relative pt-40 pb-24 px-6 md:px-16 max-w-4xl mx-auto">
+      <article className="relative pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-16 max-w-4xl mx-auto">
         <nav aria-label="Breadcrumb">
           <Link
             href="/news"
@@ -198,10 +198,10 @@ export default async function ArticlePage({ params }: { params: Params }) {
             <span className="text-white/40">·</span>
             <span className="text-white/40">By {author}</span>
           </div>
-          <h1 className="text-4xl md:text-6xl leading-[1.1]">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1]">
             {article.title}
           </h1>
-          <p className="text-xl text-white/75 leading-relaxed">
+          <p className="text-lg sm:text-xl text-white/75 leading-relaxed">
             {article.excerpt}
           </p>
 
@@ -219,12 +219,12 @@ export default async function ArticlePage({ params }: { params: Params }) {
           )}
         </header>
 
-        <div className="flex flex-col gap-6 text-lg text-white/85 leading-relaxed">
+        <div className="flex flex-col gap-6 text-base sm:text-lg text-white/85 leading-relaxed">
           {blocks.map((block, i) =>
             isHeading(block) ? (
               <h2
                 key={i}
-                className="text-2xl md:text-3xl mt-8 mb-0 leading-snug text-white"
+                className="text-xl sm:text-2xl md:text-3xl mt-8 mb-0 leading-snug text-white"
               >
                 {block}
               </h2>
@@ -249,16 +249,16 @@ export default async function ArticlePage({ params }: { params: Params }) {
           </div>
         )}
 
-        <div className="mt-16 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-8 rounded-2xl border border-border-gray bg-white/[0.02]">
+        <div className="mt-12 sm:mt-16 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 sm:p-8 rounded-2xl border border-border-gray bg-white/[0.02]">
           <div>
             <p className="text-sm text-white/60">More from Talitrix</p>
-            <p className="text-lg">
+            <p className="text-base sm:text-lg">
               See the latest field reports and announcements.
             </p>
           </div>
           <Link
             href="/news"
-            className="px-6 py-3 rounded-full bg-white/15 hover:bg-primary/40 backdrop-blur-md transition-colors border border-white/15 text-sm whitespace-nowrap"
+            className="self-start sm:self-auto px-6 py-3 rounded-full bg-white/15 hover:bg-primary/40 backdrop-blur-md transition-colors border border-white/15 text-sm whitespace-nowrap"
           >
             All News →
           </Link>

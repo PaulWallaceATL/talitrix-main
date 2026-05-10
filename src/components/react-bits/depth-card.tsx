@@ -267,9 +267,12 @@ const DepthCard: React.FC<DepthCardProps> = ({
     <CardWrapper
       {...wrapperProps}
       ref={cardRef as React.RefObject<HTMLDivElement & HTMLAnchorElement>}
-      className={cn("relative cursor-pointer focus:outline-none", className)}
+      className={cn(
+        "relative cursor-pointer focus:outline-none w-full",
+        className,
+      )}
       style={{
-        width: `${width}px`,
+        maxWidth: `${width}px`,
         height: `${height}px`,
         perspective: "1000px",
         borderRadius,

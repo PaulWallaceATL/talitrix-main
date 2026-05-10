@@ -73,7 +73,7 @@ export default function ServicesPage() {
           <StaggeredText
             as="h1"
             text={"More than software.\nA complete service model."}
-            className="text-5xl md:text-7xl leading-[1.05]"
+            className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
             delay={70}
@@ -111,14 +111,14 @@ export default function ServicesPage() {
         </div>
       </ShaderHero>
 
-      <section className="relative px-16 py-32 border-b border-border-gray overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
         <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
 
         <div className="relative z-10">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             The Talitrix Engagement Model
           </span>
-          <h2 className="text-4xl md:text-5xl mb-16 leading-tight max-w-2xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-12 md:mb-16 leading-tight max-w-2xl">
             Four phases. One continuous partnership.
           </h2>
 
@@ -126,7 +126,7 @@ export default function ServicesPage() {
             {phases.map((p, i) => (
               <div
                 key={p.phase}
-                className="bg-background p-8 flex flex-col gap-4 min-h-[220px]"
+                className="bg-background p-6 sm:p-8 flex flex-col gap-4 min-h-[200px] sm:min-h-[220px]"
               >
                 <span className="text-primary text-sm tracking-widest">
                   0{i + 1}
@@ -141,18 +141,18 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-32 border-b border-border-gray overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-16">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
           <div className="lg:col-span-5">
             <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
               Service Lines
             </span>
-            <h2 className="text-4xl md:text-5xl leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
               The full service stack.
             </h2>
           </div>
           <div className="lg:col-span-7">
-            <p className="text-lg text-white/70 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               Every service line is delivered by Talitrix or a vetted partner —
               with documented playbooks, defined SLAs, and accountability for
               outcomes.
@@ -181,13 +181,13 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-32 overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-4xl">
-          <h2 className="text-4xl md:text-6xl leading-[1.1] mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8">
             Built to operate. Designed to last.
           </h2>
-          <p className="text-white/70 text-xl leading-relaxed mb-10 max-w-2xl">
+          <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
             See how Talitrix services translate into operational outcomes
             inside your agency.
           </p>

@@ -25,7 +25,7 @@ const ShaderHero = ({
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-background/30 to-background pointer-events-none" />
 
       <div
-        className={`relative z-10 px-16 pt-48 pb-32 max-w-7xl ${
+        className={`relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl ${
           align === "center" ? "mx-auto text-center" : ""
         }`}
       >
@@ -34,9 +34,11 @@ const ShaderHero = ({
             {eyebrow}
           </span>
         )}
-        <div className="text-5xl md:text-7xl leading-[1.05] mb-6">{title}</div>
+        <div className="text-4xl sm:text-5xl md:text-7xl leading-[1.05] mb-6">
+          {title}
+        </div>
         {subtitle && (
-          <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed mb-6">
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed mb-6">
             {subtitle}
           </p>
         )}

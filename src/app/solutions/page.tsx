@@ -98,20 +98,20 @@ export default function SolutionsPage() {
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-background via-background/60 to-background/30 pointer-events-none" />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
 
-        <div className="relative z-10 px-16 pt-48 pb-32 max-w-7xl">
+        <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             Solutions
           </span>
           <StaggeredText
             as="h1"
             text={"Built for the\npeople who run it."}
-            className="text-5xl md:text-7xl leading-[1.05] mb-6"
+            className="text-4xl sm:text-5xl md:text-7xl leading-[1.05] mb-6"
             segmentBy="words"
             duration={0.7}
             delay={70}
             blur
           />
-          <p className="text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed mb-6">
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed mb-6">
             Talitrix ONE is shaped by the realities of the agencies, courts,
             and participants it serves.
           </p>
@@ -120,7 +120,7 @@ export default function SolutionsPage() {
             demands continuity — and a platform that adapts to the
             operational realities of every stakeholder in the lifecycle.
           </p>
-          <div className="flex flex-wrap gap-4 mt-10">
+          <div className="flex flex-wrap gap-4 mt-8 md:mt-10">
             <CTAButton href="/get-started">Request a Briefing</CTAButton>
             <CTAButton href="/talitrix-one" variant="secondary">
               Explore the Platform
@@ -129,7 +129,7 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-24 border-b border-border-gray">
+      <section className="relative px-6 md:px-16 py-16 md:py-24 border-b border-border-gray">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center">
           {segments.map((s, i) => (
             <DepthCard
@@ -156,7 +156,7 @@ export default function SolutionsPage() {
         <section
           key={s.id}
           id={s.id}
-          className={`relative px-16 py-32 border-b border-border-gray overflow-hidden ${
+          className={`relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden ${
             i % 2 === 1 ? "bg-white/[0.02]" : ""
           }`}
         >
@@ -166,7 +166,7 @@ export default function SolutionsPage() {
             }`}
           />
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-5 flex flex-col gap-4">
               <span className="text-xs text-white/40 tracking-widest">
                 {s.number}
@@ -174,14 +174,18 @@ export default function SolutionsPage() {
               <span className="text-primary text-xs uppercase tracking-[0.3em]">
                 {s.eyebrow}
               </span>
-              <h2 className="text-4xl md:text-5xl leading-tight mt-2">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mt-2">
                 {s.headline}
               </h2>
-              <p className="text-white/65 text-lg mt-4">{s.subheadline}</p>
+              <p className="text-white/65 text-base sm:text-lg mt-4">
+                {s.subheadline}
+              </p>
             </div>
 
-            <div className="lg:col-span-7 flex flex-col gap-8">
-              <p className="text-lg text-white/75 leading-relaxed">{s.body}</p>
+            <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
+              <p className="text-base sm:text-lg text-white/75 leading-relaxed">
+                {s.body}
+              </p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {s.bullets.map((b) => (
                   <li
@@ -193,7 +197,7 @@ export default function SolutionsPage() {
                   </li>
                 ))}
               </ul>
-              <div className="pt-2 flex gap-6">
+              <div className="pt-2 flex flex-wrap gap-4 sm:gap-6">
                 <CTAButton href="/get-started" variant="ghost">
                   Request a briefing
                 </CTAButton>
@@ -206,17 +210,17 @@ export default function SolutionsPage() {
         </section>
       ))}
 
-      <section className="relative px-16 py-32 overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-4xl">
-          <h2 className="text-4xl md:text-6xl leading-[1.1] mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8">
             One platform.
             <br />
             <span className="text-white/60">
               Every stakeholder in the lifecycle.
             </span>
           </h2>
-          <p className="text-white/70 text-xl leading-relaxed mb-10 max-w-2xl">
+          <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
             See how Talitrix ONE adapts to your agency's reality and your
             community's outcomes.
           </p>

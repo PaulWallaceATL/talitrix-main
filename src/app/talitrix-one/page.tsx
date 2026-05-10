@@ -102,7 +102,7 @@ export default function TalitrixOnePage() {
           <StaggeredText
             as="h1"
             text={"Talitrix ONE.\nThe Unified Ecosystem."}
-            className="text-5xl md:text-7xl leading-[1.05]"
+            className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
             delay={70}
@@ -142,7 +142,7 @@ export default function TalitrixOnePage() {
         </div>
       </ShaderHero>
 
-      <section className="relative px-16 py-24 border-b border-border-gray">
+      <section className="relative px-6 md:px-16 py-16 md:py-24 border-b border-border-gray">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
           {[...modules, {
             id: "score",
@@ -153,7 +153,7 @@ export default function TalitrixOnePage() {
             <a
               key={m.id}
               href={`#${m.id}`}
-              className="bg-background p-8 flex flex-col gap-3 hover:bg-white/5 transition-colors min-h-[180px]"
+              className="bg-background p-6 sm:p-8 flex flex-col gap-3 hover:bg-white/5 transition-colors min-h-[160px] sm:min-h-[180px]"
             >
               <span className="text-xs text-white/40 tracking-widest">
                 {m.number}
@@ -170,20 +170,22 @@ export default function TalitrixOnePage() {
       {/* T-Band module — paired with AgenticBall visual */}
       <section
         id="tband"
-        className="relative px-16 py-32 border-b border-border-gray overflow-hidden"
+        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden"
       >
         <div className="absolute -top-40 -left-32 w-[600px] h-[600px] bg-primary/15 blur-[200px] pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-7 flex flex-col gap-6">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div className="lg:col-span-7 flex flex-col gap-5 md:gap-6 order-2 lg:order-1">
             <span className="text-xs text-white/40 tracking-widest">
               {modules[0].number} · {modules[0].eyebrow}
             </span>
-            <h2 className="text-4xl md:text-5xl leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
               {modules[0].headline}
             </h2>
-            <h3 className="text-xl text-primary mt-2">{modules[0].title}</h3>
-            <p className="text-lg text-white/75 leading-relaxed">
+            <h3 className="text-lg sm:text-xl text-primary mt-2">
+              {modules[0].title}
+            </h3>
+            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
               {modules[0].body}
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
@@ -204,7 +206,7 @@ export default function TalitrixOnePage() {
             </div>
           </div>
 
-          <div className="lg:col-span-5 h-[480px] relative">
+          <div className="lg:col-span-5 h-[320px] sm:h-[400px] lg:h-[480px] relative order-1 lg:order-2">
             <AgenticBall
               speed={0.6}
               complexity={5}
@@ -224,7 +226,7 @@ export default function TalitrixOnePage() {
         <section
           key={m.id}
           id={m.id}
-          className={`relative px-16 py-32 border-b border-border-gray overflow-hidden ${
+          className={`relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden ${
             i % 2 === 0 ? "bg-white/[0.02]" : ""
           }`}
         >
@@ -234,19 +236,23 @@ export default function TalitrixOnePage() {
             }`}
           />
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <div className="lg:col-span-5 flex flex-col gap-4">
               <span className="text-xs text-white/40 tracking-widest">
                 {m.number} · {m.eyebrow}
               </span>
-              <h2 className="text-4xl md:text-5xl leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
                 {m.headline}
               </h2>
-              <h3 className="text-xl text-primary mt-4">{m.title}</h3>
+              <h3 className="text-lg sm:text-xl text-primary mt-4">
+                {m.title}
+              </h3>
             </div>
 
-            <div className="lg:col-span-7 flex flex-col gap-8">
-              <p className="text-lg text-white/75 leading-relaxed">{m.body}</p>
+            <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
+              <p className="text-base sm:text-lg text-white/75 leading-relaxed">
+                {m.body}
+              </p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {m.bullets.map((b) => (
                   <li
@@ -272,7 +278,7 @@ export default function TalitrixOnePage() {
       {/* Talitrix Score module — paired with SimpleGraph */}
       <section
         id="score"
-        className="relative px-16 py-32 border-b border-border-gray overflow-hidden"
+        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden"
       >
         <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
           <HalftoneWave
@@ -288,21 +294,21 @@ export default function TalitrixOnePage() {
         </div>
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-background/40 to-background pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <div className="lg:col-span-5 flex flex-col gap-4">
             <span className="text-xs text-white/40 tracking-widest">
               05 · The Talitrix Score
             </span>
-            <h2 className="text-4xl md:text-5xl leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
               Move from reactive supervision to proactive intervention.
             </h2>
-            <h3 className="text-xl text-primary mt-4">
+            <h3 className="text-lg sm:text-xl text-primary mt-4">
               Behavioral Intelligence and Defensible Data.
             </h3>
           </div>
 
-          <div className="lg:col-span-7 flex flex-col gap-8">
-            <p className="text-lg text-white/75 leading-relaxed">
+          <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
+            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
               The Talitrix Score transforms behavioral data into measurable
               intelligence, giving supervision teams earlier visibility into
               risk, stronger context for intervention, and a defensible
@@ -369,16 +375,16 @@ export default function TalitrixOnePage() {
         </div>
       </section>
 
-      <section className="relative px-16 py-32 overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-4xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             Deploy the New Standard
           </span>
-          <h2 className="text-4xl md:text-6xl leading-[1.1] mb-8">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8">
             The future of supervision starts here.
           </h2>
-          <p className="text-white/70 text-xl leading-relaxed mb-10 max-w-2xl">
+          <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
             One unified platform, behavioral intelligence, and operational
             efficiency — helping agencies act earlier, work smarter, and
             improve outcomes for participants and the communities they
