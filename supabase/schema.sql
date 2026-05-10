@@ -132,3 +132,9 @@ create index if not exists participant_registrations_participant_idx
   on public.participant_registrations (participant_id);
 
 alter table public.participant_registrations enable row level security;
+
+-- ---------- Reload PostgREST schema cache ---------------------------------
+-- Important: after adding the SEO columns above, PostgREST may still cache
+-- the old shape and reject inserts with PGRST204 ("Could not find the
+-- 'author_name' column ..."). This NOTIFY tells it to reload immediately.
+notify pgrst, 'reload schema';
