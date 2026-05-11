@@ -5,11 +5,32 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+type IconName =
+  | "stack"
+  | "watch"
+  | "intake"
+  | "facility"
+  | "route"
+  | "pulse"
+  | "globe"
+  | "shieldStar"
+  | "team"
+  | "scale"
+  | "userHeart";
+
 type NavItem = {
   label: string;
   href: string;
   desc?: string;
+  icon?: IconName;
   children?: NavItem[];
+};
+
+type MenuCta = {
+  eyebrow: string;
+  headline: string;
+  ctaLabel: string;
+  ctaHref: string;
 };
 
 const NAV_TREE: NavItem[] = [
@@ -21,31 +42,37 @@ const NAV_TREE: NavItem[] = [
       {
         label: "Talitrix ONE",
         href: "/talitrix-one",
+        icon: "stack",
         desc: "The unified ecosystem connecting hardware, software, and intelligence.",
       },
       {
         label: "T-Band",
         href: "/talitrix-one/t-band",
+        icon: "watch",
         desc: "The first independent wrist-worn GPS monitoring device.",
       },
       {
         label: "ONE Intake",
         href: "/talitrix-one/intake",
+        icon: "intake",
         desc: "Centralized booking, identity, and classification.",
       },
       {
         label: "ONE Jail Management",
         href: "/talitrix-one/jail-management",
+        icon: "facility",
         desc: "The custody lifecycle on one connected system.",
       },
       {
         label: "ONE Pre-Trial & Probation",
         href: "/talitrix-one/pretrial-probation",
+        icon: "route",
         desc: "End-to-end community supervision in a single platform.",
       },
       {
         label: "Talitrix Score",
         href: "/talitrix-one/score",
+        icon: "pulse",
         desc: "Behavioral intelligence and defensible data.",
       },
     ],
@@ -57,33 +84,52 @@ const NAV_TREE: NavItem[] = [
       {
         label: "All Solutions",
         href: "/solutions",
+        icon: "globe",
         desc: "How Talitrix ONE adapts to every stakeholder in the lifecycle.",
       },
       {
         label: "Sheriffs & Agency Leaders",
         href: "/solutions/sheriffs",
+        icon: "shieldStar",
         desc: "Decisions you can stand behind.",
       },
       {
         label: "Pretrial & Supervision",
         href: "/solutions/pretrial",
+        icon: "team",
         desc: "Proactive intervention, not reactive administration.",
       },
       {
         label: "Courts & Legal",
         href: "/solutions/courts",
+        icon: "scale",
         desc: "Data integrity and institutional credibility.",
       },
       {
         label: "Participants",
         href: "/solutions/participants",
+        icon: "userHeart",
         desc: "Support, clarity, and dignity.",
       },
     ],
   },
-  { label: "Services", href: "/services" },
   { label: "News", href: "/news" },
 ];
+
+const MENU_CTAS: Record<string, MenuCta> = {
+  Platform: {
+    eyebrow: "See the platform in action",
+    headline: "Tailored briefings for your agency.",
+    ctaLabel: "Contact Sales",
+    ctaHref: "/contact",
+  },
+  Solutions: {
+    eyebrow: "Find the right fit for your role",
+    headline: "Talk to our team about your operation.",
+    ctaLabel: "Contact Sales",
+    ctaHref: "/contact",
+  },
+};
 
 const RIGHT_LINKS: NavItem[] = [
   { label: "Contact", href: "/contact" },
@@ -151,7 +197,7 @@ const NavBar = () => {
     cancelClose();
     closeTimerRef.current = setTimeout(() => {
       setOpenMenu(null);
-    }, 150);
+    }, 200);
   };
 
   const onTriggerEnter = (label: string) => {
@@ -174,6 +220,7 @@ const NavBar = () => {
   const activeMenuItem = NAV_TREE.find(
     (i) => i.label === openMenu && i.children,
   );
+  const activeCta = activeMenuItem ? MENU_CTAS[activeMenuItem.label] : null;
 
   return (
     <>
@@ -285,22 +332,28 @@ const NavBar = () => {
         {activeMenuItem && (
           <div
             id={`mega-${activeMenuItem.label.toLowerCase()}`}
-            className="hidden lg:block absolute left-0 right-0 top-full bg-black/90 backdrop-blur-xl border-b border-border-gray z-40"
+            className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full pt-3 z-40"
             onMouseEnter={cancelClose}
             onMouseLeave={scheduleClose}
             role="menu"
           >
-            <div className="px-10 xl:px-16 py-10">
-              <span className="text-xs uppercase tracking-[0.3em] text-primary mb-6 block">
-                {activeMenuItem.label}
-              </span>
-              <div
-                className={`grid gap-4 ${
-                  activeMenuItem.children!.length > 5
-                    ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3"
-                    : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                }`}
-              >
+            {/* Invisible hover bridge so the cursor never leaves the menu zone while moving from trigger to panel */}
+            <div className="absolute -top-3 left-0 right-0 h-3" aria-hidden />
+
+            <div
+              className="relative w-[min(94vw,1080px)] rounded-2xl border border-white/15 bg-black/95 backdrop-blur-2xl overflow-hidden"
+              style={{
+                boxShadow:
+                  "0 30px 80px rgba(0, 0, 0, 0.6), 0 8px 30px rgba(248, 122, 19, 0.08)",
+              }}
+            >
+              <div className="px-8 pt-7 pb-5">
+                <span className="text-xs uppercase tracking-[0.3em] text-white/50">
+                  {activeMenuItem.label}
+                </span>
+              </div>
+
+              <div className="px-4 pb-3 grid md:grid-cols-2 gap-x-4 gap-y-1">
                 {activeMenuItem.children!.map((child) => {
                   const childActive =
                     pathname === child.href ||
@@ -311,33 +364,60 @@ const NavBar = () => {
                       href={child.href}
                       onClick={() => setOpenMenu(null)}
                       role="menuitem"
-                      className={`group relative flex flex-col gap-2 p-5 rounded-xl border transition-colors ${
+                      className={`group flex items-start gap-4 p-4 rounded-xl transition-colors ${
                         childActive
-                          ? "border-primary/50 bg-primary/5"
-                          : "border-border-gray bg-white/[0.02] hover:bg-white/[0.05] hover:border-primary/40"
+                          ? "bg-primary/10"
+                          : "hover:bg-white/[0.04]"
                       }`}
                     >
-                      <span className="flex items-center justify-between gap-3">
+                      <span
+                        className={`shrink-0 size-10 rounded-xl flex items-center justify-center border transition-colors ${
+                          childActive
+                            ? "bg-primary/20 border-primary/50 text-primary"
+                            : "bg-primary/10 border-primary/25 text-primary group-hover:bg-primary/15 group-hover:border-primary/40"
+                        }`}
+                      >
+                        {child.icon && <NavIcon name={child.icon} />}
+                      </span>
+                      <span className="flex flex-col gap-0.5 min-w-0">
                         <span
-                          className={`text-base ${
+                          className={`text-base leading-snug ${
                             childActive ? "text-primary" : "text-white"
                           }`}
                         >
                           {child.label}
                         </span>
-                        <span className="text-primary opacity-60 group-hover:opacity-100 transition-opacity">
-                          →
-                        </span>
+                        {child.desc && (
+                          <span className="text-sm text-white/55 leading-snug">
+                            {child.desc}
+                          </span>
+                        )}
                       </span>
-                      {child.desc && (
-                        <span className="text-sm text-white/60 leading-relaxed">
-                          {child.desc}
-                        </span>
-                      )}
                     </Link>
                   );
                 })}
               </div>
+
+              {activeCta && (
+                <div className="border-t border-white/10 bg-white/[0.02] px-8 py-5 flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
+                      {activeCta.eyebrow}
+                    </span>
+                    <span className="text-sm text-white/85 mt-1">
+                      {activeCta.headline}
+                    </span>
+                  </div>
+                  <Link
+                    href={activeCta.ctaHref}
+                    onClick={() => setOpenMenu(null)}
+                    className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm bg-primary/15 hover:bg-primary/30 border border-primary/40 text-primary transition-colors whitespace-nowrap"
+                  >
+                    {activeCta.ctaLabel}
+                    <span aria-hidden>→</span>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -367,6 +447,7 @@ const NavBar = () => {
               if (item.children) {
                 const sectionOpen = openMobileSection === item.label;
                 const groupActive = isPathInGroup(item);
+                const cta = MENU_CTAS[item.label];
                 return (
                   <div
                     key={item.label}
@@ -395,7 +476,7 @@ const NavBar = () => {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <div className="border-l-2 border-primary/40 ml-6 mb-4 flex flex-col">
+                        <div className="flex flex-col px-3 pb-4 gap-1">
                           {item.children.map((child) => {
                             const childActive =
                               pathname === child.href ||
@@ -405,16 +486,62 @@ const NavBar = () => {
                                 key={child.href}
                                 href={child.href}
                                 onClick={() => setDrawerOpen(false)}
-                                className={`pl-4 pr-6 py-3 text-base transition-colors ${
+                                className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
                                   childActive
-                                    ? "text-primary"
-                                    : "text-white/85 hover:text-primary"
+                                    ? "bg-primary/10"
+                                    : "hover:bg-white/[0.04]"
                                 }`}
                               >
-                                {child.label}
+                                <span
+                                  className={`shrink-0 size-9 rounded-lg flex items-center justify-center border ${
+                                    childActive
+                                      ? "bg-primary/20 border-primary/50 text-primary"
+                                      : "bg-primary/10 border-primary/25 text-primary"
+                                  }`}
+                                >
+                                  {child.icon && (
+                                    <NavIcon name={child.icon} size={18} />
+                                  )}
+                                </span>
+                                <span className="flex flex-col gap-0.5 min-w-0">
+                                  <span
+                                    className={`text-base leading-snug ${
+                                      childActive
+                                        ? "text-primary"
+                                        : "text-white"
+                                    }`}
+                                  >
+                                    {child.label}
+                                  </span>
+                                  {child.desc && (
+                                    <span className="text-xs text-white/55 leading-snug">
+                                      {child.desc}
+                                    </span>
+                                  )}
+                                </span>
                               </Link>
                             );
                           })}
+
+                          {cta && (
+                            <Link
+                              href={cta.ctaHref}
+                              onClick={() => setDrawerOpen(false)}
+                              className="mt-2 mx-1 flex items-center justify-between gap-3 rounded-xl border border-primary/40 bg-primary/10 hover:bg-primary/20 px-4 py-3 transition-colors"
+                            >
+                              <span className="flex flex-col min-w-0">
+                                <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
+                                  {cta.eyebrow}
+                                </span>
+                                <span className="text-sm text-white/85 mt-0.5">
+                                  {cta.headline}
+                                </span>
+                              </span>
+                              <span className="text-primary text-sm whitespace-nowrap">
+                                {cta.ctaLabel} →
+                              </span>
+                            </Link>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -538,3 +665,115 @@ const BurgerIcon = ({ open }: { open: boolean }) => (
     />
   </svg>
 );
+
+const NavIcon = ({
+  name,
+  size = 20,
+}: {
+  name: IconName;
+  size?: number;
+}) => {
+  const common = {
+    width: size,
+    height: size,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.75,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+  switch (name) {
+    case "stack":
+      return (
+        <svg {...common}>
+          <path d="M12 3 3 7l9 4 9-4-9-4Z" />
+          <path d="M3 12l9 4 9-4" />
+          <path d="M3 17l9 4 9-4" />
+        </svg>
+      );
+    case "watch":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="6" />
+          <path d="M12 9v3l2 1" />
+          <path d="M9 3h6l-1 3M9 21h6l-1-3" />
+        </svg>
+      );
+    case "intake":
+      return (
+        <svg {...common}>
+          <rect x="6" y="4" width="12" height="16" rx="2" />
+          <path d="M9 4v2h6V4" />
+          <path d="M9 11h6M9 15h4" />
+        </svg>
+      );
+    case "facility":
+      return (
+        <svg {...common}>
+          <path d="M4 21V8l8-4 8 4v13" />
+          <path d="M4 21h16" />
+          <path d="M9 21v-5h6v5" />
+          <path d="M9 12h.01M12 12h.01M15 12h.01" />
+        </svg>
+      );
+    case "route":
+      return (
+        <svg {...common}>
+          <circle cx="6" cy="6" r="2.5" />
+          <circle cx="18" cy="18" r="2.5" />
+          <path d="M8.5 6h6a4 4 0 0 1 0 8H9.5a4 4 0 0 0 0 8H15" />
+        </svg>
+      );
+    case "pulse":
+      return (
+        <svg {...common}>
+          <path d="M3 12h4l2-6 4 12 2-6h6" />
+        </svg>
+      );
+    case "globe":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3a14 14 0 0 1 0 18" />
+          <path d="M12 3a14 14 0 0 0 0 18" />
+        </svg>
+      );
+    case "shieldStar":
+      return (
+        <svg {...common}>
+          <path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3Z" />
+          <path d="m12 9 1.2 2.5 2.8.4-2 1.9.5 2.7L12 15.3l-2.5 1.2.5-2.7-2-1.9 2.8-.4L12 9Z" />
+        </svg>
+      );
+    case "team":
+      return (
+        <svg {...common}>
+          <circle cx="9" cy="8" r="3" />
+          <circle cx="17" cy="9" r="2.5" />
+          <path d="M3 20a6 6 0 0 1 12 0" />
+          <path d="M14 20a4 4 0 0 1 7 0" />
+        </svg>
+      );
+    case "scale":
+      return (
+        <svg {...common}>
+          <path d="M12 4v16" />
+          <path d="M6 20h12" />
+          <path d="M6 8h12" />
+          <path d="M6 8 3 14a3 3 0 0 0 6 0L6 8Z" />
+          <path d="M18 8l-3 6a3 3 0 0 0 6 0L18 8Z" />
+        </svg>
+      );
+    case "userHeart":
+      return (
+        <svg {...common}>
+          <circle cx="10" cy="8" r="3.5" />
+          <path d="M3.5 20a6.5 6.5 0 0 1 13 0" />
+          <path d="M19.5 11.5c-1.7-2-4.5-.6-4.5 1.6 0 2.4 4.5 4.4 4.5 4.4s4.5-2 4.5-4.4c0-2.2-2.8-3.6-4.5-1.6Z" />
+        </svg>
+      );
+  }
+};

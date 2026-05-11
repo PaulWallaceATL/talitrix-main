@@ -21,7 +21,6 @@ const STATIC_ROUTES: Array<{
     changeFrequency: "monthly",
     priority: 0.85,
   },
-  { path: "/services", changeFrequency: "monthly", priority: 0.8 },
   { path: "/talitrix-one", changeFrequency: "monthly", priority: 0.9 },
   { path: "/talitrix-one/t-band", changeFrequency: "monthly", priority: 0.85 },
   { path: "/talitrix-one/intake", changeFrequency: "monthly", priority: 0.8 },
