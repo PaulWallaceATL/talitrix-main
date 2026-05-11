@@ -81,19 +81,24 @@ const FooterLinks = [
     title: "Platform",
     links: [
       { label: "Talitrix ONE", href: "/talitrix-one" },
-      { label: "ONE Intake", href: "/talitrix-one#intake" },
-      { label: "ONE Jail Management", href: "/talitrix-one#jail" },
-      { label: "ONE Pre-Trial & Probation", href: "/talitrix-one#probation" },
-      { label: "Talitrix Score", href: "/talitrix-one#score" },
+      { label: "T-Band", href: "/talitrix-one/t-band" },
+      { label: "ONE Intake", href: "/talitrix-one/intake" },
+      { label: "ONE Jail Management", href: "/talitrix-one/jail-management" },
+      {
+        label: "ONE Pre-Trial & Probation",
+        href: "/talitrix-one/pretrial-probation",
+      },
+      { label: "Talitrix Score", href: "/talitrix-one/score" },
     ],
   },
   {
     title: "Solutions",
     links: [
-      { label: "Sheriffs & Agency Leaders", href: "/solutions#sheriffs" },
-      { label: "Pretrial & Supervision", href: "/solutions#pretrial" },
-      { label: "Courts & Legal", href: "/solutions#courts" },
-      { label: "Participants", href: "/solutions#participants" },
+      { label: "All Solutions", href: "/solutions" },
+      { label: "Sheriffs & Agency Leaders", href: "/solutions/sheriffs" },
+      { label: "Pretrial & Supervision", href: "/solutions/pretrial" },
+      { label: "Courts & Legal", href: "/solutions/courts" },
+      { label: "Participants", href: "/solutions/participants" },
     ],
   },
   {

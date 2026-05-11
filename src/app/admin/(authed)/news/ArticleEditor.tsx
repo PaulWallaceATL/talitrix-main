@@ -158,26 +158,28 @@ export default function ArticleEditor({ mode, article }: Props) {
         <button
           type="button"
           onClick={() => setAiOpen((v) => !v)}
-          className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+          className="w-full flex items-center justify-between gap-3 sm:gap-4 px-5 sm:px-6 py-4 sm:py-5 text-left"
         >
-          <div className="flex items-center gap-4">
-            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/15 border border-primary/40 text-primary">
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+            <span className="inline-flex shrink-0 items-center justify-center w-10 h-10 rounded-full bg-primary/15 border border-primary/40 text-primary">
               ✦
             </span>
-            <div className="flex flex-col">
+            <div className="flex flex-col min-w-0">
               <span className="text-xs uppercase tracking-[0.3em] text-primary">
                 AI Assistant
               </span>
-              <span className="text-white">
+              <span className="text-white text-sm sm:text-base truncate sm:whitespace-normal">
                 Generate a publish-ready article from a brief
               </span>
             </div>
           </div>
-          <span className="text-white/50 text-sm">{aiOpen ? "Hide" : "Open"}</span>
+          <span className="text-white/50 text-sm shrink-0">
+            {aiOpen ? "Hide" : "Open"}
+          </span>
         </button>
 
         {aiOpen && (
-          <div className="px-6 pb-6 flex flex-col gap-4 border-t border-primary/30">
+          <div className="px-5 sm:px-6 pb-5 sm:pb-6 flex flex-col gap-4 border-t border-primary/30">
             <label className="flex flex-col gap-2 mt-4">
               <span className="text-xs uppercase tracking-widest text-white/60">
                 Brief / Context <span className="text-primary">*</span>
@@ -229,12 +231,12 @@ export default function ArticleEditor({ mode, article }: Props) {
 
             {aiError && <p className="text-sm text-red-400">{aiError}</p>}
 
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
               <button
                 type="button"
                 onClick={onGenerate}
                 disabled={aiPending || aiBrief.trim().length < 20}
-                className="px-6 py-3 rounded-full bg-primary/30 hover:bg-primary/50 backdrop-blur-md transition-colors border border-primary/60 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto px-6 py-3 rounded-full bg-primary/30 hover:bg-primary/50 backdrop-blur-md transition-colors border border-primary/60 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {aiPending ? "Drafting…" : "✦ Generate Article"}
               </button>
@@ -327,7 +329,7 @@ export default function ArticleEditor({ mode, article }: Props) {
         </label>
 
         {/* SEO PANEL */}
-        <fieldset className="rounded-2xl border border-border-gray bg-white/[0.02] p-6 flex flex-col gap-5">
+        <fieldset className="rounded-2xl border border-border-gray bg-white/[0.02] p-5 sm:p-6 flex flex-col gap-5">
           <legend className="px-2 text-xs uppercase tracking-[0.3em] text-primary">
             SEO
           </legend>
@@ -423,7 +425,7 @@ export default function ArticleEditor({ mode, article }: Props) {
           </label>
         </fieldset>
 
-        <div className="flex flex-wrap gap-8">
+        <div className="flex flex-wrap gap-5 sm:gap-8">
           <label className="flex items-center gap-3 text-sm text-white/80">
             <input
               type="checkbox"
@@ -446,11 +448,11 @@ export default function ArticleEditor({ mode, article }: Props) {
 
         {error && <p className="text-sm text-red-400">{error}</p>}
 
-        <div className="flex items-center gap-4 pt-4">
+        <div className="flex flex-wrap items-center gap-4 pt-4">
           <button
             type="submit"
             disabled={pending}
-            className="px-8 py-4 rounded-full bg-white/15 hover:bg-primary/40 backdrop-blur-md transition-colors border border-white/15 disabled:opacity-50"
+            className="w-full sm:w-auto px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-white/15 hover:bg-primary/40 backdrop-blur-md transition-colors border border-white/15 disabled:opacity-50"
             style={{
               boxShadow:
                 "0px 19px 65.2px rgba(248, 122, 19, 0.25), inset -3px -1px 10.9px rgba(255, 255, 255, 0.29), inset 0px 0px 2px #ffffff",

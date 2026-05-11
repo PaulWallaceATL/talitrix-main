@@ -61,12 +61,12 @@ export default async function AdminDashboard() {
   ];
 
   return (
-    <div className="px-12 py-12 max-w-6xl">
-      <header className="mb-12">
+    <div className="px-6 py-8 md:px-12 md:py-12 max-w-6xl">
+      <header className="mb-10 md:mb-12">
         <span className="text-xs uppercase tracking-[0.3em] text-primary">
           Overview
         </span>
-        <h1 className="text-4xl mt-2">Dashboard</h1>
+        <h1 className="text-3xl sm:text-4xl mt-2">Dashboard</h1>
         <p className="text-white/60 mt-3 max-w-2xl">
           Manage news articles and review every submission from the public
           forms.
@@ -74,23 +74,23 @@ export default async function AdminDashboard() {
       </header>
 
       {envError && (
-        <div className="mb-8 p-6 rounded-2xl border border-red-500/40 bg-red-500/5 text-red-200 text-sm">
+        <div className="mb-8 p-5 sm:p-6 rounded-2xl border border-red-500/40 bg-red-500/5 text-red-200 text-sm">
           <strong className="block mb-2">Supabase not configured.</strong>
           {envError}
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
         {cards.map((c) => (
           <Link
             key={c.href}
             href={c.href}
-            className="group p-8 rounded-2xl border border-border-gray bg-white/[0.02] hover:bg-white/[0.04] hover:border-primary/40 transition-colors flex flex-col gap-4"
+            className="group p-6 sm:p-8 rounded-2xl border border-border-gray bg-white/[0.02] hover:bg-white/[0.04] hover:border-primary/40 transition-colors flex flex-col gap-4"
           >
             <span className="text-xs uppercase tracking-widest text-white/50">
               {c.label}
             </span>
-            <span className="text-5xl">{c.count}</span>
+            <span className="text-4xl sm:text-5xl">{c.count}</span>
             <span className="mt-auto text-primary text-sm inline-flex gap-2 items-center group-hover:gap-3 transition-all">
               {c.cta} <span>→</span>
             </span>

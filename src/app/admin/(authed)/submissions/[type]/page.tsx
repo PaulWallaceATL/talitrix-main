@@ -137,12 +137,12 @@ export default async function SubmissionsPage({ params }: { params: Params }) {
   }
 
   return (
-    <div className="px-12 py-12 max-w-6xl">
-      <header className="mb-10">
+    <div className="px-6 py-8 md:px-12 md:py-12 max-w-6xl">
+      <header className="mb-8 md:mb-10">
         <span className="text-xs uppercase tracking-[0.3em] text-primary">
           {cfg.eyebrow}
         </span>
-        <h1 className="text-4xl mt-2">{cfg.title}</h1>
+        <h1 className="text-3xl sm:text-4xl mt-2">{cfg.title}</h1>
         <p className="text-white/60 mt-3 max-w-2xl">{cfg.description}</p>
         <p className="text-white/40 text-sm mt-3">
           {rows.length} total submission{rows.length === 1 ? "" : "s"}
@@ -150,18 +150,18 @@ export default async function SubmissionsPage({ params }: { params: Params }) {
       </header>
 
       {envError && (
-        <div className="mb-8 p-6 rounded-2xl border border-red-500/40 bg-red-500/5 text-red-200 text-sm">
+        <div className="mb-8 p-5 sm:p-6 rounded-2xl border border-red-500/40 bg-red-500/5 text-red-200 text-sm">
           {envError}
         </div>
       )}
 
       {!envError && rows.length === 0 ? (
-        <div className="p-10 rounded-2xl border border-border-gray bg-white/[0.02] text-white/60 text-sm">
+        <div className="p-8 sm:p-10 rounded-2xl border border-border-gray bg-white/[0.02] text-white/60 text-sm">
           Nothing here yet. Submissions captured from the public form will
           appear automatically.
         </div>
       ) : (
-        <ul className="flex flex-col gap-6">
+        <ul className="flex flex-col gap-5 sm:gap-6">
           {rows.map((r) => {
             const id = String(r.id);
             const created = r.created_at
@@ -172,14 +172,14 @@ export default async function SubmissionsPage({ params }: { params: Params }) {
                 key={id}
                 className="rounded-2xl border border-border-gray bg-white/[0.02] overflow-hidden"
               >
-                <div className="flex flex-wrap items-center justify-between gap-4 px-6 py-4 border-b border-border-gray bg-white/[0.02]">
+                <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 px-5 sm:px-6 py-4 border-b border-border-gray bg-white/[0.02]">
                   <div className="flex flex-col">
                     <span className="text-white">
                       {String(r.first_name ?? "")} {String(r.last_name ?? "")}
                     </span>
                     <span className="text-xs text-white/50">{created}</span>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4 ml-auto">
                     <span className="text-xs text-white/40">
                       ID {id.slice(0, 8)}
                     </span>
@@ -187,7 +187,7 @@ export default async function SubmissionsPage({ params }: { params: Params }) {
                   </div>
                 </div>
 
-                <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+                <div className="p-5 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-10 gap-y-6 sm:gap-y-8">
                   {cfg.groups.map((group) => (
                     <div key={group.label} className="flex flex-col gap-3">
                       <span className="text-xs uppercase tracking-widest text-primary/80">

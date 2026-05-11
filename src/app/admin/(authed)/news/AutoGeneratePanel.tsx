@@ -70,17 +70,17 @@ export default function AutoGeneratePanel() {
     <section className="relative rounded-2xl border border-primary/40 bg-gradient-to-br from-primary/[0.10] via-white/[0.02] to-transparent overflow-hidden">
       <div className="absolute -top-24 -right-24 w-[400px] h-[400px] bg-primary/15 blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 p-8 flex flex-col gap-6">
+      <div className="relative z-10 p-5 sm:p-6 md:p-8 flex flex-col gap-5 md:gap-6">
         <header className="flex flex-wrap items-start justify-between gap-4">
-          <div className="flex items-start gap-4">
-            <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/15 border border-primary/40 text-primary text-xl">
+          <div className="flex items-start gap-3 sm:gap-4">
+            <span className="inline-flex shrink-0 items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/15 border border-primary/40 text-primary text-xl">
               ✦
             </span>
             <div className="flex flex-col gap-1">
               <span className="text-xs uppercase tracking-[0.3em] text-primary">
                 One-Click Newsroom
               </span>
-              <h2 className="text-2xl">Auto-generate articles</h2>
+              <h2 className="text-xl sm:text-2xl">Auto-generate articles</h2>
               <p className="text-sm text-white/60 max-w-xl">
                 Researches the current justice-tech market, picks on-brand
                 angles, writes 1–5 publish-ready articles, generates a hero
@@ -90,19 +90,19 @@ export default function AutoGeneratePanel() {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-5 md:gap-6 items-start">
           <div className="flex flex-col gap-2">
             <span className="text-xs uppercase tracking-widest text-white/60">
               How many?
             </span>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {[1, 2, 3, 4, 5].map((n) => (
                 <button
                   key={n}
                   type="button"
                   onClick={() => setCount(n)}
                   disabled={pending}
-                  className={`w-12 h-12 rounded-xl border text-base transition-colors disabled:opacity-50 ${
+                  className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl border text-base transition-colors disabled:opacity-50 ${
                     count === n
                       ? "border-primary bg-primary/20 text-primary"
                       : "border-border-gray text-white/70 hover:border-white/40 hover:text-white"
@@ -158,7 +158,7 @@ export default function AutoGeneratePanel() {
             type="button"
             onClick={onGenerate}
             disabled={pending}
-            className="px-7 py-4 rounded-full bg-primary/30 hover:bg-primary/50 backdrop-blur-md transition-colors border border-primary/60 text-base disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full sm:w-auto px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-primary/30 hover:bg-primary/50 backdrop-blur-md transition-colors border border-primary/60 text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               boxShadow:
                 "0px 19px 65.2px rgba(248, 122, 19, 0.35), inset -3px -1px 10.9px rgba(255, 255, 255, 0.18), inset 0px 0px 2px #ffffff",

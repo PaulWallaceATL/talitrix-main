@@ -1,0 +1,203 @@
+import type { Metadata } from "next";
+import Footer from "@/components/Footer";
+import CTAButton from "@/components/CTAButton";
+import ShaderHero from "@/components/ShaderHero";
+import StaggeredText from "@/components/react-bits/staggered-text";
+import HalftoneWave from "@/components/react-bits/halftone-wave";
+import DepthCard from "@/components/react-bits/depth-card";
+
+export const metadata: Metadata = {
+  title: "ONE Jail Management System (JMS) | Talitrix ONE",
+  description:
+    "ONE Jail Management System brings the full custody lifecycle into one connected system — visibility into housing, movement, wellness, and operations, especially when paired with the T-Band.",
+};
+
+const phases = [
+  {
+    phase: "Custody Lifecycle",
+    body: "Booking through release on a single connected system — every event captured in one place.",
+  },
+  {
+    phase: "Movement Visibility",
+    body: "When paired with the T-Band, JMS extends visibility into participant movement across the facility.",
+  },
+  {
+    phase: "Wellness Telemetry",
+    body: "Heart rate and SpO₂ telemetry from the T-Band surfaces wellness signals that staff can act on.",
+  },
+  {
+    phase: "Operational Decisions",
+    body: "Dashboards and audit trails support safer facilities and stronger operational decision-making.",
+  },
+];
+
+const features = [
+  {
+    title: "Connected Operations",
+    body: "Daily operations managed with greater continuity, accountability, and efficiency on one system.",
+  },
+  {
+    title: "Real-Time Housing & Movement",
+    body: "See where people are, when they moved, and what's happening in each housing unit — live.",
+  },
+  {
+    title: "Incident & Compliance",
+    body: "Capture incidents, track responses, and produce compliance reports without leaving the system.",
+  },
+  {
+    title: "Wellness Signals",
+    body: "Biometric telemetry from T-Band turns daily wellness checks into a continuous, defensible record.",
+  },
+  {
+    title: "Audit Trails by Default",
+    body: "Every action and event is logged — clean, defensible records for oversight and review.",
+  },
+  {
+    title: "Unified Custody Record",
+    body: "JMS shares its record with Pre-Trial & Probation and the Talitrix Score — one continuous picture.",
+  },
+];
+
+export default function JailManagementPage() {
+  return (
+    <main className="bg-background text-foreground min-h-screen">
+      <ShaderHero
+        eyebrow="03 · ONE Jail Management"
+        title={
+          <StaggeredText
+            as="h1"
+            text={"Connected Operations\nInside the Facility."}
+            className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
+        }
+        subtitle="Inside the walls, on one continuous system."
+        body={
+          <p>
+            ONE Jail Management System (JMS) brings the full custody lifecycle
+            into one connected system — giving facility staff the visibility
+            to manage daily operations with greater continuity, accountability,
+            and efficiency. When paired with the Talitrix T-Band, JMS extends
+            that visibility into participant movement, wellness, and facility
+            activity, creating a more complete picture of what&apos;s happening
+            inside the walls to support safer facilities and stronger
+            operational decision-making.
+          </p>
+        }
+        background={
+          <HalftoneWave
+            colorA="#f87a13"
+            colorB="#ff9a4d"
+            backgroundColor="#000000"
+            speed={0.55}
+            gridDensity={70}
+            dotSize={0.42}
+            softness={1.3}
+            opacity={0.85}
+            rotation={10}
+          />
+        }
+      >
+        <div className="flex flex-wrap gap-4 mt-8 md:mt-10">
+          <CTAButton href="/get-started">Request a Briefing</CTAButton>
+          <CTAButton href="/contact" variant="secondary">
+            Talk with our team
+          </CTAButton>
+        </div>
+      </ShaderHero>
+
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+        <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
+
+        <div className="relative z-10">
+          <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
+            What JMS Connects
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-12 md:mb-16 leading-tight max-w-2xl">
+            Four pillars of facility operations.
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
+            {phases.map((p, i) => (
+              <div
+                key={p.phase}
+                className="bg-background p-6 sm:p-8 flex flex-col gap-4 min-h-[200px] sm:min-h-[220px]"
+              >
+                <span className="text-primary text-sm tracking-widest">
+                  0{i + 1}
+                </span>
+                <h3 className="text-2xl">{p.phase}</h3>
+                <p className="text-white/65 leading-relaxed text-sm">
+                  {p.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
+          <div className="lg:col-span-5">
+            <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
+              Capabilities
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
+              The full custody lifecycle on one platform.
+            </h2>
+          </div>
+          <div className="lg:col-span-7">
+            <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
+              JMS replaces the patchwork of point tools with a single connected
+              system — and gets stronger when paired with the Talitrix T-Band.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {features.map((f, i) => (
+            <DepthCard
+              key={f.title}
+              title={f.title}
+              description={f.body}
+              width={340}
+              height={300}
+              borderRadius="20px"
+              maxRotation={10}
+              maxTranslation={12}
+              spotlight
+              spotlightColor="rgba(248, 122, 19, 0.2)"
+              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-6 flex flex-col justify-end"
+              revealAnimation="fade"
+              staggerDelay={70 + i * 25}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
+        <div className="relative z-10 max-w-4xl">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8">
+            Safer facilities. Stronger decisions.
+          </h2>
+          <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
+            See how ONE JMS extends with the T-Band and connects to Pre-Trial
+            & Probation across the lifecycle.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <CTAButton href="/get-started">Request a Briefing</CTAButton>
+            <CTAButton href="/talitrix-one" variant="secondary">
+              Explore Talitrix ONE
+            </CTAButton>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
