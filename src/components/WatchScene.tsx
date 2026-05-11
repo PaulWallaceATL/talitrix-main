@@ -102,9 +102,13 @@ const WatchScene = () => {
   });
 
   return (
-    <div className="w-full h-full fixed left-0 top-0 z-10 " ref={watchRef}>
+    <div
+      className="w-full h-full fixed left-0 top-0 z-10 "
+      ref={watchRef}
+      id="watchscene"
+    >
       <canvas ref={canvasRef} className="absolute z-10 inset-0 w-full h-full" />
-      <InfoPaths className="absolute top-1/2 left-[59%] ml-6  -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
+      <InfoPaths className="absolute top-1/2 left-[60%] ml-6  -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
       <WatchGlow className="absolute w-200 h-auto left-1/2 top-1/2 -translate-1/2" />
     </div>
   );

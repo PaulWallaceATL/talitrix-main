@@ -68,7 +68,6 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     });
 
     tl2.to("#explode-h2", { y: -150, duration: 1, ease: "none" }, 0);
-    tl2.to(sectionRef.current, { opacity: 0, duration: 0.05 }, 0.95);
 
     gsap.from(para.lines, {
       y: "100%",
@@ -133,7 +132,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     });
   });
   return (
-    <div {...props} ref={sectionRef}>
+    <div {...props} ref={sectionRef} id="infoPaths">
       <div className="w-full absolute bottom-1/2">
         <svg
           viewBox="0 0 479 315"
@@ -166,7 +165,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
             d="M4 309.005L238.862 313.49C248.225 313.669 256.675 307.901 259.919 299.117L363.978 17.3778C367.169 8.73765 375.405 3.00003 384.615 3.00009L476.5 3.00061"
             stroke="#A7A7A7"
             strokeOpacity="0.4"
-            strokeWidth="1"
+            strokeWidth="1.5"
             strokeMiterlimit="1"
           />
           <path
