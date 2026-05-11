@@ -14,7 +14,7 @@ const Footer = () => {
             width={188}
             height={24}
             style={{ width: "auto", height: "1.5rem" }}
-            className="object-contain"
+            className="self-start object-contain"
           />
           <p className="text-white/60 max-w-xs leading-relaxed">
             The new standard in monitoring and supervision technology.
