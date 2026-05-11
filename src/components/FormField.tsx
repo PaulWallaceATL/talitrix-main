@@ -1,4 +1,5 @@
 import React from "react";
+import CustomSelect from "./CustomSelect";
 
 type BaseProps = {
   label: string;
@@ -74,32 +75,28 @@ export const SelectField = ({
   hint,
   options,
   className,
-}: BaseProps & { options: { value: string; label: string }[] }) => (
-  <label className={`flex flex-col gap-2 ${className ?? ""}`}>
+  placeholder,
+  defaultValue,
+}: BaseProps & {
+  options: { value: string; label: string }[];
+  placeholder?: string;
+  defaultValue?: string;
+}) => (
+  <div className={`flex flex-col gap-2 ${className ?? ""}`}>
     <span className="text-xs uppercase tracking-widest text-white/60">
       {label}
       {required && <span className="text-primary"> *</span>}
     </span>
-    <select
+    <CustomSelect
       name={name}
+      options={options}
       required={required}
-      className={`${fieldClass} appearance-none bg-[length:14px] bg-[right_1.25rem_center] bg-no-repeat`}
-      style={{
-        backgroundImage:
-          "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f87a13' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>\")",
-      }}
-    >
-      <option value="" className="bg-background">
-        Select…
-      </option>
-      {options.map((opt) => (
-        <option key={opt.value} value={opt.value} className="bg-background">
-          {opt.label}
-        </option>
-      ))}
-    </select>
+      placeholder={placeholder}
+      defaultValue={defaultValue}
+      ariaLabel={label}
+    />
     {hint && <span className="text-xs text-white/40">{hint}</span>}
-  </label>
+  </div>
 );
 
 export const SubmitButton = ({
