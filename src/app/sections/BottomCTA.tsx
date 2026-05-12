@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
 import StaggeredText from "@/components/react-bits/staggered-text";
+import CTAGlowBg from "@/components/CTAGlowBg";
 
 const BottomCTA = () => {
   return (
     <div className="px-4 sm:px-8 lg:px-16 mb-8">
-      <div className="bg-[url('/cta-bg.jpg')] bg-cover bg-bottom pb-32 sm:pb-60 lg:pb-90 pt-12 sm:pt-16 px-6 sm:px-10 rounded-3xl sm:rounded-4xl flex flex-col gap-10 sm:gap-14 lg:gap-16 items-center">
+      <div className="overflow-hidden relative pb-32 sm:pb-60 lg:pb-90 pt-12 sm:pt-16 px-6 sm:px-10 rounded-3xl sm:rounded-4xl flex flex-col gap-10 sm:gap-14 lg:gap-16 items-center">
+        <CTAGlowBg />
         <StaggeredText
           as="h2"
           text="Deploy the new standard in your jurisdiction."
@@ -15,7 +17,7 @@ const BottomCTA = () => {
           delay={70}
           blur
         />
-        <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
+        <div className="flex flex-wrap gap-3 sm:gap-4 justify-center relative z-10">
           <Link
             href="/contact?type=briefing"
             className="px-6 sm:px-8 py-4 sm:py-5 bg-white rounded-xl text-zinc-800 font-semibold text-base sm:text-xl transition-all duration-300 hover:scale-[1.05] hover:bg-primary hover:text-white shadow-[0_10px_40px_rgba(255,255,255,0.08)] hover:shadow-[0_18px_55px_rgba(248,122,19,0.45)]"
