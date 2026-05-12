@@ -4,6 +4,7 @@ import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
 import StaggeredText from "@/components/react-bits/staggered-text";
+import EcosystemFlow from "@/components/EcosystemFlow";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 import Link from "next/link";
 
@@ -104,6 +105,34 @@ export default function TalitrixOnePage() {
           </CTAButton>
         </div>
       </ShaderHero>
+
+      <section className="relative px-6 md:px-16 py-20 md:py-28 border-b border-border-gray overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.08),transparent_60%)] pointer-events-none" />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-10 md:mb-16">
+          <div className="lg:col-span-5">
+            <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-5">
+              The Ecosystem
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
+              One device.
+              <br />
+              <span className="text-white/60">
+                Every part of the lifecycle.
+              </span>
+            </h2>
+          </div>
+          <div className="lg:col-span-7 flex">
+            <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl self-end">
+              The T-Band sits at the center of a continuous platform — feeding
+              live data and behavioral signals to every workflow across the
+              justice lifecycle, from intake to community supervision.
+            </p>
+          </div>
+        </div>
+
+        <EcosystemFlow />
+      </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
         <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
