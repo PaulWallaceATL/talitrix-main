@@ -6,7 +6,7 @@ import CenterFlow from "@/components/react-bits/center-flow";
 const ECOSYSTEM_NODES = [
   "Corrections",
   "Pretrial Electronic Monitoring",
-  "Pardons & Paroles",
+  "Probation",
   "Health & Wellness",
   "Community Supervision",
   "Medical & Mental Health",
