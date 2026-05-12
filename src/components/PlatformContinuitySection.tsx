@@ -284,7 +284,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
         </div>
 
         {/* Heading — fades out at progress 0.8 */}
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-6 sm:pt-8 lg:pt-10 relative z-20">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-20 sm:pt-24 lg:pt-28 relative z-20">
           <h2
             ref={h2Ref}
             className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
