@@ -67,15 +67,18 @@ export default function CourtsPage() {
             intelligence.
           </p>
           <div className="flex flex-wrap gap-4 mt-8 md:mt-10">
-            <CTAButton href="/get-started">Request a Briefing</CTAButton>
-            <CTAButton href="/talitrix-one/score" variant="secondary">
-              Explore the Talitrix Score
+            <CTAButton scrollTo="learn-more">Learn More</CTAButton>
+            <CTAButton href="/contact" variant="secondary">
+              Contact Sales
             </CTAButton>
           </div>
         </div>
       </section>
 
-      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+      <section
+        id="learn-more"
+        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden scroll-mt-24 lg:scroll-mt-32"
+      >
         <div className="absolute -top-40 -right-32 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none" />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">

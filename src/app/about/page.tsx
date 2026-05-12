@@ -106,14 +106,17 @@ export default function AboutPage() {
         }
       >
         <div className="flex flex-wrap gap-4 mt-10">
-          <CTAButton href="/get-started">Request a Briefing</CTAButton>
-          <CTAButton href="/talitrix-one" variant="secondary">
-            Explore Talitrix ONE
+          <CTAButton scrollTo="learn-more">Learn More</CTAButton>
+          <CTAButton href="/contact" variant="secondary">
+            Contact Sales
           </CTAButton>
         </div>
       </ShaderHero>
 
-      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray">
+      <section
+        id="learn-more"
+        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray scroll-mt-24 lg:scroll-mt-32"
+      >
         <div className="max-w-5xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             Our Story

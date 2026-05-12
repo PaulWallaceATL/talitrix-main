@@ -56,14 +56,17 @@ export default function TalitrixOnePage() {
         }
       >
         <div className="flex flex-wrap gap-4 mt-8 md:mt-10">
-          <CTAButton href="/get-started">Request a Briefing</CTAButton>
+          <CTAButton scrollTo="learn-more">Learn More</CTAButton>
           <CTAButton href="/contact" variant="secondary">
             Contact Sales
           </CTAButton>
         </div>
       </ShaderHero>
 
-      <section className="relative px-6 md:px-16 py-20 md:py-28 border-b border-border-gray overflow-hidden">
+      <section
+        id="learn-more"
+        className="relative px-6 md:px-16 py-20 md:py-28 border-b border-border-gray overflow-hidden scroll-mt-24 lg:scroll-mt-32"
+      >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.08),transparent_60%)] pointer-events-none" />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-10 md:mb-16">

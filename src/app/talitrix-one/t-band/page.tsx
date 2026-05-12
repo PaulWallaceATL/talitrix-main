@@ -7,7 +7,7 @@ import AgenticBall from "@/components/react-bits/agentic-ball";
 import DepthCard from "@/components/react-bits/depth-card";
 
 export const metadata: Metadata = {
-  title: "T-Band (PhoenixBand) | Talitrix ONE",
+  title: "T-Band | Talitrix ONE",
   description:
     "The T-Band is the first independent wrist-worn GPS monitoring device — multi-carrier SIM, biometric sensors, proximity-based skin detection, and tamper-resistant by design.",
 };
@@ -104,14 +104,17 @@ export default function TBandPage() {
         }
       >
         <div className="flex flex-wrap gap-4 mt-8 md:mt-10">
-          <CTAButton href="/get-started">Request a Briefing</CTAButton>
+          <CTAButton scrollTo="learn-more">Learn More</CTAButton>
           <CTAButton href="/contact" variant="secondary">
-            Talk with our team
+            Contact Sales
           </CTAButton>
         </div>
       </ShaderHero>
 
-      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+      <section
+        id="learn-more"
+        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden scroll-mt-24 lg:scroll-mt-32"
+      >
         <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
 
         <div className="relative z-10">

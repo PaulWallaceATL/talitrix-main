@@ -28,7 +28,7 @@ const modules: Module[] = [
     href: "/talitrix-one/t-band",
     number: "01",
     eyebrow: "The Hardware",
-    title: "T-Band (PhoenixBand)",
+    title: "T-Band",
     body: "The first independent wrist-worn GPS monitoring device — multi-carrier SIM, biometric sensing, and proximity-based skin detection.",
     icon: Watch,
     blob: "rgba(248, 122, 19, 0.85)",
