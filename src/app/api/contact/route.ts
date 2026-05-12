@@ -10,6 +10,8 @@ function str(v: unknown, max = 2000): string | null {
   return trimmed.slice(0, max);
 }
 
+const BRIEFING_TYPES = new Set(["briefing", "sales"]);
+
 export async function POST(req: Request) {
   let body: Record<string, unknown>;
   try {
@@ -18,37 +20,81 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
+  const type = (str(body.type, 60) ?? "other").toLowerCase();
   const firstName = str(body.firstName, 120);
   const lastName = str(body.lastName, 120);
   const email = str(body.email, 320);
-  const message = str(body.message, 5000);
-  const inquiryType = str(body.inquiryType, 60);
 
-  if (!firstName || !lastName || !email || !message || !inquiryType) {
+  if (!firstName || !lastName || !email) {
     return NextResponse.json(
       { error: "Missing required fields." },
       { status: 400 },
     );
   }
 
-  const { error } = await supabaseAdmin()
-    .from("contact_submissions")
-    .insert({
+  const sb = supabaseAdmin();
+
+  if (BRIEFING_TYPES.has(type)) {
+    const title = str(body.title, 200);
+    const agency = str(body.agency, 200);
+    const agencyType = str(body.agencyType, 60);
+    const interest = str(body.interest, 60);
+    const timeline = str(body.timeline, 60);
+
+    if (!title || !agency || !agencyType || !interest || !timeline) {
+      return NextResponse.json(
+        { error: "Missing required briefing fields." },
+        { status: 400 },
+      );
+    }
+
+    const { error } = await sb.from("get_started_submissions").insert({
+      first_name: firstName,
+      last_name: lastName,
+      title,
+      email,
+      agency,
+      agency_type: agencyType,
+      phone: str(body.phone, 60),
+      caseload: str(body.caseload, 200),
+      interest,
+      timeline,
+      message: str(body.message, 5000),
+    });
+
+    if (error) {
+      console.error("briefing insert failed", error);
+      return NextResponse.json(
+        { error: "Could not save submission." },
+        { status: 500 },
+      );
+    }
+  } else {
+    const message = str(body.message, 5000);
+    if (!message) {
+      return NextResponse.json(
+        { error: "Please include a message." },
+        { status: 400 },
+      );
+    }
+
+    const { error } = await sb.from("contact_submissions").insert({
       first_name: firstName,
       last_name: lastName,
       email,
       phone: str(body.phone, 60),
       organization: str(body.organization, 200),
-      inquiry_type: inquiryType,
+      inquiry_type: type,
       message,
     });
 
-  if (error) {
-    console.error("contact insert failed", error);
-    return NextResponse.json(
-      { error: "Could not save submission." },
-      { status: 500 },
-    );
+    if (error) {
+      console.error("contact insert failed", error);
+      return NextResponse.json(
+        { error: "Could not save submission." },
+        { status: 500 },
+      );
+    }
   }
 
   return NextResponse.json({ ok: true });

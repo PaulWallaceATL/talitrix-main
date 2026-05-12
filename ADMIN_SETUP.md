@@ -231,7 +231,7 @@ in the admin dashboard within seconds.
 ## 8. Hardening checklist (when you're ready)
 
 - Rotate `ADMIN_PASSWORD` and `ADMIN_SESSION_SECRET` regularly.
-- Add basic rate-limiting to `/api/contact`, `/api/get-started`,
+- Add basic rate-limiting to `/api/contact`,
   `/api/participant-registration`, and `/api/admin/login` (e.g. via
   [Upstash Ratelimit](https://upstash.com/docs/redis/sdks/ratelimit-ts/overview)).
 - Move to per-admin accounts (Supabase Auth or Clerk) when more than one
