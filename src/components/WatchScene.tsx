@@ -35,7 +35,14 @@ const WatchScene = () => {
       const cw = canvas.width;
       const ch = canvas.height;
 
-      const scale = Math.min(cw / iw, ch / ih);
+      const isMobile = cw < 768;
+      // On mobile (portrait), the contain-scale leaves the watch tiny
+      // because viewport width is the limiting dimension. Scale up so
+      // the image (and the watch face within it) dominates the screen,
+      // letting the sides overflow naturally.
+      const scale = isMobile
+        ? (cw / iw) * 2.4
+        : Math.min(cw / iw, ch / ih);
       const dw = iw * scale;
       const dh = ih * scale;
       const dx = (cw - dw) / 2;
@@ -89,8 +96,9 @@ const WatchScene = () => {
       },
     });
 
-    timeline1.to(watch, { x: -180 }, 0);
-    timeline1.to("#title-h1", { y: 150, duration: 1 }, 0);
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    timeline1.to(watch, { x: isMobile ? 0 : -180 }, 0);
+    timeline1.to("#title-h1", { y: isMobile ? 80 : 150, duration: 1 }, 0);
     timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
     timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
 
@@ -108,8 +116,8 @@ const WatchScene = () => {
       id="watchscene"
     >
       <canvas ref={canvasRef} className="absolute z-10 inset-0 w-full h-full" />
-      <InfoPaths className="absolute top-1/2 left-[60%] ml-6  -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
-      <WatchGlow className="absolute w-200 h-auto left-1/2 top-1/2 -translate-1/2" />
+      <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
+      <WatchGlow className="absolute w-[420px] sm:w-[600px] md:w-[800px] h-auto left-1/2 top-1/2 -translate-1/2" />
     </div>
   );
 };
