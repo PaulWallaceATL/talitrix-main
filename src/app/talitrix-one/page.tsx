@@ -5,57 +5,14 @@ import ShaderHero from "@/components/ShaderHero";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import EcosystemFlow from "@/components/EcosystemFlow";
+import PlatformModulesScroller from "@/components/PlatformModulesScroller";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Talitrix ONE | The Unified Ecosystem",
   description:
     "Talitrix ONE is a closed-loop ecosystem connecting hardware, software, and behavioral intelligence into one continuous platform — built for the full justice lifecycle.",
 };
-
-const modules = [
-  {
-    href: "/talitrix-one/t-band",
-    number: "01",
-    eyebrow: "The Hardware",
-    title: "T-Band (PhoenixBand)",
-    headline: "Dignity by Design.",
-    body: "The first independent wrist-worn GPS monitoring device — multi-carrier SIM, biometric sensing, and proximity-based skin detection.",
-  },
-  {
-    href: "/talitrix-one/intake",
-    number: "02",
-    eyebrow: "ONE Intake",
-    title: "The Starting Point for Continuity.",
-    headline: "Intake that powers every downstream module.",
-    body: "Centralizes booking, identity, classification, and initial assessments — captured once, carried forward across the system.",
-  },
-  {
-    href: "/talitrix-one/jail-management",
-    number: "03",
-    eyebrow: "ONE Jail Management",
-    title: "Connected Operations Inside the Facility.",
-    headline: "Inside the walls, on one continuous system.",
-    body: "Brings the full custody lifecycle into one connected system. Paired with the T-Band, JMS extends visibility into participant movement and wellness.",
-  },
-  {
-    href: "/talitrix-one/pretrial-probation",
-    number: "04",
-    eyebrow: "ONE Pre-Trial & Probation",
-    title: "End-to-End Community Supervision.",
-    headline: "Outside the walls. Same continuous platform.",
-    body: "Brings monitored and non-monitored populations into one connected system — unifying case management, risk tracking, and compliance.",
-  },
-  {
-    href: "/talitrix-one/score",
-    number: "05",
-    eyebrow: "The Talitrix Score",
-    title: "Behavioral Intelligence and Defensible Data.",
-    headline: "Move from reactive supervision to proactive intervention.",
-    body: "Transforms behavioral data into measurable intelligence — earlier visibility into risk and a defensible record over time.",
-  },
-];
 
 export default function TalitrixOnePage() {
   return (
@@ -157,31 +114,7 @@ export default function TalitrixOnePage() {
           </div>
         </div>
 
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {modules.map((m) => (
-            <Link
-              key={m.href}
-              href={m.href}
-              className="group flex flex-col gap-4 p-6 sm:p-8 rounded-2xl border border-border-gray bg-white/[0.02] hover:bg-white/[0.05] hover:border-primary/40 transition-colors min-h-[260px]"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-xs text-white/40 tracking-widest">
-                  {m.number}
-                </span>
-                <span className="text-primary text-xs uppercase tracking-[0.3em]">
-                  {m.eyebrow}
-                </span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl leading-tight">{m.title}</h3>
-              <p className="text-sm sm:text-base text-white/65 leading-relaxed">
-                {m.body}
-              </p>
-              <span className="mt-auto text-primary text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                Explore module <span>→</span>
-              </span>
-            </Link>
-          ))}
-        </div>
+        <PlatformModulesScroller />
       </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
