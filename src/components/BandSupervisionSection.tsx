@@ -34,8 +34,8 @@ const features: Feature[] = [
     Icon: IoFitnessOutline,
   },
   {
-    title: "Real-Time Location Tracking",
-    body: "Track precise inmate location in real time across facility floors and zones using integrated WiFi and BLE detection technology.",
+    title: "Real-Time Location Visibility",
+    body: "Real-time visibility into participant location across facility floors and zones, powered by integrated WiFi and BLE detection.",
     Icon: IoLocationOutline,
   },
   {
@@ -45,7 +45,7 @@ const features: Feature[] = [
   },
   {
     title: "Transport Mode",
-    body: "Stay connected with secure tracking during inmate transport — continuous visibility into participant location and status from departure to arrival.",
+    body: "Stay connected during participant transport — continuous visibility into location and status from departure to arrival.",
     Icon: IoBusOutline,
   },
   {

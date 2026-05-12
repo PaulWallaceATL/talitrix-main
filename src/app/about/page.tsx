@@ -13,7 +13,7 @@ import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 export const metadata: Metadata = {
   title: "About | Talitrix",
   description:
-    "Talitrix is redefining electronic monitoring — technology designed around people, not punishment. Learn how we set the global standard in modern supervision.",
+    "Talitrix is redefining electronic monitoring — technology designed around people, dignity, and outcomes. Learn how we set the global standard in modern supervision.",
 };
 
 const principles = [
@@ -52,12 +52,12 @@ const timeline = [
   {
     year: "1983",
     title: "A Wrong Turn",
-    body: "The industry commercialized a different vision: the ankle monitor, inspired by a comic-book villain's tracking device. Surveillance replaced support.",
+    body: "The industry commercialized a different vision: the ankle monitor, inspired by a comic-book villain's tracking device. Restriction replaced rehabilitation.",
   },
   {
     year: "Four Decades",
     title: "A Category Disconnected",
-    body: "The category prioritized surveillance over success — disconnected from the outcomes it claimed to support.",
+    body: "The category prioritized restriction over outcomes — disconnected from the rehabilitative purpose it was built to serve.",
   },
   {
     year: "Today",
@@ -82,7 +82,7 @@ export default function AboutPage() {
             blur
           />
         }
-        subtitle="Technology designed around people, not punishment."
+        subtitle="Technology designed around people, dignity, and outcomes."
         body={
           <p>
             Talitrix is setting the global standard in monitoring and
@@ -153,8 +153,8 @@ export default function AboutPage() {
               By 1983, the industry had commercialized a different vision:
               the ankle monitor, inspired by a comic-book villain's tracking
               device. For the next four decades, the category prioritized
-              surveillance over success — and disconnected from the outcomes
-              it claimed to support.
+              restriction over outcomes — and drifted from the rehabilitative
+              purpose it was built to serve.
             </p>
             <p>
               Talitrix was built to change that. We brought the technology to
@@ -186,7 +186,7 @@ export default function AboutPage() {
             Timeline
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl mb-12 md:mb-16 leading-tight max-w-2xl">
-            From rehabilitation to surveillance — and back again.
+            From rehabilitation, off course — and back again.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
