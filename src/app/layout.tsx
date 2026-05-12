@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
 import LenisProvider from "@/components/LenisProvider";
+import ScrollResetOnLoad from "@/components/ScrollResetOnLoad";
 import { ORGANIZATION_JSON_LD, SITE_NAME, getSiteUrl } from "@/lib/seo";
 
 const SITE = getSiteUrl();
@@ -96,6 +97,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={` h-full antialiased`}>
+      <head>
+        {/*
+         * Pre-hydration scroll reset — runs before React mounts so the
+         * browser does not flash a restored scroll position from the prior
+         * visit. Hash anchors (#section) are preserved.
+         */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+                if (!location.hash) window.scrollTo(0, 0);
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full">
         <script
           type="application/ld+json"
@@ -103,6 +121,7 @@ export default function RootLayout({
             __html: JSON.stringify(ORGANIZATION_JSON_LD(SITE)),
           }}
         />
+        <ScrollResetOnLoad />
         <NavBar />
         <LenisProvider>{children}</LenisProvider>
       </body>
