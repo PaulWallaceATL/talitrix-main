@@ -7,6 +7,7 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import { BlurHighlight } from "@/components/react-bits/blur-highlight";
 import DepthCard from "@/components/react-bits/depth-card";
 import SynapticShift from "@/components/react-bits/synaptic-shift";
+import VideoBlock from "@/components/VideoBlock";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
@@ -203,6 +204,12 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <VideoBlock
+        eyebrow="Watch"
+        headline="The standard, in motion."
+        body="A walkthrough of the Talitrix ONE platform — the T-Band hardware, the connected dashboards, and the Talitrix Score that ties it all together."
+      />
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
         <div className="absolute -top-20 right-0 w-[600px] h-[600px] bg-primary/10 blur-[200px] pointer-events-none" />
