@@ -113,6 +113,12 @@ export default function AboutPage() {
         </div>
       </ShaderHero>
 
+      <VideoBlock
+        eyebrow="Watch"
+        headline="The standard, in motion."
+        body="A walkthrough of the Talitrix ONE platform — the T-Band hardware, the connected dashboards, and the Talitrix Score that ties it all together."
+      />
+
       <section
         id="learn-more"
         className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray scroll-mt-24 lg:scroll-mt-32"
@@ -207,12 +213,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      <VideoBlock
-        eyebrow="Watch"
-        headline="The standard, in motion."
-        body="A walkthrough of the Talitrix ONE platform — the T-Band hardware, the connected dashboards, and the Talitrix Score that ties it all together."
-      />
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
         <div className="absolute -top-20 right-0 w-[600px] h-[600px] bg-primary/10 blur-[200px] pointer-events-none" />
