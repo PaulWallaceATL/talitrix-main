@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import StaggeredText from "@/components/react-bits/staggered-text";
 
@@ -30,15 +31,16 @@ const Hero = () => {
           <p className="text-xl text-white/75">
             A single, unified ecosystem. Inside the walls and out.
           </p>
-          <button
-            className="rounded-full cursor-pointer mt-6 w-full py-5 bg-white/15 backdrop-blur-md"
+          <Link
+            href="/talitrix-one"
+            className="rounded-full cursor-pointer mt-6 w-full py-5 bg-white/15 backdrop-blur-md inline-flex items-center justify-center transition-all duration-300 hover:scale-[1.04] hover:bg-white/25 hover:shadow-[0px_19px_65.2px_rgba(248,122,19,0.4)]"
             style={{
               boxShadow:
                 "0px 19px 65.2px rgba(248, 122, 19, 0.1), inset -3px -1px 10.9px rgba(255, 255, 255, 0.29), inset 0px 0px 2px #ffffff",
             }}
           >
             Explore Talitrix ONE
-          </button>
+          </Link>
         </div>
       </div>
     </div>

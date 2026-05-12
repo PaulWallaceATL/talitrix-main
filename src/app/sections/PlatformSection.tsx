@@ -167,7 +167,10 @@ const PlatformSection = () => {
           </div>
         </div>
         <div className="text-center px-16 py-24">
-          <h2 className="text-6xl font-semibold" ref={h2Ref}>
+          <h2
+            className="text-6xl font-semibold leading-[1.15] pb-2"
+            ref={h2Ref}
+          >
             One Platform. <br /> Complete{" "}
             <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
               Continuity
@@ -176,7 +179,10 @@ const PlatformSection = () => {
         </div>
       </div>
       <div className="flex justify-between px-16 absolute items-center top-1/2 left-1/2 w-full max-w-[1500px] -translate-1/2">
-        <h2 className="text-6xl font-semibold" ref={h2bRef}>
+        <h2
+          className="text-6xl font-semibold leading-[1.15] pb-2"
+          ref={h2bRef}
+        >
           Intelligence <br /> with{" "}
           <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
             Purpose.

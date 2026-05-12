@@ -18,7 +18,7 @@ const BottomCTA = () => {
         <div className="flex gap-4">
           <Link
             href="/contact?type=briefing"
-            className="px-8 py-5 bg-white rounded-xl text-zinc-800 font-semibold text-xl transition-all duration-300 hover:scale-[1.03] hover:bg-zinc-100 shadow-[0_10px_40px_rgba(255,255,255,0.08)] hover:shadow-[0_14px_48px_rgba(248,122,19,0.25)]"
+            className="px-8 py-5 bg-white rounded-xl text-zinc-800 font-semibold text-xl transition-all duration-300 hover:scale-[1.05] hover:bg-primary hover:text-white shadow-[0_10px_40px_rgba(255,255,255,0.08)] hover:shadow-[0_18px_55px_rgba(248,122,19,0.45)]"
           >
             Request a Briefing
           </Link>
