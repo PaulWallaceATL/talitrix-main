@@ -42,13 +42,13 @@ export default function EcosystemFlow({
         centerBackground="rgba(0, 0, 0, 0.55)"
         centerFillsArea
         centerContent={
-          <div className="relative w-full h-full">
+          <div className="absolute -inset-12 sm:-inset-16 md:-inset-20 pointer-events-none">
             <Image
               src={watchFrame}
               alt="Talitrix T-Band"
               fill
               priority
-              sizes="(max-width: 768px) 240px, 280px"
+              sizes="(max-width: 768px) 320px, 420px"
               className="object-contain"
             />
           </div>
