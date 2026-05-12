@@ -115,16 +115,19 @@ const WatchScene = () => {
     timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
     timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
 
-    // On mobile only: fade the watch overlay out as the next section
-    // (ExplodedSection / #exploded) scrolls into view, so the fixed
-    // canvas does not cover subsequent content.
+    // On mobile only: fade the watch overlay out just before the
+    // PlatformSection cards take over. We delay the fade until the
+    // platform section is entering the viewport so the watch stays
+    // visible (and rotating with scroll) throughout the Hero and the
+    // ExplodedSection beats — both of which are themed around the
+    // wristband itself.
     let fadeTrigger: ScrollTrigger | undefined;
     if (isMobile) {
       const fade = gsap.to(watch, {
         opacity: 0,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: "#exploded",
+          trigger: "#platform-section",
           start: "top bottom",
           end: "top center",
           scrub: true,

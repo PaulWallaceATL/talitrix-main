@@ -109,7 +109,11 @@ const PlatformSection = () => {
     );
   });
   return (
-    <div ref={platformRef} className="relative opacity-0">
+    <div
+      ref={platformRef}
+      id="platform-section"
+      className="relative opacity-0"
+    >
       <div className="w-full h-screen relative overflow-hidden">
         <div className="absolute top-1/2 h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
