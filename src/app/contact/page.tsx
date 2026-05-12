@@ -4,7 +4,7 @@ import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
 import ContactExperience from "./ContactExperience";
-import { OUTREACH_TYPES, type OutreachType } from "./UnifiedContactForm";
+import { OUTREACH_TYPES, type OutreachType } from "./outreach";
 import {
   subtleOrangeAurora,
   blackSky,

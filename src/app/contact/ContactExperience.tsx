@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import UnifiedContactForm, { type OutreachType } from "./UnifiedContactForm";
+import UnifiedContactForm from "./UnifiedContactForm";
+import type { OutreachType } from "./outreach";
 
 const channels = [
   {
