@@ -5,6 +5,7 @@ import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import AgenticBall from "@/components/react-bits/agentic-ball";
 import DepthCard from "@/components/react-bits/depth-card";
+import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 
 export const metadata: Metadata = {
   title: "T-Band | Talitrix ONE",
@@ -182,6 +183,8 @@ export default function TBandPage() {
           ))}
         </div>
       </section>
+
+      <PlatformContinuitySection />
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />

@@ -6,6 +6,7 @@ import AuroraBlur from "@/components/react-bits/aurora-blur";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import EcosystemFlow from "@/components/EcosystemFlow";
 import PlatformModulesScroller from "@/components/PlatformModulesScroller";
+import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
@@ -119,6 +120,8 @@ export default function TalitrixOnePage() {
 
         <PlatformModulesScroller />
       </section>
+
+      <PlatformContinuitySection />
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
