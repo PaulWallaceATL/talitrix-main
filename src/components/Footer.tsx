@@ -94,7 +94,6 @@ const FooterLinks = [
   {
     title: "Solutions",
     links: [
-      { label: "All Solutions", href: "/solutions" },
       { label: "Sheriffs & Agency Leaders", href: "/solutions/sheriffs" },
       { label: "Pretrial & Supervision", href: "/solutions/pretrial" },
       { label: "Courts & Legal", href: "/solutions/courts" },

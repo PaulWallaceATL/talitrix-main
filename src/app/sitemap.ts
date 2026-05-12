@@ -12,8 +12,7 @@ const STATIC_ROUTES: Array<{
 }> = [
   { path: "/", changeFrequency: "weekly", priority: 1.0 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
-  { path: "/solutions", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/solutions/sheriffs", changeFrequency: "monthly", priority: 0.85 },
+  { path: "/solutions/sheriffs", changeFrequency: "monthly", priority: 0.9 },
   { path: "/solutions/pretrial", changeFrequency: "monthly", priority: 0.85 },
   { path: "/solutions/courts", changeFrequency: "monthly", priority: 0.85 },
   {
@@ -36,8 +35,7 @@ const STATIC_ROUTES: Array<{
   },
   { path: "/talitrix-one/score", changeFrequency: "monthly", priority: 0.85 },
   { path: "/news", changeFrequency: "daily", priority: 0.9 },
-  { path: "/contact", changeFrequency: "yearly", priority: 0.6 },
-  { path: "/get-started", changeFrequency: "yearly", priority: 0.7 },
+  { path: "/contact", changeFrequency: "yearly", priority: 0.8 },
   {
     path: "/participant-registration",
     changeFrequency: "yearly",

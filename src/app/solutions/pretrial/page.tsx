@@ -154,15 +154,6 @@ export default function PretrialPage() {
                 </span>
               </Link>
             ))}
-            <Link
-              href="/solutions"
-              className="group flex items-center justify-between gap-3 p-5 rounded-xl border border-primary/40 bg-primary/[0.05] hover:bg-primary/[0.1] transition-colors sm:col-span-2"
-            >
-              <span className="text-primary">All Solutions</span>
-              <span className="text-primary opacity-60 group-hover:opacity-100 transition-opacity">
-                →
-              </span>
-            </Link>
           </div>
         </div>
       </section>

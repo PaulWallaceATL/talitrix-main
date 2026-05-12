@@ -171,7 +171,7 @@ export default function TalitrixOnePage() {
           </p>
           <div className="flex flex-wrap gap-4">
             <CTAButton href="/get-started">Request a Briefing</CTAButton>
-            <CTAButton href="/solutions" variant="secondary">
+            <CTAButton href="/solutions/sheriffs" variant="secondary">
               View Solutions
             </CTAButton>
           </div>

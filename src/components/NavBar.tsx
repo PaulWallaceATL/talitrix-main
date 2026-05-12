@@ -33,6 +33,26 @@ type MenuCta = {
   ctaHref: string;
 };
 
+const isChildActive = (
+  child: NavItem,
+  siblings: NavItem[],
+  pathname: string | null,
+) => {
+  if (!pathname) return false;
+  if (pathname !== child.href && !pathname.startsWith(`${child.href}/`)) {
+    return false;
+  }
+  // If a sibling has a more specific (longer) matching href, defer to it so
+  // a parent overview link doesn't light up on every sub-page.
+  const moreSpecific = siblings.some(
+    (s) =>
+      s !== child &&
+      s.href.length > child.href.length &&
+      (pathname === s.href || pathname.startsWith(`${s.href}/`)),
+  );
+  return !moreSpecific;
+};
+
 const NAV_TREE: NavItem[] = [
   { label: "About", href: "/about" },
   {
@@ -43,7 +63,7 @@ const NAV_TREE: NavItem[] = [
         label: "Talitrix ONE",
         href: "/talitrix-one",
         icon: "stack",
-        desc: "The unified ecosystem connecting hardware, software, and intelligence.",
+        desc: "The unified hardware, software, and intelligence ecosystem.",
       },
       {
         label: "T-Band",
@@ -79,14 +99,8 @@ const NAV_TREE: NavItem[] = [
   },
   {
     label: "Solutions",
-    href: "/solutions",
+    href: "/solutions/sheriffs",
     children: [
-      {
-        label: "All Solutions",
-        href: "/solutions",
-        icon: "globe",
-        desc: "How Talitrix ONE adapts to every stakeholder in the lifecycle.",
-      },
       {
         label: "Sheriffs & Agency Leaders",
         href: "/solutions/sheriffs",
@@ -264,7 +278,7 @@ const NavBar = () => {
                     aria-controls={`mega-${item.label.toLowerCase()}`}
                     onClick={() => onTriggerClick(item.label)}
                     className={`inline-flex items-center gap-1.5 transition-colors hover:text-primary ${
-                      isActive || isOpen ? "text-primary" : "text-white"
+                      isActive ? "text-primary" : "text-white"
                     }`}
                   >
                     {item.label}
@@ -355,9 +369,7 @@ const NavBar = () => {
 
               <div className="px-4 pb-3 grid md:grid-cols-2 gap-x-4 gap-y-1">
                 {activeMenuItem.children!.map((child) => {
-                  const childActive =
-                    pathname === child.href ||
-                    pathname?.startsWith(`${child.href}/`);
+                  const childActive = isChildActive(child, activeMenuItem.children!, pathname);
                   return (
                     <Link
                       key={child.href}
@@ -478,9 +490,7 @@ const NavBar = () => {
                       <div className="overflow-hidden">
                         <div className="flex flex-col px-3 pb-4 gap-1">
                           {item.children.map((child) => {
-                            const childActive =
-                              pathname === child.href ||
-                              pathname?.startsWith(`${child.href}/`);
+                            const childActive = isChildActive(child, item.children!, pathname);
                             return (
                               <Link
                                 key={child.href}
