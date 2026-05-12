@@ -20,6 +20,13 @@ const PlatformSection = () => {
   useGSAP(() => {
     const platform = platformRef.current;
     if (!platform) return;
+
+    // Reveal the section as soon as GSAP is set up — until now it is
+    // hidden via Tailwind's opacity-0 so it cannot flash over the hero
+    // on a fresh page load (the absolute "Intelligence with Purpose"
+    // overlay would otherwise sit at viewport center over Hero).
+    gsap.set(platform, { opacity: 1 });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: platform,
@@ -102,7 +109,7 @@ const PlatformSection = () => {
     );
   });
   return (
-    <div ref={platformRef}>
+    <div ref={platformRef} className="relative opacity-0">
       <div className="w-full h-screen relative overflow-hidden">
         <div className="absolute top-1/2 h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
