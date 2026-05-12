@@ -116,23 +116,28 @@ const WatchScene = () => {
     timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
 
     // On mobile only: fade the watch overlay out just before the
-    // PlatformSection cards take over. We delay the fade until the
-    // platform section is entering the viewport so the watch stays
-    // visible (and rotating with scroll) throughout the Hero and the
-    // ExplodedSection beats — both of which are themed around the
-    // wristband itself.
+    // PlatformSection cards take over, and fade it back in if the
+    // user scrolls back up. We use toggleActions (not scrub) here so
+    // the play/reverse cycle is independent of PlatformSection's tl2,
+    // which also targets #watchscene opacity — sharing the same scrub
+    // would leave the watch stuck at 0 on the way back up.
     let fadeTrigger: ScrollTrigger | undefined;
     if (isMobile) {
-      const fade = gsap.to(watch, {
-        opacity: 0,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: "#platform-section",
-          start: "top bottom",
-          end: "top center",
-          scrub: true,
+      const fade = gsap.fromTo(
+        watch,
+        { opacity: 1 },
+        {
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          overwrite: "auto",
+          scrollTrigger: {
+            trigger: "#platform-section",
+            start: "top 60%",
+            toggleActions: "play none none reverse",
+          },
         },
-      });
+      );
       fadeTrigger = fade.scrollTrigger ?? undefined;
     }
 
