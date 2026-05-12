@@ -214,7 +214,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
     >
       <div className="w-full h-screen relative overflow-hidden">
         {/* Fanned card stack */}
-        <div className="absolute top-1/2 h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-[58%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
             ref={screenRef}
             className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
@@ -270,7 +270,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
             scrubs through the same rotation arc as the pin scrolls. */}
         <div
           ref={watchRef}
-          className="absolute left-1/2 top-1/2 -translate-1/2 z-10 w-[90vw] sm:w-[85vw] md:w-[1200px] lg:w-[1500px] aspect-square pointer-events-none"
+          className="absolute left-1/2 top-[58%] -translate-1/2 z-10 w-[90vw] sm:w-[85vw] md:w-[1200px] lg:w-[1500px] aspect-square pointer-events-none"
         >
           <div
             className="absolute inset-[20%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.5),rgba(248,122,19,0.12)_45%,transparent_72%)] blur-3xl"
