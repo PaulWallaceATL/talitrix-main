@@ -25,6 +25,12 @@ const WatchScene = () => {
 
     let images: HTMLImageElement[] = [];
     const obj = { frame: 0 };
+    let revealed = false;
+    const reveal = () => {
+      if (revealed) return;
+      revealed = true;
+      gsap.to(watch, { opacity: 1, duration: 0.4, ease: "power2.out" });
+    };
 
     const renderFrame = (index: number) => {
       const img = images[Math.round(index)];
@@ -66,11 +72,18 @@ const WatchScene = () => {
       return img;
     });
 
-    if (images[0].complete) {
+    if (images[0].complete && images[0].naturalWidth) {
       renderFrame(0);
+      reveal();
     } else {
-      images[0].onload = () => renderFrame(0);
+      images[0].onload = () => {
+        renderFrame(0);
+        reveal();
+      };
     }
+    // Failsafe: even if the first frame is extremely slow, don't leave the
+    // overlay hidden forever — fade it in after a short window.
+    const failSafe = window.setTimeout(reveal, 1200);
 
     const tl = gsap.to(obj, {
       frame: FRAME_COUNT - 1,
@@ -123,12 +136,13 @@ const WatchScene = () => {
     return () => {
       fadeTrigger?.kill();
       window.removeEventListener("resize", resize);
+      window.clearTimeout(failSafe);
     };
   });
 
   return (
     <div
-      className="w-full h-full fixed left-0 top-0 z-10 "
+      className="w-full h-full fixed left-0 top-0 z-10 opacity-0"
       ref={watchRef}
       id="watchscene"
     >
