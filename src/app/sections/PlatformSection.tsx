@@ -84,10 +84,15 @@ const PlatformSection = () => {
     tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
     tl2.to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8);
 
+    // Hold off the Intelligence with Purpose / Move from reactive
+    // reveal until the supervisor card with the Talitrix score has
+    // scrolled almost to the top of the viewport. Anchored to top
+    // 60% of #placeholder (well past pin end) so on mobile the score
+    // is no longer occupying the same space as the text reveal.
     const tl3 = gsap.timeline({
       scrollTrigger: {
         trigger: "#placeholder",
-        start: "-=200 bottom",
+        start: "top 60%",
         toggleActions: "play none none reverse",
       },
     });
@@ -189,7 +194,7 @@ const PlatformSection = () => {
           </h2>
         </div>
       </div>
-      <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center top-1/2 left-1/2 w-full max-w-[1500px] -translate-1/2 z-20">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center top-[72%] lg:top-1/2 left-1/2 w-full max-w-[1500px] -translate-x-1/2 lg:-translate-y-1/2 z-20">
         <h2
           className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
           ref={h2bRef}

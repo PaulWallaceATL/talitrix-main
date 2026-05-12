@@ -183,17 +183,15 @@ const PlatformContinuitySection = ({ id }: Props) => {
       tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
       tl2.to(".pcs-card", { opacity: 0, duration: 0.3 }, 0.8);
 
-      // Reveal Intelligence with Purpose + paragraph only AFTER the pin
-      // has finished and the T-Band has fully faded out. The placeholder
-      // sits outside platformRef in the JSX, so it cannot enter the
-      // viewport until the pin scroll is over — and we anchor the
-      // trigger at "top 90%" (placeholder just barely in view) instead
-      // of "-=200 bottom" so it never fires while the watch is still
-      // mid-fade behind the cards.
+      // Reveal Intelligence with Purpose + paragraph only AFTER the
+      // T-Band has fully faded out AND the supervisor / Talitrix score
+      // card has scrolled almost to the top of the viewport. Anchored
+      // at top 60% of the placeholder (well past pin end) so on mobile
+      // the text reveal does not overlap the still-large score.
       const tl3 = gsap.timeline({
         scrollTrigger: {
           trigger: placeholder,
-          start: "top 90%",
+          start: "top 60%",
           toggleActions: "play none none reverse",
         },
       });
@@ -299,8 +297,11 @@ const PlatformContinuitySection = ({ id }: Props) => {
         </div>
       </div>
 
-      {/* Intelligence with Purpose — revealed at end of the pin */}
-      <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center top-1/2 left-1/2 w-full max-w-[1500px] -translate-1/2 z-20">
+      {/* Intelligence with Purpose — revealed at end of the pin.
+          Mobile sits in the lower portion of the section so it does
+          not collide with the scaled-up score; desktop keeps the
+          centered split layout. */}
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center top-[72%] lg:top-1/2 left-1/2 w-full max-w-[1500px] -translate-x-1/2 lg:-translate-y-1/2 z-20">
         <h2
           ref={h2bRef}
           className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
