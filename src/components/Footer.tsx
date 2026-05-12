@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaPaperPlane,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -23,16 +28,11 @@ const Footer = () => {
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
-              href="/get-started"
-              className="rounded-full px-5 sm:px-6 py-3 bg-white/10 hover:bg-primary/30 backdrop-blur-md text-sm transition-colors border border-white/15"
-            >
-              Request a Briefing
-            </Link>
-            <Link
               href="/contact"
-              className="rounded-full px-5 sm:px-6 py-3 bg-transparent hover:bg-white/5 text-sm transition-colors border border-white/15"
+              className="group inline-flex items-center gap-2 rounded-full px-5 sm:px-6 py-3 bg-white/10 hover:bg-primary/30 backdrop-blur-md text-sm transition-colors border border-white/15"
             >
               Contact Sales
+              <FaPaperPlane className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
 
@@ -89,12 +89,6 @@ const Footer = () => {
         <div className="flex gap-4 sm:gap-6 flex-wrap">
           <Link href="/privacy" className="hover:text-white">
             Privacy
-          </Link>
-          <Link href="/terms" className="hover:text-white">
-            Terms
-          </Link>
-          <Link href="/security" className="hover:text-white">
-            Security
           </Link>
         </div>
       </div>
