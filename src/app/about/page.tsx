@@ -5,7 +5,7 @@ import ShaderHero from "@/components/ShaderHero";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import { BlurHighlight } from "@/components/react-bits/blur-highlight";
-import DepthCard from "@/components/react-bits/depth-card";
+import PrinciplesScroller from "@/components/PrinciplesScroller";
 import SynapticShift from "@/components/react-bits/synaptic-shift";
 import VideoBlock from "@/components/VideoBlock";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
@@ -15,33 +15,6 @@ export const metadata: Metadata = {
   description:
     "Talitrix is redefining electronic monitoring — technology designed around people, dignity, and outcomes. Learn how we set the global standard in modern supervision.",
 };
-
-const principles = [
-  {
-    title: "People First",
-    body: "We build for the human experience, supporting the professionals who depend on our technology and the participants who wear it.",
-  },
-  {
-    title: "Radical Accountability",
-    body: "We carry the responsibility of operating in one of the most consequential spaces in the world completely, with integrity and without exception.",
-  },
-  {
-    title: "Uncompromising Excellence",
-    body: "We hold ourselves to a standard of technological excellence that expands what this industry believes is possible.",
-  },
-  {
-    title: "Intelligence With Purpose",
-    body: "Every insight our platform generates exists to drive better decisions and stronger outcomes.",
-  },
-  {
-    title: "Dignity by Design",
-    body: "We design technology around the dignity, privacy, and humanity of the people who use it.",
-  },
-  {
-    title: "Conviction Over Convention",
-    body: "We refuse to accept what everyone else has settled for.",
-  },
-];
 
 const timeline = [
   {
@@ -233,24 +206,8 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-          {principles.map((p, i) => (
-            <DepthCard
-              key={p.title}
-              title={p.title}
-              description={p.body}
-              width={340}
-              height={260}
-              borderRadius="20px"
-              maxRotation={12}
-              maxTranslation={14}
-              spotlight
-              spotlightColor="rgba(248, 122, 19, 0.18)"
-              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-7 flex flex-col justify-end"
-              revealAnimation="fade"
-              staggerDelay={80 + i * 30}
-            />
-          ))}
+        <div className="relative z-10">
+          <PrinciplesScroller />
         </div>
       </section>
 
