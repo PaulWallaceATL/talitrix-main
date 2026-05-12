@@ -5,6 +5,7 @@ import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
 import DepthCard from "@/components/react-bits/depth-card";
+import BandSupervisionSection from "@/components/BandSupervisionSection";
 
 export const metadata: Metadata = {
   title: "ONE Jail Management System (JMS) | Talitrix ONE",
@@ -180,6 +181,8 @@ export default function JailManagementPage() {
           ))}
         </div>
       </section>
+
+      <BandSupervisionSection />
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
