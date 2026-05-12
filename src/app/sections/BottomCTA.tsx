@@ -4,7 +4,7 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 
 const BottomCTA = () => {
   return (
-    <div className="px-4 sm:px-8 lg:px-16">
+    <div className="px-4 sm:px-8 lg:px-16 mb-8">
       <div className="bg-[url('/cta-bg.jpg')] bg-cover bg-bottom pb-32 sm:pb-60 lg:pb-90 pt-12 sm:pt-16 px-6 sm:px-10 rounded-3xl sm:rounded-4xl flex flex-col gap-10 sm:gap-14 lg:gap-16 items-center">
         <StaggeredText
           as="h2"

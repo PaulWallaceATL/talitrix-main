@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import StaggeredText from "@/components/react-bits/staggered-text";
 
 const Hero = () => {
@@ -25,6 +24,7 @@ const Hero = () => {
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center justify-center leading-[1.1]"
             segmentBy="words"
             duration={0.7}
+            direction="bottom"
             delay={70}
             blur
           />

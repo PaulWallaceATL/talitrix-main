@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InfoPaths from "@/app/sections/components/InfoPaths";
+import { motion } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,9 +47,7 @@ const WatchScene = () => {
       // because viewport width is the limiting dimension. Scale up
       // ~1.7x so the watch face dominates the screen but the rotated
       // band profile still fits within the viewport at most angles.
-      const scale = isMobile
-        ? (cw / iw) * 1.7
-        : Math.min(cw / iw, ch / ih);
+      const scale = isMobile ? (cw / iw) * 1.7 : Math.min(cw / iw, ch / ih);
       const dw = iw * scale;
       const dh = ih * scale;
       const dx = (cw - dw) / 2;
@@ -154,9 +153,19 @@ const WatchScene = () => {
       ref={watchRef}
       id="watchscene"
     >
-      <canvas ref={canvasRef} className="absolute z-10 inset-0 w-full h-full" />
-      <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
-      <WatchGlow className="absolute w-[420px] sm:w-[600px] md:w-[800px] h-auto left-1/2 top-1/2 -translate-1/2" />
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2 }}
+        className="relative size-full"
+      >
+        <canvas
+          ref={canvasRef}
+          className="absolute z-10 inset-0 w-full h-full"
+        />
+        <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
+        <WatchGlow className="absolute w-[420px] sm:w-[600px] md:w-[800px] h-auto left-1/2 top-1/2 -translate-1/2" />
+      </motion.div>
     </div>
   );
 };
