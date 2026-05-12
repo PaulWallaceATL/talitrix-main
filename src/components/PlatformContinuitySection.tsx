@@ -9,6 +9,22 @@ import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+// Subset of homepage watch frames to scrub through during the pin —
+// roughly the same arc the user sees on the homepage as PlatformSection
+// scrolls past, sampled every 3rd frame to keep the load light.
+const WATCH_FRAME_START = 20;
+const WATCH_FRAME_END = 220;
+const WATCH_FRAME_STEP = 3;
+const WATCH_FRAMES = Array.from(
+  {
+    length:
+      Math.floor((WATCH_FRAME_END - WATCH_FRAME_START) / WATCH_FRAME_STEP) + 1,
+  },
+  (_, i) => WATCH_FRAME_START + i * WATCH_FRAME_STEP,
+);
+const watchFrameSrc = (i: number) =>
+  `/watch-sequence/${String(i).padStart(4, "0")}.webp`;
+
 type Props = {
   /** Optional id for in-page anchoring. */
   id?: string;
@@ -26,6 +42,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
   const screenRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const watchRef = useRef<HTMLDivElement>(null);
+  const watchCanvasRef = useRef<HTMLCanvasElement>(null);
   const placeholderRef = useRef<HTMLDivElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const h2bRef = useRef<HTMLHeadingElement>(null);
@@ -35,11 +52,83 @@ const PlatformContinuitySection = ({ id }: Props) => {
     () => {
       const platform = platformRef.current;
       const placeholder = placeholderRef.current;
+      const canvas = watchCanvasRef.current;
       if (!platform || !placeholder) return;
 
       // Reveal: until now the section is opacity-0 so it cannot flash
       // over surrounding content on first paint.
       gsap.set(platform, { opacity: 1 });
+
+      // ---------------------------------------------------------------
+      // Watch frame scrub — paints the rotating T-Band into the canvas
+      // as the pin scrolls, mirroring the homepage's WatchScene rotation
+      // during the PlatformSection beat.
+      // ---------------------------------------------------------------
+      const ctx = canvas?.getContext("2d");
+      let watchCleanup: (() => void) | undefined;
+      if (canvas && ctx) {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const images: HTMLImageElement[] = WATCH_FRAMES.map((idx) => {
+          const img = new window.Image();
+          img.src = watchFrameSrc(idx);
+          return img;
+        });
+        const obj = { frame: 0 };
+
+        const drawFrame = (index: number) => {
+          const img = images[Math.round(index)];
+          if (!img?.complete || !img.naturalWidth) return;
+          const cw = canvas.clientWidth;
+          const ch = canvas.clientHeight;
+          const iw = img.naturalWidth;
+          const ih = img.naturalHeight;
+          const scale = Math.min(cw / iw, ch / ih);
+          const dw = iw * scale;
+          const dh = ih * scale;
+          const dx = (cw - dw) / 2;
+          const dy = (ch - dh) / 2;
+          ctx.clearRect(0, 0, cw, ch);
+          ctx.drawImage(img, dx, dy, dw, dh);
+        };
+
+        const resize = () => {
+          const rect = canvas.getBoundingClientRect();
+          canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+          canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          drawFrame(obj.frame);
+        };
+        resize();
+        window.addEventListener("resize", resize);
+
+        const first = images[0];
+        if (first.complete && first.naturalWidth) {
+          drawFrame(0);
+        } else {
+          first.addEventListener("load", () => drawFrame(obj.frame), {
+            once: true,
+          });
+        }
+
+        const frameTween = gsap.to(obj, {
+          frame: images.length - 1,
+          ease: "none",
+          snap: "frame",
+          onUpdate: () => drawFrame(obj.frame),
+          scrollTrigger: {
+            trigger: platform,
+            start: "top top",
+            end: "+=400%",
+            scrub: 0.4,
+          },
+        });
+
+        watchCleanup = () => {
+          window.removeEventListener("resize", resize);
+          frameTween.scrollTrigger?.kill();
+          frameTween.kill();
+        };
+      }
 
       const h2Split = SplitText.create(h2Ref.current, {
         type: "lines",
@@ -102,6 +191,10 @@ const PlatformContinuitySection = ({ id }: Props) => {
       });
       tl3.from(h2bSplit.lines, { y: "100%", stagger: 0.2 }, 0);
       tl3.from(pSplit.lines, { y: "100%", stagger: 0.2 }, 0);
+
+      return () => {
+        watchCleanup?.();
+      };
     },
     { scope: platformRef },
   );
@@ -164,22 +257,22 @@ const PlatformContinuitySection = ({ id }: Props) => {
           </div>
         </div>
 
-        {/* Local T-Band overlay (replaces homepage's global #watchscene) */}
+        {/* Local T-Band canvas (replaces homepage's global #watchscene).
+            Sized to match the on-screen footprint of the homepage canvas
+            so the watch dominates the cards as it does there, and
+            scrubs through the same rotation arc as the pin scrolls. */}
         <div
           ref={watchRef}
-          className="absolute left-1/2 top-1/2 -translate-1/2 z-10 w-[420px] sm:w-[600px] md:w-[800px] aspect-square pointer-events-none"
+          className="absolute left-1/2 top-1/2 -translate-1/2 z-10 w-[90vw] sm:w-[85vw] md:w-[1200px] lg:w-[1500px] aspect-square pointer-events-none"
         >
           <div
-            className="absolute inset-[18%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.45),rgba(248,122,19,0.1)_45%,transparent_72%)] blur-2xl"
+            className="absolute inset-[20%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.5),rgba(248,122,19,0.12)_45%,transparent_72%)] blur-3xl"
             aria-hidden
           />
-          <Image
-            src="/watch-sequence/0000.webp"
-            alt="Talitrix T-Band"
-            fill
-            className="object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.55)]"
-            priority
-            sizes="(min-width: 768px) 800px, (min-width: 640px) 600px, 420px"
+          <canvas
+            ref={watchCanvasRef}
+            className="relative w-full h-full"
+            aria-label="Talitrix T-Band rotating as you scroll"
           />
         </div>
 
