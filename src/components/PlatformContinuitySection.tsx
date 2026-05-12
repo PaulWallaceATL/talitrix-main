@@ -3,288 +3,225 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
 import Image from "next/image";
 import { useRef } from "react";
-import StaggeredText from "@/components/react-bits/staggered-text";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 type Props = {
   /** Optional id for in-page anchoring. */
   id?: string;
-  /** Tailwind classes for the outer <section>. */
-  className?: string;
 };
 
-const PlatformContinuitySection = ({ id, className = "" }: Props) => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const shieldRef = useRef<HTMLDivElement>(null);
-  const guardianRef = useRef<HTMLDivElement>(null);
-  const supervisorRef = useRef<HTMLDivElement>(null);
+/**
+ * Self-contained version of the homepage's PlatformSection. Same fanned
+ * card stack, same pinned 400% scroll, same supervisor scale + h2 fade
+ * + cards fade choreography, and the same Intelligence with Purpose
+ * reveal at the end. Only difference: the watch is a local element here
+ * because inner pages do not mount the global #watchscene canvas.
+ */
+const PlatformContinuitySection = ({ id }: Props) => {
+  const platformRef = useRef<HTMLDivElement>(null);
+  const screenRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const watchRef = useRef<HTMLDivElement>(null);
-  const scoreRef = useRef<HTMLDivElement>(null);
+  const placeholderRef = useRef<HTMLDivElement>(null);
+  const h2Ref = useRef<HTMLHeadingElement>(null);
+  const h2bRef = useRef<HTMLHeadingElement>(null);
+  const pRef = useRef<HTMLParagraphElement>(null);
 
   useGSAP(
     () => {
-      const stage = stageRef.current;
-      if (!stage) return;
+      const platform = platformRef.current;
+      const placeholder = placeholderRef.current;
+      if (!platform || !placeholder) return;
 
-      gsap.set([shieldRef.current, guardianRef.current, supervisorRef.current], {
-        willChange: "transform, opacity, filter",
+      // Reveal: until now the section is opacity-0 so it cannot flash
+      // over surrounding content on first paint.
+      gsap.set(platform, { opacity: 1 });
+
+      const h2Split = SplitText.create(h2Ref.current, {
+        type: "lines",
+        mask: "lines",
+      });
+      const h2bSplit = SplitText.create(h2bRef.current, {
+        type: "lines",
+        mask: "lines",
+      });
+      const pSplit = SplitText.create(pRef.current, {
+        type: "lines",
+        mask: "lines",
       });
 
-      const intro = gsap.timeline({
+      // h2 reveal as the section enters
+      gsap.from(h2Split.lines, {
+        y: "100%",
+        stagger: 0.2,
         scrollTrigger: {
-          trigger: stage,
-          start: "top 75%",
+          trigger: platform,
+          start: "20% center",
           toggleActions: "play none none reverse",
         },
-        defaults: { ease: "power3.out" },
       });
 
-      intro
-        .from(
-          watchRef.current,
-          {
-            opacity: 0,
-            scale: 0.55,
-            y: 60,
-            filter: "blur(20px)",
-            duration: 1.1,
-          },
-          0,
-        )
-        .from(
-          shieldRef.current,
-          {
-            opacity: 0,
-            x: -180,
-            y: 40,
-            rotate: -22,
-            filter: "blur(10px)",
-            duration: 1.1,
-          },
-          0.15,
-        )
-        .from(
-          guardianRef.current,
-          {
-            opacity: 0,
-            x: 180,
-            y: 40,
-            rotate: 22,
-            filter: "blur(10px)",
-            duration: 1.1,
-          },
-          0.25,
-        )
-        .from(
-          supervisorRef.current,
-          {
-            opacity: 0,
-            x: 220,
-            y: 80,
-            rotate: 28,
-            scale: 0.8,
-            filter: "blur(12px)",
-            duration: 1.15,
-          },
-          0.4,
-        )
-        .from(
-          scoreRef.current,
-          {
-            opacity: 0,
-            scale: 0.6,
-            duration: 0.7,
-            ease: "back.out(1.7)",
-          },
-          0.9,
-        );
-
-      // Idle floating motion — gentle, infinite
-      const float = (
-        target: Element | null,
-        amount: number,
-        duration: number,
-        delay: number,
-      ) => {
-        if (!target) return;
-        gsap.to(target, {
-          y: `+=${amount}`,
-          duration,
-          yoyo: true,
-          repeat: -1,
-          ease: "sine.inOut",
-          delay,
-        });
-      };
-      float(shieldRef.current, 12, 4.2, 1.6);
-      float(guardianRef.current, -10, 4.6, 1.8);
-      float(supervisorRef.current, 14, 4.8, 2.0);
-      float(watchRef.current, -8, 5.0, 2.1);
-
-      // Scroll parallax — cards drift outward as the section exits
-      const parallax = gsap.timeline({
+      // Pinned scroll choreography — mirrors the homepage's tl2.
+      const tl2 = gsap.timeline({
         scrollTrigger: {
-          trigger: stage,
-          start: "top 30%",
-          end: "bottom top",
-          scrub: 1,
+          trigger: platform,
+          start: "top top",
+          end: "+=400%",
+          pin: true,
+          pinSpacing: true,
+          scrub: true,
         },
       });
-      parallax
-        .to(shieldRef.current, { x: "-=80", rotate: "-=4" }, 0)
-        .to(guardianRef.current, { x: "+=60", rotate: "+=3" }, 0)
-        .to(supervisorRef.current, { x: "+=120", y: "+=40" }, 0)
-        .to(watchRef.current, { y: "-=50" }, 0);
+      tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
+      tl2.to(
+        watchRef.current,
+        { x: "-22%", delay: 0.1, ease: "power4.inOut" },
+        0,
+      );
+      tl2.to(
+        watchRef.current,
+        { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
+        0.8,
+      );
+      tl2.to(cardRef.current, { scale: 2.5, y: -50 }, 0.8);
+      tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
+      tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
+      tl2.to(".pcs-card", { opacity: 0, duration: 0.3 }, 0.8);
+
+      // Reveal Intelligence with Purpose + paragraph at the end of the pin.
+      const tl3 = gsap.timeline({
+        scrollTrigger: {
+          trigger: placeholder,
+          start: "-=200 bottom",
+          toggleActions: "play none none reverse",
+        },
+      });
+      tl3.from(h2bSplit.lines, { y: "100%", stagger: 0.2 }, 0);
+      tl3.from(pSplit.lines, { y: "100%", stagger: 0.2 }, 0);
     },
-    { scope: sectionRef },
+    { scope: platformRef },
   );
 
   return (
-    <section
-      ref={sectionRef}
+    <div
+      ref={platformRef}
       id={id}
-      className={`relative bg-background overflow-hidden border-b border-border-gray ${className}`}
+      className="relative opacity-0 bg-background border-b border-border-gray"
     >
-      <div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_55%,rgba(248,122,19,0.18),transparent_55%)] pointer-events-none"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background to-transparent pointer-events-none"
-        aria-hidden
-      />
-
-      <div className="relative z-10 px-6 md:px-16 pt-20 md:pt-28 text-center max-w-5xl mx-auto">
-        <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-          The Ecosystem
-        </span>
-        <StaggeredText
-          as="h2"
-          text={"One Platform.\nComplete Continuity."}
-          className="text-3xl sm:text-5xl md:text-6xl font-semibold leading-[1.1]"
-          segmentBy="words"
-          duration={0.7}
-          delay={70}
-          blur
-        />
-      </div>
-
-      <div
-        ref={stageRef}
-        className="relative mx-auto mt-12 md:mt-16 mb-20 md:mb-24 max-w-6xl h-[460px] sm:h-[560px] md:h-[640px] px-4"
-      >
-        {/* ONE Shield — back-left, slight tilt */}
-        <div
-          ref={shieldRef}
-          className="absolute left-[2%] sm:left-[6%] md:left-[10%] top-[18%] w-[55%] sm:w-[44%] md:w-[40%] -rotate-[8deg] origin-bottom-right"
-        >
-          <CardLabel>One Shield</CardLabel>
-          <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_40px_90px_-20px_rgba(0,0,0,0.85)]">
-            <Image
-              src="/platform/one-shield.jpg"
-              alt="ONE Shield app"
-              width={462}
-              height={587}
-              className="w-full h-auto block"
-              sizes="(min-width: 768px) 40vw, 55vw"
-            />
-          </div>
-        </div>
-
-        {/* ONE Guardian — back-right, slight tilt */}
-        <div
-          ref={guardianRef}
-          className="absolute right-[18%] sm:right-[20%] md:right-[22%] top-[16%] w-[55%] sm:w-[44%] md:w-[40%] rotate-[6deg] origin-bottom-left"
-        >
-          <CardLabel align="right">One Guardian</CardLabel>
-          <div className="rounded-2xl overflow-hidden border border-white/10 shadow-[0_40px_90px_-20px_rgba(0,0,0,0.85)]">
-            <Image
-              src="/platform/one-gaurdian.jpg"
-              alt="ONE Guardian app"
-              width={462}
-              height={587}
-              className="w-full h-auto block"
-              sizes="(min-width: 768px) 40vw, 55vw"
-            />
-          </div>
-        </div>
-
-        {/* ONE Supervisor — right, separated, smaller */}
-        <div
-          ref={supervisorRef}
-          className="absolute right-[1%] sm:right-[2%] md:right-[2%] top-[28%] w-[36%] sm:w-[28%] md:w-[24%] rotate-[8deg] origin-bottom-left"
-        >
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_40px_90px_-20px_rgba(0,0,0,0.85)]">
-            <Image
-              src="/platform/one-supervisor1.jpg"
-              alt="ONE Supervisor app"
-              width={462}
-              height={587}
-              className="w-full h-auto block"
-              sizes="(min-width: 768px) 24vw, 36vw"
-            />
-            {/* Recreated Talitrix score ring overlay (matches PlatformSection) */}
-            <div
-              ref={scoreRef}
-              className="absolute top-[36%] left-1/2 -translate-x-1/2 w-full flex flex-col items-center gap-2"
-            >
-              <h3 className="tracking-widest text-center text-[10px] sm:text-xs">
-                TALITRIX
-              </h3>
-              <div className="size-16 sm:size-20 md:size-24 relative">
-                <div className="top-1/2 left-1/2 -translate-1/2 text-primary text-2xl sm:text-3xl md:text-4xl absolute font-medium">
-                  63
+      <div className="w-full h-screen relative overflow-hidden">
+        {/* Fanned card stack */}
+        <div className="absolute top-1/2 h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+          <div
+            ref={screenRef}
+            className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
+          >
+            <div className="w-full pcs-card">
+              <Image
+                src="/platform/one-shield.jpg"
+                alt="ONE Shield"
+                width={462}
+                height={587}
+                className="w-full rounded-2xl origin-bottom-right -rotate-12"
+              />
+            </div>
+            <div className="w-full pcs-card">
+              <Image
+                src="/platform/one-gaurdian.jpg"
+                alt="ONE Guardian"
+                width={462}
+                height={587}
+                className="w-full rounded-2xl"
+              />
+            </div>
+            <div className="w-full relative">
+              <div className="origin-bottom-left rotate-12 relative">
+                <div className="relative" ref={cardRef}>
+                  <div className="top-[36%] absolute w-full flex flex-col items-center gap-2">
+                    <h3 className="tracking-widest text-center">TALITRIX</h3>
+                    <div className="size-30 relative">
+                      <div className="top-1/2 left-1/2 -translate-1/2 text-primary text-4xl absolute">
+                        63
+                      </div>
+                      <ScoreRing />
+                    </div>
+                  </div>
+                  <div className="pcs-card">
+                    <Image
+                      src="/platform/one-supervisor1.jpg"
+                      alt="ONE Supervisor"
+                      width={462}
+                      height={587}
+                      className="w-full rounded-2xl"
+                    />
+                  </div>
                 </div>
-                <ScoreRing />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Central T-Band watch */}
+        {/* Local T-Band overlay (replaces homepage's global #watchscene) */}
         <div
           ref={watchRef}
-          className="absolute left-[8%] sm:left-[14%] md:left-[18%] top-[10%] sm:top-[6%] z-20 w-[68%] sm:w-[58%] md:w-[52%]"
+          className="absolute left-1/2 top-1/2 -translate-1/2 z-10 w-[420px] sm:w-[600px] md:w-[800px] aspect-square pointer-events-none"
         >
-          <div className="relative w-full aspect-square">
-            <div
-              className="absolute inset-[16%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.45),rgba(248,122,19,0.1)_45%,transparent_72%)] blur-2xl pointer-events-none"
-              aria-hidden
-            />
-            <Image
-              src="/watch-sequence/0200.webp"
-              alt="Talitrix T-Band"
-              fill
-              className="object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.55)]"
-              priority
-              sizes="(min-width: 768px) 52vw, 68vw"
-            />
-          </div>
+          <div
+            className="absolute inset-[18%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.45),rgba(248,122,19,0.1)_45%,transparent_72%)] blur-2xl"
+            aria-hidden
+          />
+          <Image
+            src="/watch-sequence/0000.webp"
+            alt="Talitrix T-Band"
+            fill
+            className="object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.55)]"
+            priority
+            sizes="(min-width: 768px) 800px, (min-width: 640px) 600px, 420px"
+          />
+        </div>
+
+        {/* Heading — fades out at progress 0.8 */}
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:py-24 relative z-20">
+          <h2
+            ref={h2Ref}
+            className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
+          >
+            One Platform. <br /> Complete{" "}
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
+              Continuity
+            </span>
+          </h2>
         </div>
       </div>
-    </section>
+
+      {/* Trigger marker for tl3 (mirrors homepage's #placeholder) */}
+      <div ref={placeholderRef} className="h-px w-full" aria-hidden />
+
+      {/* Intelligence with Purpose — revealed at end of the pin */}
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center top-1/2 left-1/2 w-full max-w-[1500px] -translate-1/2 z-20">
+        <h2
+          ref={h2bRef}
+          className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
+        >
+          Intelligence <br /> with{" "}
+          <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
+            Purpose.
+          </span>
+        </h2>
+        <p
+          ref={pRef}
+          className="w-full max-w-md lg:w-80 text-base sm:text-lg lg:text-xl"
+        >
+          Move from reactive supervision to proactive intervention by
+          identifying potential issues before they become operational problems.
+        </p>
+      </div>
+    </div>
   );
 };
-
-const CardLabel = ({
-  children,
-  align = "left",
-}: {
-  children: React.ReactNode;
-  align?: "left" | "right";
-}) => (
-  <div
-    className={`mb-2 text-[10px] sm:text-xs uppercase tracking-[0.3em] text-white/55 ${
-      align === "right" ? "text-right pr-2" : "pl-2"
-    }`}
-  >
-    {children}
-  </div>
-);
 
 const ScoreRing = () => (
   <svg
