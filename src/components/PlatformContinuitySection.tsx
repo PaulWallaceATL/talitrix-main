@@ -9,13 +9,14 @@ import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-// Watch frames to scrub through during the pin. Start dead-on at
-// frame 0000 (the TALITRIX 10:15 face shot) and rotate forward from
-// there as the user scrolls. Sampled every 3rd frame to keep the
-// payload light.
-const WATCH_FRAME_START = 0;
-const WATCH_FRAME_END = 200;
-const WATCH_FRAME_STEP = 3;
+// Watch frames to scrub through during the pin. Start at frame 0200
+// — the 3/4 angle that matches where the homepage watch lands when
+// PlatformSection enters — and rotate forward through the rest of
+// the sequence (0260) as the user scrolls. Step 2 keeps the
+// rotation smooth without doubling the payload.
+const WATCH_FRAME_START = 200;
+const WATCH_FRAME_END = 260;
+const WATCH_FRAME_STEP = 2;
 const WATCH_FRAMES = Array.from(
   {
     length:
