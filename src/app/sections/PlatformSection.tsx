@@ -111,28 +111,34 @@ const PlatformSection = () => {
             className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
             ref={screenRef}
           >
-            <div className="w-full platform-cards">
-              <Image
-                src={"/platform/one-shield.jpg"}
-                alt="One Shield"
-                width={462}
-                height={587}
-                className="w-full rounded-2xl origin-bottom-right -rotate-12"
-              />
+            <div className="w-full platform-cards ">
+              <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right -rotate-12 overflow-hidden relative">
+                <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
+                <Image
+                  src={"/platform/one-shield.jpg"}
+                  alt="One Shield"
+                  width={462}
+                  height={587}
+                  className="w-full rounded-2xl relative z-10"
+                />
+              </div>
             </div>
             <div className="w-full platform-cards">
-              <Image
-                src={"/platform/one-gaurdian.jpg"}
-                alt="One Shield"
-                width={462}
-                height={587}
-                className="w-full rounded-2xl "
-              />
+              <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right overflow-hidden relative">
+                <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
+                <Image
+                  src={"/platform/one-gaurdian.jpg"}
+                  alt="One Shield"
+                  width={462}
+                  height={587}
+                  className="w-full rounded-2xl relative z-10"
+                />
+              </div>
             </div>
             <div className="w-full relative">
-              <div className="origin-bottom-left rotate-12 relative">
-                <div className="relative" ref={cardRef}>
-                  <div className="top-[36%] absolute w-full flex flex-col items-center gap-2">
+              <div className="origin-bottom-left rotate-12 relative ">
+                <div className="relative z-10 " ref={cardRef}>
+                  <div className="top-[36%] absolute w-full flex flex-col items-center gap-2 z-20">
                     <h3 className="tracking-widest text-center ">TALITRIX</h3>
                     <div className="size-30 relative">
                       <div className="top-1/2 left-1/2 -translate-1/2 text-primary text-4xl absolute">
@@ -154,13 +160,15 @@ const PlatformSection = () => {
                       </svg>
                     </div>
                   </div>
-                  <div className="platform-cards">
+                  <div className="platform-cards rounded-3xl shadow-lg shadow-primary/45 overflow-hidden p-1 relative">
+                    <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
+
                     <Image
                       src={"/platform/one-supervisor1.jpg"}
                       alt="One Shield"
                       width={462}
                       height={587}
-                      className="w-full rounded-2xl"
+                      className="w-full rounded-2xl relative z-10"
                     />
                   </div>
                 </div>
