@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import StaggeredText from "@/components/react-bits/staggered-text";
 
 const Hero = () => {
   return (
@@ -13,9 +14,17 @@ const Hero = () => {
         className="w-full h-full absolute top-0 left-0 object-cover"
       />
       <div className=" text-center  max-h-190 py-16 mt-24 flex flex-col gap-36 justify-between h-full items-center w-full">
-        <h1 className="text-7xl relative z-1" id="title-h1">
-          The Standard for <br /> Modern Supervision.
-        </h1>
+        <div id="title-h1" className="relative z-1">
+          <StaggeredText
+            as="h1"
+            text={"The Standard for\nModern Supervision."}
+            className="text-7xl text-center justify-center"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
+        </div>
 
         <div className="max-w-72 relative z-20" id="hero-desc">
           <p className="text-xl text-white/75">
