@@ -176,7 +176,7 @@ const PlatformSection = () => {
             </div>
           </div>
         </div>
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:py-24 relative z-20">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-6 sm:pt-8 lg:pt-10 relative z-20">
           <h2
             className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}
