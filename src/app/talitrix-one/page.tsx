@@ -126,9 +126,15 @@ export default function TalitrixOnePage() {
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             Deploy the New Standard
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8">
-            The future of supervision starts here.
-          </h2>
+          <StaggeredText
+            as="h2"
+            text={"The future of supervision starts here."}
+            className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8"
+            segmentBy="words"
+            duration={0.7}
+            delay={70}
+            blur
+          />
           <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
             One unified platform, behavioral intelligence, and operational
             efficiency — helping agencies act earlier, work smarter, and

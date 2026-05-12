@@ -4,33 +4,54 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import type { IconType } from "react-icons";
+import {
+  IoBusinessOutline,
+  IoBusOutline,
+  IoCheckmarkDoneOutline,
+  IoFitnessOutline,
+  IoLocationOutline,
+  IoShieldCheckmarkOutline,
+} from "react-icons/io5";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const features = [
+type Feature = {
+  title: string;
+  body: string;
+  Icon: IconType;
+};
+
+const features: Feature[] = [
   {
     title: "Inside and Outside the Walls",
     body: "Built for both in-facility management and community supervision, reducing operational handoffs and device transitions.",
+    Icon: IoBusinessOutline,
   },
   {
     title: "Health and Wellness",
     body: "Monitor vital signs, including heart rate and blood oxygen levels, to provide earlier visibility into potential medical issues and support faster response.",
+    Icon: IoFitnessOutline,
   },
   {
     title: "Real-Time Location Tracking",
     body: "Track precise inmate location in real time across facility floors and zones using integrated WiFi and BLE detection technology.",
+    Icon: IoLocationOutline,
   },
   {
     title: "Count Automation",
     body: "Simplify count procedures with automated tracking designed to support faster, more efficient facility operations.",
+    Icon: IoCheckmarkDoneOutline,
   },
   {
     title: "Transport Mode",
     body: "Stay connected with secure tracking during inmate transport — continuous visibility into participant location and status from departure to arrival.",
+    Icon: IoBusOutline,
   },
   {
     title: "Tamper Detection",
     body: "Continuous proximity-based skin checks with biometric verification produce a defensible record the moment something is off.",
+    Icon: IoShieldCheckmarkOutline,
   },
 ];
 
@@ -143,11 +164,11 @@ const BandSupervisionSection = () => {
       featureRefs.current.forEach((el) => {
         if (!el) return;
 
-        const reveal = gsap.from(el, {
-          opacity: 0,
-          y: 50,
-          duration: 0.7,
-          ease: "power2.out",
+        const icon = el.querySelector<HTMLElement>(".feature-icon");
+        const title = el.querySelector<HTMLElement>(".feature-title");
+        const body = el.querySelector<HTMLElement>(".feature-body");
+
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: el,
             start: "top 85%",
@@ -155,18 +176,55 @@ const BandSupervisionSection = () => {
           },
         });
 
+        if (icon) {
+          tl.from(icon, {
+            opacity: 0,
+            scale: 0.6,
+            x: -30,
+            filter: "blur(6px)",
+            duration: 0.7,
+            ease: "back.out(1.6)",
+          });
+        }
+        if (title) {
+          tl.from(
+            title,
+            {
+              opacity: 0,
+              x: 50,
+              filter: "blur(8px)",
+              duration: 0.7,
+              ease: "power3.out",
+            },
+            "-=0.55",
+          );
+        }
+        if (body) {
+          tl.from(
+            body,
+            {
+              opacity: 0,
+              y: 20,
+              filter: "blur(6px)",
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "-=0.45",
+          );
+        }
+
         const activeST = ScrollTrigger.create({
           trigger: el,
-          start: "top 60%",
-          end: "bottom 40%",
+          start: "top 65%",
+          end: "bottom 35%",
           onToggle: ({ isActive }) => {
             el.classList.toggle("is-active", isActive);
           },
         });
 
         cleanups.push(() => {
-          reveal.scrollTrigger?.kill();
-          reveal.kill();
+          tl.scrollTrigger?.kill();
+          tl.kill();
           activeST.kill();
         });
       });
@@ -211,16 +269,16 @@ const BandSupervisionSection = () => {
         </p>
       </div>
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 px-6 md:px-16 pt-12 md:pt-20 pb-24 md:pb-32 max-w-7xl mx-auto">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-6 px-6 md:px-16 pt-12 md:pt-20 pb-24 md:pb-32 max-w-7xl mx-auto">
         {/* Sticky T-Band column */}
         <div className="relative">
           <div
             ref={stickyRef}
             className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center"
           >
-            <div className="relative w-full aspect-square max-w-[560px] mx-auto">
+            <div className="relative w-full aspect-square max-w-[780px] mx-auto -ml-2 lg:-ml-12 xl:-ml-20">
               <div
-                className="absolute inset-[10%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.32),rgba(248,122,19,0.08)_40%,transparent_70%)] blur-2xl pointer-events-none"
+                className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.42),rgba(248,122,19,0.1)_45%,transparent_72%)] blur-2xl pointer-events-none"
                 aria-hidden
               />
               <canvas
@@ -234,28 +292,36 @@ const BandSupervisionSection = () => {
 
         {/* Feature list */}
         <div className="flex flex-col gap-12 md:gap-20 lg:py-[28vh] lg:max-w-md xl:max-w-lg lg:ml-auto">
-          {features.map((f, i) => (
-            <div
-              key={f.title}
-              ref={(el) => {
-                featureRefs.current[i] = el;
-              }}
-              className="group flex flex-col gap-3 transition-all duration-500 lg:opacity-60 lg:[&.is-active]:opacity-100 lg:[&.is-active]:translate-x-0 lg:translate-x-2"
-            >
-              <div className="flex items-center gap-3">
-                <span
-                  className="h-px flex-shrink-0 bg-primary transition-all duration-500 w-6 lg:w-4 lg:group-[.is-active]:w-10"
-                  aria-hidden
-                />
-                <h3 className="text-xl sm:text-2xl text-primary leading-tight">
-                  {f.title}
-                </h3>
+          {features.map((f, i) => {
+            const Icon = f.Icon;
+            return (
+              <div
+                key={f.title}
+                ref={(el) => {
+                  featureRefs.current[i] = el;
+                }}
+                className="group flex gap-4 sm:gap-5 transition-all duration-500 lg:opacity-55 lg:translate-x-2 lg:[&.is-active]:opacity-100 lg:[&.is-active]:translate-x-0"
+              >
+                <div
+                  className="feature-icon flex-shrink-0 size-12 sm:size-14 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md flex items-center justify-center transition-all duration-500 group-[.is-active]:border-primary/50 group-[.is-active]:bg-primary/[0.12] group-[.is-active]:shadow-[0_0_30px_rgba(248,122,19,0.3)]"
+                  style={{
+                    boxShadow:
+                      "inset 0 0 1.5px rgba(255,255,255,0.6), inset 1px -2px 4px rgba(255,255,255,0.18)",
+                  }}
+                >
+                  <Icon className="size-5 sm:size-6 text-primary transition-transform duration-500 group-[.is-active]:scale-110" />
+                </div>
+                <div className="flex flex-col gap-2 min-w-0 flex-1">
+                  <h3 className="feature-title text-xl sm:text-2xl text-primary leading-tight">
+                    {f.title}
+                  </h3>
+                  <p className="feature-body text-sm sm:text-base text-white/70 leading-relaxed max-w-md">
+                    {f.body}
+                  </p>
+                </div>
               </div>
-              <p className="text-sm sm:text-base text-white/70 leading-relaxed max-w-md">
-                {f.body}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
