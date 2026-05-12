@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -34,6 +35,29 @@ const Footer = () => {
               Contact Sales
             </Link>
           </div>
+
+          <div className="flex flex-col gap-3 pt-2">
+            <span className="text-xs uppercase tracking-widest text-white/40">
+              Follow Us
+            </span>
+            <div className="flex items-center gap-3">
+              {SOCIALS.map((s) => {
+                const Icon = s.Icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    aria-label={s.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="size-10 rounded-full border border-white/15 bg-white/[0.03] hover:bg-primary/20 hover:border-primary/40 hover:text-primary text-white/75 flex items-center justify-center transition-colors"
+                  >
+                    <Icon className="size-4" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         <div className="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -56,8 +80,12 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="relative z-10 border-t border-border-gray px-6 md:px-16 py-6 flex flex-col md:flex-row justify-between gap-4 text-xs text-white/50">
-        <span>© {new Date().getFullYear()} Talitrix. All rights reserved.</span>
+      <div className="relative z-10 border-t border-border-gray px-6 md:px-16 py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs text-white/50">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+          <span>© {new Date().getFullYear()} Talitrix. All rights reserved.</span>
+          <span className="hidden sm:inline text-white/25">•</span>
+          <span>U.S. Patent No. 11,507,909</span>
+        </div>
         <div className="flex gap-4 sm:gap-6 flex-wrap">
           <Link href="/privacy" className="hover:text-white">
             Privacy
@@ -75,6 +103,24 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const SOCIALS = [
+  {
+    label: "Talitrix on LinkedIn",
+    href: "https://www.linkedin.com/company/talitrix",
+    Icon: FaLinkedinIn,
+  },
+  {
+    label: "Talitrix on Facebook",
+    href: "https://www.facebook.com/talitrix",
+    Icon: FaFacebookF,
+  },
+  {
+    label: "Talitrix on Instagram",
+    href: "https://www.instagram.com/talitrix",
+    Icon: FaInstagram,
+  },
+];
 
 const FooterLinks = [
   {
