@@ -183,11 +183,17 @@ const PlatformContinuitySection = ({ id }: Props) => {
       tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
       tl2.to(".pcs-card", { opacity: 0, duration: 0.3 }, 0.8);
 
-      // Reveal Intelligence with Purpose + paragraph at the end of the pin.
+      // Reveal Intelligence with Purpose + paragraph only AFTER the pin
+      // has finished and the T-Band has fully faded out. The placeholder
+      // sits outside platformRef in the JSX, so it cannot enter the
+      // viewport until the pin scroll is over — and we anchor the
+      // trigger at "top 90%" (placeholder just barely in view) instead
+      // of "-=200 bottom" so it never fires while the watch is still
+      // mid-fade behind the cards.
       const tl3 = gsap.timeline({
         scrollTrigger: {
           trigger: placeholder,
-          start: "-=200 bottom",
+          start: "top 90%",
           toggleActions: "play none none reverse",
         },
       });
@@ -202,6 +208,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
   );
 
   return (
+    <>
     <div
       ref={platformRef}
       id={id}
@@ -292,9 +299,6 @@ const PlatformContinuitySection = ({ id }: Props) => {
         </div>
       </div>
 
-      {/* Trigger marker for tl3 (mirrors homepage's #placeholder) */}
-      <div ref={placeholderRef} className="h-px w-full" aria-hidden />
-
       {/* Intelligence with Purpose — revealed at end of the pin */}
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center top-1/2 left-1/2 w-full max-w-[1500px] -translate-1/2 z-20">
         <h2
@@ -315,6 +319,13 @@ const PlatformContinuitySection = ({ id }: Props) => {
         </p>
       </div>
     </div>
+
+      {/* Trigger marker for tl3 — sits OUTSIDE platformRef so it does not get
+          pinned, and therefore can only enter the viewport after the
+          PlatformSection pin has finished and the T-Band has fully faded out.
+          Mirrors the homepage's #placeholder placement. */}
+      <div ref={placeholderRef} className="h-px w-full" aria-hidden />
+    </>
   );
 };
 
