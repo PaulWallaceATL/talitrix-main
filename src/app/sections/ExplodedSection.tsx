@@ -3,22 +3,31 @@ import InfoPaths from "./components/InfoPaths";
 const ExplodedSection = () => {
   return (
     <div
-      className="w-full h-screen py-20 px-16 relative overflow-hidden "
+      className="w-full h-screen py-12 sm:py-20 px-6 sm:px-12 lg:px-16 relative overflow-hidden"
       id="exploded"
     >
-      <div className="h-full flex flex-col justify-between ">
-        <p className="text-2xl max-w-100" id="explode-p">
+      <div className="h-full flex flex-col justify-between">
+        <p
+          className="text-base sm:text-xl lg:text-2xl max-w-xs sm:max-w-md lg:max-w-100 relative z-20"
+          id="explode-p"
+        >
           Dignity by Design. Proximity-based tamper detection with biometric
           verification.
         </p>
         <div className="flex justify-end">
-          <h2 className="text-6xl w-120 font-semibold" id="explode-h2">
+          <h2
+            className="text-3xl sm:text-5xl lg:text-6xl w-full max-w-xs sm:max-w-md lg:w-120 font-semibold leading-[1.15] text-right relative z-20"
+            id="explode-h2"
+          >
             Built for human experience.
           </h2>
         </div>
       </div>
 
-      <div className="w-200 absolute left-0 top-[-20%]" id="explode-bg">
+      <div
+        className="w-[140vw] sm:w-[160vw] lg:w-200 absolute left-0 top-[-20%]"
+        id="explode-bg"
+      >
         <SectionBg />
       </div>
     </div>

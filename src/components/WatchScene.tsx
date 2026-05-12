@@ -102,9 +102,27 @@ const WatchScene = () => {
     timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
     timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
 
+    // On mobile only: fade out the watch overlay during the second
+    // viewport of scroll so subsequent sections (ExplodedSection,
+    // PlatformSection) aren't covered by the fixed canvas.
+    let fadeTrigger: ScrollTrigger | undefined;
+    if (isMobile) {
+      const fade = gsap.to(watch, {
+        opacity: 0,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#watch-trigger",
+          start: "top+=80% top",
+          end: "top+=140% top",
+          scrub: true,
+          onLeaveBack: () => gsap.to(watch, { opacity: 1, duration: 0.2 }),
+        },
+      });
+      fadeTrigger = fade.scrollTrigger;
+    }
+
     return () => {
-      //   tl.kill();
-      //   ScrollTrigger.getAll().forEach((st) => st.kill());
+      fadeTrigger?.kill();
       window.removeEventListener("resize", resize);
     };
   });

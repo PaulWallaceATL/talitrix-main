@@ -104,9 +104,9 @@ const PlatformSection = () => {
   return (
     <div ref={platformRef}>
       <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-1/2 h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-1/2 h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
-            className="flex gap-6 w-250 h-500 origin-bottom rotate-55"
+            className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
             ref={screenRef}
           >
             <div className="w-full platform-cards">
@@ -166,9 +166,9 @@ const PlatformSection = () => {
             </div>
           </div>
         </div>
-        <div className="text-center px-16 py-24">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:py-24 relative z-20">
           <h2
-            className="text-6xl font-semibold leading-[1.15] pb-2"
+            className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}
           >
             One Platform. <br /> Complete{" "}
@@ -178,9 +178,9 @@ const PlatformSection = () => {
           </h2>
         </div>
       </div>
-      <div className="flex justify-between px-16 absolute items-center top-1/2 left-1/2 w-full max-w-[1500px] -translate-1/2">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center top-1/2 left-1/2 w-full max-w-[1500px] -translate-1/2 z-20">
         <h2
-          className="text-6xl font-semibold leading-[1.15] pb-2"
+          className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
           ref={h2bRef}
         >
           Intelligence <br /> with{" "}
@@ -188,7 +188,10 @@ const PlatformSection = () => {
             Purpose.
           </span>
         </h2>
-        <p className="w-80 text-xl" ref={pRef}>
+        <p
+          className="w-full max-w-md lg:w-80 text-base sm:text-lg lg:text-xl"
+          ref={pRef}
+        >
           Move from reactive supervision to proactive intervention by
           identifying potential issues before they become operational problems.
         </p>
