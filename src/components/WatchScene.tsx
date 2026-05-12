@@ -102,23 +102,22 @@ const WatchScene = () => {
     timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
     timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
 
-    // On mobile only: fade out the watch overlay during the second
-    // viewport of scroll so subsequent sections (ExplodedSection,
-    // PlatformSection) aren't covered by the fixed canvas.
+    // On mobile only: fade the watch overlay out as the next section
+    // (ExplodedSection / #exploded) scrolls into view, so the fixed
+    // canvas does not cover subsequent content.
     let fadeTrigger: ScrollTrigger | undefined;
     if (isMobile) {
       const fade = gsap.to(watch, {
         opacity: 0,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: "#watch-trigger",
-          start: "top+=80% top",
-          end: "top+=140% top",
+          trigger: "#exploded",
+          start: "top bottom",
+          end: "top center",
           scrub: true,
-          onLeaveBack: () => gsap.to(watch, { opacity: 1, duration: 0.2 }),
         },
       });
-      fadeTrigger = fade.scrollTrigger;
+      fadeTrigger = fade.scrollTrigger ?? undefined;
     }
 
     return () => {
