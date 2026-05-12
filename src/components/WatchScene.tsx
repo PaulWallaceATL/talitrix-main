@@ -37,11 +37,11 @@ const WatchScene = () => {
 
       const isMobile = cw < 768;
       // On mobile (portrait), the contain-scale leaves the watch tiny
-      // because viewport width is the limiting dimension. Scale up so
-      // the image (and the watch face within it) dominates the screen,
-      // letting the sides overflow naturally.
+      // because viewport width is the limiting dimension. Scale up
+      // ~1.7x so the watch face dominates the screen but the rotated
+      // band profile still fits within the viewport at most angles.
       const scale = isMobile
-        ? (cw / iw) * 2.4
+        ? (cw / iw) * 1.7
         : Math.min(cw / iw, ch / ih);
       const dw = iw * scale;
       const dh = ih * scale;
