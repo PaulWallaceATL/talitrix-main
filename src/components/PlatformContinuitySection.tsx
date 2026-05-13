@@ -173,9 +173,24 @@ const PlatformContinuitySection = ({ id }: Props) => {
         { x: "-22%", delay: 0.1, ease: "power4.inOut" },
         0,
       );
+      // Mobile only: shorten the watch fade so it fully completes
+      // within the pin (0.8 + 0.2 = 1.0). Desktop's 0.5 duration ends
+      // past the timeline (1.3) and leaves the watch ~60% visible at
+      // pin end — which on mobile, where w-[225vw] makes the wrapper
+      // huge, peeks back into view as the section scrolls past.
+      const isMobileWatch =
+        typeof window !== "undefined" &&
+        window.matchMedia("(max-width: 639px)").matches;
+      const watchFadeDuration = isMobileWatch ? 0.2 : 0.5;
+
       tl2.to(
         watchRef.current,
-        { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
+        {
+          x: "-50%",
+          opacity: 0,
+          duration: watchFadeDuration,
+          ease: "power1.in",
+        },
         0.8,
       );
       tl2.to(cardRef.current, { scale: 2.5, y: -50 }, 0.8);
