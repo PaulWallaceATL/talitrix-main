@@ -28,6 +28,7 @@ const Footer = () => {
               <div className="flex gap-4">
                 {SOCIALS.map((s) => {
                   const Icon = s.Icon;
+
                   return (
                     <a
                       key={s.label}
@@ -35,15 +36,45 @@ const Footer = () => {
                       aria-label={s.label}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex size-12 p-3 border border-white/20 rounded-md"
+                      className="
+          group relative flex size-12 overflow-hidden rounded-md border border-white/20 p-3
+          transition-all duration-300 ease-out
+          hover:scale-105 hover:border-white/40
+          active:scale-95
+        "
                       style={{
                         boxShadow:
-                          "inset -3px -1px 2.7px rgba(255, 255, 255, 0.24)",
+                          "inset -3px -1px 2.7px rgba(255, 255, 255, 0.24), 0 0 0 rgba(255,255,255,0)",
                         background:
                           "linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%)",
                       }}
                     >
-                      <Icon className="size-full" />
+                      <span
+                        className="
+            pointer-events-none absolute inset-0 -translate-x-full
+            bg-linear-to-r from-transparent via-white/30 to-transparent
+            transition-transform duration-700 ease-out
+            group-hover:translate-x-full
+          "
+                      />
+
+                      <span
+                        className="
+            pointer-events-none absolute inset-0 opacity-0
+            transition-opacity duration-300
+            group-hover:opacity-100
+          "
+                        style={{
+                          boxShadow: "0 8px 30px rgba(255,255,255,0.18)",
+                        }}
+                      />
+
+                      <Icon
+                        className="
+            relative z-10 size-full transition-transform duration-300 ease-out
+            group-hover:scale-110 group-hover:-rotate-6
+          "
+                      />
                     </a>
                   );
                 })}
