@@ -149,7 +149,7 @@ const WatchScene = () => {
 
   return (
     <div
-      className="w-full h-full fixed left-0 top-0 z-10 opacity-0"
+      className="w-full h-full fixed left-0 top-0 z-10 opacity-0 pointer-events-none"
       ref={watchRef}
       id="watchscene"
     >
