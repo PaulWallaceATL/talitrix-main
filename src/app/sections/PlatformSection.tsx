@@ -83,6 +83,7 @@ const PlatformSection = () => {
     tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
     tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
     tl2.to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8);
+    tl2.to(".platform-card-2", { x: -400, duration: 0.3 }, 0.8);
 
     tl2.from(
       h2b.lines,
@@ -111,7 +112,7 @@ const PlatformSection = () => {
             className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
             ref={screenRef}
           >
-            <div className="w-full platform-cards ">
+            <div className="w-full platform-cards platform-card-2 ">
               <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right -rotate-12 overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
@@ -123,7 +124,7 @@ const PlatformSection = () => {
                 />
               </div>
             </div>
-            <div className="w-full platform-cards">
+            <div className="w-full platform-cards platform-card-2">
               <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
@@ -176,7 +177,7 @@ const PlatformSection = () => {
             </div>
           </div>
         </div>
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-6 sm:pt-8 lg:pt-10 relative z-20">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:py-24 relative z-20">
           <h2
             className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}
