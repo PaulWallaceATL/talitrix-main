@@ -294,7 +294,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
           <canvas
             ref={watchCanvasRef}
             className="relative w-full h-full"
-            aria-label="Talitrix T-Band rotating as you scroll"
+            aria-label="Talitrix All in ONE Band rotating as you scroll"
           />
         </div>
 

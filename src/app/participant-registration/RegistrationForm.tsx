@@ -56,7 +56,7 @@ export default function RegistrationForm() {
         </span>
         <h3 className="text-2xl">You're set up. Step 2 unlocks next.</h3>
         <p className="text-white/60 max-w-md mx-auto">
-          Check your email for instructions on pairing your T-Band and
+          Check your email for instructions on pairing your All in ONE Band and
           installing the Talitrix Participant App.
         </p>
       </div>
@@ -93,7 +93,7 @@ export default function RegistrationForm() {
           hint="Provided by your supervising agency."
         />
         <TextField
-          label="T-Band Serial Number"
+          label="All in ONE Band Serial Number"
           name="serial"
           hint="Found on the inside of the band, near the lock."
         />

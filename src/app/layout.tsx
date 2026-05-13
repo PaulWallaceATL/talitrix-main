@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     template: "%s | Talitrix",
   },
   description:
-    "Talitrix builds the T-Band — the first independent wrist-worn GPS supervision device — and the Talitrix ONE platform for sheriffs, departments of corrections, courts, and pretrial supervision. Real-time tracking, biometric verification, tamper detection.",
+    "Talitrix builds the All in ONE Band — the first independent wrist-worn GPS supervision device — and the Talitrix ONE platform for sheriffs, departments of corrections, courts, and pretrial supervision. Real-time tracking, biometric verification, tamper detection.",
   applicationName: SITE_NAME,
   keywords: [
     "electronic monitoring",
     "wrist-worn GPS",
-    "T-Band",
+    "All in ONE Band",
     "Talitrix ONE",
     "pretrial supervision",
     "probation technology",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title:
       "Talitrix — Wrist-worn GPS Supervision & the Talitrix ONE Platform",
     description:
-      "The new standard in monitoring and supervision technology. T-Band hardware. Talitrix ONE software. Built for sheriffs, DOC, courts, pretrial, and probation.",
+      "The new standard in monitoring and supervision technology. All in ONE Band hardware. Talitrix ONE software. Built for sheriffs, DOC, courts, pretrial, and probation.",
     locale: "en_US",
     images: [
       {
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Talitrix — Wrist-worn GPS Supervision",
     description:
-      "T-Band hardware + Talitrix ONE software. Built for sheriffs, DOC, courts, pretrial, and probation.",
+      "All in ONE Band hardware + Talitrix ONE software. Built for sheriffs, DOC, courts, pretrial, and probation.",
     images: [`${SITE}/og-image.png`],
   },
   robots: {

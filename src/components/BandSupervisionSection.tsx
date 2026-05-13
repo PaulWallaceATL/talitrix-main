@@ -254,7 +254,7 @@ const BandSupervisionSection = () => {
         className="relative z-10 px-6 md:px-16 pt-20 md:pt-32 text-center max-w-5xl mx-auto"
       >
         <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-          Built with the T-Band
+          Built with the All in ONE Band
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.05]">
           One Band.{" "}
@@ -284,7 +284,7 @@ const BandSupervisionSection = () => {
               <canvas
                 ref={canvasRef}
                 className="relative w-full h-full"
-                aria-label="T-Band rendering rotating as you scroll"
+                aria-label="All in ONE Band rendering rotating as you scroll"
               />
             </div>
           </div>

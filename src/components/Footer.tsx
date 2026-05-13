@@ -121,7 +121,7 @@ const FooterLinks = [
     title: "Platform",
     links: [
       { label: "Talitrix ONE", href: "/talitrix-one" },
-      { label: "T-Band", href: "/talitrix-one/t-band" },
+      { label: "All in ONE Band", href: "/talitrix-one/t-band" },
       { label: "ONE Intake", href: "/talitrix-one/intake" },
       { label: "ONE Jail Management", href: "/talitrix-one/jail-management" },
       {

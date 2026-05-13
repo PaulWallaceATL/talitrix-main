@@ -85,7 +85,7 @@ export default function TalitrixOnePage() {
           </div>
           <div className="lg:col-span-7 flex">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl self-end">
-              The T-Band sits at the center of a continuous platform — feeding
+              The All in ONE Band sits at the center of a continuous platform — feeding
               live data and behavioral signals to every workflow across the
               justice lifecycle, from intake to community supervision.
             </p>

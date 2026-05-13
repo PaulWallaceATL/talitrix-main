@@ -35,7 +35,7 @@ const timeline = [
   {
     year: "Today",
     title: "Talitrix",
-    body: "We brought the technology to the wrist — and back to its original purpose. The T-Band is the industry's first independent wrist-worn GPS monitoring device, paired with a complete unified ecosystem.",
+    body: "We brought the technology to the wrist — and back to its original purpose. The All in ONE Band is the industry's first independent wrist-worn GPS monitoring device, paired with a complete unified ecosystem.",
   },
 ];
 
@@ -89,7 +89,7 @@ export default function AboutPage() {
       <VideoBlock
         eyebrow="Watch"
         headline="The standard, in motion."
-        body="A walkthrough of the Talitrix ONE platform — the T-Band hardware, the connected dashboards, and the Talitrix Score that ties it all together."
+        body="A walkthrough of the Talitrix ONE platform — the All in ONE Band hardware, the connected dashboards, and the Talitrix Score that ties it all together."
       />
 
       <section
@@ -138,9 +138,9 @@ export default function AboutPage() {
             <p>
               Talitrix was built to change that. We brought the technology to
               the wrist — and back to its original purpose. We built the
-              T-Band, the industry's first independent wrist-worn GPS
-              monitoring device, and developed a complete ecosystem around
-              it.
+              All in ONE Band, the industry's first independent wrist-worn
+              GPS monitoring device, and developed a complete ecosystem
+              around it.
             </p>
           </BlurHighlight>
         </div>

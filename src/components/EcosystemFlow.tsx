@@ -40,7 +40,7 @@ export default function EcosystemFlow({
             <div className="absolute -inset-6 pointer-events-none">
               <Image
                 src={watchFrame}
-                alt="Talitrix T-Band"
+                alt="Talitrix All in ONE Band"
                 fill
                 priority
                 sizes="280px"
@@ -98,7 +98,7 @@ export default function EcosystemFlow({
             <div className="absolute -inset-12 sm:-inset-16 md:-inset-20 pointer-events-none">
               <Image
                 src={watchFrame}
-                alt="Talitrix T-Band"
+                alt="Talitrix All in ONE Band"
                 fill
                 priority
                 sizes="(max-width: 768px) 320px, 420px"

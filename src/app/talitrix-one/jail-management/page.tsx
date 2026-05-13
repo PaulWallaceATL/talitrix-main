@@ -10,7 +10,7 @@ import BandSupervisionSection from "@/components/BandSupervisionSection";
 export const metadata: Metadata = {
   title: "ONE Jail Management System (JMS) | Talitrix ONE",
   description:
-    "ONE Jail Management System brings the full custody lifecycle into one connected system — visibility into housing, movement, wellness, and operations, especially when paired with the T-Band.",
+    "ONE Jail Management System brings the full custody lifecycle into one connected system — visibility into housing, movement, wellness, and operations, especially when paired with the All in ONE Band.",
 };
 
 const phases = [
@@ -20,11 +20,11 @@ const phases = [
   },
   {
     phase: "Movement Visibility",
-    body: "When paired with the T-Band, JMS extends visibility into participant movement across the facility.",
+    body: "When paired with the All in ONE Band, JMS extends visibility into participant movement across the facility.",
   },
   {
     phase: "Wellness Telemetry",
-    body: "Heart rate and SpO₂ telemetry from the T-Band surfaces wellness signals that staff can act on.",
+    body: "Heart rate and SpO₂ telemetry from the All in ONE Band surfaces wellness signals that staff can act on.",
   },
   {
     phase: "Operational Decisions",
@@ -47,7 +47,7 @@ const features = [
   },
   {
     title: "Wellness Signals",
-    body: "Biometric telemetry from T-Band turns daily wellness checks into a continuous, defensible record.",
+    body: "Biometric telemetry from the All in ONE Band turns daily wellness checks into a continuous, defensible record.",
   },
   {
     title: "Audit Trails by Default",
@@ -81,7 +81,7 @@ export default function JailManagementPage() {
             ONE Jail Management System (JMS) brings the full custody lifecycle
             into one connected system — giving facility staff the visibility
             to manage daily operations with greater continuity, accountability,
-            and efficiency. When paired with the Talitrix T-Band, JMS extends
+            and efficiency. When paired with the Talitrix All in ONE Band, JMS extends
             that visibility into participant movement, wellness, and facility
             activity, creating a more complete picture of what&apos;s happening
             inside the walls to support safer facilities and stronger
@@ -156,7 +156,7 @@ export default function JailManagementPage() {
           <div className="lg:col-span-7">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               JMS replaces the patchwork of point tools with a single connected
-              system — and gets stronger when paired with the Talitrix T-Band.
+              system — and gets stronger when paired with the Talitrix All in ONE Band.
             </p>
           </div>
         </div>
@@ -191,7 +191,7 @@ export default function JailManagementPage() {
             Safer facilities. Stronger decisions.
           </h2>
           <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
-            See how ONE JMS extends with the T-Band and connects to Pre-Trial
+            See how ONE JMS extends with the All in ONE Band and connects to Pre-Trial
             & Probation across the lifecycle.
           </p>
           <div className="flex flex-wrap gap-4">

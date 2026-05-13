@@ -107,7 +107,7 @@ const CONFIG: Record<SubmissionType, TypeConfig> = {
         label: "Supervision",
         rows: [
           { label: "Participant ID", key: "participant_id", mono: true },
-          { label: "T-Band Serial", key: "serial_number", mono: true },
+          { label: "All in ONE Band Serial", key: "serial_number", mono: true },
           { label: "Agency", key: "agency" },
           { label: "Supervisor", key: "supervisor" },
         ],

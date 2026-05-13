@@ -20,7 +20,7 @@ const agencyTypes = [
 ];
 
 const interestAreas = [
-  { value: "tband", label: "T-Band Hardware" },
+  { value: "tband", label: "All in ONE Band Hardware" },
   { value: "intake", label: "ONE Intake" },
   { value: "jms", label: "ONE Jail Management" },
   { value: "probation", label: "ONE Pre-Trial & Probation" },
