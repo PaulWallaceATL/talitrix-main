@@ -240,10 +240,10 @@ const PlatformContinuitySection = ({ id }: Props) => {
             <div className="w-full relative">
               <div className="origin-bottom-left rotate-12 relative">
                 <div className="relative" ref={cardRef}>
-                  <div className="top-[36%] absolute w-full flex flex-col items-center gap-2">
-                    <h3 className="tracking-widest text-center">TALITRIX</h3>
-                    <div className="size-30 relative">
-                      <div className="top-1/2 left-1/2 -translate-1/2 text-primary text-4xl absolute">
+                  <div className="top-[36%] absolute w-full flex flex-col items-center gap-1 sm:gap-2">
+                    <h3 className="tracking-widest text-center text-[10px] sm:text-sm lg:text-base">TALITRIX</h3>
+                    <div className="size-14 sm:size-20 lg:size-30 relative">
+                      <div className="top-1/2 left-1/2 -translate-1/2 text-primary text-lg sm:text-2xl lg:text-4xl absolute">
                         63
                       </div>
                       <ScoreRing />
