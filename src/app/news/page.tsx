@@ -6,41 +6,20 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
 import FrameBorder from "@/components/react-bits/frame-border";
 import { supabaseAdmin, type NewsArticle } from "@/lib/supabase";
-import { getSiteUrl } from "@/lib/seo";
+import { getSiteUrl, pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
 const SITE = getSiteUrl();
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/news",
   title: "News & Field Reports | Talitrix",
   description:
     "Announcements, field reports, and engineering deep-dives from Talitrix — the team setting the new standard in wrist-worn GPS supervision and the Talitrix ONE platform.",
-  alternates: { canonical: `${SITE}/news` },
-  openGraph: {
-    type: "website",
-    url: `${SITE}/news`,
-    siteName: "Talitrix",
-    title: "News & Field Reports | Talitrix",
-    description:
-      "Announcements, field reports, and engineering deep-dives from Talitrix — wrist-worn GPS supervision and the Talitrix ONE platform.",
-    images: [
-      {
-        url: `${SITE}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "Talitrix",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "News & Field Reports | Talitrix",
-    description:
-      "Announcements, field reports, and engineering deep-dives from Talitrix.",
-    images: [`${SITE}/og-image.png`],
-  },
-};
+  socialDescription:
+    "Announcements, field reports, and engineering deep-dives from Talitrix.",
+});
 
 function fmt(date: string | null | undefined): string {
   if (!date) return "";

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
@@ -6,11 +7,15 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import { Globe } from "@/components/react-bits/globe";
 import FeaturesGrid, { type FeatureGridItem } from "@/components/FeaturesGrid";
 
-export const metadata: Metadata = {
-  title: "For Participants | Talitrix Solutions",
+export const metadata: Metadata = pageMetadata({
+  path: "/solutions/participants",
+  title:
+    "For Participants | Talitrix Solutions",
   description:
-    "Talitrix for Participants — a wrist-worn All-In-One Band designed for dignity and a Participant App for proactive support, clear communication, and a pathway to success.",
-};
+    "Talitrix for Participants — designed around dignity, privacy, and proactive support. The All-In-One Band built to be worn without broadcasting justice involvement, plus the Talitrix Participant App for clarity and a pathway to success.",
+  socialDescription:
+    "Designed around dignity, privacy, and proactive support — built to help participants succeed in rebuilding their lives.",
+});
 
 const features: FeatureGridItem[] = [
   {

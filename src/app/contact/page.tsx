@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
@@ -10,11 +11,13 @@ import {
   blackSky,
 } from "@/components/AuroraPresets";
 
-export const metadata: Metadata = {
-  title: "Contact | Talitrix",
+export const metadata: Metadata = pageMetadata({
+  path: "/contact",
+  title:
+    "Contact | Talitrix",
   description:
     "Talk with the Talitrix team. Briefings, partnerships, support, press, and general inquiries — one place to reach the right team.",
-};
+});
 
 const VALID_TYPES = new Set<OutreachType>(
   OUTREACH_TYPES.map((t) => t.value),

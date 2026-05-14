@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
@@ -6,11 +7,13 @@ import AuroraBlur from "@/components/react-bits/aurora-blur";
 import RegistrationForm from "./RegistrationForm";
 import { warmAurora, warmSky } from "@/components/AuroraPresets";
 
-export const metadata: Metadata = {
-  title: "Participant Registration | Talitrix",
+export const metadata: Metadata = pageMetadata({
+  path: "/participant-registration",
+  title:
+    "Participant Registration | Talitrix",
   description:
     "Register your Talitrix participant account. Activate your All-In-One Band, set up the Talitrix Participant App, and get the support you need to succeed.",
-};
+});
 
 const steps = [
   {

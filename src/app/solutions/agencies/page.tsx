@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
@@ -7,11 +8,15 @@ import { Globe } from "@/components/react-bits/globe";
 import AgencyTypesScroller from "@/components/AgencyTypesScroller";
 import FeaturesGrid, { type FeatureGridItem } from "@/components/FeaturesGrid";
 
-export const metadata: Metadata = {
-  title: "For Agencies | Talitrix Solutions",
+export const metadata: Metadata = pageMetadata({
+  path: "/solutions/agencies",
+  title:
+    "For Agencies | Talitrix Solutions",
   description:
-    "Talitrix ONE for justice agencies — sheriffs, county leadership, pretrial administration, courts, judges, and district attorneys. One unified platform for operational visibility, defensible records, and accountability across the full justice lifecycle.",
-};
+    "Talitrix ONE for sheriffs, county leadership, pretrial and probation administration, courts, judges, and district attorneys — operational visibility, defensible records, and accountability across the full justice lifecycle.",
+  socialDescription:
+    "One platform across sheriffs, county leadership, pretrial, probation, courts, judges, and district attorneys.",
+});
 
 const audienceTags = [
   "Sheriffs",

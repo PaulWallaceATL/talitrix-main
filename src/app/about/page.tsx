@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
@@ -10,11 +11,15 @@ import SynapticShift from "@/components/react-bits/synaptic-shift";
 import VideoBlock from "@/components/VideoBlock";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
-export const metadata: Metadata = {
-  title: "About | Talitrix",
+export const metadata: Metadata = pageMetadata({
+  path: "/about",
+  title:
+    "About | Talitrix",
   description:
-    "Talitrix is redefining electronic monitoring — technology designed around people, dignity, and outcomes. Learn how we set the global standard in modern supervision.",
-};
+    "Talitrix is redefining electronic monitoring — technology designed around people, dignity, and outcomes. Learn how we set the new standard for modern supervision.",
+  socialDescription:
+    "Modern technology, human-centered design — redefining electronic monitoring around people, dignity, and outcomes.",
+});
 
 export default function AboutPage() {
   return (

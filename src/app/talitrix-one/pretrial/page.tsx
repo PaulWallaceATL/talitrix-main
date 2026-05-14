@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
@@ -10,11 +11,15 @@ import FeaturesShowcase, {
 } from "@/components/FeaturesShowcase";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
-export const metadata: Metadata = {
-  title: "ONE Pre-Trial | Talitrix ONE",
+export const metadata: Metadata = pageMetadata({
+  path: "/talitrix-one/pretrial",
+  title:
+    "ONE Pre-Trial | Talitrix ONE",
   description:
-    "ONE Pre-Trial brings every pre-trial participant — monitored or not — into one connected system. Risk frameworks, conditions tracking, court-ready documentation, and defensible records in a single platform.",
-};
+    "ONE Pre-Trial brings every pre-trial participant — monitored or not — into one connected system. Risk assessment, conditions tracking, court-ready documentation, and continuous risk signal in a single platform.",
+  socialDescription:
+    "Risk assessment, conditions tracking, court-ready documentation, and continuous risk signal in one platform.",
+});
 
 const phases: FeatureShowcaseItem[] = [
   {

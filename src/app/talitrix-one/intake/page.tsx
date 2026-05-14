@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
@@ -6,11 +7,15 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import SynapticShift from "@/components/react-bits/synaptic-shift";
 import CapabilitiesScroller from "@/components/CapabilitiesScroller";
 
-export const metadata: Metadata = {
-  title: "ONE Intake | Talitrix ONE",
+export const metadata: Metadata = pageMetadata({
+  path: "/talitrix-one/intake",
+  title:
+    "ONE Intake | Talitrix ONE",
   description:
-    "ONE Intake centralizes booking and intake processing — establishing identity, classification, and assessments captured once and carried forward across the system.",
-};
+    "ONE Intake centralizes booking and intake — establishing identity, classification, and assessments captured once and carried forward across the Talitrix ONE platform.",
+  socialDescription:
+    "Centralized booking, identity, classification, and assessments — captured once and carried forward across the platform.",
+});
 
 const phases = [
   {

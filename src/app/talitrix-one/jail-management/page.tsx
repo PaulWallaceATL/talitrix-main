@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
@@ -10,11 +11,15 @@ import FeaturesShowcase, {
 } from "@/components/FeaturesShowcase";
 import BandSupervisionSection from "@/components/BandSupervisionSection";
 
-export const metadata: Metadata = {
-  title: "ONE Jail Management System (JMS) | Talitrix ONE",
+export const metadata: Metadata = pageMetadata({
+  path: "/talitrix-one/jail-management",
+  title:
+    "ONE Jail Management System (JMS) | Talitrix ONE",
   description:
-    "ONE Jail Management System brings the full custody lifecycle into one connected system — visibility into housing, movement, wellness, and operations, especially when paired with the All-In-One Band.",
-};
+    "ONE Jail Management System brings the full custody lifecycle into one connected system — custody lifecycle, real-time movement visibility, wellness telemetry, and operational decisions, especially when paired with the All-In-One Band.",
+  socialDescription:
+    "Custody lifecycle, movement visibility, wellness telemetry, and operational decisions on one connected system.",
+});
 
 const phases: FeatureShowcaseItem[] = [
   {

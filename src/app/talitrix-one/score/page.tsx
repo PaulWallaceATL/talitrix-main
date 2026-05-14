@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
@@ -10,11 +11,15 @@ import FeaturesShowcase, {
   type FeatureShowcaseItem,
 } from "@/components/FeaturesShowcase";
 
-export const metadata: Metadata = {
-  title: "The Talitrix Score | Talitrix ONE",
+export const metadata: Metadata = pageMetadata({
+  path: "/talitrix-one/score",
+  title:
+    "The Talitrix Score | Talitrix ONE",
   description:
-    "The Talitrix Score transforms behavioral data into measurable intelligence — earlier risk visibility, stronger context for intervention, and a defensible record over time.",
-};
+    "The Talitrix Score turns behavioral data into measurable intelligence — aggregating signals, scoring transparently, surfacing risk earlier, and producing a defensible record backed by chain-of-custody and expert-witness support.",
+  socialDescription:
+    "Aggregate, score, surface, defend — behavioral data turned into a transparent, defensible record.",
+});
 
 const scoreData = [
   { value: 32, label: "Day 1" },

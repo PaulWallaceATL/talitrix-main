@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
@@ -7,11 +8,17 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import BandFeaturesScroller from "@/components/BandFeaturesScroller";
 import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 
-export const metadata: Metadata = {
-  title: "All-In-One Band | Talitrix ONE",
+export const metadata: Metadata = pageMetadata({
+  path: "/talitrix-one/t-band",
+  title:
+    "All-In-One Band — Wrist-worn GPS for Modern Supervision | Talitrix ONE",
   description:
-    "The All-In-One Band is the first independent wrist-worn GPS monitoring device — 3-Carrier SIM, biometric sensors, proximity-based skin detection, and tamper-resistant by design.",
-};
+    "The All-In-One Band is the first independent wrist-worn GPS supervision device — 3-Carrier SIM, biometric verification, heart rate and SpO₂ telemetry, 2-way communication, and proximity-based tamper detection.",
+  socialTitle:
+    "All-In-One Band | Talitrix ONE",
+  socialDescription:
+    "Wrist-worn GPS supervision with 3-Carrier SIM, biometrics, wellness telemetry, 2-way comms, and proximity tamper detection.",
+});
 
 export default function TBandPage() {
   return (

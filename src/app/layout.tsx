@@ -3,18 +3,25 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import LenisProvider from "@/components/LenisProvider";
 import ScrollResetOnLoad from "@/components/ScrollResetOnLoad";
-import { ORGANIZATION_JSON_LD, SITE_NAME, getSiteUrl } from "@/lib/seo";
+import {
+  ORGANIZATION_JSON_LD,
+  OG_IMAGE_ALT,
+  OG_IMAGE_PATH,
+  SITE_NAME,
+  getSiteUrl,
+} from "@/lib/seo";
 
 const SITE = getSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Talitrix — Wrist-worn GPS Supervision & the Talitrix ONE Platform",
+    default:
+      "Talitrix — The Standard for Modern Supervision",
     template: "%s | Talitrix",
   },
   description:
-    "Talitrix builds the All-In-One Band — the first independent wrist-worn GPS supervision device — and the Talitrix ONE platform for sheriffs, departments of corrections, courts, and pretrial supervision. Real-time tracking, biometric verification, tamper detection.",
+    "Talitrix builds the All-In-One Band — the first independent wrist-worn GPS supervision device — and the Talitrix ONE platform for sheriffs, departments of corrections, courts, pretrial, and probation. Real-time visibility, biometric verification, tamper detection.",
   applicationName: SITE_NAME,
   keywords: [
     "electronic monitoring",
@@ -47,26 +54,25 @@ export const metadata: Metadata = {
     type: "website",
     siteName: SITE_NAME,
     url: SITE,
-    title:
-      "Talitrix — Wrist-worn GPS Supervision & the Talitrix ONE Platform",
+    title: "Talitrix — The Standard for Modern Supervision",
     description:
-      "The new standard in monitoring and supervision technology. All-In-One Band hardware. Talitrix ONE software. Built for sheriffs, DOC, courts, pretrial, and probation.",
+      "All-In-One Band hardware. Talitrix ONE software. One unified platform for sheriffs, DOC, courts, pretrial, and probation — built for the full justice lifecycle, Inside and Outside the Walls.",
     locale: "en_US",
     images: [
       {
-        url: `${SITE}/og-image.png`,
+        url: `${SITE}${OG_IMAGE_PATH}`,
         width: 1200,
         height: 630,
-        alt: "Talitrix — the new standard in monitoring and supervision technology",
+        alt: OG_IMAGE_ALT,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Talitrix — Wrist-worn GPS Supervision",
+    title: "Talitrix — The Standard for Modern Supervision",
     description:
-      "All-In-One Band hardware + Talitrix ONE software. Built for sheriffs, DOC, courts, pretrial, and probation.",
-    images: [`${SITE}/og-image.png`],
+      "All-In-One Band hardware + Talitrix ONE software. Built for the full justice lifecycle, Inside and Outside the Walls.",
+    images: [`${SITE}${OG_IMAGE_PATH}`],
   },
   robots: {
     index: true,

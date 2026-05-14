@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
@@ -8,11 +9,15 @@ import PlatformModulesScroller from "@/components/PlatformModulesScroller";
 import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
-export const metadata: Metadata = {
-  title: "Talitrix ONE | The Unified Ecosystem",
+export const metadata: Metadata = pageMetadata({
+  path: "/talitrix-one",
+  title:
+    "Talitrix ONE — One Platform. End-to-End.",
   description:
-    "Talitrix ONE is a closed-loop ecosystem connecting hardware, software, and behavioral intelligence into one continuous platform — built for the full justice lifecycle.",
-};
+    "Talitrix ONE brings the All-In-One Band and Inside and Outside the Walls supervision together in one cohesive system built for the full justice lifecycle — giving agencies the flexibility to support different operational needs through modular technology.",
+  socialDescription:
+    "Hardware, software, and behavioral intelligence in one platform — built for the full justice lifecycle, Inside and Outside the Walls.",
+});
 
 export default function TalitrixOnePage() {
   return (

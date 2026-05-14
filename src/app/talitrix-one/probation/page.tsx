@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
@@ -10,11 +11,15 @@ import FeaturesShowcase, {
 } from "@/components/FeaturesShowcase";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
-export const metadata: Metadata = {
-  title: "ONE Probation | Talitrix ONE",
+export const metadata: Metadata = pageMetadata({
+  path: "/talitrix-one/probation",
+  title:
+    "ONE Probation | Talitrix ONE",
   description:
-    "ONE Probation brings every probation participant — monitored or not — into one connected system. Caseload management, long-term tracking, risk signals, and defensible records in a single platform.",
-};
+    "ONE Probation brings every probation participant — monitored or not — into one connected system. Caseload management, long-term tracking, continuous risk signals, and earlier intervention in a single platform.",
+  socialDescription:
+    "Caseload management, long-term tracking, continuous risk signals, and earlier intervention in one platform.",
+});
 
 const phases: FeatureShowcaseItem[] = [
   {
