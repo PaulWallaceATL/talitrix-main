@@ -171,7 +171,7 @@ export default function ProbationPage() {
               Built for the realities of caseloads.
             </h2>
           </div>
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 lg:pt-10">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               Move from reactive paperwork to proactive case management —
               with the same record, the same tooling, and the same

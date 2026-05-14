@@ -173,7 +173,7 @@ export default function JailManagementPage() {
               The full custody lifecycle on one platform.
             </h2>
           </div>
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 lg:pt-10">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               JMS replaces the patchwork of point tools with a single connected
               system — and gets stronger when paired with the Talitrix All-In-One Band.

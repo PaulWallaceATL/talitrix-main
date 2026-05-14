@@ -94,7 +94,7 @@ export default function TalitrixOnePage() {
               <span className="text-white/60">Every module connected.</span>
             </h2>
           </div>
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 lg:pt-10">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               Modular by design. Continuous by intent. Deploy what your agency
               needs today and extend across the lifecycle as your operation

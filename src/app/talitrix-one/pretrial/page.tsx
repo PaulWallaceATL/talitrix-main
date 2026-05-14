@@ -171,7 +171,7 @@ export default function PretrialPage() {
               Built for the realities of pre-trial.
             </h2>
           </div>
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 lg:pt-10">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               From risk assessment to court appearance — same record, same
               tooling, same accountability across every pre-trial participant.

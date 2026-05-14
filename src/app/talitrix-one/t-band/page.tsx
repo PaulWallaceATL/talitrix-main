@@ -89,7 +89,7 @@ export default function TBandPage() {
               High confidence. Quiet hardware.
             </h2>
           </div>
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 lg:pt-10">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               The All-In-One Band is engineered so that supervision teams get the signal
               they need — and participants get the dignity they deserve.

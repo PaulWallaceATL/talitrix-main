@@ -144,7 +144,7 @@ export default function IntakePage() {
               The first record sets the tone for every record that follows.
             </h2>
           </div>
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 lg:pt-10">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               Get intake right and every downstream system inherits accurate,
               defensible, and complete data — without the duplication that
