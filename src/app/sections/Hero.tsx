@@ -16,7 +16,7 @@ const Hero = () => {
         sizes="100vw"
         className="w-full h-full absolute top-0 left-0 object-cover"
       />
-      <div className="px-6 text-center max-h-190 pt-20 sm:pt-24 pb-12 sm:pb-16 mt-16 sm:mt-24 flex flex-col gap-16 sm:gap-24 lg:gap-36 justify-between h-full items-center w-full">
+      <div className="px-6 text-center max-h-190 pt-4 sm:pt-6 pb-12 sm:pb-16 mt-16 sm:mt-24 flex flex-col gap-16 sm:gap-24 lg:gap-36 justify-between h-full items-center w-full">
         <div id="title-h1" className="relative z-1">
           <StaggeredText
             as="h1"
