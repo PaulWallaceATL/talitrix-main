@@ -30,20 +30,6 @@ export default function TBandPage() {
           />
         }
         subtitle="The first independent wrist-worn GPS monitoring device in the industry."
-        body={
-          <p>
-            The All-In-One Band is designed to operate inside and outside the walls,
-            eliminating the need for multiple vendors or device types. It
-            features 3-Carrier SIM connectivity for redundancy alongside
-            biometric sensors that monitor heart rate and blood oxygen (SpO₂).
-            For community supervision, it utilizes proximity-based skin
-            detection — checking for contact approximately 20 times per second
-            — triggering biometric verification only if a disruption is
-            detected. The outcome is high-confidence tamper detection with
-            optimized performance, battery life, and reliability — all while
-            treating the person wearing it with dignity.
-          </p>
-        }
         background={
           <div className="absolute inset-0 overflow-hidden bg-black">
             {/* Soft orange aurora behind the band, weighted to the
@@ -62,7 +48,7 @@ export default function TBandPage() {
                 hero so it doesn't overlap the headline / body / CTAs.
                 Hidden below lg so the hero text gets full width on
                 tablet and mobile. */}
-            <div className="hidden lg:block absolute top-1/2 right-[-15%] xl:right-[-8%] -translate-y-1/2 w-[1100px] xl:w-[1300px] aspect-square pointer-events-none">
+            <div className="hidden lg:block absolute top-1/2 right-[-30%] xl:right-[-20%] -translate-y-1/2 w-[1100px] xl:w-[1300px] aspect-square pointer-events-none">
               <Image
                 src="/watch-sequence/0188.webp"
                 alt="Talitrix All-In-One Band, 3/4 angled view"
