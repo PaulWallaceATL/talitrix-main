@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InfoPaths from "@/app/sections/components/InfoPaths";
+import LeftInfoPath from "@/app/sections/components/LeftInfoPath";
 import { motion } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -164,6 +165,7 @@ const WatchScene = () => {
           className="absolute z-10 inset-0 w-full h-full"
         />
         <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
+        <LeftInfoPath className="hidden lg:block absolute bottom-[15%] left-[15%] z-20 w-100 h-50 text-xl pointer-events-none" />
         <WatchGlow className="absolute w-[420px] sm:w-[600px] md:w-[800px] h-auto left-1/2 top-1/2 -translate-1/2" />
       </motion.div>
     </div>
