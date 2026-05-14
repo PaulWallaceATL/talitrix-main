@@ -211,8 +211,11 @@ const NavBar = () => {
     if (typeof window === "undefined") return;
     lastScrollYRef.current = window.scrollY;
 
-    const SHOW_AT_TOP = 80;
-    const DELTA_THRESHOLD = 6;
+    // Tight thresholds: hide almost immediately on any downward
+    // scroll, only force-show in the very top 10 px so the navbar
+    // doesn't pop in when the user is bouncing at the page top.
+    const SHOW_AT_TOP = 10;
+    const DELTA_THRESHOLD = 1;
 
     const onScroll = () => {
       if (tickingRef.current) return;
@@ -285,9 +288,9 @@ const NavBar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 h-16 lg:h-24 left-0 w-full z-40 border-b border-border-gray flex items-stretch transition-transform duration-300 will-change-transform ${
+        className={`fixed top-0 h-16 lg:h-24 left-0 w-full z-40 border-b border-border-gray flex items-stretch backdrop-blur-md bg-black/40 transition-transform duration-300 will-change-transform ${
           headerHidden ? "-translate-y-full" : "translate-y-0"
-        } ${isHome ? "" : "backdrop-blur-md bg-black/40"}`}
+        }`}
       >
         <div className="flex items-center px-6 lg:px-10 xl:px-16 border-border-gray lg:border-r shrink-0">
           <Link href={"/"} onClick={() => setDrawerOpen(false)}>
