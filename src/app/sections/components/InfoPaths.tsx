@@ -193,7 +193,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
       {/* Middle-right callout: copy of the Tamper Proof bent line, anchored
           one step higher so it sits parallel-above the Tamper Proof bend
           (no crossover) and starts at the same right-of-band x position. */}
-      <div className="w-full absolute bottom-[78%] left-[40%]">
+      <div className="w-full absolute bottom-[78%] left-[55%]">
         <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
           <div
             className="size-14 p-2 bg-white/15  rounded-lg"
