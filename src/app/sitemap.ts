@@ -27,7 +27,12 @@ const STATIC_ROUTES: Array<{
     priority: 0.8,
   },
   {
-    path: "/talitrix-one/pretrial-probation",
+    path: "/talitrix-one/pretrial",
+    changeFrequency: "monthly",
+    priority: 0.8,
+  },
+  {
+    path: "/talitrix-one/probation",
     changeFrequency: "monthly",
     priority: 0.8,
   },

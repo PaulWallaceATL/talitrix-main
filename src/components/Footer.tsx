@@ -122,12 +122,12 @@ const FooterLinks = [
     links: [
       { label: "Talitrix ONE", href: "/talitrix-one" },
       { label: "All-In-One Band", href: "/talitrix-one/t-band" },
-      { label: "ONE Pre-Trial", href: "/talitrix-one/pretrial-probation" },
+      { label: "ONE Pre-Trial", href: "/talitrix-one/pretrial" },
       {
         label: "ONE Jail Management System",
         href: "/talitrix-one/jail-management",
       },
-      { label: "ONE Probation", href: "/talitrix-one/pretrial-probation" },
+      { label: "ONE Probation", href: "/talitrix-one/probation" },
       { label: "Talitrix Score", href: "/talitrix-one/score" },
     ],
   },

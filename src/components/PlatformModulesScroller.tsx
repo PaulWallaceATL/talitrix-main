@@ -34,7 +34,7 @@ const modules: Module[] = [
     blob: "rgba(248, 122, 19, 0.85)",
   },
   {
-    href: "/talitrix-one/pretrial-probation",
+    href: "/talitrix-one/pretrial",
     number: "02",
     eyebrow: "Pre-Trial Supervision",
     title: "ONE Pre-Trial",
@@ -52,7 +52,7 @@ const modules: Module[] = [
     blob: "rgba(255, 100, 0, 0.85)",
   },
   {
-    href: "/talitrix-one/pretrial-probation",
+    href: "/talitrix-one/probation",
     number: "04",
     eyebrow: "Community Supervision",
     title: "ONE Probation",

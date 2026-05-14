@@ -8,66 +8,66 @@ import DepthCard from "@/components/react-bits/depth-card";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
-  title: "ONE Pre-Trial & Probation | Talitrix ONE",
+  title: "ONE Pre-Trial | Talitrix ONE",
   description:
-    "ONE Pre-Trial & Probation brings monitored and non-monitored populations into one connected system — unified case management, risk tracking, and compliance reporting.",
+    "ONE Pre-Trial brings every pre-trial participant — monitored or not — into one connected system. Risk frameworks, conditions tracking, court-ready documentation, and defensible records in a single platform.",
 };
 
 const phases = [
   {
-    phase: "Unified Population",
-    body: "Monitored and non-monitored participants live in the same system — no separate spreadsheets.",
+    phase: "Risk Assessment",
+    body: "Standardized pre-trial risk frameworks applied consistently to inform release and conditions decisions.",
   },
   {
-    phase: "Case Management",
-    body: "Case files, conditions, contacts, and notes managed in one place across the supervision team.",
+    phase: "Conditions Tracking",
+    body: "Court-ordered conditions, contacts, and check-ins managed in one place across the pre-trial team.",
   },
   {
-    phase: "Risk Tracking",
-    body: "Continuous risk and compliance signals — including from the All-In-One Band and Talitrix Score where applicable.",
+    phase: "Court-Ready Documentation",
+    body: "Compliance records produced on demand for every appearance — same system the team uses daily.",
   },
   {
-    phase: "Court-Ready Records",
-    body: "Court-ready documentation produced on demand from the same system supervision teams use daily.",
+    phase: "Continuous Risk Signal",
+    body: "Live risk and compliance signals — including from the All-In-One Band and Talitrix Score where applicable.",
   },
 ];
 
 const features = [
   {
-    title: "End-to-End Community Supervision",
-    body: "Pre-trial, probation, and adjacent populations on a single connected platform.",
+    title: "All Pre-Trial Participants in One Place",
+    body: "Monitored and non-monitored pre-trial populations on a single connected platform — no separate spreadsheets.",
   },
   {
-    title: "Caseload Visibility Across Teams",
-    body: "Supervisors and officers share a single view — no handoff gaps or system swaps.",
+    title: "Faster, Better Release Decisions",
+    body: "Risk and compliance signals available the moment a judge, prosecutor, or pre-trial officer needs them.",
+  },
+  {
+    title: "Court-Ready by Default",
+    body: "Every check-in, alert, and condition status documented with a chain of custody you can stand behind.",
+  },
+  {
+    title: "Reduced Failure-to-Appear",
+    body: "Proactive alerts for upcoming court dates and condition gaps reduce no-shows and missed obligations.",
   },
   {
     title: "Earlier Intervention",
     body: "Surface compliance and risk signals early so teams can intervene before a violation is recorded.",
   },
   {
-    title: "Reduced Administrative Friction",
-    body: "Less duplicate entry, less search-the-spreadsheet — more time on the work that drives outcomes.",
-  },
-  {
-    title: "Defensible Compliance Record",
-    body: "Every interaction, alert, and check-in is captured with a chain of custody you can stand behind.",
-  },
-  {
     title: "Connected to the Whole ONE Platform",
-    body: "Inherits the intake record, integrates with JMS, and feeds the Talitrix Score continuously.",
+    body: "Inherits the intake record, integrates with ONE Jail Management System, and feeds the Talitrix Score continuously.",
   },
 ];
 
-export default function PretrialProbationPage() {
+export default function PretrialPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
-        eyebrow="ONE Pre-Trial & Probation"
+        eyebrow="ONE Pre-Trial"
         title={
           <StaggeredText
             as="h1"
-            text={"End-to-End\nCommunity Supervision."}
+            text={"Pre-Trial Supervision\nin One Connected System."}
             className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
@@ -75,15 +75,15 @@ export default function PretrialProbationPage() {
             blur
           />
         }
-        subtitle="Outside the walls. Same continuous platform."
+        subtitle="From release to resolution. Same continuous platform."
         body={
           <p>
-            ONE Pre-Trial & Probation brings all participant populations into
-            one connected system — whether they are on electronic monitoring
-            or not. By unifying case management, risk tracking, and compliance
-            reporting in one place, agencies gain clearer visibility across
-            caseloads and more time to focus on intervention, accountability,
-            and outcomes.
+            ONE Pre-Trial brings every pre-trial participant — whether they
+            are on electronic monitoring or not — into one connected system.
+            By unifying risk frameworks, conditions tracking, and court-ready
+            documentation in a single place, agencies gain clearer visibility
+            across caseloads and a defensible record behind every release and
+            supervision decision.
           </p>
         }
         background={
@@ -119,7 +119,7 @@ export default function PretrialProbationPage() {
             What&apos;s Connected
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl mb-12 md:mb-16 leading-tight max-w-2xl">
-            Four pillars of community supervision.
+            Four pillars of pre-trial supervision.
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
@@ -148,14 +148,13 @@ export default function PretrialProbationPage() {
               Capabilities
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-              Built for the realities of caseloads.
+              Built for the realities of pre-trial.
             </h2>
           </div>
           <div className="lg:col-span-7">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
-              Move from reactive paperwork to proactive case management — with
-              the same record, the same tooling, and the same accountability
-              across every participant.
+              From risk assessment to court appearance — same record, same
+              tooling, same accountability across every pre-trial participant.
             </p>
           </div>
         </div>
@@ -185,12 +184,11 @@ export default function PretrialProbationPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-4xl">
           <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8">
-            Same platform. Outside the walls.
+            One platform. From release to resolution.
           </h2>
           <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
-            See how ONE Pre-Trial & Probation extends Talitrix ONE into the
-            community — and how the Talitrix Score makes that record
-            defensible.
+            See how ONE Pre-Trial extends Talitrix ONE into the community —
+            and how the Talitrix Score makes that record defensible.
           </p>
           <div className="flex flex-wrap gap-4">
             <CTAButton href="/get-started">Request a Briefing</CTAButton>

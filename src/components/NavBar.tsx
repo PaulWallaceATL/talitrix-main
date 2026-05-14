@@ -73,7 +73,7 @@ const NAV_TREE: NavItem[] = [
       },
       {
         label: "ONE Pre-Trial",
-        href: "/talitrix-one/pretrial-probation",
+        href: "/talitrix-one/pretrial",
         icon: "route",
         desc: "Pre-trial supervision in one connected system.",
       },
@@ -85,7 +85,7 @@ const NAV_TREE: NavItem[] = [
       },
       {
         label: "ONE Probation",
-        href: "/talitrix-one/pretrial-probation",
+        href: "/talitrix-one/probation",
         icon: "team",
         desc: "End-to-end community supervision in a single platform.",
       },
