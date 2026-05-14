@@ -42,7 +42,7 @@ const otherSegments = [
 export default function ParticipantsPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <section className="relative w-full overflow-hidden border-b border-border-gray">
+      <section className="relative w-full min-h-screen flex items-center overflow-hidden border-b border-border-gray">
         <div className="absolute inset-0 z-0 opacity-80">
           <Globe
             primaryColor="#f87a13"
@@ -64,7 +64,7 @@ export default function ParticipantsPage() {
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-background via-background/60 to-background/30 pointer-events-none" />
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
 
-        <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl">
+        <div className="relative z-10 px-6 md:px-16 py-20 md:py-24 max-w-7xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             02 · For Participants
           </span>
@@ -78,7 +78,8 @@ export default function ParticipantsPage() {
             blur
           />
           <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed mb-6">
-            A system designed to help participants succeed.
+            A system designed to help participants succeed — built around
+            dignity, privacy, and the proactive support people actually need.
           </p>
           <div className="flex flex-wrap gap-4 mt-8 md:mt-10">
             <CTAButton href="/participant-registration">
