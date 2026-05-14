@@ -103,6 +103,28 @@ const PlatformSection = () => {
       },
       0.9,
     );
+
+    // Lower the global #watchscene canvas to align with the fanned card
+    // stack (anchored at top-[58%], ~8% below center). Independent of
+    // the scrub timelines (tl, tl2) which only animate x and opacity on
+    // #watchscene — keeping y on its own toggleActions ScrollTrigger so
+    // it plays once on enter, reverses cleanly on scroll-back-up, and
+    // never drifts mid-scrub. Hero and ExplodedSection are unaffected
+    // because the trigger is tied to the platform section.
+    gsap.fromTo(
+      "#watchscene",
+      { y: 0 },
+      {
+        y: 80,
+        duration: 0.45,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: platform,
+          start: "top center",
+          toggleActions: "play none none reverse",
+        },
+      },
+    );
   });
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
