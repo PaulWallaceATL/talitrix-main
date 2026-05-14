@@ -91,26 +91,32 @@ const features = [
   {
     title: "Continuous Behavioral Signal",
     body: "Aggregates compliance, activity, and intervention history into one continuous signal — not periodic snapshots.",
+    icon: "activity",
   },
   {
     title: "Earlier Risk Identification",
     body: "Surface trend changes earlier, giving supervision teams more time to intervene before a violation occurs.",
+    icon: "radar",
   },
   {
     title: "Transparent & Explainable",
     body: "Every score is explainable. No black-box. Every contributing signal is visible to operators and reviewers.",
+    icon: "brain",
   },
   {
     title: "Court-Admissible Record",
     body: "Captured through a secure chain of custody — making the record reliable for legal review and sentencing.",
+    icon: "scale",
   },
   {
     title: "Expert Witness Support",
     body: "Talitrix experts can support prosecutors, defense, and judges to interpret the score in court.",
+    icon: "gavel",
   },
   {
     title: "Strengthens Accountability",
     body: "Connects alerts, activity, and intervention into one continuous view that holds up under scrutiny.",
+    icon: "scrollText",
   },
 ];
 
