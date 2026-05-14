@@ -110,12 +110,11 @@ export default function AboutPage() {
               What we believe
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-              Built on
-              <br />
-              conviction.
+              Our Foundation.
             </h2>
-            <p className="text-white/65 mt-6 max-w-sm leading-relaxed">
-              What we built is shaped by what we believe.
+            <p className="text-white/65 mt-6 max-w-md leading-relaxed">
+              The beliefs that shape our technology, guide our decisions, and
+              define our standards.
             </p>
           </div>
         </div>
