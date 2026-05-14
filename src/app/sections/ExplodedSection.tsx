@@ -15,7 +15,7 @@ const ExplodedSection = () => {
         </p>
         <div className="flex justify-start lg:justify-end">
           <h2
-            className="text-3xl sm:text-5xl lg:text-6xl w-full max-w-xs sm:max-w-md lg:w-120 font-semibold leading-[1.15] text-left lg:text-right relative z-20"
+            className="text-base sm:text-xl lg:text-2xl w-full max-w-xs sm:max-w-md lg:max-w-100 leading-snug text-left lg:text-right relative z-20"
             id="explode-h2"
           >
             One connected system for ITW and OTW monitoring.

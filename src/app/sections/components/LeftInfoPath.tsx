@@ -1,81 +1,83 @@
 "use client";
 import { IoWifiOutline } from "react-icons/io5";
 
-// Single bent-line callout for the bottom-left of the viewport. Mirrors
-// the structure of one block from InfoPaths but with the bent path
-// horizontally flipped (line origin on the bottom-right, endpoint on
-// the top-left where the label sits). Reuses .info-line / .info-box /
-// .laser-path classes so InfoPaths' existing useGSAP picks it up for
-// the line clipPath reveal, info-box blink-in, and laser-pulse loop.
+// Single bottom-left callout: label on the left, a short straight
+// orange-glow line on the right pointing toward the band. Uses an
+// inline flex layout so the label always lands inside the viewport
+// (no right-full overflow), and the line stays the same orange-glow
+// laser style as the right-side InfoPaths blocks. Reuses
+// .info-line / .info-box / .laser-path classes so InfoPaths' existing
+// useGSAP picks it up for the line clipPath reveal, info-box
+// blink-in, and infinite laser-pulse loop.
 const LeftInfoPath = ({ ...props }: React.ComponentProps<"div">) => {
   return (
     <div {...props} id="leftInfoPath">
-      <div className="w-full absolute bottom-0 right-0">
-        <div className="absolute top-0 -translate-y-7 right-full text-center flex flex-col gap-2 items-center info-box w-25">
+      <div className="flex items-center gap-3 h-full w-full">
+        <div className="info-box flex flex-col items-center text-center gap-2 w-25 shrink-0">
           <div
-            className="size-14 p-2 bg-white/15  rounded-lg"
+            className="size-14 p-2 bg-white/15 rounded-lg"
             style={{ boxShadow: infoGlass }}
           >
             <IoWifiOutline className="size-full text-primary" />
           </div>
           3-Carrier SIM <br /> + WiFi
         </div>
-        <svg
-          viewBox="0 0 465 136"
-          className="info-line"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <filter
-              id="laser-glow-left-1"
-              x="-20%"
-              y="-20%"
-              width="140%"
-              height="140%"
-            >
-              <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            {/* Mirrored gradient so the bright (orange/white) end lands at
-                the line origin near the band, fading toward the label end. */}
-            <linearGradient
-              id="laser-gradient-left-1"
-              x1="1"
-              y1="0"
-              x2="0"
-              y2="0"
-            >
-              <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
-              <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
-              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
-            </linearGradient>
-          </defs>
-          {/* Horizontally-mirrored copy of the Tamper Proof bent path:
-              starts at (461, 133) bottom-right, bends up, ends at (3.5, 3)
-              top-left where the label sits. */}
-          <path
-            d="M461 133.001H222.05C213.741 133.001 206.142 128.32 202.403 120.9L149.097 15.101C145.358 7.68089 137.759 3 129.45 3H3.5"
-            stroke="#A7A7A7"
-            strokeOpacity="0.4"
-            strokeWidth="2"
-            strokeMiterlimit="1"
-          />
-          <path
-            className="laser-path"
-            d="M461 133.001H222.05C213.741 133.001 206.142 128.32 202.403 120.9L149.097 15.101C145.358 7.68089 137.759 3 129.45 3H3.5"
-            stroke="url(#laser-gradient-left-1)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            filter="url(#laser-glow-left-1)"
-          />
-          <circle cx="461" cy="133" r="3" fill="#D9D9D9" />
-          <circle cx="3.5" cy="3" r="3" fill="#D9D9D9" />
-        </svg>
+
+        <div className="flex-1 flex items-center min-w-0">
+          <svg
+            viewBox="0 0 220 20"
+            className="info-line w-full overflow-visible"
+            preserveAspectRatio="none"
+            fill="none"
+          >
+            <defs>
+              <filter
+                id="laser-glow-left-1"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
+              >
+                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              {/* Bright tail anchored on the right (band side), fading
+                  back toward the label on the left. */}
+              <linearGradient
+                id="laser-gradient-left-1"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="0"
+              >
+                <stop offset="0%" stopColor="#FFFFFF" stopOpacity="1" />
+                <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
+                <stop offset="100%" stopColor="#FF6B35" stopOpacity="1" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M4 10H216"
+              stroke="#A7A7A7"
+              strokeOpacity="0.4"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <path
+              className="laser-path"
+              d="M4 10H216"
+              stroke="url(#laser-gradient-left-1)"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              filter="url(#laser-glow-left-1)"
+            />
+            <circle cx="4" cy="10" r="3" fill="#D9D9D9" />
+            <circle cx="216" cy="10" r="3" fill="#D9D9D9" />
+          </svg>
+        </div>
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const PlatformSection = () => {
         scrub: true,
       },
     });
-    tl.to("#infoPaths", { opacity: 0, duration: 0.2, delay: 0.1 }, 0);
+    tl.to(["#infoPaths", "#leftInfoPath"], { opacity: 0, duration: 0.2, delay: 0.1 }, 0);
     tl.to("#explode-h2", { opacity: 0, duration: 0.3 }, 0);
     tl.to("#watchscene", { x: 0, duration: 1 }, 0);
 
@@ -83,7 +83,6 @@ const PlatformSection = () => {
     tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
     tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
     tl2.to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8);
-    tl2.to(".platform-card-2", { x: -400, duration: 0.3 }, 0.8);
 
     tl2.from(
       h2b.lines,
@@ -103,38 +102,16 @@ const PlatformSection = () => {
       },
       0.9,
     );
-
-    // Lower the global #watchscene canvas to align with the fanned card
-    // stack (anchored at top-[58%], ~8% below center). Independent of
-    // the scrub timelines (tl, tl2) which only animate x and opacity on
-    // #watchscene — keeping y on its own toggleActions ScrollTrigger so
-    // it plays once on enter, reverses cleanly on scroll-back-up, and
-    // never drifts mid-scrub. Hero and ExplodedSection are unaffected
-    // because the trigger is tied to the platform section.
-    gsap.fromTo(
-      "#watchscene",
-      { y: 0 },
-      {
-        y: 80,
-        duration: 0.45,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: platform,
-          start: "top center",
-          toggleActions: "play none none reverse",
-        },
-      },
-    );
   });
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
       <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-[58%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-1/2 h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
             className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
             ref={screenRef}
           >
-            <div className="w-full platform-cards platform-card-2 ">
+            <div className="w-full platform-cards ">
               <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right -rotate-12 overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
@@ -146,7 +123,7 @@ const PlatformSection = () => {
                 />
               </div>
             </div>
-            <div className="w-full platform-cards platform-card-2">
+            <div className="w-full platform-cards">
               <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
@@ -199,7 +176,7 @@ const PlatformSection = () => {
             </div>
           </div>
         </div>
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:py-24 relative z-20">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-6 sm:pt-8 lg:pt-10 relative z-20">
           <h2
             className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}
