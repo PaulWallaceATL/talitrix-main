@@ -168,7 +168,7 @@ const WatchScene = () => {
           ref={canvasRef}
           className="absolute z-10 inset-0 w-full h-full"
         />
-        <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
+        <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-sm pointer-events-none" />
         <LeftInfoPath
           id="leftInfoPathHealth"
           Icon={IoFitnessOutline}

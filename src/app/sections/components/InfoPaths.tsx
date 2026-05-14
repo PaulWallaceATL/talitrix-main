@@ -29,16 +29,28 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
       mask: "lines",
     });
 
-    gsap.from(sectionRef.current, {
-      opacity: 0,
-      duration: 0.3,
-      scrollTrigger: {
-        trigger: "#exploded",
-        start: "-=20%",
-        end: "+=20%",
-        scrub: true,
+    // Fade in/out the right-side InfoPaths AND both left-side callouts
+    // together as the exploded section enters/leaves the viewport. Using
+    // a tighter '-=10%' / 'top center' window so when the user scrolls
+    // back up toward the hero the lines disappear immediately rather
+    // than lingering past the section boundary.
+    gsap.from(
+      [
+        sectionRef.current,
+        "#leftInfoPathHealth",
+        "#leftInfoPathStraps",
+      ],
+      {
+        opacity: 0,
+        duration: 0.3,
+        scrollTrigger: {
+          trigger: "#exploded",
+          start: "-=10%",
+          end: "top center",
+          scrub: true,
+        },
       },
-    });
+    );
 
     gsap.from("#explode-bg", {
       y: 700,
