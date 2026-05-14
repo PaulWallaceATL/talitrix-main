@@ -121,13 +121,13 @@ const FooterLinks = [
     title: "Platform",
     links: [
       { label: "Talitrix ONE", href: "/talitrix-one" },
-      { label: "All in ONE Band", href: "/talitrix-one/t-band" },
-      { label: "ONE Intake", href: "/talitrix-one/intake" },
-      { label: "ONE Jail Management", href: "/talitrix-one/jail-management" },
+      { label: "All In One (AIO) Band", href: "/talitrix-one/t-band" },
+      { label: "ONE Pre-Trial", href: "/talitrix-one/pretrial-probation" },
       {
-        label: "ONE Pre-Trial & Probation",
-        href: "/talitrix-one/pretrial-probation",
+        label: "ONE Jail Management System",
+        href: "/talitrix-one/jail-management",
       },
+      { label: "ONE Probation", href: "/talitrix-one/pretrial-probation" },
       { label: "Talitrix Score", href: "/talitrix-one/score" },
     ],
   },

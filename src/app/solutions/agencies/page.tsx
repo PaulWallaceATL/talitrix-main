@@ -61,7 +61,7 @@ export default function AgenciesPage() {
 
         <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            01 · For Agencies
+            For Agencies
           </span>
           <StaggeredText
             as="h1"
@@ -103,7 +103,6 @@ export default function AgenciesPage() {
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <div className="lg:col-span-5 flex flex-col gap-4">
-            <span className="text-xs text-white/40 tracking-widest">01</span>
             <span className="text-primary text-xs uppercase tracking-[0.3em]">
               For Agencies
             </span>

@@ -23,7 +23,7 @@ export default function TalitrixOnePage() {
         title={
           <StaggeredText
             as="h1"
-            text={"Talitrix ONE.\nThe Unified Ecosystem."}
+            text={"Talitrix ONE."}
             className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
@@ -34,12 +34,10 @@ export default function TalitrixOnePage() {
         subtitle="A connected ecosystem built for the full justice lifecycle."
         body={
           <p>
-            Talitrix ONE is a closed-loop ecosystem that connects hardware,
-            software, and behavioral intelligence into one continuous platform.
-            Built to support the full justice lifecycle, its modular
-            architecture allows agencies to deploy what they need while
-            maintaining continuity across facilities, supervision teams, and
-            community-based programs.
+            Talitrix ONE brings the All In One band and Inside and Outside
+            the Walls supervision together in one cohesive system built for
+            the full justice lifecycle — giving agencies the flexibility to
+            support different operational needs through modular technology.
           </p>
         }
         background={
@@ -76,18 +74,14 @@ export default function TalitrixOnePage() {
               The Ecosystem
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-              One device.
-              <br />
-              <span className="text-white/60">
-                Every part of the lifecycle.
-              </span>
+              One band. Every part of the lifecycle.
             </h2>
           </div>
           <div className="lg:col-span-7 flex">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl self-end">
-              The All in ONE Band sits at the center of a continuous platform — feeding
-              live data and behavioral signals to every workflow across the
-              justice lifecycle, from intake to community supervision.
+              The Talitrix All In One Band connects ITW and OTW supervision
+              through a single, continuous flow of live data and intelligence
+              across the justice lifecycle.
             </p>
           </div>
         </div>

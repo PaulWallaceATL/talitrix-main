@@ -78,7 +78,7 @@ export default function TalitrixScorePage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
-        eyebrow="05 · The Talitrix Score"
+        eyebrow="The Talitrix Score"
         title={
           <StaggeredText
             as="h1"

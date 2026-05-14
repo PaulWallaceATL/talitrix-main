@@ -63,7 +63,7 @@ export default function TBandPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
-        eyebrow="01 · The Hardware"
+        eyebrow="The Hardware"
         title={
           <StaggeredText
             as="h1"

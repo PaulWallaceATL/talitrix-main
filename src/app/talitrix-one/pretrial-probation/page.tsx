@@ -63,7 +63,7 @@ export default function PretrialProbationPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
-        eyebrow="04 · ONE Pre-Trial & Probation"
+        eyebrow="ONE Pre-Trial & Probation"
         title={
           <StaggeredText
             as="h1"

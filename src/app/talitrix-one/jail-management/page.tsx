@@ -63,7 +63,7 @@ export default function JailManagementPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
-        eyebrow="03 · ONE Jail Management"
+        eyebrow="ONE Jail Management System"
         title={
           <StaggeredText
             as="h1"

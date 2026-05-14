@@ -62,7 +62,7 @@ export default function IntakePage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
-        eyebrow="02 · ONE Intake"
+        eyebrow="ONE Intake"
         title={
           <StaggeredText
             as="h1"
