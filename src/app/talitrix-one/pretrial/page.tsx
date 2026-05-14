@@ -59,7 +59,7 @@ const features = [
     icon: "bell",
   },
   {
-    title: "Connected to the Whole ONE Platform",
+    title: "Connected to the Talitrix ONE Platform",
     body: "Inherits the intake record, integrates with ONE Jail Management System, and feeds the Talitrix Score continuously.",
     icon: "link",
   },
