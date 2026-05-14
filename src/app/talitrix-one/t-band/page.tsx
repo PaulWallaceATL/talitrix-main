@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
-import DepthCard from "@/components/react-bits/depth-card";
+import BandFeaturesScroller from "@/components/BandFeaturesScroller";
 import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 
 export const metadata: Metadata = {
@@ -12,52 +12,6 @@ export const metadata: Metadata = {
   description:
     "The All-In-One Band is the first independent wrist-worn GPS monitoring device — 3-Carrier SIM, biometric sensors, proximity-based skin detection, and tamper-resistant by design.",
 };
-
-const phases = [
-  {
-    phase: "Independent GPS",
-    body: "First wrist-worn GPS monitoring device that operates independently — inside and outside the walls.",
-  },
-  {
-    phase: "3-Carrier SIM",
-    body: "Built-in redundancy across carriers ensures continuous connectivity in the field and across regions.",
-  },
-  {
-    phase: "Biometric Sensing",
-    body: "Heart rate and blood-oxygen (SpO₂) sensors give supervision teams a continuous wellness picture.",
-  },
-  {
-    phase: "Tamper Detection",
-    body: "Proximity-based skin detection ~20 times per second, triggering biometric verification only on disruption.",
-  },
-];
-
-const features = [
-  {
-    title: "Dignity by Design",
-    body: "A wrist form factor that lets participants live, work, and reintegrate without broadcasting justice involvement.",
-  },
-  {
-    title: "Optimized Battery & Performance",
-    body: "Skin-detection logic minimizes unnecessary verification, preserving battery life and on-device performance.",
-  },
-  {
-    title: "High-Confidence Tamper Evidence",
-    body: "Continuous proximity checks combined with biometric verification produce a defensible tamper record.",
-  },
-  {
-    title: "Closed-Loop with Talitrix ONE",
-    body: "Telemetry streams directly into JMS, ONE Pre-Trial & Probation, and the Talitrix Score — no integration gaps.",
-  },
-  {
-    title: "One Vendor, Inside & Outside",
-    body: "Eliminates the need for separate ankle-monitor and facility-tracking vendors. One device, one record.",
-  },
-  {
-    title: "Built for the Field",
-    body: "Engineered for the realities of supervision — durable, reliable, and ready for in-field All-In-One Band fitting workflows.",
-  },
-];
 
 export default function TBandPage() {
   return (
@@ -108,7 +62,7 @@ export default function TBandPage() {
                 hero so it doesn't overlap the headline / body / CTAs.
                 Hidden below lg so the hero text gets full width on
                 tablet and mobile. */}
-            <div className="hidden lg:block absolute top-1/2 right-[2%] xl:right-[6%] -translate-y-1/2 w-[460px] xl:w-[560px] aspect-square pointer-events-none">
+            <div className="hidden lg:block absolute top-1/2 right-[-15%] xl:right-[-8%] -translate-y-1/2 w-[1100px] xl:w-[1300px] aspect-square pointer-events-none">
               <Image
                 src="/watch-sequence/0188.webp"
                 alt="Talitrix All-In-One Band, 3/4 angled view"
@@ -133,36 +87,6 @@ export default function TBandPage() {
         id="learn-more"
         className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden scroll-mt-24 lg:scroll-mt-32"
       >
-        <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
-
-        <div className="relative z-10">
-          <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            Core Capabilities
-          </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl mb-12 md:mb-16 leading-tight max-w-2xl">
-            Four pillars. One independent device.
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-            {phases.map((p, i) => (
-              <div
-                key={p.phase}
-                className="bg-background p-6 sm:p-8 flex flex-col gap-4 min-h-[200px] sm:min-h-[220px]"
-              >
-                <span className="text-primary text-sm tracking-widest">
-                  0{i + 1}
-                </span>
-                <h3 className="text-2xl">{p.phase}</h3>
-                <p className="text-white/65 leading-relaxed text-sm">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
           <div className="lg:col-span-5">
             <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
@@ -180,25 +104,7 @@ export default function TBandPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-          {features.map((f, i) => (
-            <DepthCard
-              key={f.title}
-              title={f.title}
-              description={f.body}
-              width={340}
-              height={300}
-              borderRadius="20px"
-              maxRotation={10}
-              maxTranslation={12}
-              spotlight
-              spotlightColor="rgba(248, 122, 19, 0.2)"
-              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-6 flex flex-col justify-end"
-              revealAnimation="fade"
-              staggerDelay={70 + i * 25}
-            />
-          ))}
-        </div>
+        <BandFeaturesScroller />
       </section>
 
       <PlatformContinuitySection />
