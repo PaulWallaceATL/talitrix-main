@@ -4,7 +4,7 @@ import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
-import DepthCard from "@/components/react-bits/depth-card";
+import CapabilitiesScroller from "@/components/CapabilitiesScroller";
 import FeaturesShowcase, {
   type FeatureShowcaseItem,
 } from "@/components/FeaturesShowcase";
@@ -71,26 +71,32 @@ const features = [
   {
     title: "All Pre-Trial Participants in One Place",
     body: "Monitored and non-monitored pre-trial populations on a single connected platform — no separate spreadsheets.",
+    icon: "users",
   },
   {
     title: "Faster, Better Release Decisions",
     body: "Risk and compliance signals available the moment a judge, prosecutor, or pre-trial officer needs them.",
+    icon: "eye",
   },
   {
     title: "Court-Ready by Default",
     body: "Every check-in, alert, and condition status documented with a chain of custody you can stand behind.",
+    icon: "fileCheck",
   },
   {
     title: "Reduced Failure-to-Appear",
     body: "Proactive alerts for upcoming court dates and condition gaps reduce no-shows and missed obligations.",
+    icon: "calendarCheck",
   },
   {
     title: "Earlier Intervention",
     body: "Surface compliance and risk signals early so teams can intervene before a violation is recorded.",
+    icon: "bell",
   },
   {
     title: "Connected to the Talitrix ONE Platform",
     body: "Inherits the intake record, integrates with ONE Jail Management System, and feeds the Talitrix Score continuously.",
+    icon: "network",
   },
 ];
 
@@ -179,25 +185,7 @@ export default function PretrialPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-          {features.map((f, i) => (
-            <DepthCard
-              key={f.title}
-              title={f.title}
-              description={f.body}
-              width={340}
-              height={300}
-              borderRadius="20px"
-              maxRotation={10}
-              maxTranslation={12}
-              spotlight
-              spotlightColor="rgba(248, 122, 19, 0.2)"
-              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-6 flex flex-col justify-end"
-              revealAnimation="fade"
-              staggerDelay={70 + i * 25}
-            />
-          ))}
-        </div>
+        <CapabilitiesScroller features={features} />
       </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
