@@ -60,6 +60,24 @@ export default function TalitrixOnePage() {
         </div>
       </ShaderHero>
 
+      <section className="relative px-6 md:px-16 py-20 md:py-28 border-b border-border-gray overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.08),transparent_60%)] pointer-events-none" />
+
+        <div className="relative z-10 max-w-3xl">
+          <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-5">
+            The Ecosystem
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
+            One band. Every part of the lifecycle.
+          </h2>
+          <p className="mt-6 md:mt-8 text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
+            The Talitrix All in One Band connects ITW and OTW supervision
+            through a single, continuous flow of live data and intelligence
+            across the justice lifecycle.
+          </p>
+        </div>
+      </section>
+
       <section
         id="learn-more"
         className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden scroll-mt-24 lg:scroll-mt-32"
