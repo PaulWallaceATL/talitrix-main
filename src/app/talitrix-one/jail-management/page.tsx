@@ -21,7 +21,7 @@ const phases: FeatureShowcaseItem[] = [
     title: "Custody Lifecycle",
     short: "Booking through release",
     description:
-      "The full custody lifecycle on one connected system — every event from booking through release captured in one place, with the visibility and accountability modern facilities need.",
+      "The full custody lifecycle on one connected system — every event from booking through release captured with the visibility and accountability modern facilities need.",
     bullets: [
       "Booking, classification, and assessments on one record",
       "Every event timestamped and audit-trailed",
@@ -173,7 +173,7 @@ export default function JailManagementPage() {
               The full custody lifecycle on one platform.
             </h2>
           </div>
-          <div className="lg:col-span-7 lg:pt-10">
+          <div className="lg:col-span-7">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
               JMS replaces the patchwork of point tools with a single connected
               system — and gets stronger when paired with the Talitrix All-In-One Band.
