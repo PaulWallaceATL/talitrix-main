@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
-import AgenticBall from "@/components/react-bits/agentic-ball";
 import DepthCard from "@/components/react-bits/depth-card";
 import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 
@@ -91,16 +91,33 @@ export default function TBandPage() {
           </p>
         }
         background={
-          <div className="w-full h-full">
-            <AgenticBall
-              speed={0.6}
-              complexity={5}
-              swirl={0.6}
-              hueRotation={0}
-              saturation={1.4}
-              brightness={1.1}
-              backgroundColor="#000000"
+          <div className="absolute inset-0 overflow-hidden bg-black">
+            {/* Soft orange aurora behind the band, weighted to the
+                right so it sits behind the band image and never bleeds
+                across the hero text on the left. */}
+            <div
+              className="absolute inset-0 bg-[radial-gradient(circle_at_72%_50%,rgba(248,122,19,0.32),transparent_55%)] pointer-events-none"
+              aria-hidden
             />
+            <div
+              className="absolute top-1/2 right-[8%] -translate-y-1/2 w-[540px] h-[540px] rounded-full bg-primary/25 blur-[150px] pointer-events-none"
+              aria-hidden
+            />
+
+            {/* All-In-One Band hero image, anchored to the right of the
+                hero so it doesn't overlap the headline / body / CTAs.
+                Hidden below lg so the hero text gets full width on
+                tablet and mobile. */}
+            <div className="hidden lg:block absolute top-1/2 right-[2%] xl:right-[6%] -translate-y-1/2 w-[460px] xl:w-[560px] aspect-square pointer-events-none">
+              <Image
+                src="/watch-sequence/0188.webp"
+                alt="Talitrix All-In-One Band, 3/4 angled view"
+                fill
+                priority
+                sizes="(max-width: 1024px) 0px, 560px"
+                className="object-contain"
+              />
+            </div>
           </div>
         }
       >
