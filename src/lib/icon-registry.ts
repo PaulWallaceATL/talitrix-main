@@ -27,6 +27,12 @@ import {
   Footprints,
   BarChart3,
   Layers,
+  Gavel,
+  Lock,
+  FileCheck2,
+  Radar,
+  Smartphone,
+  ShieldEllipsis,
   type LucideIcon,
 } from "lucide-react";
 
@@ -62,6 +68,12 @@ export const ICONS: Record<string, LucideIcon> = {
   footprints: Footprints,
   barChart: BarChart3,
   layers: Layers,
+  gavel: Gavel,
+  lock: Lock,
+  fileCheck: FileCheck2,
+  radar: Radar,
+  smartphone: Smartphone,
+  shieldEllipsis: ShieldEllipsis,
 };
 
 export type CapabilityIconName = keyof typeof ICONS;

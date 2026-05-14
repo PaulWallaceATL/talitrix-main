@@ -4,6 +4,8 @@ import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import { Globe } from "@/components/react-bits/globe";
+import AgencyTypesScroller from "@/components/AgencyTypesScroller";
+import FeaturesGrid, { type FeatureGridItem } from "@/components/FeaturesGrid";
 
 export const metadata: Metadata = {
   title: "For Agencies | Talitrix Solutions",
@@ -19,15 +21,47 @@ const audienceTags = [
   "District Attorneys",
 ];
 
-const bullets = [
-  "Operational visibility across the full agency",
-  "Population & program pressure management",
-  "Unified participant activity & compliance view",
-  "Court-admissible documentation, on demand",
-  "Secure chain of custody for evidentiary data",
-  "Transparent, explainable Talitrix Score",
-  "Supervisor T-App for live field access",
-  "Defensible record behind every decision",
+const features: FeatureGridItem[] = [
+  {
+    title: "Operational visibility across the full agency",
+    body: "One connected view of custody, supervision, and field operations — so leadership sees the whole picture in real time, not after the fact.",
+    icon: "eye",
+  },
+  {
+    title: "Population & program pressure management",
+    body: "Surface program capacity, caseload pressure, and incident trends early — so resources land where they have the most impact.",
+    icon: "users",
+  },
+  {
+    title: "Unified participant activity & compliance view",
+    body: "Activity, conditions, contacts, and compliance status on one record — every officer working from the same source of truth.",
+    icon: "activity",
+  },
+  {
+    title: "Court-admissible documentation, on demand",
+    body: "Hearing-ready records produced from the same system the team uses daily — no manual reformatting, no missing context.",
+    icon: "scale",
+  },
+  {
+    title: "Secure chain of custody for evidentiary data",
+    body: "Behavioral and supervision data captured under a secure chain of custody — reliable for legal review and oversight.",
+    icon: "lock",
+  },
+  {
+    title: "Transparent, explainable Talitrix Score",
+    body: "A behavioral score that's transparent and explainable end-to-end — every contributing signal visible to operators and reviewers.",
+    icon: "barChart",
+  },
+  {
+    title: "Supervisor T-App for live field access",
+    body: "Live compliance data and court-ready documentation in the field — so supervisors and officers act on real information, not yesterday's report.",
+    icon: "smartphone",
+  },
+  {
+    title: "Defensible record behind every decision",
+    body: "Every alert, contact, and intervention captured with the durability and auditability needed under scrutiny.",
+    icon: "shieldCheck",
+  },
 ];
 
 const otherSegments = [
@@ -61,7 +95,7 @@ export default function AgenciesPage() {
 
         <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            For Agencies
+            01 · For Agencies
           </span>
           <StaggeredText
             as="h1"
@@ -101,66 +135,65 @@ export default function AgenciesPage() {
       >
         <div className="absolute -top-40 -right-32 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
           <div className="lg:col-span-5 flex flex-col gap-4">
+            <span className="text-xs text-white/40 tracking-widest">01</span>
             <span className="text-primary text-xs uppercase tracking-[0.3em]">
-              For Agencies
+              Who We Serve
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mt-2">
               One platform. Every role across the justice lifecycle.
             </h2>
-            <p className="text-white/65 text-base sm:text-lg mt-4">
+          </div>
+
+          <div className="lg:col-span-7 flex flex-col gap-4">
+            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
+              Talitrix ONE supports every role in the justice lifecycle — from
+              custody and field operations to supervision programs, the bench,
+              and prosecution. One connected platform, the same defensible
+              record, every role working from the same source of truth.
+            </p>
+            <p className="text-white/65 text-base leading-relaxed">
               Stronger accountability under scrutiny. Stronger protection for
               the communities you serve.
             </p>
           </div>
+        </div>
 
-          <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
-            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
-              Talitrix ONE provides the operational visibility agencies need
-              to manage population pressure, strengthen program oversight, and
-              improve efficiency across supervision. By connecting participant
-              activity, compliance records, and case history in one system,
-              Talitrix creates a secure, defensible record behind every
-              decision — helping agencies operate with greater accountability
-              under scrutiny and stronger protection for the communities they
-              serve.
-            </p>
-            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
-              For pretrial and community supervision teams, Talitrix ONE
-              delivers a single, unified view of participant activity,
-              compliance, and case history. The Supervisor T-App provides
-              instant access to live compliance data and court-ready
-              documentation — creating more time for active case management,
-              earlier intervention, and stronger participant outcomes.
-            </p>
-            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
-              For courts, judges, and district attorneys, Talitrix captures
-              behavioral data and supervision records through a secure chain
-              of custody — creating a clear, reliable record for legal review.
-              The Talitrix Score is transparent, explainable, and backed by
-              expert witness support, giving courts greater confidence in
-              sentencing and supervision decisions.
-            </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {bullets.map((b) => (
-                <li
-                  key={b}
-                  className="flex gap-3 text-sm text-white/80 border border-border-gray rounded-lg p-4 bg-white/[0.02]"
-                >
-                  <span className="text-primary">✦</span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="pt-2 flex flex-wrap gap-4 sm:gap-6">
-              <CTAButton href="/get-started" variant="ghost">
-                Request a briefing
-              </CTAButton>
-              <CTAButton href="/contact" variant="ghost">
-                Talk with our team
-              </CTAButton>
+        <AgencyTypesScroller />
+      </section>
+
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+        <div className="absolute -top-40 -left-32 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none" />
+
+        <div className="relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
+            <div className="lg:col-span-5">
+              <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
+                What Agencies Get
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
+                Built for the realities of running an agency.
+              </h2>
             </div>
+            <div className="lg:col-span-7">
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
+                Operational visibility, defensible records, and accountability
+                across the full lifecycle — purpose-built for the way modern
+                agencies actually work.
+              </p>
+            </div>
+          </div>
+
+          <FeaturesGrid items={features} columns={4} />
+
+          <div className="mt-12 md:mt-16 flex flex-wrap gap-4 sm:gap-6">
+            <CTAButton href="/get-started" variant="ghost">
+              Request a briefing
+            </CTAButton>
+            <CTAButton href="/contact" variant="ghost">
+              Talk with our team
+            </CTAButton>
           </div>
         </div>
       </section>
