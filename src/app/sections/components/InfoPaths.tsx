@@ -206,7 +206,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           >
             <IoLocationOutline className="size-full text-primary" />
           </div>
-          ITW + OTW <br /> Monitoring
+          Inside & Outside <br /> the Walls
         </div>
       </div>
       {/* Middle-right callout: copy of the Tamper Proof bent line, anchored

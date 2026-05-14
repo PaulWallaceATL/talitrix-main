@@ -9,7 +9,7 @@ import { warmAurora, warmSky } from "@/components/AuroraPresets";
 export const metadata: Metadata = {
   title: "Participant Registration | Talitrix",
   description:
-    "Register your Talitrix participant account. Activate your All in ONE Band, set up the Talitrix Participant App, and get the support you need to succeed.",
+    "Register your Talitrix participant account. Activate your All-In-One Band, set up the Talitrix Participant App, and get the support you need to succeed.",
 };
 
 const steps = [
@@ -20,7 +20,7 @@ const steps = [
   },
   {
     number: "02",
-    title: "Pair your All in ONE Band",
+    title: "Pair your All-In-One Band",
     body: "We'll guide you through pairing the device assigned by your supervisor.",
   },
   {
@@ -33,7 +33,7 @@ const steps = [
 const support = [
   {
     title: "Designed for dignity",
-    body: "The All in ONE Band is designed to be worn without broadcasting justice involvement — preserving your privacy in the workplace and community.",
+    body: "The All-In-One Band is designed to be worn without broadcasting justice involvement — preserving your privacy in the workplace and community.",
   },
   {
     title: "Proactive support",

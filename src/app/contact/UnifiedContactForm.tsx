@@ -20,7 +20,7 @@ const agencyTypes = [
 ];
 
 const interestAreas = [
-  { value: "tband", label: "All in ONE Band Hardware" },
+  { value: "tband", label: "All-In-One Band Hardware" },
   { value: "intake", label: "ONE Intake" },
   { value: "jms", label: "ONE Jail Management" },
   { value: "probation", label: "ONE Pre-Trial & Probation" },
@@ -165,7 +165,7 @@ export default function UnifiedContactForm({ type, onTypeChange }: Props) {
             <TextField
               label="Population / Caseload Size"
               name="caseload"
-              placeholder="e.g. 1,200 inmates · 4,500 caseload"
+              placeholder="e.g. 1,200 participants · 4,500 caseload"
             />
           </div>
 

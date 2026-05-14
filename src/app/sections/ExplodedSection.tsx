@@ -18,7 +18,7 @@ const ExplodedSection = () => {
             className="text-base sm:text-xl lg:text-2xl w-full max-w-xs sm:max-w-md lg:max-w-100 leading-snug text-left lg:text-right relative z-20"
             id="explode-h2"
           >
-            One connected system for ITW and OTW monitoring.
+            One connected system for Inside and Outside the Walls monitoring.
           </h2>
         </div>
       </div>

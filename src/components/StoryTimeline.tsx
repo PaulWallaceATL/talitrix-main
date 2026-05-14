@@ -27,7 +27,7 @@ const MILESTONES: Milestone[] = [
   },
   {
     year: "Today",
-    body: "Talitrix introduces a more modern, human-centered approach to monitoring — bringing the technology to the wrist through the industry's first independent wrist-worn GPS device and a connected ITW and OTW ecosystem designed for modern supervision.",
+    body: "Talitrix introduces a more modern, human-centered approach to monitoring — bringing the technology to the wrist through the industry's first independent wrist-worn GPS device and a connected Inside and Outside the Walls ecosystem designed for modern supervision.",
   },
 ];
 

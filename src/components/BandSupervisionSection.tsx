@@ -30,7 +30,7 @@ const features: Feature[] = [
   },
   {
     title: "Health and Wellness",
-    body: "Monitor vital signs, including heart rate and blood oxygen levels, to provide earlier visibility into potential medical issues and support faster response.",
+    body: "Monitor vital signs, including heart rate and blood oxygen levels, to give supervision teams earlier visibility into participant well-being so they can act before issues escalate.",
     Icon: IoFitnessOutline,
   },
   {
@@ -254,7 +254,7 @@ const BandSupervisionSection = () => {
         className="relative z-10 px-6 md:px-16 pt-20 md:pt-32 text-center max-w-5xl mx-auto"
       >
         <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-          Built with the All in ONE Band
+          Built with the All-In-One Band
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.05]">
           One Band.{" "}
@@ -270,7 +270,7 @@ const BandSupervisionSection = () => {
       </div>
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-6 px-6 md:px-16 pt-12 md:pt-20 pb-24 md:pb-32 max-w-7xl mx-auto">
-        {/* Sticky T-Band column */}
+        {/* Sticky All-In-One Band column */}
         <div className="relative">
           <div
             ref={stickyRef}
@@ -284,7 +284,7 @@ const BandSupervisionSection = () => {
               <canvas
                 ref={canvasRef}
                 className="relative w-full h-full"
-                aria-label="All in ONE Band rendering rotating as you scroll"
+                aria-label="All-In-One Band rendering rotating as you scroll"
               />
             </div>
           </div>

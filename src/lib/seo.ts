@@ -20,6 +20,6 @@ export const ORGANIZATION_JSON_LD = (siteUrl: string) => ({
   url: siteUrl,
   logo: `${siteUrl}/talitrix-logo.svg`,
   description:
-    "Talitrix builds the All in ONE Band — the first independent wrist-worn GPS supervision device — and the Talitrix ONE platform for sheriffs, departments of corrections, courts, and pretrial supervision.",
+    "Talitrix builds the All-In-One Band — the first independent wrist-worn GPS supervision device — and the Talitrix ONE platform for sheriffs, departments of corrections, courts, and pretrial supervision.",
   sameAs: [],
 });

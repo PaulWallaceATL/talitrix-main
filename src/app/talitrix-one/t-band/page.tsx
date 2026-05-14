@@ -8,9 +8,9 @@ import DepthCard from "@/components/react-bits/depth-card";
 import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 
 export const metadata: Metadata = {
-  title: "All in ONE Band | Talitrix ONE",
+  title: "All-In-One Band | Talitrix ONE",
   description:
-    "The All in ONE Band is the first independent wrist-worn GPS monitoring device — multi-carrier SIM, biometric sensors, proximity-based skin detection, and tamper-resistant by design.",
+    "The All-In-One Band is the first independent wrist-worn GPS monitoring device — 3-Carrier SIM, biometric sensors, proximity-based skin detection, and tamper-resistant by design.",
 };
 
 const phases = [
@@ -19,7 +19,7 @@ const phases = [
     body: "First wrist-worn GPS monitoring device that operates independently — inside and outside the walls.",
   },
   {
-    phase: "Multi-carrier SIM",
+    phase: "3-Carrier SIM",
     body: "Built-in redundancy across carriers ensures continuous connectivity in the field and across regions.",
   },
   {
@@ -55,7 +55,7 @@ const features = [
   },
   {
     title: "Built for the Field",
-    body: "Engineered for the realities of supervision — durable, reliable, and ready for in-field All in ONE Band fitting workflows.",
+    body: "Engineered for the realities of supervision — durable, reliable, and ready for in-field All-In-One Band fitting workflows.",
   },
 ];
 
@@ -67,7 +67,7 @@ export default function TBandPage() {
         title={
           <StaggeredText
             as="h1"
-            text={"All in ONE Band.\nDignity by Design."}
+            text={"All-In-One Band.\nDignity by Design."}
             className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
@@ -78,9 +78,9 @@ export default function TBandPage() {
         subtitle="The first independent wrist-worn GPS monitoring device in the industry."
         body={
           <p>
-            The All in ONE Band is designed to operate inside and outside the walls,
+            The All-In-One Band is designed to operate inside and outside the walls,
             eliminating the need for multiple vendors or device types. It
-            features multi-carrier SIM connectivity for redundancy alongside
+            features 3-Carrier SIM connectivity for redundancy alongside
             biometric sensors that monitor heart rate and blood oxygen (SpO₂).
             For community supervision, it utilizes proximity-based skin
             detection — checking for contact approximately 20 times per second
@@ -157,7 +157,7 @@ export default function TBandPage() {
           </div>
           <div className="lg:col-span-7">
             <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
-              The All in ONE Band is engineered so that supervision teams get the signal
+              The All-In-One Band is engineered so that supervision teams get the signal
               they need — and participants get the dignity they deserve.
             </p>
           </div>
@@ -193,7 +193,7 @@ export default function TBandPage() {
             The wrist. The standard.
           </h2>
           <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
-            See the All in ONE Band in person — and how it integrates across the full
+            See the All-In-One Band in person — and how it integrates across the full
             Talitrix ONE platform.
           </p>
           <div className="flex flex-wrap gap-4">

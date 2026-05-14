@@ -33,7 +33,7 @@ export default function TalitrixOnePage() {
         subtitle="A connected ecosystem built for the full justice lifecycle."
         body={
           <p>
-            Talitrix ONE brings the All In One band and Inside and Outside
+            Talitrix ONE brings the All-In-One band and Inside and Outside
             the Walls supervision together in one cohesive system built for
             the full justice lifecycle — giving agencies the flexibility to
             support different operational needs through modular technology.

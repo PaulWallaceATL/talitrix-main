@@ -189,7 +189,7 @@ export default function ArticleEditor({ mode, article }: Props) {
                 onChange={(e) => setAiBrief(e.target.value)}
                 rows={6}
                 className={inputClass}
-                placeholder={`What is this article about? Be specific.\n\nExample: "We just signed a 3-county pilot in Georgia covering 1,200 pretrial participants. Lead with the policy implications. Mention the All in ONE Band's 20Hz skin-detection. Don't name the counties."`}
+                placeholder={`What is this article about? Be specific.\n\nExample: "We just signed a 3-county pilot in Georgia covering 1,200 pretrial participants. Lead with the policy implications. Mention the All-In-One Band's 20Hz skin-detection. Don't name the counties."`}
               />
               <span className="text-xs text-white/40">
                 The more concrete the brief (numbers, named programs, target

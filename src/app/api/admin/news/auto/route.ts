@@ -72,7 +72,7 @@ const ArticleSchema = z.object({
 // ---------- Prompts ---------------------------------------------------------
 
 const TALITRIX_CONTEXT = `ABOUT TALITRIX
-Talitrix is a justice-tech company. The flagship hardware product is the All in ONE Band — the first independent wrist-worn GPS supervision device, with continuous biometric verification, multi-carrier SIM, ~20Hz skin-detection, and tamper-resistant design. The flagship software platform is "Talitrix ONE" — a unified ecosystem covering ONE Intake, ONE Jail Management, ONE Pre-Trial & Probation, and Talitrix Score (a transparent, explainable behavioral-intelligence layer).
+Talitrix is a justice-tech company. The flagship hardware product is the All-In-One Band — the first independent wrist-worn GPS supervision device, with continuous biometric verification, 3-Carrier SIM, ~20Hz skin-detection, and tamper-resistant design. The flagship software platform is "Talitrix ONE" — a unified ecosystem covering ONE Intake, ONE Jail Management, ONE Pre-Trial & Probation, and Talitrix Score (a transparent, explainable behavioral-intelligence layer).
 
 Brand positioning: "Dignity by Design" — a deliberate move away from the stigma and bulk of legacy ankle monitors. Talitrix sells primarily B2G to sheriffs, departments of corrections, courts, pretrial services, and probation/community supervision agencies.
 

@@ -8,11 +8,11 @@ import { Globe } from "@/components/react-bits/globe";
 export const metadata: Metadata = {
   title: "For Participants | Talitrix Solutions",
   description:
-    "Talitrix for Participants — a wrist-worn All in ONE Band designed for dignity and a Participant App for proactive support, clear communication, and a pathway to success.",
+    "Talitrix for Participants — a wrist-worn All-In-One Band designed for dignity and a Participant App for proactive support, clear communication, and a pathway to success.",
 };
 
 const bullets = [
-  "Wrist-worn All in ONE Band designed for dignity",
+  "Wrist-worn All-In-One Band designed for dignity",
   "Participant App: clarity & support",
   "Proactive alerts before violations",
   "Pathway designed for success",
@@ -68,7 +68,7 @@ export default function ParticipantsPage() {
               Begin Registration
             </CTAButton>
             <CTAButton href="/talitrix-one/t-band" variant="secondary">
-              Learn about the All in ONE Band
+              Learn about the All-In-One Band
             </CTAButton>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function ParticipantsPage() {
             <p className="text-base sm:text-lg text-white/75 leading-relaxed">
               Talitrix removes the barriers between people committed to
               rebuilding their lives and the support they need to do it. The
-              All in ONE Band is designed to be worn without broadcasting justice
+              All-In-One Band is designed to be worn without broadcasting justice
               involvement, preserving dignity in the workplace and community.
               The Talitrix Participant App serves as a compliance support
               tool, providing proactive alerts and clear communication to

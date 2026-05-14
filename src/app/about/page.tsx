@@ -67,7 +67,7 @@ export default function AboutPage() {
       <VideoBlock
         eyebrow="Watch"
         headline="The standard, in motion."
-        body="A walkthrough of the Talitrix ONE platform — the All in ONE Band hardware, the connected dashboards, and the Talitrix Score that ties it all together."
+        body="A walkthrough of the Talitrix ONE platform — the All-In-One Band hardware, the connected dashboards, and the Talitrix Score that ties it all together."
       />
 
       <section

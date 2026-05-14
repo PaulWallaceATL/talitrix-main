@@ -24,7 +24,7 @@ const phases = [
   },
   {
     phase: "Risk Tracking",
-    body: "Continuous risk and compliance signals — including from the All in ONE Band and Talitrix Score where applicable.",
+    body: "Continuous risk and compliance signals — including from the All-In-One Band and Talitrix Score where applicable.",
   },
   {
     phase: "Court-Ready Records",

@@ -9,7 +9,6 @@ const ECOSYSTEM_NODES = [
   "Probation",
   "Health & Wellness",
   "Community Supervision",
-  "Medical & Mental Health",
   "County Detention",
   "Transport",
 ];
@@ -23,7 +22,7 @@ export default function EcosystemFlow({
 }: Props) {
   return (
     <>
-      {/* Mobile: stacked T-Band + 2-column ecosystem grid.
+      {/* Mobile: stacked All-In-One Band + 2-column ecosystem grid.
           The radial diagram is unreadable below ~sm because the nodes overlap
           the center hub on a phone-sized viewport, so we swap to a vertical
           hierarchy that keeps the same visual language (orange borders, glow,
@@ -40,7 +39,7 @@ export default function EcosystemFlow({
             <div className="absolute -inset-6 pointer-events-none">
               <Image
                 src={watchFrame}
-                alt="Talitrix All in ONE Band"
+                alt="Talitrix All-In-One Band"
                 fill
                 priority
                 sizes="280px"
@@ -98,7 +97,7 @@ export default function EcosystemFlow({
             <div className="absolute -inset-12 sm:-inset-16 md:-inset-20 pointer-events-none">
               <Image
                 src={watchFrame}
-                alt="Talitrix All in ONE Band"
+                alt="Talitrix All-In-One Band"
                 fill
                 priority
                 sizes="(max-width: 768px) 320px, 420px"

@@ -62,7 +62,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
       gsap.set(platform, { opacity: 1 });
 
       // ---------------------------------------------------------------
-      // Watch frame scrub — paints the rotating T-Band into the canvas
+      // Watch frame scrub — paints the rotating All-In-One Band into the canvas
       // as the pin scrolls, mirroring the homepage's WatchScene rotation
       // during the PlatformSection beat.
       // ---------------------------------------------------------------
@@ -199,7 +199,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
       tl2.to(".pcs-card", { opacity: 0, duration: 0.3 }, 0.8);
 
       // Reveal Intelligence with Purpose + paragraph only AFTER the
-      // T-Band has fully faded out AND the supervisor / Talitrix score
+      // All-In-One Band has fully faded out AND the supervisor / Talitrix score
       // card has scrolled almost to the top of the viewport. Anchored
       // at top 60% of the placeholder (well past pin end) so on mobile
       // the text reveal does not overlap the still-large score.
@@ -279,7 +279,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
           </div>
         </div>
 
-        {/* Local T-Band canvas (replaces homepage's global #watchscene).
+        {/* Local All-In-One Band canvas (replaces homepage's global #watchscene).
             Sized to match the on-screen footprint of the homepage canvas
             so the watch dominates the cards as it does there, and
             scrubs through the same rotation arc as the pin scrolls. */}
@@ -294,7 +294,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
           <canvas
             ref={watchCanvasRef}
             className="relative w-full h-full"
-            aria-label="Talitrix All in ONE Band rotating as you scroll"
+            aria-label="Talitrix All-In-One Band rotating as you scroll"
           />
         </div>
 
@@ -338,7 +338,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
 
       {/* Trigger marker for tl3 — sits OUTSIDE platformRef so it does not get
           pinned, and therefore can only enter the viewport after the
-          PlatformSection pin has finished and the T-Band has fully faded out.
+          PlatformSection pin has finished and the All-In-One Band has fully faded out.
           Mirrors the homepage's #placeholder placement. */}
       <div ref={placeholderRef} className="h-px w-full" aria-hidden />
     </>
