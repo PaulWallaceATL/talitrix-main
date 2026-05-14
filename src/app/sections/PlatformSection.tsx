@@ -107,7 +107,7 @@ const PlatformSection = () => {
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
       <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-1/2 h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-[58%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
             className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
             ref={screenRef}
