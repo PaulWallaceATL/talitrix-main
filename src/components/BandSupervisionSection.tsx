@@ -4,54 +4,54 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-import type { IconType } from "react-icons";
 import {
-  IoBusinessOutline,
-  IoBusOutline,
-  IoCheckmarkDoneOutline,
-  IoFitnessOutline,
-  IoLocationOutline,
-  IoShieldCheckmarkOutline,
-} from "react-icons/io5";
+  ArrowLeftRight,
+  HeartPulse,
+  MapPin,
+  ListChecks,
+  Bus,
+  ShieldAlert,
+  type LucideIcon,
+} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 type Feature = {
   title: string;
   body: string;
-  Icon: IconType;
+  Icon: LucideIcon;
 };
 
 const features: Feature[] = [
   {
     title: "Inside and Outside the Walls",
     body: "Built for both in-facility management and community supervision, reducing operational handoffs and device transitions.",
-    Icon: IoBusinessOutline,
+    Icon: ArrowLeftRight,
   },
   {
     title: "Health and Wellness",
     body: "Monitor vital signs, including heart rate and blood oxygen levels, to give supervision teams earlier visibility into participant well-being so they can act before issues escalate.",
-    Icon: IoFitnessOutline,
+    Icon: HeartPulse,
   },
   {
     title: "Real-Time Location Visibility",
     body: "Real-time visibility into participant location across facility floors and zones, powered by integrated WiFi and BLE detection.",
-    Icon: IoLocationOutline,
+    Icon: MapPin,
   },
   {
     title: "Count Automation",
     body: "Simplify count procedures with automated tracking designed to support faster, more efficient facility operations.",
-    Icon: IoCheckmarkDoneOutline,
+    Icon: ListChecks,
   },
   {
     title: "Transport Mode",
     body: "Stay connected during participant transport — continuous visibility into location and status from departure to arrival.",
-    Icon: IoBusOutline,
+    Icon: Bus,
   },
   {
     title: "Tamper Detection",
     body: "Continuous proximity-based skin checks with biometric verification produce a defensible record the moment something is off.",
-    Icon: IoShieldCheckmarkOutline,
+    Icon: ShieldAlert,
   },
 ];
 
@@ -178,12 +178,12 @@ const BandSupervisionSection = () => {
 
         if (icon) {
           tl.from(icon, {
-            opacity: 0,
             scale: 0.6,
             x: -30,
             filter: "blur(6px)",
             duration: 0.7,
             ease: "back.out(1.6)",
+            immediateRender: false,
           });
         }
         if (title) {
@@ -242,7 +242,7 @@ const BandSupervisionSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-background overflow-hidden border-b border-border-gray"
+      className="relative bg-background overflow-clip border-b border-border-gray"
     >
       <div
         className="absolute -top-32 -left-40 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none"
@@ -276,7 +276,7 @@ const BandSupervisionSection = () => {
             ref={stickyRef}
             className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center"
           >
-            <div className="relative w-full aspect-square max-w-[780px] mx-auto -ml-2 lg:-ml-12 xl:-ml-20">
+            <div className="relative w-full aspect-square max-w-[1100px] mx-auto -ml-4 lg:-ml-20 xl:-ml-32">
               <div
                 className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.42),rgba(248,122,19,0.1)_45%,transparent_72%)] blur-2xl pointer-events-none"
                 aria-hidden
@@ -303,7 +303,7 @@ const BandSupervisionSection = () => {
                 className="group flex gap-4 sm:gap-5 transition-all duration-500 lg:opacity-55 lg:translate-x-2 lg:[&.is-active]:opacity-100 lg:[&.is-active]:translate-x-0"
               >
                 <div
-                  className="feature-icon flex-shrink-0 size-12 sm:size-14 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md flex items-center justify-center transition-all duration-500 group-[.is-active]:border-primary/50 group-[.is-active]:bg-primary/[0.12] group-[.is-active]:shadow-[0_0_30px_rgba(248,122,19,0.3)]"
+                  className="feature-icon flex-shrink-0 size-12 sm:size-14 rounded-xl border border-primary/25 bg-primary/[0.08] backdrop-blur-md flex items-center justify-center transition-all duration-500 group-[.is-active]:border-primary/55 group-[.is-active]:bg-primary/[0.18] group-[.is-active]:shadow-[0_0_30px_rgba(248,122,19,0.35)]"
                   style={{
                     boxShadow:
                       "inset 0 0 1.5px rgba(255,255,255,0.6), inset 1px -2px 4px rgba(255,255,255,0.18)",
