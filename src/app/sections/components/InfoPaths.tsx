@@ -4,8 +4,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
-import { IoMdFingerPrint } from "react-icons/io";
-import { IoChatbubblesOutline, IoShieldCheckmarkOutline } from "react-icons/io5";
+import {
+  IoLocationOutline,
+  IoShieldCheckmarkOutline,
+  IoWifiOutline,
+} from "react-icons/io5";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -185,9 +188,9 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
             className="size-14 p-2 bg-white/15  rounded-lg"
             style={{ boxShadow: infoGlass }}
           >
-            <IoMdFingerPrint className="size-full text-primary" />
+            <IoLocationOutline className="size-full text-primary" />
           </div>
-          Biometric <br /> Sensors
+          ITW + OTW <br /> Monitoring
         </div>
       </div>
       {/* Middle-right callout: copy of the Tamper Proof bent line, anchored
@@ -199,9 +202,9 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
             className="size-14 p-2 bg-white/15  rounded-lg"
             style={{ boxShadow: infoGlass }}
           >
-            <IoChatbubblesOutline className="size-full text-primary" />
+            <IoWifiOutline className="size-full text-primary" />
           </div>
-          2-Way <br /> Communication
+          Connectivity <br /> & Comms
         </div>
         <svg
           viewBox="0 0 465 136"
@@ -257,7 +260,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           >
             <IoShieldCheckmarkOutline className="size-full text-primary" />
           </div>
-          Tamper <br /> Proof
+          Proximity <br /> Tamper
         </div>
         <svg
           viewBox="0 0 465 136"

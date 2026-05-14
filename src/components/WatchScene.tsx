@@ -6,6 +6,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InfoPaths from "@/app/sections/components/InfoPaths";
 import LeftInfoPath from "@/app/sections/components/LeftInfoPath";
+import {
+  IoFitnessOutline,
+  IoSwapHorizontalOutline,
+} from "react-icons/io5";
 import { motion } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -165,7 +169,28 @@ const WatchScene = () => {
           className="absolute z-10 inset-0 w-full h-full"
         />
         <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-xl pointer-events-none" />
-        <LeftInfoPath className="hidden lg:block absolute bottom-[20%] left-[18%] z-20 w-[400px] h-[100px] text-sm pointer-events-none" />
+        <LeftInfoPath
+          id="leftInfoPathHealth"
+          Icon={IoFitnessOutline}
+          label={
+            <>
+              Heart Rate <br /> &amp; SpO<sub>2</sub>
+            </>
+          }
+          defsId="health"
+          className="hidden lg:block absolute bottom-[42%] left-[18%] z-20 w-[400px] h-[100px] text-sm pointer-events-none"
+        />
+        <LeftInfoPath
+          id="leftInfoPathStraps"
+          Icon={IoSwapHorizontalOutline}
+          label={
+            <>
+              Replaceable <br /> Straps
+            </>
+          }
+          defsId="straps"
+          className="hidden lg:block absolute bottom-[20%] left-[18%] z-20 w-[400px] h-[100px] text-sm pointer-events-none"
+        />
         <WatchGlow className="absolute w-[420px] sm:w-[600px] md:w-[800px] h-auto left-1/2 top-1/2 -translate-1/2" />
       </motion.div>
     </div>
