@@ -32,6 +32,16 @@ export default function AboutPage() {
             blur
           />
         }
+        subtitle="Talitrix is rebuilding monitoring and supervision around dignity, intelligence, and outcomes — bringing the technology back to the wrist and back to its original rehabilitative purpose."
+        body={
+          <p>
+            We design hardware, software, and behavioral intelligence as one
+            connected system — built for the realities of agencies inside and
+            outside the walls, and for the participants who depend on the
+            people who use it. The result is a more modern, human-centered
+            standard for the supervision category, and the people it serves.
+          </p>
+        }
         background={
           <AuroraBlur
             layers={orangeAurora}
