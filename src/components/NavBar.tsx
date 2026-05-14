@@ -198,6 +198,46 @@ const NavBar = () => {
     };
   }, []);
 
+  // Auto-hide on scroll-down, reveal on scroll-up. We track scroll
+  // direction via raw scrollY deltas (rAF-throttled) and toggle a
+  // -translate-y-full on the header. The navbar always re-shows in
+  // the top SHOW_AT_TOP px so the very top of the page never feels
+  // like a hidden state.
+  const [navHidden, setNavHidden] = useState(false);
+  const lastScrollYRef = useRef(0);
+  const tickingRef = useRef(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    lastScrollYRef.current = window.scrollY;
+
+    const SHOW_AT_TOP = 80;
+    const DELTA_THRESHOLD = 6;
+
+    const onScroll = () => {
+      if (tickingRef.current) return;
+      tickingRef.current = true;
+      window.requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        const delta = currentY - lastScrollYRef.current;
+
+        if (currentY < SHOW_AT_TOP) {
+          setNavHidden(false);
+        } else if (delta > DELTA_THRESHOLD) {
+          setNavHidden(true);
+        } else if (delta < -DELTA_THRESHOLD) {
+          setNavHidden(false);
+        }
+
+        lastScrollYRef.current = currentY;
+        tickingRef.current = false;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   if (isAdmin) return null;
 
   const cancelClose = () => {
@@ -236,14 +276,18 @@ const NavBar = () => {
   );
   const activeCta = activeMenuItem ? MENU_CTAS[activeMenuItem.label] : null;
 
+  // Don't apply the auto-hide while an interactive menu is open —
+  // hiding the navbar would also pull the megamenu / drawer offscreen
+  // mid-interaction.
+  const isAnyMenuOpen = drawerOpen || openMenu !== null;
+  const headerHidden = navHidden && !isAnyMenuOpen;
+
   return (
     <>
       <header
-        className={`h-16 lg:h-24 left-0 w-full z-40 border-b border-border-gray flex items-stretch ${
-          isHome
-            ? "absolute top-0"
-            : "fixed top-0 backdrop-blur-md bg-black/40"
-        }`}
+        className={`fixed top-0 h-16 lg:h-24 left-0 w-full z-40 border-b border-border-gray flex items-stretch transition-transform duration-300 will-change-transform ${
+          headerHidden ? "-translate-y-full" : "translate-y-0"
+        } ${isHome ? "" : "backdrop-blur-md bg-black/40"}`}
       >
         <div className="flex items-center px-6 lg:px-10 xl:px-16 border-border-gray lg:border-r shrink-0">
           <Link href={"/"} onClick={() => setDrawerOpen(false)}>
