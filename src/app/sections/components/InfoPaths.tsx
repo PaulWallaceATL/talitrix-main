@@ -117,7 +117,12 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
         0,
       );
     });
-    info.forEach((item, i) => {
+    // Fade all info-boxes in together (right-side trio + the two
+    // LeftInfoPath instances). Previous 'i * 0.3' stagger meant the
+    // left callouts (positions 3 and 4 in DOM order) didn't appear
+    // until ~0.9 / 1.2s after the first right-side icon, which read
+    // as them 'loading later'.
+    info.forEach((item) => {
       timeline.from(
         item,
         {
@@ -125,7 +130,6 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           ease: "power3.inOut",
           duration: 0.1,
           repeat: 1,
-          delay: i * 0.3,
         },
         1.3,
       );

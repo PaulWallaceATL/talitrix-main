@@ -174,7 +174,7 @@ const WatchScene = () => {
           Icon={IoFitnessOutline}
           label={
             <>
-              Heart Rate <br /> &amp; SpO<sub>2</sub>
+              Heart Rate <br /> &amp; SpO₂
             </>
           }
           defsId="health"
