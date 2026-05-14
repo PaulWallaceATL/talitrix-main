@@ -5,6 +5,9 @@ import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
 import CapabilitiesScroller from "@/components/CapabilitiesScroller";
+import FeaturesShowcase, {
+  type FeatureShowcaseItem,
+} from "@/components/FeaturesShowcase";
 import BandSupervisionSection from "@/components/BandSupervisionSection";
 
 export const metadata: Metadata = {
@@ -13,22 +16,54 @@ export const metadata: Metadata = {
     "ONE Jail Management System brings the full custody lifecycle into one connected system — visibility into housing, movement, wellness, and operations, especially when paired with the All-In-One Band.",
 };
 
-const phases = [
+const phases: FeatureShowcaseItem[] = [
   {
-    phase: "Custody Lifecycle",
-    body: "Booking through release on a single connected system — every event captured in one place.",
+    title: "Custody Lifecycle",
+    short: "Booking through release",
+    description:
+      "The full custody lifecycle on one connected system — every event from booking through release captured in one place, with the visibility and accountability modern facilities need.",
+    bullets: [
+      "Booking, classification, and assessments on one record",
+      "Every event timestamped and audit-trailed",
+      "Continuous record from intake through release",
+    ],
+    icon: "building",
   },
   {
-    phase: "Movement Visibility",
-    body: "When paired with the All-In-One Band, JMS extends visibility into participant movement across the facility.",
+    title: "Movement Visibility",
+    short: "Live housing and movement",
+    description:
+      "When paired with the All-In-One Band, ONE Jail Management System extends visibility into participant movement across every floor and zone of the facility — in real time.",
+    bullets: [
+      "Real-time location across housing units and zones",
+      "WiFi + BLE detection for indoor accuracy",
+      "Movement history available for any incident review",
+    ],
+    icon: "footprints",
   },
   {
-    phase: "Wellness Telemetry",
-    body: "Heart rate and SpO₂ telemetry from the All-In-One Band surfaces wellness signals that staff can act on.",
+    title: "Wellness Telemetry",
+    short: "Continuous wellness signal",
+    description:
+      "Heart rate and SpO₂ telemetry from the All-In-One Band surface wellness signals continuously — turning daily wellness checks into a defensible, automated record.",
+    bullets: [
+      "Continuous biometric signal, not periodic snapshots",
+      "Alerts surface participants who need attention",
+      "Wellness record defensible in oversight reviews",
+    ],
+    icon: "heartPulse",
   },
   {
-    phase: "Operational Decisions",
-    body: "Dashboards and audit trails support safer facilities and stronger operational decision-making.",
+    title: "Operational Decisions",
+    short: "Dashboards and audit trails",
+    description:
+      "Dashboards and audit trails support safer facilities and stronger operational decision-making — giving leadership the operational picture in real time, not after the fact.",
+    bullets: [
+      "Live dashboards for housing, movement, and incidents",
+      "Clean audit trails for oversight and review",
+      "Operational metrics that surface trend changes early",
+    ],
+    icon: "barChart",
   },
 ];
 
@@ -124,22 +159,7 @@ export default function JailManagementPage() {
             Four pillars of facility operations.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-            {phases.map((p, i) => (
-              <div
-                key={p.phase}
-                className="bg-background p-6 sm:p-8 flex flex-col gap-4 min-h-[200px] sm:min-h-[220px]"
-              >
-                <span className="text-primary text-sm tracking-widest">
-                  0{i + 1}
-                </span>
-                <h3 className="text-2xl">{p.phase}</h3>
-                <p className="text-white/65 leading-relaxed text-sm">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FeaturesShowcase items={phases} />
         </div>
       </section>
 

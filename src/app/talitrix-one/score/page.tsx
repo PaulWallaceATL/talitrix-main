@@ -6,6 +6,9 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
 import SimpleGraph from "@/components/react-bits/simple-graph";
 import CapabilitiesScroller from "@/components/CapabilitiesScroller";
+import FeaturesShowcase, {
+  type FeatureShowcaseItem,
+} from "@/components/FeaturesShowcase";
 
 export const metadata: Metadata = {
   title: "The Talitrix Score | Talitrix ONE",
@@ -28,22 +31,54 @@ const scoreData = [
   { value: 91, label: "Day 55" },
 ];
 
-const phases = [
+const phases: FeatureShowcaseItem[] = [
   {
-    phase: "Aggregate",
-    body: "Continuously aggregates alerts, activity, and intervention history across the supervision lifecycle.",
+    title: "Aggregate",
+    short: "Continuous behavioral signal",
+    description:
+      "Continuously aggregates alerts, activity, and intervention history across the supervision lifecycle — turning dozens of disconnected feeds into one continuous behavioral signal.",
+    bullets: [
+      "Compliance, activity, and intervention in one stream",
+      "Continuous aggregation, not periodic snapshots",
+      "Connected across the full ONE platform",
+    ],
+    icon: "layers",
   },
   {
-    phase: "Score",
-    body: "Translates behavioral signals into a transparent, explainable score over time.",
+    title: "Score",
+    short: "Transparent and explainable",
+    description:
+      "Translates behavioral signals into a transparent, explainable score over time — every contributing input visible to operators, supervisors, and reviewers.",
+    bullets: [
+      "Score is transparent and explainable end-to-end",
+      "Every contributing signal visible to operators",
+      "No black-box: the math is reviewable",
+    ],
+    icon: "barChart",
   },
   {
-    phase: "Surface",
-    body: "Surfaces risk and trend changes early so teams can intervene before a violation is recorded.",
+    title: "Surface",
+    short: "Earlier risk identification",
+    description:
+      "Surfaces risk and trend changes early so teams can intervene before a violation is recorded — and act on context, not just paperwork.",
+    bullets: [
+      "Trend changes surfaced earlier than periodic reviews",
+      "In-context alerts for officers and supervisors",
+      "Earlier intervention, stronger outcomes",
+    ],
+    icon: "eye",
   },
   {
-    phase: "Defend",
-    body: "Produces a defensible behavioral record — backed by chain-of-custody and expert-witness support.",
+    title: "Defend",
+    short: "Defensible behavioral record",
+    description:
+      "Produces a defensible behavioral record — backed by chain-of-custody and expert-witness support — that holds up in court and oversight reviews.",
+    bullets: [
+      "Secure chain of custody on every signal",
+      "Expert witness support for legal review",
+      "Court-admissible behavioral evidence",
+    ],
+    icon: "shieldCheck",
   },
 ];
 
@@ -132,22 +167,7 @@ export default function TalitrixScorePage() {
             Four steps from signal to defensible record.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-            {phases.map((p, i) => (
-              <div
-                key={p.phase}
-                className="bg-background p-6 sm:p-8 flex flex-col gap-4 min-h-[200px] sm:min-h-[220px]"
-              >
-                <span className="text-primary text-sm tracking-widest">
-                  0{i + 1}
-                </span>
-                <h3 className="text-2xl">{p.phase}</h3>
-                <p className="text-white/65 leading-relaxed text-sm">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FeaturesShowcase items={phases} />
         </div>
       </section>
 

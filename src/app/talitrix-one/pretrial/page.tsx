@@ -4,7 +4,10 @@ import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
-import CapabilitiesScroller from "@/components/CapabilitiesScroller";
+import DepthCard from "@/components/react-bits/depth-card";
+import FeaturesShowcase, {
+  type FeatureShowcaseItem,
+} from "@/components/FeaturesShowcase";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
@@ -13,22 +16,54 @@ export const metadata: Metadata = {
     "ONE Pre-Trial brings every pre-trial participant — monitored or not — into one connected system. Risk frameworks, conditions tracking, court-ready documentation, and defensible records in a single platform.",
 };
 
-const phases = [
+const phases: FeatureShowcaseItem[] = [
   {
-    phase: "Risk Assessment",
-    body: "Standardized pre-trial risk frameworks applied consistently to inform release and conditions decisions.",
+    title: "Risk Assessment",
+    short: "Standardized frameworks applied consistently",
+    description:
+      "Standardized pre-trial risk frameworks applied consistently across every release decision — giving judges, prosecutors, and pre-trial officers the same defensible signal to work from.",
+    bullets: [
+      "Configurable to your jurisdiction's risk matrix",
+      "Same record across release, supervision, and revocation",
+      "Defensible chain of custody for every assessment",
+    ],
+    icon: "gauge",
   },
   {
-    phase: "Conditions Tracking",
-    body: "Court-ordered conditions, contacts, and check-ins managed in one place across the pre-trial team.",
+    title: "Conditions Tracking",
+    short: "Conditions and contacts in one place",
+    description:
+      "Court-ordered conditions, contacts, check-ins, and notes managed in one place across the pre-trial team — no spreadsheets, no missed handoffs.",
+    bullets: [
+      "Real-time visibility on every active condition",
+      "Automated alerts on missed contacts or violations",
+      "Shared view across the supervision team",
+    ],
+    icon: "clipboardCheck",
   },
   {
-    phase: "Court-Ready Documentation",
-    body: "Compliance records produced on demand for every appearance — same system the team uses daily.",
+    title: "Court-Ready Documentation",
+    short: "Compliance records on demand",
+    description:
+      "Compliance records produced on demand for every court appearance — generated from the same system the team uses daily, with no manual reformatting.",
+    bullets: [
+      "One-click export for hearings and court reviews",
+      "Chain of custody preserved end-to-end",
+      "Same record powers expert witness testimony",
+    ],
+    icon: "scale",
   },
   {
-    phase: "Continuous Risk Signal",
-    body: "Live risk and compliance signals — including from the All-In-One Band and Talitrix Score where applicable.",
+    title: "Continuous Risk Signal",
+    short: "Live signals across the lifecycle",
+    description:
+      "Continuous risk and compliance signals — including telemetry from the All-In-One Band and the Talitrix Score where applicable — surfaced where supervision teams already work.",
+    bullets: [
+      "Telemetry from the All-In-One Band integrated by default",
+      "Talitrix Score updates as new signals come in",
+      "Earlier intervention before violations are recorded",
+    ],
+    icon: "activity",
   },
 ];
 
@@ -36,32 +71,26 @@ const features = [
   {
     title: "All Pre-Trial Participants in One Place",
     body: "Monitored and non-monitored pre-trial populations on a single connected platform — no separate spreadsheets.",
-    icon: "users",
   },
   {
     title: "Faster, Better Release Decisions",
     body: "Risk and compliance signals available the moment a judge, prosecutor, or pre-trial officer needs them.",
-    icon: "gauge",
   },
   {
     title: "Court-Ready by Default",
     body: "Every check-in, alert, and condition status documented with a chain of custody you can stand behind.",
-    icon: "scale",
   },
   {
     title: "Reduced Failure-to-Appear",
     body: "Proactive alerts for upcoming court dates and condition gaps reduce no-shows and missed obligations.",
-    icon: "calendarCheck",
   },
   {
     title: "Earlier Intervention",
     body: "Surface compliance and risk signals early so teams can intervene before a violation is recorded.",
-    icon: "bell",
   },
   {
     title: "Connected to the Talitrix ONE Platform",
     body: "Inherits the intake record, integrates with ONE Jail Management System, and feeds the Talitrix Score continuously.",
-    icon: "link",
   },
 ];
 
@@ -81,11 +110,15 @@ export default function PretrialPage() {
             blur
           />
         }
+        subtitle="From release to resolution. Same continuous platform."
         body={
           <p>
-            Every pre-trial participant — monitored or not — in one place.
-            Risk frameworks, conditions tracking, and court-ready
-            documentation that hold up under scrutiny.
+            ONE Pre-Trial brings every pre-trial participant — whether they
+            are on electronic monitoring or not — into one connected system.
+            By unifying risk frameworks, conditions tracking, and court-ready
+            documentation in a single place, agencies gain clearer visibility
+            across caseloads and a defensible record behind every release and
+            supervision decision.
           </p>
         }
         background={
@@ -124,22 +157,7 @@ export default function PretrialPage() {
             Four pillars of pre-trial supervision.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-            {phases.map((p, i) => (
-              <div
-                key={p.phase}
-                className="bg-background p-6 sm:p-8 flex flex-col gap-4 min-h-[200px] sm:min-h-[220px]"
-              >
-                <span className="text-primary text-sm tracking-widest">
-                  0{i + 1}
-                </span>
-                <h3 className="text-2xl">{p.phase}</h3>
-                <p className="text-white/65 leading-relaxed text-sm">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FeaturesShowcase items={phases} />
         </div>
       </section>
 
@@ -161,7 +179,25 @@ export default function PretrialPage() {
           </div>
         </div>
 
-        <CapabilitiesScroller features={features} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {features.map((f, i) => (
+            <DepthCard
+              key={f.title}
+              title={f.title}
+              description={f.body}
+              width={340}
+              height={300}
+              borderRadius="20px"
+              maxRotation={10}
+              maxTranslation={12}
+              spotlight
+              spotlightColor="rgba(248, 122, 19, 0.2)"
+              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-6 flex flex-col justify-end"
+              revealAnimation="fade"
+              staggerDelay={70 + i * 25}
+            />
+          ))}
+        </div>
       </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">

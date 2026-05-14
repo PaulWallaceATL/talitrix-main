@@ -4,7 +4,10 @@ import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
-import CapabilitiesScroller from "@/components/CapabilitiesScroller";
+import DepthCard from "@/components/react-bits/depth-card";
+import FeaturesShowcase, {
+  type FeatureShowcaseItem,
+} from "@/components/FeaturesShowcase";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
@@ -13,22 +16,54 @@ export const metadata: Metadata = {
     "ONE Probation brings every probation participant — monitored or not — into one connected system. Caseload management, long-term tracking, risk signals, and defensible records in a single platform.",
 };
 
-const phases = [
+const phases: FeatureShowcaseItem[] = [
   {
-    phase: "Caseload Management",
-    body: "Case files, conditions, contacts, and notes managed in one place across the whole probation team.",
+    title: "Caseload Management",
+    short: "All cases in one place",
+    description:
+      "Case files, conditions, contacts, and notes managed in one place across the whole probation team — every officer working from the same record.",
+    bullets: [
+      "Single record per participant across the team",
+      "Conditions, contacts, and notes in one workflow",
+      "Built-in handoff visibility — no missing context",
+    ],
+    icon: "users",
   },
   {
-    phase: "Long-Term Tracking",
-    body: "Track sentence progress, treatment milestones, and restitution over the full supervision period.",
+    title: "Long-Term Tracking",
+    short: "Sentence and treatment progress",
+    description:
+      "Track sentence progress, treatment milestones, restitution, and program completion over the full supervision period — with the durability needed for multi-year cases.",
+    bullets: [
+      "Sentence progress and milestones in one timeline",
+      "Treatment, restitution, and program completion tracked",
+      "Built for multi-year, long-term supervision cases",
+    ],
+    icon: "calendarCheck",
   },
   {
-    phase: "Risk Tracking",
-    body: "Continuous risk and compliance signals — including from the All-In-One Band and Talitrix Score where applicable.",
+    title: "Risk Tracking",
+    short: "Continuous compliance signals",
+    description:
+      "Continuous risk and compliance signals — including telemetry from the All-In-One Band and the Talitrix Score where applicable — surfaced where probation teams already work.",
+    bullets: [
+      "Live signals from the All-In-One Band",
+      "Talitrix Score factored into every officer view",
+      "Trend changes visible before they become violations",
+    ],
+    icon: "trendingUp",
   },
   {
-    phase: "Earlier Intervention",
-    body: "Surface trend changes early so officers can intervene before a violation is recorded.",
+    title: "Earlier Intervention",
+    short: "Surface trends early",
+    description:
+      "Surface trend changes early so probation officers can intervene before a violation is recorded — supporting outcomes-focused supervision instead of reactive paperwork.",
+    bullets: [
+      "Trend alerts before condition gaps escalate",
+      "Officer-facing notifications, not after-the-fact reports",
+      "Outcome-focused workflow built around the participant",
+    ],
+    icon: "bell",
   },
 ];
 
@@ -75,11 +110,15 @@ export default function ProbationPage() {
             blur
           />
         }
+        subtitle="Outside the walls. Same continuous platform."
         body={
           <p>
-            Every probation participant — monitored or not — in one place.
-            Caseload management, risk tracking, and compliance reporting that
-            give your team time back for outcomes.
+            ONE Probation brings every probation participant into one
+            connected system — whether they are on electronic monitoring or
+            not. By unifying caseload management, risk tracking, and
+            compliance reporting in a single place, agencies gain clearer
+            visibility across caseloads and more time for the work that
+            drives outcomes.
           </p>
         }
         background={
@@ -118,22 +157,7 @@ export default function ProbationPage() {
             Four pillars of community supervision.
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border-gray border border-border-gray rounded-2xl overflow-hidden">
-            {phases.map((p, i) => (
-              <div
-                key={p.phase}
-                className="bg-background p-6 sm:p-8 flex flex-col gap-4 min-h-[200px] sm:min-h-[220px]"
-              >
-                <span className="text-primary text-sm tracking-widest">
-                  0{i + 1}
-                </span>
-                <h3 className="text-2xl">{p.phase}</h3>
-                <p className="text-white/65 leading-relaxed text-sm">
-                  {p.body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <FeaturesShowcase items={phases} />
         </div>
       </section>
 
@@ -156,7 +180,25 @@ export default function ProbationPage() {
           </div>
         </div>
 
-        <CapabilitiesScroller features={features} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {features.map((f, i) => (
+            <DepthCard
+              key={f.title}
+              title={f.title}
+              description={f.body}
+              width={340}
+              height={300}
+              borderRadius="20px"
+              maxRotation={10}
+              maxTranslation={12}
+              spotlight
+              spotlightColor="rgba(248, 122, 19, 0.2)"
+              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-6 flex flex-col justify-end"
+              revealAnimation="fade"
+              staggerDelay={70 + i * 25}
+            />
+          ))}
+        </div>
       </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">

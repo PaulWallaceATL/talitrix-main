@@ -2,67 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import {
-  Sparkles,
-  Network,
-  MapPin,
-  ShieldAlert,
-  HeartPulse,
-  ClipboardCheck,
-  ClipboardList,
-  Database,
-  DoorOpen,
-  FileMinus2,
-  Users,
-  Gauge,
-  Scale,
-  CalendarCheck,
-  Bell,
-  Link2,
-  Watch,
-  Building2,
-  Route,
-  Activity,
-  Brain,
-  Eye,
-  TrendingUp,
-  ScrollText,
-  ShieldCheck,
-  type LucideIcon,
-} from "lucide-react";
+import { ICONS, type CapabilityIconName } from "@/lib/icon-registry";
 
-// Icon registry — keys are stable strings that pages pass across the
-// RSC boundary. Lucide components live here on the client side only.
-// Add a new entry whenever a page wants an icon that isn't listed.
-const ICONS: Record<string, LucideIcon> = {
-  sparkles: Sparkles,
-  network: Network,
-  mapPin: MapPin,
-  shieldAlert: ShieldAlert,
-  heartPulse: HeartPulse,
-  clipboardCheck: ClipboardCheck,
-  clipboardList: ClipboardList,
-  database: Database,
-  doorOpen: DoorOpen,
-  fileMinus: FileMinus2,
-  users: Users,
-  gauge: Gauge,
-  scale: Scale,
-  calendarCheck: CalendarCheck,
-  bell: Bell,
-  link: Link2,
-  watch: Watch,
-  building: Building2,
-  route: Route,
-  activity: Activity,
-  brain: Brain,
-  eye: Eye,
-  trendingUp: TrendingUp,
-  scrollText: ScrollText,
-  shieldCheck: ShieldCheck,
-};
-
-export type CapabilityIconName = keyof typeof ICONS;
+export type { CapabilityIconName };
 
 export type CapabilityFeature = {
   title: string;
