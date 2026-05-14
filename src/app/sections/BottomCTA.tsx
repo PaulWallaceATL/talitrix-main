@@ -32,7 +32,7 @@ const BottomCTA = () => {
                 "inset 1px -1px 3px rgba(255, 255, 255, 0.5), inset -3px -1px 5px rgba(255, 255, 255, 0.5)",
             }}
           >
-            View the ecosystem
+            Explore Talitrix ONE
             <FiArrowUpRight className="size-5 sm:size-6 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
