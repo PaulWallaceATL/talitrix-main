@@ -83,7 +83,7 @@ const BandSupervisionSection = () => {
       const ctx = canvas?.getContext("2d");
       if (!section || !sticky || !canvas || !ctx) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const images: HTMLImageElement[] = FRAMES.map((idx) => {
         const img = new window.Image();
         img.src = getFrameSrc(idx);
@@ -269,14 +269,14 @@ const BandSupervisionSection = () => {
         </p>
       </div>
 
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-6 px-6 md:px-16 pt-12 md:pt-20 pb-24 md:pb-32 max-w-7xl mx-auto">
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-12 lg:gap-6 px-6 md:px-16 pt-12 md:pt-20 pb-24 md:pb-32 max-w-[1700px] mx-auto">
         {/* Sticky All-In-One Band column */}
         <div className="relative">
           <div
             ref={stickyRef}
             className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center"
           >
-            <div className="relative w-full aspect-square max-w-[1100px] mx-auto -ml-4 lg:-ml-20 xl:-ml-32 lg:scale-[2] lg:origin-right">
+            <div className="relative w-full aspect-square max-w-[1500px] mx-auto -ml-6 lg:-ml-32 xl:-ml-48">
               <div
                 className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.42),rgba(248,122,19,0.1)_45%,transparent_72%)] blur-2xl pointer-events-none"
                 aria-hidden
