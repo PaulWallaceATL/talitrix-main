@@ -74,16 +74,11 @@ export default function IntakePage() {
             blur
           />
         }
-        subtitle="Intake that powers every downstream module."
         body={
           <p>
-            ONE Intake centralizes booking and intake processing, establishing
-            the identity, classification, and initial assessments for every
-            individual entering the system. As the foundation for every
-            downstream ONE module, it ensures that accurate, comprehensive
-            data is captured once and carried forward across the system —
-            ultimately reducing administrative burden and preventing
-            information gaps.
+            Centralized booking, identity, classification, and initial
+            assessments — captured once at intake and carried forward across
+            every downstream Talitrix ONE module.
           </p>
         }
         background={

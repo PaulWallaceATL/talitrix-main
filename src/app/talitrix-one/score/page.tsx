@@ -90,16 +90,11 @@ export default function TalitrixScorePage() {
             blur
           />
         }
-        subtitle="Move from reactive supervision to proactive intervention."
         body={
           <p>
-            The Talitrix Score transforms behavioral data into measurable
-            intelligence, giving supervision teams earlier visibility into
-            risk, stronger context for intervention, and a defensible record
-            of participant behavior over time. By connecting alerts, activity,
-            and intervention history into one continuous view, agencies can
-            make more informed decisions and strengthen accountability across
-            supervision.
+            Behavioral data turned into measurable intelligence — earlier risk
+            visibility, stronger context for intervention, and a defensible
+            record of participant behavior over time.
           </p>
         }
         background={

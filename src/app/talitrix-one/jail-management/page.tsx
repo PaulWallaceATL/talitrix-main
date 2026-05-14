@@ -81,17 +81,11 @@ export default function JailManagementPage() {
             blur
           />
         }
-        subtitle="Inside the walls, on one continuous system."
         body={
           <p>
-            ONE Jail Management System (JMS) brings the full custody lifecycle
-            into one connected system — giving facility staff the visibility
-            to manage daily operations with greater continuity, accountability,
-            and efficiency. When paired with the Talitrix All-In-One Band, JMS extends
-            that visibility into participant movement, wellness, and facility
-            activity, creating a more complete picture of what&apos;s happening
-            inside the walls to support safer facilities and stronger
-            operational decision-making.
+            The full custody lifecycle on one connected system — managing
+            housing, movement, incidents, and compliance with the visibility
+            and accountability modern facilities need.
           </p>
         }
         background={

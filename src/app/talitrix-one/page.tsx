@@ -22,7 +22,7 @@ export default function TalitrixOnePage() {
         title={
           <StaggeredText
             as="h1"
-            text={"Talitrix ONE."}
+            text={"Talitrix ONE.\nOne Platform. End-to-End."}
             className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
@@ -32,10 +32,9 @@ export default function TalitrixOnePage() {
         }
         body={
           <p>
-            Talitrix ONE brings the All-In-One band and Inside and Outside
-            the Walls supervision together in one cohesive system built for
-            the full justice lifecycle — giving agencies the flexibility to
-            support different operational needs through modular technology.
+            The All-In-One Band and Inside and Outside the Walls supervision
+            in one cohesive, modular system — built for the full justice
+            lifecycle and the flexibility every agency needs.
           </p>
         }
         background={

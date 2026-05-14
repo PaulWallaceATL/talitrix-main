@@ -29,7 +29,14 @@ export default function TBandPage() {
             blur
           />
         }
-        subtitle="The first independent wrist-worn GPS monitoring device in the industry."
+        body={
+          <p>
+            The first independent wrist-worn GPS monitoring device — built for
+            both Inside and Outside the Walls supervision, with 3-Carrier SIM
+            connectivity, biometric sensing, and proximity-based tamper
+            detection.
+          </p>
+        }
         background={
           <div className="absolute inset-0 overflow-hidden bg-black">
             {/* Soft orange aurora behind the band, weighted to the
