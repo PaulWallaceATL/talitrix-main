@@ -99,31 +99,19 @@ const NAV_TREE: NavItem[] = [
   },
   {
     label: "Solutions",
-    href: "/solutions/sheriffs",
+    href: "/solutions/agencies",
     children: [
       {
-        label: "Sheriffs & Agency Leaders",
-        href: "/solutions/sheriffs",
+        label: "Agencies",
+        href: "/solutions/agencies",
         icon: "shieldStar",
-        desc: "Decisions you can stand behind.",
-      },
-      {
-        label: "Pretrial & Supervision",
-        href: "/solutions/pretrial",
-        icon: "team",
-        desc: "Proactive intervention, not reactive administration.",
-      },
-      {
-        label: "Courts & Legal",
-        href: "/solutions/courts",
-        icon: "scale",
-        desc: "Data integrity and institutional credibility.",
+        desc: "For sheriffs, county leadership, pretrial admin, courts, judges, and DAs.",
       },
       {
         label: "Participants",
         href: "/solutions/participants",
         icon: "userHeart",
-        desc: "Support, clarity, and dignity.",
+        desc: "Support, clarity, and dignity for the people you serve.",
       },
     ],
   },

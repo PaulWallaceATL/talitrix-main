@@ -6,25 +6,35 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import { Globe } from "@/components/react-bits/globe";
 
 export const metadata: Metadata = {
-  title: "For Courts & Legal Professionals | Talitrix Solutions",
+  title: "For Agencies | Talitrix Solutions",
   description:
-    "Talitrix ONE for Courts and Legal Professionals — court-admissible documentation, transparent Talitrix Score, expert witness support, and a defensible chain of custody.",
+    "Talitrix ONE for justice agencies — sheriffs, county leadership, pretrial administration, courts, judges, and district attorneys. One unified platform for operational visibility, defensible records, and accountability across the full justice lifecycle.",
 };
 
+const audienceTags = [
+  "Sheriffs",
+  "County Leadership",
+  "Pretrial & Probation Admin",
+  "Courts & Judges",
+  "District Attorneys",
+];
+
 const bullets = [
+  "Operational visibility across the full agency",
+  "Population & program pressure management",
+  "Unified participant activity & compliance view",
+  "Court-admissible documentation, on demand",
   "Secure chain of custody for evidentiary data",
   "Transparent, explainable Talitrix Score",
-  "Expert witness support",
-  "Reliable record for legal review",
+  "Supervisor T-App for live field access",
+  "Defensible record behind every decision",
 ];
 
 const otherSegments = [
-  { href: "/solutions/sheriffs", label: "Sheriffs & Agency Leaders" },
-  { href: "/solutions/pretrial", label: "Pretrial & Supervision" },
   { href: "/solutions/participants", label: "Participants" },
 ];
 
-export default function CourtsPage() {
+export default function AgenciesPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <section className="relative w-full overflow-hidden border-b border-border-gray">
@@ -51,11 +61,11 @@ export default function CourtsPage() {
 
         <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            03 · For Courts & Legal Professionals
+            01 · For Agencies
           </span>
           <StaggeredText
             as="h1"
-            text={"Data Integrity\nand Institutional Credibility."}
+            text={"Decisions You\nCan Stand Behind."}
             className="text-4xl sm:text-5xl md:text-7xl leading-[1.05] mb-6"
             segmentBy="words"
             duration={0.7}
@@ -63,9 +73,19 @@ export default function CourtsPage() {
             blur
           />
           <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed mb-6">
-            Court-admissible documentation and defensible behavioral
-            intelligence.
+            Built for sheriffs, county leadership, pretrial and probation
+            administration, courts, judges, and district attorneys.
           </p>
+          <div className="flex flex-wrap gap-2 mb-8">
+            {audienceTags.map((tag) => (
+              <span
+                key={tag}
+                className="text-xs sm:text-sm px-3 py-1.5 rounded-full border border-primary/30 bg-primary/[0.08] text-white/80"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
           <div className="flex flex-wrap gap-4 mt-8 md:mt-10">
             <CTAButton scrollTo="learn-more">Learn More</CTAButton>
             <CTAButton href="/contact" variant="secondary">
@@ -83,27 +103,45 @@ export default function CourtsPage() {
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <div className="lg:col-span-5 flex flex-col gap-4">
-            <span className="text-xs text-white/40 tracking-widest">03</span>
+            <span className="text-xs text-white/40 tracking-widest">01</span>
             <span className="text-primary text-xs uppercase tracking-[0.3em]">
-              For Courts & Legal Professionals
+              For Agencies
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mt-2">
-              What can be seen, documented, and defended.
+              One platform. Every role across the justice lifecycle.
             </h2>
             <p className="text-white/65 text-base sm:text-lg mt-4">
-              Greater confidence in sentencing and supervision decisions.
+              Stronger accountability under scrutiny. Stronger protection for
+              the communities you serve.
             </p>
           </div>
 
           <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
             <p className="text-base sm:text-lg text-white/75 leading-relaxed">
-              Every supervision decision depends on what can be seen,
-              documented, and defended. Talitrix captures behavioral data and
-              supervision records through a secure chain of custody, creating
-              a clear and reliable record for legal review. The Talitrix Score
-              is transparent, explainable, and backed by expert witness
-              support, giving courts greater confidence in sentencing and
-              supervision decisions.
+              Talitrix ONE provides the operational visibility agencies need
+              to manage population pressure, strengthen program oversight, and
+              improve efficiency across supervision. By connecting participant
+              activity, compliance records, and case history in one system,
+              Talitrix creates a secure, defensible record behind every
+              decision — helping agencies operate with greater accountability
+              under scrutiny and stronger protection for the communities they
+              serve.
+            </p>
+            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
+              For pretrial and community supervision teams, Talitrix ONE
+              delivers a single, unified view of participant activity,
+              compliance, and case history. The Supervisor T-App provides
+              instant access to live compliance data and court-ready
+              documentation — creating more time for active case management,
+              earlier intervention, and stronger participant outcomes.
+            </p>
+            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
+              For courts, judges, and district attorneys, Talitrix captures
+              behavioral data and supervision records through a secure chain
+              of custody — creating a clear, reliable record for legal review.
+              The Talitrix Score is transparent, explainable, and backed by
+              expert witness support, giving courts greater confidence in
+              sentencing and supervision decisions.
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {bullets.map((b) => (
@@ -133,14 +171,14 @@ export default function CourtsPage() {
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <div className="lg:col-span-5">
             <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-4">
-              See the rest of the lifecycle
+              Also designed for
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-              Every stakeholder. One platform.
+              The people you serve.
             </h2>
             <p className="text-white/65 mt-6 max-w-md leading-relaxed">
-              Talitrix ONE is shaped by the realities of every role across the
-              justice lifecycle.
+              Talitrix ONE supports both sides of the supervision relationship
+              — agencies and the participants in their care.
             </p>
           </div>
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
