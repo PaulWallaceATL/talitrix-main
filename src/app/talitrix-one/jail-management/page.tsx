@@ -34,6 +34,11 @@ const phases = [
 
 const features = [
   {
+    title: "ONE Intake",
+    body: "Centralized booking, identity, classification, and initial assessments — captured once and carried forward across the custody lifecycle.",
+    icon: "doorOpen",
+  },
+  {
     title: "Connected Operations",
     body: "Daily operations managed with greater continuity, accountability, and efficiency on one system.",
     icon: "network",
@@ -44,23 +49,18 @@ const features = [
     icon: "mapPin",
   },
   {
+    title: "Reduced Administrative Burden",
+    body: "Less paperwork, fewer duplicate fields, and less time at the booking desk for staff and participants.",
+    icon: "fileMinus",
+  },
+  {
     title: "Incident & Compliance",
     body: "Capture incidents, track responses, and produce compliance reports without leaving the system.",
     icon: "shieldAlert",
   },
   {
-    title: "Wellness Signals",
-    body: "Biometric telemetry from the All-In-One Band turns daily wellness checks into a continuous, defensible record.",
-    icon: "heartPulse",
-  },
-  {
-    title: "Audit Trails by Default",
-    body: "Every action and event is logged — clean, defensible records for oversight and review.",
-    icon: "clipboardCheck",
-  },
-  {
-    title: "Unified Custody Record",
-    body: "JMS shares its record with Pre-Trial & Probation and the Talitrix Score — one continuous picture.",
+    title: "Unified Custody Records",
+    body: "JMS shares its record with ONE Pre-Trial, ONE Probation, and the Talitrix Score — one continuous picture.",
     icon: "database",
   },
 ];
