@@ -190,11 +190,21 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           Biometric <br /> Sensors
         </div>
       </div>
-      {/* Middle-right callout: a horizontal connector line bridging the
-          two existing top-right and bottom-right callouts. */}
-      <div className="w-full absolute bottom-1/4">
+      {/* Middle-right callout: copy of the Tamper Proof bent line, anchored
+          one step higher so it sits parallel-above the Tamper Proof bend
+          (no crossover) and starts at the same right-of-band x position. */}
+      <div className="w-full absolute bottom-1/3 left-1/2">
+        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
+          <div
+            className="size-14 p-2 bg-white/15  rounded-lg"
+            style={{ boxShadow: infoGlass }}
+          >
+            <IoChatbubblesOutline className="size-full text-primary" />
+          </div>
+          2-Way <br /> Communication
+        </div>
         <svg
-          viewBox="0 0 472 30"
+          viewBox="0 0 465 136"
           className="info-line"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -221,33 +231,23 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
             </linearGradient>
           </defs>
           <path
-            d="M4 15H468"
+            d="M4 133.001H242.95C251.259 133.001 258.858 128.32 262.597 120.9L315.903 15.101C319.642 7.68089 327.241 3 335.55 3H461.5"
             stroke="#A7A7A7"
             strokeOpacity="0.4"
-            strokeWidth="1.5"
+            strokeWidth="2"
             strokeMiterlimit="1"
           />
           <path
             className="laser-path"
-            d="M4 15H468"
+            d="M4 133.001H242.95C251.259 133.001 258.858 128.32 262.597 120.9L315.903 15.101C319.642 7.68089 327.241 3 335.55 3H461.5"
             stroke="url(#laser-gradient-3)"
             strokeWidth="1.5"
             strokeLinecap="round"
             filter="url(#laser-glow-3)"
           />
-          <circle cx="468" cy="15" r="3" fill="#D9D9D9" />
-          <circle cx="3" cy="15" r="3" fill="#D9D9D9" />
+          <circle cx="462" cy="3" r="3" fill="#D9D9D9" />
+          <circle cx="3" cy="133" r="3" fill="#D9D9D9" />
         </svg>
-
-        <div className="absolute top-1/2 -translate-y-1/2 left-full text-center flex flex-col gap-2 items-center info-box w-25">
-          <div
-            className="size-14 p-2 bg-white/15  rounded-lg"
-            style={{ boxShadow: infoGlass }}
-          >
-            <IoChatbubblesOutline className="size-full text-primary" />
-          </div>
-          2-Way <br /> Communication
-        </div>
       </div>
       <div className="w-full absolute bottom-0 left-1/2">
         <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
