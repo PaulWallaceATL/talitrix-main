@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import { Globe } from "@/components/react-bits/globe";
+import FeaturesGrid, { type FeatureGridItem } from "@/components/FeaturesGrid";
 
 export const metadata: Metadata = {
   title: "For Participants | Talitrix Solutions",
@@ -11,11 +12,27 @@ export const metadata: Metadata = {
     "Talitrix for Participants — a wrist-worn All-In-One Band designed for dignity and a Participant App for proactive support, clear communication, and a pathway to success.",
 };
 
-const bullets = [
-  "Wrist-worn All-In-One Band designed for dignity",
-  "Participant App: clarity & support",
-  "Proactive alerts before violations",
-  "Pathway designed for success",
+const features: FeatureGridItem[] = [
+  {
+    title: "Wrist-worn All-In-One Band designed for dignity",
+    body: "Built to be worn without broadcasting justice involvement — preserving dignity in the workplace, at home, and in the community.",
+    icon: "shieldCheck",
+  },
+  {
+    title: "Participant App for clarity and support",
+    body: "A compliance support tool that helps participants understand their obligations and stay on track — clear communication, clear next steps.",
+    icon: "smartphone",
+  },
+  {
+    title: "Proactive alerts before a violation is recorded",
+    body: "Surface upcoming court dates, condition gaps, and at-risk behavior early — so participants can correct course before a violation happens.",
+    icon: "bell",
+  },
+  {
+    title: "A pathway designed for success, not paperwork",
+    body: "Built around dignity, privacy, and proactive support — focused on outcomes that help participants succeed, not punitive enforcement.",
+    icon: "route",
+  },
 ];
 
 const otherSegments = [
@@ -49,7 +66,7 @@ export default function ParticipantsPage() {
 
         <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            For Participants
+            02 · For Participants
           </span>
           <StaggeredText
             as="h1"
@@ -68,59 +85,44 @@ export default function ParticipantsPage() {
               Begin Registration
             </CTAButton>
             <CTAButton href="/talitrix-one/t-band" variant="secondary">
-              Learn about the All-In-One Band
+              Learn about the All in ONE Band
             </CTAButton>
           </div>
         </div>
       </section>
 
-      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden bg-white/[0.02]">
-        <div className="absolute -bottom-40 -left-32 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none" />
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+        <div className="absolute -top-40 -left-32 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            <span className="text-primary text-xs uppercase tracking-[0.3em]">
-              For Participants
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mt-2">
-              Removing barriers to rebuilding a life.
-            </h2>
-            <p className="text-white/65 text-base sm:text-lg mt-4">
-              Designed around dignity, privacy, and the support needed to
-              succeed.
-            </p>
+        <div className="relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
+            <div className="lg:col-span-5">
+              <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
+                What Participants Get
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
+                Designed around dignity, privacy, and success.
+              </h2>
+            </div>
+            <div className="lg:col-span-7 lg:pt-10">
+              <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
+                Talitrix removes the barriers between people committed to
+                rebuilding their lives and the support they need to do it —
+                built around dignity, clarity, and the outcomes that help
+                participants succeed.
+              </p>
+            </div>
           </div>
 
-          <div className="lg:col-span-7 flex flex-col gap-6 md:gap-8">
-            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
-              Talitrix removes the barriers between people committed to
-              rebuilding their lives and the support they need to do it. The
-              All-In-One Band is designed to be worn without broadcasting justice
-              involvement, preserving dignity in the workplace and community.
-              The Talitrix Participant App serves as a compliance support
-              tool, providing proactive alerts and clear communication to
-              help participants understand their obligations and correct
-              behavior before a violation is recorded.
-            </p>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {bullets.map((b) => (
-                <li
-                  key={b}
-                  className="flex gap-3 text-sm text-white/80 border border-border-gray rounded-lg p-4 bg-white/[0.02]"
-                >
-                  <span className="text-primary">✦</span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="pt-2 flex flex-wrap gap-4 sm:gap-6">
-              <CTAButton href="/participant-registration" variant="ghost">
-                Begin registration
-              </CTAButton>
-              <CTAButton href="/contact" variant="ghost">
-                Get support
-              </CTAButton>
-            </div>
+          <FeaturesGrid items={features} columns={2} />
+
+          <div className="mt-12 md:mt-16 flex flex-wrap gap-4 sm:gap-6">
+            <CTAButton href="/participant-registration" variant="ghost">
+              Begin registration
+            </CTAButton>
+            <CTAButton href="/contact" variant="ghost">
+              Get support
+            </CTAButton>
           </div>
         </div>
       </section>

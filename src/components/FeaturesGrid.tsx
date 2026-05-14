@@ -12,7 +12,7 @@ export type FeatureGridItem = {
 interface Props {
   items: FeatureGridItem[];
   /** Number of columns at the lg+ breakpoint. Defaults to 4. */
-  columns?: 3 | 4;
+  columns?: 2 | 3 | 4;
 }
 
 /**
@@ -24,9 +24,11 @@ interface Props {
  */
 export default function FeaturesGrid({ items, columns = 4 }: Props) {
   const gridCols =
-    columns === 3
-      ? "sm:grid-cols-2 lg:grid-cols-3"
-      : "sm:grid-cols-2 lg:grid-cols-4";
+    columns === 2
+      ? "sm:grid-cols-2"
+      : columns === 3
+        ? "sm:grid-cols-2 lg:grid-cols-3"
+        : "sm:grid-cols-2 lg:grid-cols-4";
 
   return (
     <div
