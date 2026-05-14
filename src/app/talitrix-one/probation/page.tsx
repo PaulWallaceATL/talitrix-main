@@ -4,7 +4,7 @@ import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
-import DepthCard from "@/components/react-bits/depth-card";
+import CapabilitiesScroller from "@/components/CapabilitiesScroller";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
@@ -160,25 +160,7 @@ export default function ProbationPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-          {features.map((f, i) => (
-            <DepthCard
-              key={f.title}
-              title={f.title}
-              description={f.body}
-              width={340}
-              height={300}
-              borderRadius="20px"
-              maxRotation={10}
-              maxTranslation={12}
-              spotlight
-              spotlightColor="rgba(248, 122, 19, 0.2)"
-              contentClassName="bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/10 backdrop-blur-md p-6 flex flex-col justify-end"
-              revealAnimation="fade"
-              staggerDelay={70 + i * 25}
-            />
-          ))}
-        </div>
+        <CapabilitiesScroller features={features} />
       </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
