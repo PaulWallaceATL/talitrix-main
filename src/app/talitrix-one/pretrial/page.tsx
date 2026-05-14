@@ -5,6 +5,14 @@ import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
 import CapabilitiesScroller from "@/components/CapabilitiesScroller";
+import {
+  Users,
+  Gauge,
+  Scale,
+  CalendarCheck,
+  Bell,
+  Link2,
+} from "lucide-react";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = {
@@ -36,26 +44,32 @@ const features = [
   {
     title: "All Pre-Trial Participants in One Place",
     body: "Monitored and non-monitored pre-trial populations on a single connected platform — no separate spreadsheets.",
+    icon: Users,
   },
   {
     title: "Faster, Better Release Decisions",
     body: "Risk and compliance signals available the moment a judge, prosecutor, or pre-trial officer needs them.",
+    icon: Gauge,
   },
   {
     title: "Court-Ready by Default",
     body: "Every check-in, alert, and condition status documented with a chain of custody you can stand behind.",
+    icon: Scale,
   },
   {
     title: "Reduced Failure-to-Appear",
     body: "Proactive alerts for upcoming court dates and condition gaps reduce no-shows and missed obligations.",
+    icon: CalendarCheck,
   },
   {
     title: "Earlier Intervention",
     body: "Surface compliance and risk signals early so teams can intervene before a violation is recorded.",
+    icon: Bell,
   },
   {
     title: "Connected to the Whole ONE Platform",
     body: "Inherits the intake record, integrates with ONE Jail Management System, and feeds the Talitrix Score continuously.",
+    icon: Link2,
   },
 ];
 

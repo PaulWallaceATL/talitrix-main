@@ -5,6 +5,14 @@ import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
 import CapabilitiesScroller from "@/components/CapabilitiesScroller";
+import {
+  Network,
+  MapPin,
+  ShieldAlert,
+  HeartPulse,
+  ClipboardCheck,
+  Database,
+} from "lucide-react";
 import BandSupervisionSection from "@/components/BandSupervisionSection";
 
 export const metadata: Metadata = {
@@ -36,26 +44,32 @@ const features = [
   {
     title: "Connected Operations",
     body: "Daily operations managed with greater continuity, accountability, and efficiency on one system.",
+    icon: Network,
   },
   {
     title: "Real-Time Housing & Movement",
     body: "See where people are, when they moved, and what's happening in each housing unit — live.",
+    icon: MapPin,
   },
   {
     title: "Incident & Compliance",
     body: "Capture incidents, track responses, and produce compliance reports without leaving the system.",
+    icon: ShieldAlert,
   },
   {
     title: "Wellness Signals",
     body: "Biometric telemetry from the All-In-One Band turns daily wellness checks into a continuous, defensible record.",
+    icon: HeartPulse,
   },
   {
     title: "Audit Trails by Default",
     body: "Every action and event is logged — clean, defensible records for oversight and review.",
+    icon: ClipboardCheck,
   },
   {
     title: "Unified Custody Record",
     body: "JMS shares its record with Pre-Trial & Probation and the Talitrix Score — one continuous picture.",
+    icon: Database,
   },
 ];
 
