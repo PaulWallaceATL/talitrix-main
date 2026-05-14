@@ -3,95 +3,11 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { useRef, type ReactNode } from "react";
-import type { IconType } from "react-icons";
+import { useRef } from "react";
 import { IoMdFingerPrint } from "react-icons/io";
-import {
-  IoChatbubblesOutline,
-  IoFitnessOutline,
-  IoLockClosedOutline,
-  IoSwapHorizontalOutline,
-  IoWifiOutline,
-} from "react-icons/io5";
+import { IoChatbubblesOutline, IoShieldCheckmarkOutline } from "react-icons/io5";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
-
-type CalloutSide = "left" | "right";
-type CalloutPosition = "top" | "middle" | "bottom";
-
-interface CalloutSpec {
-  side: CalloutSide;
-  position: CalloutPosition;
-  Icon: IconType;
-  label: ReactNode;
-}
-
-// Three callouts per side. Right side keeps the original Biometric Sensors
-// at the top and Tamper Proof (formerly "Unique Lock") at the bottom, with
-// 2-Way Communication added in the middle. Left side adds three more band
-// features in the same vertical rhythm.
-const CALLOUTS: CalloutSpec[] = [
-  {
-    side: "right",
-    position: "top",
-    Icon: IoMdFingerPrint,
-    label: (
-      <>
-        Biometric <br /> Sensors
-      </>
-    ),
-  },
-  {
-    side: "right",
-    position: "middle",
-    Icon: IoChatbubblesOutline,
-    label: (
-      <>
-        2-Way <br /> Communication
-      </>
-    ),
-  },
-  {
-    side: "right",
-    position: "bottom",
-    Icon: IoLockClosedOutline,
-    label: (
-      <>
-        Tamper <br /> Proof
-      </>
-    ),
-  },
-  {
-    side: "left",
-    position: "top",
-    Icon: IoWifiOutline,
-    label: (
-      <>
-        3-Carrier SIM <br /> + WiFi
-      </>
-    ),
-  },
-  {
-    side: "left",
-    position: "middle",
-    Icon: IoFitnessOutline,
-    label: (
-      <>
-        Heart Rate <br /> &amp; SpO₂
-      </>
-    ),
-  },
-  {
-    side: "left",
-    position: "bottom",
-    Icon: IoSwapHorizontalOutline,
-    label: (
-      <>
-        Replaceable <br /> Straps
-      </>
-    ),
-  },
-];
 
 const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -181,7 +97,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           clipPath: "inset(0 100% 0 0)",
           ease: "power3.inOut",
           duration: 1.5,
-          delay: i * 0.18,
+          delay: i * 0.3,
         },
         0,
       );
@@ -194,7 +110,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           ease: "power3.inOut",
           duration: 0.1,
           repeat: 1,
-          delay: i * 0.18,
+          delay: i * 0.3,
         },
         1.3,
       );
@@ -210,180 +126,191 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
         strokeDashoffset: -length,
         duration: 2,
         repeat: -1,
-        delay: i * 0.6,
+        delay: i * 1,
         ease: "none",
       });
     });
   });
-
   return (
     <div {...props} ref={sectionRef} id="infoPaths">
-      {/* Shared SVG defs (filter + gradients) so each callout reuses one
-          glow filter and one of two laser gradients (left-to-right vs
-          right-to-left). Sized 0/0 so it doesn't take layout space. */}
-      <svg
-        className="absolute w-0 h-0 pointer-events-none"
-        aria-hidden
-        focusable="false"
-      >
-        <defs>
-          <filter
-            id="laser-glow-shared"
-            x="-20%"
-            y="-20%"
-            width="140%"
-            height="140%"
-          >
-            <feGaussianBlur stdDeviation="6" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <linearGradient id="laser-grad-ltr" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
-            <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
-            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
-          </linearGradient>
-          <linearGradient id="laser-grad-rtl" x1="1" y1="0" x2="0" y2="0">
-            <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
-            <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
-            <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
-          </linearGradient>
-        </defs>
-      </svg>
+      <div className="w-full absolute bottom-1/2">
+        <svg
+          viewBox="0 0 479 315"
+          className="info-line"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <filter
+              id="laser-glow-1"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
+            >
+              <feGaussianBlur stdDeviation="8" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <linearGradient id="laser-gradient-1" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
+              <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M4 309.005L238.862 313.49C248.225 313.669 256.675 307.901 259.919 299.117L363.978 17.3778C367.169 8.73765 375.405 3.00003 384.615 3.00009L476.5 3.00061"
+            stroke="#A7A7A7"
+            strokeOpacity="0.4"
+            strokeWidth="1.5"
+            strokeMiterlimit="1"
+          />
+          <path
+            className="laser-path"
+            d="M4 309.005L238.862 313.49C248.225 313.669 256.675 307.901 259.919 299.117L363.978 17.3778C367.169 8.73765 375.405 3.00003 384.615 3.00009L476.5 3.00061"
+            stroke="url(#laser-gradient-1)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            filter="url(#laser-glow-1)"
+          />
+          <circle cx="476" cy="3" r="3" fill="#D9D9D9" />
+          <circle cx="3" cy="309" r="3" fill="#D9D9D9" />
+        </svg>
 
-      {CALLOUTS.map((c, i) => (
-        <CalloutBlock key={`${c.side}-${c.position}-${i}`} {...c} />
-      ))}
+        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
+          <div
+            className="size-14 p-2 bg-white/15  rounded-lg"
+            style={{ boxShadow: infoGlass }}
+          >
+            <IoMdFingerPrint className="size-full text-primary" />
+          </div>
+          Biometric <br /> Sensors
+        </div>
+      </div>
+      {/* Middle-right callout: a horizontal connector line bridging the
+          two existing top-right and bottom-right callouts. */}
+      <div className="w-full absolute bottom-1/4">
+        <svg
+          viewBox="0 0 472 30"
+          className="info-line"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <filter
+              id="laser-glow-3"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
+            >
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <linearGradient id="laser-gradient-3" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
+              <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M4 15H468"
+            stroke="#A7A7A7"
+            strokeOpacity="0.4"
+            strokeWidth="1.5"
+            strokeMiterlimit="1"
+          />
+          <path
+            className="laser-path"
+            d="M4 15H468"
+            stroke="url(#laser-gradient-3)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            filter="url(#laser-glow-3)"
+          />
+          <circle cx="468" cy="15" r="3" fill="#D9D9D9" />
+          <circle cx="3" cy="15" r="3" fill="#D9D9D9" />
+        </svg>
+
+        <div className="absolute top-1/2 -translate-y-1/2 left-full text-center flex flex-col gap-2 items-center info-box w-25">
+          <div
+            className="size-14 p-2 bg-white/15  rounded-lg"
+            style={{ boxShadow: infoGlass }}
+          >
+            <IoChatbubblesOutline className="size-full text-primary" />
+          </div>
+          2-Way <br /> Communication
+        </div>
+      </div>
+      <div className="w-full absolute bottom-0 left-1/2">
+        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
+          <div
+            className="size-14 p-2 bg-white/15  rounded-lg"
+            style={{ boxShadow: infoGlass }}
+          >
+            <IoShieldCheckmarkOutline className="size-full text-primary" />
+          </div>
+          Tamper <br /> Proof
+        </div>
+        <svg
+          viewBox="0 0 465 136"
+          className="info-line"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <filter
+              id="laser-glow-2"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
+            >
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <linearGradient id="laser-gradient-2" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
+              <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
+              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M4 133.001H242.95C251.259 133.001 258.858 128.32 262.597 120.9L315.903 15.101C319.642 7.68089 327.241 3 335.55 3H461.5"
+            stroke="#A7A7A7"
+            strokeOpacity="0.4"
+            strokeWidth="2"
+            strokeMiterlimit="1"
+          />
+          <path
+            className="laser-path"
+            d="M4 133.001H242.95C251.259 133.001 258.858 128.32 262.597 120.9L315.903 15.101C319.642 7.68089 327.241 3 335.55 3H461.5"
+            stroke="url(#laser-gradient-2)"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            filter="url(#laser-glow-2)"
+          />
+          <circle cx="462" cy="3" r="3" fill="#D9D9D9" />
+          <circle cx="3" cy="133" r="3" fill="#D9D9D9" />
+        </svg>
+      </div>
     </div>
   );
 };
 
 export default InfoPaths;
-
-function CalloutBlock({ side, position, Icon, label }: CalloutSpec) {
-  const isRight = side === "right";
-  const isMid = position === "middle";
-
-  // Block size: mid-row uses a short horizontal connector; top/bottom use
-  // a wider elbow connector.
-  const W = isMid ? 320 : 440;
-  const H = isMid ? 60 : 180;
-
-  // Path: starts near the watch (inner edge of block) and ends at the
-  // outer corner where the label sits.
-  // Right side, top:    inner-bottom -> outer-top    (elbow up)
-  // Right side, middle: inner-mid    -> outer-mid    (straight)
-  // Right side, bottom: inner-top    -> outer-bottom (elbow down)
-  // Left side mirrors x.
-  const inset = 4;
-  const innerX = isRight ? inset : W - inset;
-  const outerX = isRight ? W - inset : inset;
-  let pathD: string;
-  let endY: number;
-  if (position === "middle") {
-    pathD = `M ${innerX} ${H / 2} L ${outerX} ${H / 2}`;
-    endY = H / 2;
-  } else if (position === "top") {
-    // Inner-bottom -> outer-top via S-curve.
-    const innerY = H - inset;
-    endY = inset;
-    const c1x = isRight ? W * 0.42 : W * 0.58;
-    const c2x = isRight ? W * 0.58 : W * 0.42;
-    pathD = `M ${innerX} ${innerY} C ${c1x} ${innerY} ${c2x} ${endY} ${outerX} ${endY}`;
-  } else {
-    // Inner-top -> outer-bottom via S-curve.
-    const innerY = inset;
-    endY = H - inset;
-    const c1x = isRight ? W * 0.42 : W * 0.58;
-    const c2x = isRight ? W * 0.58 : W * 0.42;
-    pathD = `M ${innerX} ${innerY} C ${c1x} ${innerY} ${c2x} ${endY} ${outerX} ${endY}`;
-  }
-
-  // Block container positioning within InfoPaths:
-  //   right side -> right: 0 (with horizontal label cluster spilling outward)
-  //   left  side -> left:  0
-  //   top    -> anchored to InfoPaths top
-  //   bottom -> anchored to InfoPaths bottom
-  //   middle -> vertical center of InfoPaths
-  const containerStyle: React.CSSProperties = { width: W, height: H };
-  if (isRight) containerStyle.right = 0;
-  else containerStyle.left = 0;
-  if (position === "top") containerStyle.top = 0;
-  else if (position === "bottom") containerStyle.bottom = 0;
-  else {
-    containerStyle.top = "50%";
-    containerStyle.transform = "translateY(-50%)";
-  }
-
-  // Label sits adjacent to the path endpoint. Vertically: above for top,
-  // below for bottom, centered for middle. Horizontally pinned to the
-  // outer edge of the block.
-  const labelStyle: React.CSSProperties = {};
-  if (isRight) labelStyle.right = -10;
-  else labelStyle.left = -10;
-  if (position === "top") labelStyle.top = -56;
-  else if (position === "bottom") labelStyle.bottom = -56;
-  else {
-    labelStyle.top = "50%";
-    labelStyle.transform = "translateY(-50%)";
-    if (isRight) labelStyle.right = -120;
-    else labelStyle.left = -120;
-  }
-
-  const gradId = isRight ? "laser-grad-ltr" : "laser-grad-rtl";
-  // Label-row alignment: right-side stacks center-right, left-side
-  // center-left, middle stacks centered to the side of the line.
-  const labelAlign = isRight ? "items-center" : "items-center";
-
-  return (
-    <div className="absolute" style={containerStyle}>
-      <svg
-        viewBox={`0 0 ${W} ${H}`}
-        className="info-line absolute inset-0 w-full h-full overflow-visible"
-        fill="none"
-        preserveAspectRatio="none"
-      >
-        <path
-          d={pathD}
-          stroke="#A7A7A7"
-          strokeOpacity="0.4"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <path
-          className="laser-path"
-          d={pathD}
-          stroke={`url(#${gradId})`}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          filter="url(#laser-glow-shared)"
-        />
-        <circle
-          cx={outerX}
-          cy={endY}
-          r="3"
-          fill="#D9D9D9"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
-      <div
-        className={`info-box absolute text-center flex flex-col gap-2 ${labelAlign} w-28 leading-tight text-sm`}
-        style={labelStyle}
-      >
-        <div
-          className="size-12 p-2 bg-white/15 rounded-lg"
-          style={{ boxShadow: infoGlass }}
-        >
-          <Icon className="size-full text-primary" />
-        </div>
-        {label}
-      </div>
-    </div>
-  );
-}
 
 const infoGlass =
   "inset 0px 0px 1.8px rgba(255, 255, 255, 0.98), inset 1px -2px 4.3px rgba(255, 255, 255, 0.44)";
