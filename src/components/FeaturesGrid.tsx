@@ -50,10 +50,10 @@ export default function FeaturesGrid({ items, columns = 4 }: Props) {
             <div className="size-11 rounded-xl bg-white/[0.04] border border-border-gray flex items-center justify-center text-primary mb-1">
               <Icon className="w-5 h-5" strokeWidth={1.6} />
             </div>
-            <h3 className="text-base sm:text-lg text-white leading-snug">
+            <h3 className="text-base sm:text-lg text-white leading-snug min-h-[2lh]">
               {item.title}
             </h3>
-            <p className="text-sm text-white/60 leading-relaxed">
+            <p className="text-sm text-white/60 leading-relaxed min-h-[3lh]">
               {item.body}
             </p>
           </motion.div>

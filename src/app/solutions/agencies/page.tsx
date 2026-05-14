@@ -24,7 +24,7 @@ const audienceTags = [
 const features: FeatureGridItem[] = [
   {
     title: "Operational visibility across the full agency",
-    body: "One connected view of custody, supervision, and field operations — so leadership sees the whole picture in real time, not after the fact.",
+    body: "One connected view of custody, supervision, and field operations — so leadership sees the whole picture in real time.",
     icon: "eye",
   },
   {
@@ -48,18 +48,18 @@ const features: FeatureGridItem[] = [
     icon: "lock",
   },
   {
-    title: "Transparent, explainable Talitrix Score",
+    title: "Transparent, explainable Talitrix Score for every case",
     body: "A behavioral score that's transparent and explainable end-to-end — every contributing signal visible to operators and reviewers.",
     icon: "barChart",
   },
   {
-    title: "Supervisor T-App for live field access",
-    body: "Live compliance data and court-ready documentation in the field — so supervisors and officers act on real information, not yesterday's report.",
+    title: "Supervisor T-App for live, court-ready field access",
+    body: "Live compliance data and court-ready documentation in the field — so officers act on real information, not yesterday's report.",
     icon: "smartphone",
   },
   {
-    title: "Defensible record behind every decision",
-    body: "Every alert, contact, and intervention captured with the durability and auditability needed under scrutiny.",
+    title: "Defensible record behind every supervision decision",
+    body: "Every alert, contact, and intervention captured with the durability and auditability needed to hold up under scrutiny.",
     icon: "shieldCheck",
   },
 ];
@@ -136,17 +136,16 @@ export default function AgenciesPage() {
         <div className="absolute -top-40 -right-32 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none" />
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            <span className="text-xs text-white/40 tracking-widest">01</span>
-            <span className="text-primary text-xs uppercase tracking-[0.3em]">
+          <div className="lg:col-span-5">
+            <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
               Who We Serve
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight mt-2">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
               One platform. Every role across the justice lifecycle.
             </h2>
           </div>
 
-          <div className="lg:col-span-7 flex flex-col gap-4">
+          <div className="lg:col-span-7 lg:pt-10 flex flex-col gap-4">
             <p className="text-base sm:text-lg text-white/75 leading-relaxed">
               Talitrix ONE supports every role in the justice lifecycle — from
               custody and field operations to supervision programs, the bench,
@@ -176,7 +175,7 @@ export default function AgenciesPage() {
                 Built for the realities of running an agency.
               </h2>
             </div>
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 lg:pt-10">
               <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
                 Operational visibility, defensible records, and accountability
                 across the full lifecycle — purpose-built for the way modern
