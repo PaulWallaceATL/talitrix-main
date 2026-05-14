@@ -20,12 +20,12 @@ const ShaderHero = ({
   children,
 }: ShaderHeroProps) => {
   return (
-    <section className="relative w-full overflow-hidden border-b border-border-gray">
+    <section className="relative w-full min-h-screen flex items-center overflow-hidden border-b border-border-gray">
       <div className="absolute inset-0 z-0">{background}</div>
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-background/30 to-background pointer-events-none" />
 
       <div
-        className={`relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl ${
+        className={`relative z-10 w-full px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl ${
           align === "center" ? "mx-auto text-center" : ""
         }`}
       >
