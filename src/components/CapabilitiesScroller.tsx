@@ -2,26 +2,82 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { Sparkles, type LucideIcon } from "lucide-react";
+import {
+  Sparkles,
+  Network,
+  MapPin,
+  ShieldAlert,
+  HeartPulse,
+  ClipboardCheck,
+  Database,
+  Users,
+  Gauge,
+  Scale,
+  CalendarCheck,
+  Bell,
+  Link2,
+  Watch,
+  Building2,
+  Route,
+  Activity,
+  Brain,
+  Eye,
+  TrendingUp,
+  ScrollText,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
+
+// Icon registry — keys are stable strings that pages pass across the
+// RSC boundary. Lucide components live here on the client side only.
+// Add a new entry whenever a page wants an icon that isn't listed.
+const ICONS: Record<string, LucideIcon> = {
+  sparkles: Sparkles,
+  network: Network,
+  mapPin: MapPin,
+  shieldAlert: ShieldAlert,
+  heartPulse: HeartPulse,
+  clipboardCheck: ClipboardCheck,
+  database: Database,
+  users: Users,
+  gauge: Gauge,
+  scale: Scale,
+  calendarCheck: CalendarCheck,
+  bell: Bell,
+  link: Link2,
+  watch: Watch,
+  building: Building2,
+  route: Route,
+  activity: Activity,
+  brain: Brain,
+  eye: Eye,
+  trendingUp: TrendingUp,
+  scrollText: ScrollText,
+  shieldCheck: ShieldCheck,
+};
+
+export type CapabilityIconName = keyof typeof ICONS;
 
 export type CapabilityFeature = {
   title: string;
   body: string;
   /** Optional small uppercase orange label above the body copy. */
   eyebrow?: string;
-  /** Optional Lucide icon. Falls back to `defaultIcon` (or Sparkles). */
-  icon?: LucideIcon;
+  /**
+   * Optional icon name (key into the ICONS registry). Falls back to
+   * `defaultIcon` (or `'sparkles'`). Pages pass strings rather than
+   * Lucide components so the data can cross the RSC boundary safely.
+   */
+  icon?: CapabilityIconName;
 };
 
 interface Props {
   features: CapabilityFeature[];
-  /** Used for any feature that doesn't supply its own icon. */
-  defaultIcon?: LucideIcon;
+  /** Used for any feature that doesn't supply its own icon name. */
+  defaultIcon?: CapabilityIconName;
 }
 
-// Rotating palette for the per-card blob glow + number-chip hover color so
-// the row of cards reads as visually distinct without each page having to
-// hand-pick colors.
+// Rotating palette for the per-card blob glow + number-chip hover color.
 const BLOBS = [
   "rgba(248, 122, 19, 0.85)",
   "rgba(255, 165, 80, 0.85)",
@@ -32,15 +88,15 @@ const BLOBS = [
 ];
 
 /**
- * Horizontal snap-scroll of capability cards. Mirrors the visual idiom of
- * PlatformModulesScroller and BandFeaturesScroller: icon + number-badge
- * row, optional orange eyebrow, hover-reveal body with word stagger, and
- * the title + numbered chip pinned to the bottom of the card. Cards
- * fade-and-rise into view on scroll.
+ * Horizontal snap-scroll of capability cards. Mirrors the visual idiom
+ * of PlatformModulesScroller and BandFeaturesScroller: icon +
+ * number-badge row, optional orange eyebrow, hover-reveal body with
+ * word stagger, and the title + numbered chip pinned to the bottom of
+ * the card. Cards fade-and-rise into view on scroll.
  */
 export default function CapabilitiesScroller({
   features,
-  defaultIcon = Sparkles,
+  defaultIcon = "sparkles",
 }: Props) {
   return (
     <div className="-mx-6 md:-mx-16">
@@ -67,7 +123,7 @@ function FeatureCard({
 }: {
   feature: CapabilityFeature;
   index: number;
-  defaultIcon: LucideIcon;
+  defaultIcon: CapabilityIconName;
 }) {
   const [hovered, setHovered] = useState(false);
   const [hoverCapable, setHoverCapable] = useState(true);
@@ -81,7 +137,7 @@ function FeatureCard({
   }, []);
 
   const reveal = hoverCapable ? hovered : true;
-  const Icon = feature.icon ?? defaultIcon;
+  const Icon = ICONS[feature.icon ?? defaultIcon] ?? ICONS.sparkles;
   const number = String(index + 1).padStart(2, "0");
   const blob = BLOBS[index % BLOBS.length];
   const words = feature.body.split(" ");
