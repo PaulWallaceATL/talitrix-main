@@ -21,7 +21,7 @@ const phases: FeatureShowcaseItem[] = [
     title: "Risk Assessment",
     short: "Standardized frameworks applied consistently",
     description:
-      "Standardized pre-trial risk frameworks applied consistently across every release decision — giving judges, prosecutors, and pre-trial officers the same defensible signal to work from.",
+      "Standardized pre-trial risk frameworks applied consistently — giving judges, prosecutors, and officers the same defensible signal.",
     bullets: [
       "Configurable to your jurisdiction's risk matrix",
       "Same record across release, supervision, and revocation",
@@ -57,7 +57,7 @@ const phases: FeatureShowcaseItem[] = [
     title: "Continuous Risk Signal",
     short: "Live signals across the lifecycle",
     description:
-      "Continuous risk and compliance signals — including telemetry from the All-In-One Band and the Talitrix Score where applicable — surfaced where supervision teams already work.",
+      "Continuous risk and compliance signals — including telemetry from the All-In-One Band and the Talitrix Score — surfaced where supervision teams already work.",
     bullets: [
       "Telemetry from the All-In-One Band integrated by default",
       "Talitrix Score updates as new signals come in",
