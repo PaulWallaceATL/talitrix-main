@@ -23,8 +23,8 @@ const Footer = () => {
             className="self-start object-contain"
           />
           <p className="text-white/60 max-w-xs leading-relaxed">
-            The new standard in monitoring and supervision technology.
-            One platform. Complete continuity.
+            The new standard in monitoring and supervision technology. One
+            platform. Complete continuity.
           </p>
           <div className="flex flex-wrap gap-3 pt-2">
             <Link
@@ -82,7 +82,9 @@ const Footer = () => {
 
       <div className="relative z-10 border-t border-border-gray px-6 md:px-16 py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs text-white/50">
         <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-          <span>© {new Date().getFullYear()} Talitrix. All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} Talitrix. All rights reserved.
+          </span>
           <span className="hidden sm:inline text-white/25">•</span>
           <span>U.S. Patent No. 11,507,909</span>
         </div>
