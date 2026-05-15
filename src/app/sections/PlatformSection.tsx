@@ -66,46 +66,80 @@ const PlatformSection = () => {
       },
     });
 
-    const tl2 = gsap.timeline({
-      scrollTrigger: {
-        trigger: platform,
-        start: "top top",
-        end: "+=400%",
-        pin: true,
-        pinSpacing: true,
-        scrub: true,
+    // Pin timeline. The watchscene slide is breakpoint-dependent (the
+    // watch image is much larger on mobile, so a partial slide would
+    // still overlap the cards), so the whole timeline lives inside
+    // matchMedia and gets rebuilt when crossing 768px.
+    const mm = gsap.matchMedia();
+    mm.add(
+      {
+        isDesktop: "(min-width: 768px)",
+        isMobile: "(max-width: 767px)",
       },
-    });
-    tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
-    tl2.to("#watchscene", { x: "-22%", delay: 0.1, ease: "power4.inOut" }, 0);
-    tl2.to(
-      "#watchscene",
-      { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
-      0.8,
-    );
-    tl2.to(cardRef.current, { scale: 2.5, y: -50 }, 0.8);
-    tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
-    tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
-    tl2.to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8);
-    tl2.to(".platform-card-2", { x: -400, duration: 0.3 }, 0.8);
+      (context) => {
+        const isMobile = context.conditions?.isMobile === true;
 
-    tl2.from(
-      h2b.lines,
-      {
-        y: "100%",
-        stagger: 0.2,
-        duration: 0.5,
+        const tl2 = gsap.timeline({
+          scrollTrigger: {
+            trigger: platform,
+            start: "top top",
+            end: "+=400%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+          },
+        });
+        tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
+
+        if (isMobile) {
+          tl2.to(
+            "#watchscene",
+            { x: "-100%", delay: 0.1, ease: "power1.in" },
+            0,
+          );
+          tl2.to(
+            "#watchscene",
+            { opacity: 0, delay: 0.2, ease: "power1.in" },
+            0,
+          );
+        } else {
+          tl2.to(
+            "#watchscene",
+            { x: "-22%", delay: 0.1, ease: "power4.inOut" },
+            0,
+          );
+          tl2.to(
+            "#watchscene",
+            { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
+            0.8,
+          );
+        }
+
+        tl2.to(cardRef.current, { scale: 2.5, y: -50 }, 0.8);
+        tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
+        tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
+        tl2.to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8);
+        tl2.to(".platform-card-2", { x: -400, duration: 0.3 }, 0.8);
+
+        tl2.from(
+          h2b.lines,
+          {
+            y: "100%",
+            stagger: 0.2,
+            duration: 0.5,
+          },
+          0.9,
+        );
+        tl2.from(
+          p.lines,
+          {
+            y: "100%",
+            stagger: 0.1,
+            duration: 0.3,
+          },
+          0.9,
+        );
       },
-      0.9,
-    );
-    tl2.from(
-      p.lines,
-      {
-        y: "100%",
-        stagger: 0.1,
-        duration: 0.3,
-      },
-      0.9,
     );
 
     // Lower the global #watchscene canvas to align with the fanned card
@@ -119,7 +153,7 @@ const PlatformSection = () => {
       "#watchscene",
       { y: 0 },
       {
-        y: 80,
+        y: 0,
         duration: 0.45,
         ease: "power2.out",
         scrollTrigger: {
@@ -133,7 +167,7 @@ const PlatformSection = () => {
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
       <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-[58%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-[55%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
             className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
             ref={screenRef}

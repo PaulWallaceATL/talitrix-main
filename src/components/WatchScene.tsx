@@ -6,10 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InfoPaths from "@/app/sections/components/InfoPaths";
 import LeftInfoPath from "@/app/sections/components/LeftInfoPath";
-import {
-  IoFitnessOutline,
-  IoSwapHorizontalOutline,
-} from "react-icons/io5";
+import { IoFitnessOutline, IoSwapHorizontalOutline } from "react-icons/io5";
 import { motion } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -47,16 +44,16 @@ const WatchScene = () => {
       const cw = canvas.width;
       const ch = canvas.height;
 
+      // Mobile uses a fixed scale so the watch doesn't shrink with the
+      // viewport at all. Desktop locks to viewport height so width
+      // changes don't shrink it either, but the watch still fills the
+      // available vertical space.
       const isMobile = cw < 768;
-      // On mobile (portrait), the contain-scale leaves the watch tiny
-      // because viewport width is the limiting dimension. Scale up
-      // ~1.7x so the watch face dominates the screen but the rotated
-      // band profile still fits within the viewport at most angles.
-      const scale = isMobile ? (cw / iw) * 1.7 : Math.min(cw / iw, ch / ih);
+      const scale = isMobile ? 0.5 : ch / ih;
       const dw = iw * scale;
       const dh = ih * scale;
       const dx = (cw - dw) / 2;
-      const dy = ch - dh;
+      const dy = (ch - dh) / 2;
 
       ctx.clearRect(0, 0, cw, ch);
       ctx.drawImage(img, dx, dy, dw, dh);
@@ -89,7 +86,7 @@ const WatchScene = () => {
     // overlay hidden forever — fade it in after a short window.
     const failSafe = window.setTimeout(reveal, 1200);
 
-    const tl = gsap.to(obj, {
+    gsap.to(obj, {
       frame: FRAME_COUNT - 1,
       snap: "frame",
       ease: "none",
@@ -104,49 +101,59 @@ const WatchScene = () => {
       },
     });
 
-    const timeline1 = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#watch-trigger",
-        start: "top top",
-        end: "+=100%",
-        scrub: true,
+    // Breakpoint-dependent animations live inside matchMedia so they
+    // get torn down and rebuilt automatically when the viewport crosses
+    // 768px — no stale `isMobile` value, no manual resize wiring.
+    const mm = gsap.matchMedia();
+    mm.add(
+      {
+        isDesktop: "(min-width: 768px)",
+        isMobile: "(max-width: 767px)",
       },
-    });
+      (context) => {
+        const isMobile = context.conditions?.isMobile === true;
 
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    timeline1.to(watch, { x: isMobile ? 0 : -180 }, 0);
-    timeline1.to("#title-h1", { y: isMobile ? 80 : 150, duration: 1 }, 0);
-    timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
-    timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
-
-    // On mobile only: fade the watch overlay out just before the
-    // PlatformSection cards take over, and fade it back in if the
-    // user scrolls back up. We use toggleActions (not scrub) here so
-    // the play/reverse cycle is independent of PlatformSection's tl2,
-    // which also targets #watchscene opacity — sharing the same scrub
-    // would leave the watch stuck at 0 on the way back up.
-    let fadeTrigger: ScrollTrigger | undefined;
-    if (isMobile) {
-      const fade = gsap.fromTo(
-        watch,
-        { opacity: 1 },
-        {
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.out",
-          overwrite: "auto",
+        const timeline1 = gsap.timeline({
           scrollTrigger: {
-            trigger: "#platform-section",
-            start: "top 60%",
-            toggleActions: "play none none reverse",
+            trigger: "#watch-trigger",
+            start: "top top",
+            end: "+=100%",
+            scrub: true,
           },
-        },
-      );
-      fadeTrigger = fade.scrollTrigger ?? undefined;
-    }
+        });
+        timeline1.to(watch, { x: isMobile ? 0 : -180 }, 0);
+        timeline1.to("#title-h1", { y: isMobile ? 80 : 150, duration: 1 }, 0);
+        timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
+        timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
+
+        // On mobile only: fade the watch overlay out just before the
+        // PlatformSection cards take over, and fade it back in if the
+        // user scrolls back up. toggleActions (not scrub) keeps this
+        // play/reverse cycle independent of PlatformSection's tl2,
+        // which also targets #watchscene opacity — sharing the same
+        // scrub would leave the watch stuck at 0 on the way back up.
+        if (isMobile) {
+          gsap.fromTo(
+            watch,
+            { opacity: 1 },
+            {
+              opacity: 1,
+              duration: 0.5,
+              ease: "power2.out",
+              overwrite: "auto",
+              scrollTrigger: {
+                trigger: "#platform-section",
+                start: "top 60%",
+                toggleActions: "play none none reverse",
+              },
+            },
+          );
+        }
+      },
+    );
 
     return () => {
-      fadeTrigger?.kill();
+      mm.revert();
       window.removeEventListener("resize", resize);
       window.clearTimeout(failSafe);
     };
