@@ -27,22 +27,6 @@ const PlatformSection = () => {
     // overlay would otherwise sit at viewport center over Hero).
     gsap.set(platform, { opacity: 1 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: platform,
-        start: "top bottom",
-        end: "bottom bottom",
-        scrub: true,
-      },
-    });
-    tl.to(
-      ["#infoPaths", "#leftInfoPathHealth", "#leftInfoPathStraps"],
-      { opacity: 0, duration: 0.2, delay: 0.1 },
-      0,
-    );
-    tl.to("#explode-h2", { opacity: 0, duration: 0.3 }, 0);
-    tl.to("#watchscene", { x: 0, duration: 1 }, 0);
-
     const h2 = SplitText.create(h2Ref.current, {
       type: "lines",
       mask: "lines",
@@ -66,110 +50,92 @@ const PlatformSection = () => {
       },
     });
 
-    // Pin timeline. The watchscene slide is breakpoint-dependent (the
-    // watch image is much larger on mobile, so a partial slide would
-    // still overlap the cards), so the whole timeline lives inside
-    // matchMedia and gets rebuilt when crossing 768px.
-    const mm = gsap.matchMedia();
-    mm.add(
+    // Scroll-driven section animations. One matchMedia handles both
+    // breakpoints: <768px scales the watch on entry; <1024px slides it
+    // fully off-screen during the pin (otherwise it would overlap the
+    // fanned cards). Timelines and their ScrollTriggers are auto-
+    // reverted by gsap.context on breakpoint change.
+    gsap.matchMedia().add(
       {
-        isDesktop: "(min-width: 768px)",
-        isMobile: "(max-width: 767px)",
+        isDesktop: "(min-width: 1024px)",
+        isMobile: "(max-width: 1023px)",
+        isSmallMobile: "(max-width: 767px)",
       },
       (context) => {
         const isMobile = context.conditions?.isMobile === true;
+        const isSmallMobile = context.conditions?.isSmallMobile === true;
 
-        const tl2 = gsap.timeline({
-          scrollTrigger: {
-            trigger: platform,
-            start: "top top",
-            end: "+=400%",
-            pin: true,
-            pinSpacing: true,
-            scrub: true,
-          },
-        });
-        tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: platform,
+              start: "top bottom",
+              end: "bottom bottom",
+              scrub: true,
+            },
+          })
+          .to(
+            ["#infoPaths", "#leftInfoPathHealth", "#leftInfoPathStraps"],
+            { opacity: 0, duration: 0.2, delay: 0.1 },
+            0,
+          )
+          .to("#explode-h2", { opacity: 0, duration: 0.3 }, 0)
+          .to(
+            "#watchscene",
+            { x: 0, duration: 1, ...(isSmallMobile && { scale: 1.2 }) },
+            0,
+          );
+
+        const tl2 = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: platform,
+              start: "top top",
+              end: "+=400%",
+              pin: true,
+              pinSpacing: true,
+              scrub: true,
+            },
+          })
+          .to(screenRef.current, { rotate: "-12deg" }, 0);
 
         if (isMobile) {
           tl2.to(
             "#watchscene",
-            { x: "-100%", delay: 0.1, ease: "power1.in" },
-            0,
-          );
-          tl2.to(
-            "#watchscene",
-            { opacity: 0, delay: 0.2, ease: "power1.in" },
+            { x: "-100%", opacity: 0, delay: 0.1, ease: "power1.in" },
             0,
           );
         } else {
-          tl2.to(
-            "#watchscene",
-            { x: "-22%", delay: 0.1, ease: "power4.inOut" },
-            0,
-          );
-          tl2.to(
-            "#watchscene",
-            { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
-            0.8,
-          );
+          tl2
+            .to(
+              "#watchscene",
+              { x: "-22%", delay: 0.1, ease: "power4.inOut" },
+              0,
+            )
+            .to(
+              "#watchscene",
+              { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
+              0.8,
+            );
         }
 
-        tl2.to(cardRef.current, { scale: 2.5, y: -50 }, 0.8);
-        tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
-        tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
-        tl2.to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8);
-        tl2.to(".platform-card-2", { x: -400, duration: 0.3 }, 0.8);
-
-        tl2.from(
-          h2b.lines,
-          {
-            y: "100%",
-            stagger: 0.2,
-            duration: 0.5,
-          },
-          0.9,
-        );
-        tl2.from(
-          p.lines,
-          {
-            y: "100%",
-            stagger: 0.1,
-            duration: 0.3,
-          },
-          0.9,
-        );
-      },
-    );
-
-    // Lower the global #watchscene canvas to align with the fanned card
-    // stack (anchored at top-[58%], ~8% below center). Independent of
-    // the scrub timelines (tl, tl2) which only animate x and opacity on
-    // #watchscene — keeping y on its own toggleActions ScrollTrigger so
-    // it plays once on enter, reverses cleanly on scroll-back-up, and
-    // never drifts mid-scrub. Hero and ExplodedSection are unaffected
-    // because the trigger is tied to the platform section.
-    gsap.fromTo(
-      "#watchscene",
-      { y: 0 },
-      {
-        y: 0,
-        duration: 0.45,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: platform,
-          start: "top center",
-          toggleActions: "play none none reverse",
-        },
+        tl2
+          .to(cardRef.current, { scale: 2.5, y: -50 }, 0.8)
+          .to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8)
+          .to(h2Ref.current, { pointerEvents: "none" }, 0.8)
+          .to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8)
+          .to(".platform-card-2", { x: -400, duration: 0.3 }, 0.8)
+          .from(h2b.lines, { y: "100%", stagger: 0.2, duration: 0.5 }, 0.9)
+          .from(p.lines, { y: "100%", stagger: 0.1, duration: 0.3 }, 0.9);
       },
     );
   });
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
       <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-[55%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-1/2 lg:top-[55%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
-            className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
+            className="flex gap-6 w-250 h-500 origin-bottom rotate-55"
             ref={screenRef}
           >
             <div className="w-full platform-cards platform-card-2 ">
