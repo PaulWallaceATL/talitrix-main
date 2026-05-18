@@ -44,12 +44,9 @@ const WatchScene = () => {
       const cw = canvas.width;
       const ch = canvas.height;
 
-      // Mobile uses a fixed scale so the watch doesn't shrink with the
-      // viewport at all. Desktop locks to viewport height so width
-      // changes don't shrink it either, but the watch still fills the
-      // available vertical space.
-      const isMobile = cw < 768;
-      const scale = isMobile ? 0.5 : ch / ih;
+      // Phone & laptop use fixed scales so width resizes don't shrink
+      // the watch; on large desktops the watch fills viewport height.
+      const scale = cw < 768 ? 0.5 : cw < 1440 ? 0.7 : ch / ih;
       const dw = iw * scale;
       const dh = ih * scale;
       const dx = (cw - dw) / 2;
@@ -125,30 +122,6 @@ const WatchScene = () => {
         timeline1.to("#title-h1", { y: isMobile ? 80 : 150, duration: 1 }, 0);
         timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
         timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
-
-        // On mobile only: fade the watch overlay out just before the
-        // PlatformSection cards take over, and fade it back in if the
-        // user scrolls back up. toggleActions (not scrub) keeps this
-        // play/reverse cycle independent of PlatformSection's tl2,
-        // which also targets #watchscene opacity — sharing the same
-        // scrub would leave the watch stuck at 0 on the way back up.
-        if (isMobile) {
-          gsap.fromTo(
-            watch,
-            { opacity: 1 },
-            {
-              opacity: 1,
-              duration: 0.5,
-              ease: "power2.out",
-              overwrite: "auto",
-              scrollTrigger: {
-                trigger: "#platform-section",
-                start: "top 60%",
-                toggleActions: "play none none reverse",
-              },
-            },
-          );
-        }
       },
     );
 

@@ -31,7 +31,7 @@ const Hero = () => {
         </div>
 
         <div className="max-w-72 relative z-20" id="hero-desc">
-          <p className="text-base sm:text-lg md:text-xl text-white/75">
+          <p className="text-xl text-white/75">
             A single, unified ecosystem. Inside the walls and out.
           </p>
           <Link

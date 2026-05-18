@@ -3,30 +3,27 @@ import InfoPaths from "./components/InfoPaths";
 const ExplodedSection = () => {
   return (
     <div
-      className="w-full h-screen py-12 sm:py-20 px-6 sm:px-12 lg:px-16 relative overflow-hidden"
+      className="w-full h-screen py-20 sm:py-20 px-6 sm:px-12 lg:px-16 relative overflow-hidden"
       id="exploded"
     >
-      <div className="h-full flex flex-col justify-start gap-10 sm:gap-12 lg:justify-between lg:gap-0">
-        <p
-          className="text-base sm:text-xl lg:text-2xl max-w-xs sm:max-w-md lg:max-w-100 relative z-20"
+      <div className="h-full flex flex-col gap-10 justify-between ">
+        <h2
+          className="text-3xl sm:text-4xl font-semibold max-w-120 relative z-20"
           id="explode-p"
         >
           Modern technology. Human-centered design.
-        </p>
-        <div className="flex justify-start lg:justify-end">
-          <h2
-            className="text-base sm:text-xl lg:text-2xl w-full max-w-xs sm:max-w-md lg:max-w-100 leading-snug text-left lg:text-right relative z-20"
+        </h2>
+        <div className="flex justify-end">
+          <p
+            className="text-xl lg:text-2xl w-full max-w-75  lg:max-w-100 leading-snug text-left lg:text-right relative z-20"
             id="explode-h2"
           >
             One connected system for Inside and Outside the Walls monitoring.
-          </h2>
+          </p>
         </div>
       </div>
 
-      <div
-        className="w-[140vw] sm:w-[160vw] lg:w-200 absolute left-0 top-[-20%]"
-        id="explode-bg"
-      >
+      <div className="w-200 absolute left-0 top-[-20%]" id="explode-bg">
         <SectionBg />
       </div>
     </div>

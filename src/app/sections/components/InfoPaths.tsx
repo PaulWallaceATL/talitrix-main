@@ -35,11 +35,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     // back up toward the hero the lines disappear immediately rather
     // than lingering past the section boundary.
     gsap.from(
-      [
-        sectionRef.current,
-        "#leftInfoPathHealth",
-        "#leftInfoPathStraps",
-      ],
+      [sectionRef.current, "#leftInfoPathHealth", "#leftInfoPathStraps"],
       {
         opacity: 0,
         duration: 0.3,
@@ -71,18 +67,35 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
       },
     });
 
-    const tl2 = gsap.timeline({
-      scrollTrigger: {
-        trigger: "#exploded",
-        start: "top top",
-        end: "+=120%",
-        pin: true,
-        pinSpacing: true,
-        scrub: true,
+    // Pin range and h2 lift are smaller on mobile — the section is
+    // shorter and -150 lifts the headline too far off-screen. Wrapped
+    // in matchMedia so the pin trigger rebuilds cleanly at 768px.
+    gsap.matchMedia().add(
+      {
+        isDesktop: "(min-width: 768px)",
+        isMobile: "(max-width: 767px)",
       },
-    });
+      (context) => {
+        const isMobile = context.conditions?.isMobile === true;
 
-    tl2.to("#explode-h2", { y: -150, duration: 1, ease: "none" }, 0);
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "#exploded",
+              start: "top top",
+              end: isMobile ? "+=90%" : "+=120%",
+              pin: true,
+              pinSpacing: true,
+              scrub: true,
+            },
+          })
+          .to(
+            "#explode-h2",
+            { y: isMobile ? -50 : -150, duration: 1, ease: "none" },
+            0,
+          );
+      },
+    );
 
     gsap.from(para.lines, {
       y: "100%",

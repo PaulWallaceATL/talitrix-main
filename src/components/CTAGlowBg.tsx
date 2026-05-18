@@ -63,7 +63,7 @@ export default function AnimatedGlowShape() {
   }, []);
 
   return (
-    <div className="absolute inset-x-0 bottom-0 h-[85vh] overflow-hidden pointer-events-none">
+    <div className="absolute inset-x-0 bottom-0 h-[85vh] overflow-hidden pointer-events-none scale-x-150 scale-y-50 sm:scale-100 origin-bottom">
       <svg
         ref={svgRef}
         viewBox="0 0 1793 717"
