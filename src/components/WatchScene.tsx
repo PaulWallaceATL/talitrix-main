@@ -44,8 +44,6 @@ const WatchScene = () => {
       const cw = canvas.width;
       const ch = canvas.height;
 
-      // Phone & laptop use fixed scales so width resizes don't shrink
-      // the watch; on large desktops the watch fills viewport height.
       const scale = cw < 768 ? 0.5 : cw < 1440 ? 0.7 : ch / ih;
       const dw = iw * scale;
       const dh = ih * scale;
@@ -158,7 +156,7 @@ const WatchScene = () => {
             </>
           }
           defsId="health"
-          className="hidden lg:block absolute bottom-[42%] left-[18%] z-20 w-[400px] h-[100px] text-sm pointer-events-none"
+          className="hidden lg:block absolute bottom-[42%] left-[18%] z-20 w-100 h-25 text-sm pointer-events-none"
         />
         <LeftInfoPath
           id="leftInfoPathStraps"
@@ -169,9 +167,9 @@ const WatchScene = () => {
             </>
           }
           defsId="straps"
-          className="hidden lg:block absolute bottom-[20%] left-[18%] z-20 w-[400px] h-[100px] text-sm pointer-events-none"
+          className="hidden lg:block absolute bottom-[20%] left-[18%] z-20 w-100 h-25 text-sm pointer-events-none"
         />
-        <WatchGlow className="absolute w-[420px] sm:w-[600px] md:w-[800px] h-auto left-1/2 top-1/2 -translate-1/2" />
+        <WatchGlow className="absolute w-105 sm:w-150 md:w-200 h-auto left-1/2 top-1/2 -translate-1/2" />
       </motion.div>
     </div>
   );

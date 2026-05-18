@@ -10,7 +10,7 @@ import {
 const Footer = () => {
   return (
     <footer className="relative border-t border-border-gray bg-black overflow-hidden">
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[1200px] h-[400px] bg-primary/10 blur-[180px] pointer-events-none" />
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-300 h-100 bg-primary/10 blur-[180px] pointer-events-none" />
 
       <div className="relative z-10 px-6 md:px-16 py-12 md:py-20 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12">
         <div className="md:col-span-4 flex flex-col gap-6">
