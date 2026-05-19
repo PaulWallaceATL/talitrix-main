@@ -172,26 +172,29 @@ export default function ProbationPage() {
         </div>
       </section>
 
-      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
-          <div className="lg:col-span-5">
-            <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-              Capabilities
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-              Built for the realities of caseloads.
-            </h2>
-          </div>
-          <div className="lg:col-span-7 lg:pt-10">
-            <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
-              Move from reactive paperwork to proactive case management —
-              with the same record, the same tooling, and the same
-              accountability across every participant.
-            </p>
-          </div>
-        </div>
-
-        <CapabilitiesScroller features={features} />
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-x-clip">
+        <CapabilitiesScroller
+          features={features}
+          header={
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16 mb-12 md:mb-16">
+              <div className="lg:col-span-5">
+                <span className="mb-6 inline-block text-xs uppercase tracking-[0.3em] text-primary">
+                  Capabilities
+                </span>
+                <h2 className="text-3xl leading-tight sm:text-4xl md:text-5xl">
+                  Built for the realities of caseloads.
+                </h2>
+              </div>
+              <div className="lg:col-span-7 lg:pt-10">
+                <p className="max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
+                  Move from reactive paperwork to proactive case management —
+                  with the same record, the same tooling, and the same
+                  accountability across every participant.
+                </p>
+              </div>
+            </div>
+          }
+        />
       </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">

@@ -202,22 +202,20 @@ const FooterLinks = [
     title: "Platform",
     links: [
       { label: "Talitrix ONE", href: "/talitrix-one" },
-      { label: "All in ONE Band", href: "/talitrix-one/t-band" },
-      { label: "ONE Intake", href: "/talitrix-one/intake" },
-      { label: "ONE Jail Management", href: "/talitrix-one/jail-management" },
+      { label: "All-In-One Band", href: "/talitrix-one/t-band" },
+      { label: "ONE Pre-Trial", href: "/talitrix-one/pretrial" },
       {
-        label: "ONE Pre-Trial & Probation",
-        href: "/talitrix-one/pretrial-probation",
+        label: "ONE Jail Management System",
+        href: "/talitrix-one/jail-management",
       },
+      { label: "ONE Probation", href: "/talitrix-one/probation" },
       { label: "Talitrix Score", href: "/talitrix-one/score" },
     ],
   },
   {
     title: "Solutions",
     links: [
-      { label: "Sheriffs & Agency Leaders", href: "/solutions/sheriffs" },
-      { label: "Pretrial & Supervision", href: "/solutions/pretrial" },
-      { label: "Courts & Legal", href: "/solutions/courts" },
+      { label: "Agencies", href: "/solutions/agencies" },
       { label: "Participants", href: "/solutions/participants" },
     ],
   },

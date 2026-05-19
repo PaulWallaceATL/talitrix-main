@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
         destination: "/solutions/agencies",
         permanent: true,
       },
+      {
+        source: "/talitrix-one/intake",
+        destination: "/talitrix-one/jail-management",
+        permanent: true,
+      },
       // /talitrix-one/pretrial-probation was split into two dedicated
       // pages (/pretrial and /probation). Forward old inbound links
       // to the Pre-Trial page (chronologically the first phase).

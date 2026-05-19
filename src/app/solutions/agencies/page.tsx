@@ -136,35 +136,37 @@ export default function AgenciesPage() {
 
       <section
         id="learn-more"
-        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden scroll-mt-24 lg:scroll-mt-32"
+        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-x-clip scroll-mt-24 lg:scroll-mt-32"
       >
         <div className="absolute -top-40 -right-32 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
-          <div className="lg:col-span-5">
-            <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-              Who We Serve
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-              One platform. Every role across the justice lifecycle.
-            </h2>
-          </div>
+        <AgencyTypesScroller
+          header={
+            <div className="relative z-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16 mb-12 md:mb-16">
+              <div className="lg:col-span-5">
+                <span className="mb-6 inline-block text-xs uppercase tracking-[0.3em] text-primary">
+                  Who We Serve
+                </span>
+                <h2 className="text-3xl leading-tight sm:text-4xl md:text-5xl">
+                  One platform. Every role across the justice lifecycle.
+                </h2>
+              </div>
 
-          <div className="lg:col-span-7 lg:pt-10 flex flex-col gap-4">
-            <p className="text-base sm:text-lg text-white/75 leading-relaxed">
-              Talitrix ONE supports every role in the justice lifecycle — from
-              custody and field operations to supervision programs, the bench,
-              and prosecution. One connected platform, the same defensible
-              record, every role working from the same source of truth.
-            </p>
-            <p className="text-white/65 text-base leading-relaxed">
-              Stronger accountability under scrutiny. Stronger protection for
-              the communities you serve.
-            </p>
-          </div>
-        </div>
-
-        <AgencyTypesScroller />
+              <div className="lg:col-span-7 lg:flex lg:flex-col lg:gap-4 lg:pt-10">
+                <p className="text-base leading-relaxed text-white/75 sm:text-lg">
+                  Talitrix ONE supports every role in the justice lifecycle — from
+                  custody and field operations to supervision programs, the bench,
+                  and prosecution. One connected platform, the same defensible
+                  record, every role working from the same source of truth.
+                </p>
+                <p className="text-base leading-relaxed text-white/65">
+                  Stronger accountability under scrutiny. Stronger protection for
+                  the communities you serve.
+                </p>
+              </div>
+            </div>
+          }
+        />
       </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">

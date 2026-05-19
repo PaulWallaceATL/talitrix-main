@@ -5,7 +5,8 @@ import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import { Globe } from "@/components/react-bits/globe";
-import FeaturesGrid, { type FeatureGridItem } from "@/components/FeaturesGrid";
+import CapabilitiesScroller from "@/components/CapabilitiesScroller";
+import type { CapabilityFeature } from "@/components/CapabilitiesScroller";
 
 export const metadata: Metadata = pageMetadata({
   path: "/solutions/participants",
@@ -17,7 +18,7 @@ export const metadata: Metadata = pageMetadata({
     "Designed around dignity, privacy, and proactive support — built to help participants succeed in rebuilding their lives.",
 });
 
-const features: FeatureGridItem[] = [
+const features: CapabilityFeature[] = [
   {
     title: "Wrist-worn All-In-One Band designed for dignity",
     body: "Built to be worn without broadcasting justice involvement — preserving dignity in the workplace, at home, and in the community.",
@@ -97,30 +98,33 @@ export default function ParticipantsPage() {
         </div>
       </section>
 
-      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-x-clip">
         <div className="absolute -top-40 -left-32 w-[600px] h-[600px] bg-primary/10 blur-[180px] pointer-events-none" />
 
         <div className="relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
-            <div className="lg:col-span-5">
-              <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-                What Participants Get
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-                Designed around dignity, privacy, and success.
-              </h2>
-            </div>
-            <div className="lg:col-span-7 lg:pt-10">
-              <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
-                Talitrix removes the barriers between people committed to
-                rebuilding their lives and the support they need to do it —
-                built around dignity, clarity, and the outcomes that help
-                participants succeed.
-              </p>
-            </div>
-          </div>
-
-          <FeaturesGrid items={features} columns={2} />
+          <CapabilitiesScroller
+            features={features}
+            header={
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16 mb-12 md:mb-16">
+                <div className="lg:col-span-5">
+                  <span className="mb-6 inline-block text-xs uppercase tracking-[0.3em] text-primary">
+                    What Participants Get
+                  </span>
+                  <h2 className="text-3xl leading-tight sm:text-4xl md:text-5xl">
+                    Designed around dignity, privacy, and success.
+                  </h2>
+                </div>
+                <div className="lg:col-span-7 lg:pt-10">
+                  <p className="max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
+                    Talitrix removes the barriers between people committed to
+                    rebuilding their lives and the support they need to do it —
+                    built around dignity, clarity, and the outcomes that help
+                    participants succeed.
+                  </p>
+                </div>
+              </div>
+            }
+          />
 
           <div className="mt-12 md:mt-16 flex flex-wrap gap-4 sm:gap-6">
             <CTAButton href="/participant-registration" variant="ghost">

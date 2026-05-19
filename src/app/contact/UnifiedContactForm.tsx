@@ -21,9 +21,9 @@ const agencyTypes = [
 
 const interestAreas = [
   { value: "tband", label: "All-In-One Band Hardware" },
-  { value: "intake", label: "ONE Intake" },
   { value: "jms", label: "ONE Jail Management" },
-  { value: "probation", label: "ONE Pre-Trial & Probation" },
+  { value: "pretrial", label: "ONE Pre-Trial" },
+  { value: "probation", label: "ONE Probation" },
   { value: "score", label: "Talitrix Score" },
   { value: "platform", label: "Full Talitrix ONE Platform" },
 ];
