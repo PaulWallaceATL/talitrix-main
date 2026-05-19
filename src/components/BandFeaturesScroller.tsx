@@ -19,7 +19,6 @@ type Feature = {
   title: string;
   body: string;
   icon: LucideIcon;
-  blob: string;
 };
 
 const features: Feature[] = [
@@ -29,7 +28,6 @@ const features: Feature[] = [
     title: "Dignity by Design",
     body: "A wrist form factor that lets participants live, work, and reintegrate without broadcasting justice involvement.",
     icon: HeartHandshake,
-    blob: "rgba(248, 122, 19, 0.85)",
   },
   {
     number: "02",
@@ -37,7 +35,6 @@ const features: Feature[] = [
     title: "Optimized Battery & Performance",
     body: "Skin-detection logic minimizes unnecessary verification, preserving battery life and on-device performance.",
     icon: BatteryFull,
-    blob: "rgba(255, 165, 80, 0.85)",
   },
   {
     number: "03",
@@ -45,7 +42,6 @@ const features: Feature[] = [
     title: "High-Confidence Tamper Evidence",
     body: "Continuous proximity checks combined with biometric verification produce a defensible tamper record.",
     icon: ShieldCheck,
-    blob: "rgba(255, 100, 0, 0.85)",
   },
   {
     number: "04",
@@ -53,7 +49,6 @@ const features: Feature[] = [
     title: "Closed-Loop with Talitrix ONE",
     body: "Telemetry streams directly into ONE Jail Management System, ONE Pre-Trial, ONE Probation, and the Talitrix Score — no integration gaps.",
     icon: Link2,
-    blob: "rgba(255, 180, 100, 0.85)",
   },
   {
     number: "05",
@@ -61,7 +56,6 @@ const features: Feature[] = [
     title: "One Vendor, Inside & Outside the Walls",
     body: "Eliminates the need for separate ankle-monitor and facility-tracking vendors. One device, one record, every phase.",
     icon: Globe,
-    blob: "rgba(255, 130, 30, 0.85)",
   },
   {
     number: "06",
@@ -69,7 +63,6 @@ const features: Feature[] = [
     title: "Built for the Field",
     body: "Engineered for the realities of supervision — durable, reliable, and ready for in-field All-In-One Band fitting workflows.",
     icon: Hammer,
-    blob: "rgba(255, 90, 20, 0.85)",
   },
 ];
 
@@ -86,7 +79,6 @@ export default function BandFeaturesScroller({ header }: Props) {
         return (
           <ScrollHoverCard
             key={feature.title}
-            blob={feature.blob}
             icon={<Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />}
             number={feature.number}
             eyebrow={feature.eyebrow}

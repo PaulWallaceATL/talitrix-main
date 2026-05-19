@@ -5,8 +5,10 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
+/** Matches Talitrix primary — used for glow + badge on every card hover. */
+const CARD_HOVER_ACCENT = "rgba(248, 122, 19, 0.85)";
+
 export type ScrollHoverCardProps = {
-  blob: string;
   icon: ReactNode;
   number: string;
   eyebrow?: string;
@@ -17,7 +19,6 @@ export type ScrollHoverCardProps = {
 };
 
 export default function ScrollHoverCard({
-  blob,
   icon,
   number,
   eyebrow,
@@ -28,8 +29,11 @@ export default function ScrollHoverCard({
 }: ScrollHoverCardProps) {
   const [hovered, setHovered] = useState(false);
 
-  const cardClassName =
-    "group relative flex min-h-[360px] flex-col overflow-hidden rounded-2xl border border-border-gray bg-white/[0.03] p-6 sm:p-7 transition-[border-color,box-shadow] duration-300 hover:border-primary hover:shadow-[0_0_40px_rgba(248,122,19,0.18)]";
+  const cardClassName = `group relative flex min-h-[360px] flex-col overflow-hidden rounded-2xl border bg-white/[0.03] p-6 sm:p-7 transition-[border-color,box-shadow] duration-300 ${
+    hovered
+      ? "border-primary shadow-[0_0_40px_rgba(248,122,19,0.18)]"
+      : "border-border-gray"
+  }`;
 
   const content = (
     <>
@@ -42,7 +46,7 @@ export default function ScrollHoverCard({
         transition={{ duration: 0.35, ease: "easeOut" }}
         className="pointer-events-none absolute -bottom-24 left-1/2 h-72 w-72 rounded-full blur-2xl"
         style={{
-          background: `radial-gradient(circle, ${blob} 0%, rgba(0,0,0,0) 70%)`,
+          background: `radial-gradient(circle, ${CARD_HOVER_ACCENT} 0%, rgba(0,0,0,0) 70%)`,
           x: "-50%",
         }}
       />
@@ -71,7 +75,7 @@ export default function ScrollHoverCard({
         <motion.span
           initial={false}
           animate={{
-            backgroundColor: hovered ? blob : "rgba(255,255,255,0.08)",
+            backgroundColor: hovered ? CARD_HOVER_ACCENT : "rgba(255,255,255,0.08)",
             color: hovered ? "#ffffff" : "rgba(255,255,255,0.7)",
           }}
           transition={{ duration: 0.3 }}

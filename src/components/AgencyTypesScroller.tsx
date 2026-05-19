@@ -11,7 +11,6 @@ export type AgencyType = {
   title: string;
   body: string;
   icon: CapabilityIconName;
-  blob: string;
 };
 
 const types: AgencyType[] = [
@@ -21,7 +20,6 @@ const types: AgencyType[] = [
     title: "Sheriffs",
     body: "From booking to release to community supervision — Talitrix ONE gives sheriffs visibility, accountability, and a defensible record across the full lifecycle.",
     icon: "shieldCheck",
-    blob: "rgba(248, 122, 19, 0.85)",
   },
   {
     number: "02",
@@ -29,7 +27,6 @@ const types: AgencyType[] = [
     title: "County Leadership",
     body: "Manage population pressure, oversee programs, and demonstrate operational accountability to constituents and oversight bodies — on one connected platform.",
     icon: "building",
-    blob: "rgba(255, 165, 80, 0.85)",
   },
   {
     number: "03",
@@ -37,7 +34,6 @@ const types: AgencyType[] = [
     title: "Pretrial & Probation Admin",
     body: "Caseload visibility, conditions tracking, and the Supervisor T-App — built for the realities of running pretrial and probation programs at scale.",
     icon: "clipboardCheck",
-    blob: "rgba(255, 100, 0, 0.85)",
   },
   {
     number: "04",
@@ -45,7 +41,6 @@ const types: AgencyType[] = [
     title: "Courts & Judges",
     body: "A transparent, explainable Talitrix Score — backed by chain-of-custody behavioral data and expert witness support — for stronger sentencing and supervision decisions.",
     icon: "scale",
-    blob: "rgba(255, 180, 100, 0.85)",
   },
   {
     number: "05",
@@ -53,7 +48,6 @@ const types: AgencyType[] = [
     title: "District Attorneys",
     body: "Court-admissible behavioral evidence with secure chain of custody — making participant activity, compliance, and risk reliable inputs for legal review.",
     icon: "gavel",
-    blob: "rgba(255, 130, 30, 0.85)",
   },
 ];
 
@@ -70,7 +64,6 @@ export default function AgencyTypesScroller({ header }: Props) {
         return (
           <ScrollHoverCard
             key={type.title}
-            blob={type.blob}
             icon={<Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />}
             number={type.number}
             eyebrow={type.eyebrow}

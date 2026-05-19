@@ -18,7 +18,6 @@ type Module = {
   title: string;
   body: string;
   icon: LucideIcon;
-  blob: string;
 };
 
 const modules: Module[] = [
@@ -29,7 +28,6 @@ const modules: Module[] = [
     title: "All-In-One Band",
     body: "The first independent wrist-worn GPS monitoring device — 3-Carrier SIM, biometric sensing, and proximity-based skin detection.",
     icon: Watch,
-    blob: "rgba(248, 122, 19, 0.85)",
   },
   {
     href: "/talitrix-one/pretrial",
@@ -38,7 +36,6 @@ const modules: Module[] = [
     title: "ONE Pre-Trial",
     body: "Pre-trial supervision in one connected system — case management, risk tracking, and court-ready documentation in one place.",
     icon: Scale,
-    blob: "rgba(255, 165, 80, 0.85)",
   },
   {
     href: "/talitrix-one/jail-management",
@@ -47,7 +44,6 @@ const modules: Module[] = [
     title: "ONE Jail Management System",
     body: "Brings the full custody lifecycle into one connected system. Paired with the All-In-One Band, JMS extends visibility into participant movement and wellness.",
     icon: Building2,
-    blob: "rgba(255, 100, 0, 0.85)",
   },
   {
     href: "/talitrix-one/probation",
@@ -56,7 +52,6 @@ const modules: Module[] = [
     title: "ONE Probation",
     body: "End-to-end community supervision in a single platform — monitored and non-monitored populations together with case management and compliance.",
     icon: Route,
-    blob: "rgba(255, 180, 100, 0.85)",
   },
   {
     href: "/talitrix-one/score",
@@ -65,7 +60,6 @@ const modules: Module[] = [
     title: "Talitrix Score",
     body: "Transforms behavioral data into measurable intelligence — earlier visibility into risk and a defensible record over time.",
     icon: Activity,
-    blob: "rgba(255, 130, 30, 0.85)",
   },
 ];
 
@@ -100,7 +94,6 @@ export default function PlatformModulesScroller() {
           <ScrollHoverCard
             key={mod.href}
             href={mod.href}
-            blob={mod.blob}
             icon={<Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />}
             number={mod.number}
             eyebrow={mod.eyebrow}
