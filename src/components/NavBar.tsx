@@ -276,11 +276,11 @@ const NavBar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 h-16 lg:h-24 left-0 w-full z-40 border-b border-border-gray flex items-stretch backdrop-blur-md bg-black/40 transition-transform duration-300 will-change-transform ${
+        className={`fixed top-0 h-16 lg:h-20 xl:h-24 left-0 w-full z-40 border-b border-border-gray flex items-stretch backdrop-blur-md bg-black/10 transition-transform duration-300 will-change-transform text-sm xl:text-base ${
           headerHidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
-        <div className="flex items-center px-6 lg:px-10 xl:px-16 border-border-gray lg:border-r shrink-0">
+        <div className="flex items-center px-6 lg:px-10 2xl:px-16 border-border-gray lg:border-r shrink-0">
           <Link href={"/"} onClick={() => setDrawerOpen(false)}>
             <Image
               src={"/talitrix-logo.svg"}
@@ -293,7 +293,7 @@ const NavBar = () => {
         </div>
 
         <nav
-          className="hidden lg:flex gap-8 xl:gap-12 px-8 xl:px-12 items-center w-full"
+          className="hidden lg:flex gap-6 xl:gap-12 px-6 xl:px-12 items-center w-full"
           onMouseLeave={scheduleClose}
         >
           {NAV_TREE.map((item) => {
@@ -340,7 +340,7 @@ const NavBar = () => {
           })}
         </nav>
 
-        <div className="hidden lg:flex gap-8 xl:gap-12 px-8 xl:px-12 items-center border-x border-border-gray shrink-0">
+        <div className="hidden lg:flex gap-6 xl:gap-12 px-6 xl:px-12 items-center border-x border-border-gray shrink-0">
           {RIGHT_LINKS.map((nav) => {
             const active = pathname === nav.href;
             const className = `flex gap-1 shrink-0 transition-colors hover:text-primary ${
@@ -371,7 +371,7 @@ const NavBar = () => {
 
         <Link
           href="/get-started"
-          className="hidden lg:flex shrink-0 px-10 xl:px-16 bg-white/14 backdrop-blur-lg items-center transition-colors hover:bg-primary/40"
+          className="hidden lg:flex shrink-0 px-8 2xl:px-16 bg-white/14 backdrop-blur-lg items-center transition-colors hover:bg-primary/40"
         >
           Get Started
         </Link>
@@ -389,98 +389,106 @@ const NavBar = () => {
           </span>
           <BurgerIcon open={drawerOpen} />
         </button>
+      </header>
 
-        {activeMenuItem && (
+      {/* Megamenu lives outside <header> on purpose: the header has its own
+          backdrop-blur, and a descendant backdrop-filter can't see past an
+          ancestor's filter in Chromium/WebKit. Rendering as a sibling lets
+          the panel blur the page content directly. */}
+      {activeMenuItem && (
+        <div
+          id={`mega-${activeMenuItem.label.toLowerCase()}`}
+          className={`hidden lg:block fixed left-1/2 -translate-x-1/2 top-24 z-50 transition-transform duration-300 ${
+            headerHidden ? "translate-y-[-200%]" : ""
+          }`}
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleClose}
+          role="menu"
+        >
+          {/* Invisible hover bridge so the cursor never leaves the menu zone while moving from trigger to panel */}
+          <div className="absolute -top-3 left-0 right-0 h-3" aria-hidden />
+
           <div
-            id={`mega-${activeMenuItem.label.toLowerCase()}`}
-            className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full pt-3 z-40"
-            onMouseEnter={cancelClose}
-            onMouseLeave={scheduleClose}
-            role="menu"
+            className="relative w-[min(94vw,1080px)] rounded-b-2xl border border-white/15 bg-black/50 backdrop-blur-2xl overflow-hidden"
+            style={{
+              boxShadow:
+                "0 30px 80px rgba(0, 0, 0, 0.6), 0 8px 30px rgba(248, 122, 19, 0.08)",
+            }}
           >
-            {/* Invisible hover bridge so the cursor never leaves the menu zone while moving from trigger to panel */}
-            <div className="absolute -top-3 left-0 right-0 h-3" aria-hidden />
+            <div className="px-8 pt-7 pb-5">
+              <span className="text-xs uppercase tracking-[0.3em] text-white/50">
+                {activeMenuItem.label}
+              </span>
+            </div>
 
-            <div
-              className="relative w-[min(94vw,1080px)] rounded-2xl border border-white/15 bg-black/95 backdrop-blur-2xl overflow-hidden"
-              style={{
-                boxShadow:
-                  "0 30px 80px rgba(0, 0, 0, 0.6), 0 8px 30px rgba(248, 122, 19, 0.08)",
-              }}
-            >
-              <div className="px-8 pt-7 pb-5">
-                <span className="text-xs uppercase tracking-[0.3em] text-white/50">
-                  {activeMenuItem.label}
-                </span>
-              </div>
-
-              <div className="px-4 pb-3 grid md:grid-cols-2 gap-x-4 gap-y-1">
-                {activeMenuItem.children!.map((child) => {
-                  const childActive = isChildActive(child, activeMenuItem.children!, pathname);
-                  return (
-                    <Link
-                      key={child.href}
-                      href={child.href}
-                      onClick={() => setOpenMenu(null)}
-                      role="menuitem"
-                      className={`group flex items-start gap-4 p-4 rounded-xl transition-colors ${
+            <div className="px-4 pb-3 grid md:grid-cols-2 gap-x-4 gap-y-1">
+              {activeMenuItem.children!.map((child) => {
+                const childActive = isChildActive(
+                  child,
+                  activeMenuItem.children!,
+                  pathname,
+                );
+                return (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    onClick={() => setOpenMenu(null)}
+                    role="menuitem"
+                    className={`group flex items-start gap-4 p-4 rounded-xl transition-colors ${
+                      childActive ? "bg-primary/10" : "hover:bg-white/4"
+                    }`}
+                  >
+                    <span
+                      className={`shrink-0 size-10 rounded-xl flex items-center justify-center border transition-colors ${
                         childActive
-                          ? "bg-primary/10"
-                          : "hover:bg-white/[0.04]"
+                          ? "bg-primary/20 border-primary/50 text-primary"
+                          : "bg-primary/10 border-primary/25 text-primary group-hover:bg-primary/15 group-hover:border-primary/40"
                       }`}
                     >
+                      {child.icon && <NavIcon name={child.icon} />}
+                    </span>
+                    <span className="flex flex-col gap-0.5 min-w-0">
                       <span
-                        className={`shrink-0 size-10 rounded-xl flex items-center justify-center border transition-colors ${
-                          childActive
-                            ? "bg-primary/20 border-primary/50 text-primary"
-                            : "bg-primary/10 border-primary/25 text-primary group-hover:bg-primary/15 group-hover:border-primary/40"
+                        className={`text-base leading-snug ${
+                          childActive ? "text-primary" : "text-white"
                         }`}
                       >
-                        {child.icon && <NavIcon name={child.icon} />}
+                        {child.label}
                       </span>
-                      <span className="flex flex-col gap-0.5 min-w-0">
-                        <span
-                          className={`text-base leading-snug ${
-                            childActive ? "text-primary" : "text-white"
-                          }`}
-                        >
-                          {child.label}
+                      {child.desc && (
+                        <span className="text-sm text-white/55 leading-snug">
+                          {child.desc}
                         </span>
-                        {child.desc && (
-                          <span className="text-sm text-white/55 leading-snug">
-                            {child.desc}
-                          </span>
-                        )}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-
-              {activeCta && (
-                <div className="border-t border-white/10 bg-white/[0.02] px-8 py-5 flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
-                      {activeCta.eyebrow}
+                      )}
                     </span>
-                    <span className="text-sm text-white/85 mt-1">
-                      {activeCta.headline}
-                    </span>
-                  </div>
-                  <Link
-                    href={activeCta.ctaHref}
-                    onClick={() => setOpenMenu(null)}
-                    className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm bg-primary/15 hover:bg-primary/30 border border-primary/40 text-primary transition-colors whitespace-nowrap"
-                  >
-                    {activeCta.ctaLabel}
-                    <span aria-hidden>→</span>
                   </Link>
-                </div>
-              )}
+                );
+              })}
             </div>
+
+            {activeCta && (
+              <div className="border-t border-white/10 bg-white/2 px-8 py-5 flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-col min-w-0">
+                  <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
+                    {activeCta.eyebrow}
+                  </span>
+                  <span className="text-sm text-white/85 mt-1">
+                    {activeCta.headline}
+                  </span>
+                </div>
+                <Link
+                  href={activeCta.ctaHref}
+                  onClick={() => setOpenMenu(null)}
+                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm bg-primary/15 hover:bg-primary/30 border border-primary/40 text-primary transition-colors whitespace-nowrap"
+                >
+                  {activeCta.ctaLabel}
+                  <span aria-hidden>→</span>
+                </Link>
+              </div>
+            )}
           </div>
-        )}
-      </header>
+        </div>
+      )}
 
       <div
         id="mobile-nav"
@@ -508,10 +516,7 @@ const NavBar = () => {
                 const groupActive = isPathInGroup(item);
                 const cta = MENU_CTAS[item.label];
                 return (
-                  <div
-                    key={item.label}
-                    className="border-b border-border-gray"
-                  >
+                  <div key={item.label} className="border-b border-border-gray">
                     <button
                       type="button"
                       aria-expanded={sectionOpen}
@@ -529,15 +534,17 @@ const NavBar = () => {
                     </button>
                     <div
                       className={`grid transition-[grid-template-rows] duration-300 ${
-                        sectionOpen
-                          ? "grid-rows-[1fr]"
-                          : "grid-rows-[0fr]"
+                        sectionOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                       }`}
                     >
                       <div className="overflow-hidden">
                         <div className="flex flex-col px-3 pb-4 gap-1">
                           {item.children.map((child) => {
-                            const childActive = isChildActive(child, item.children!, pathname);
+                            const childActive = isChildActive(
+                              child,
+                              item.children!,
+                              pathname,
+                            );
                             return (
                               <Link
                                 key={child.href}
@@ -546,7 +553,7 @@ const NavBar = () => {
                                 className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
                                   childActive
                                     ? "bg-primary/10"
-                                    : "hover:bg-white/[0.04]"
+                                    : "hover:bg-white/4"
                                 }`}
                               >
                                 <span
@@ -612,9 +619,7 @@ const NavBar = () => {
                   href={item.href}
                   onClick={() => setDrawerOpen(false)}
                   className={`px-6 py-5 border-b border-border-gray text-lg transition-colors ${
-                    active
-                      ? "text-primary"
-                      : "text-white hover:text-primary"
+                    active ? "text-primary" : "text-white hover:text-primary"
                   }`}
                 >
                   {item.label}
@@ -738,13 +743,7 @@ const BurgerIcon = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-const NavIcon = ({
-  name,
-  size = 20,
-}: {
-  name: IconName;
-  size?: number;
-}) => {
+const NavIcon = ({ name, size = 20 }: { name: IconName; size?: number }) => {
   const common = {
     width: size,
     height: size,
