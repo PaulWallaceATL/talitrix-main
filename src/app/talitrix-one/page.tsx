@@ -67,7 +67,7 @@ export default function TalitrixOnePage() {
 
       <section
         id="learn-more"
-        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden scroll-mt-24 lg:scroll-mt-32"
+        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-x-clip scroll-mt-24 lg:scroll-mt-32"
       >
         <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
 

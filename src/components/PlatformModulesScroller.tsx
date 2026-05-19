@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "motion/react";
 import {
   Watch,
@@ -12,6 +15,8 @@ import {
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Module = {
   href: string;
@@ -72,33 +77,63 @@ const modules: Module[] = [
 ];
 
 export default function PlatformModulesScroller() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      const container = containerRef.current;
+      const track = trackRef.current;
+      if (!container || !track) return;
+
+      const getScrollDistance = () =>
+        Math.max(0, track.scrollWidth - container.clientWidth);
+
+      gsap.to(track, {
+        x: () => -getScrollDistance(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          pin: true,
+          scrub: true,
+          start: "top top",
+          end: () => `+=${getScrollDistance()}`,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      });
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <div className="flex flex-col gap-5">
-      {modules.map((m, i) => (
-        <ModuleCard key={m.href} mod={m} index={i} />
-      ))}
+    <div
+      ref={containerRef}
+      className="relative -mx-6 md:-mx-16 flex min-h-[420px] md:min-h-[460px] items-center overflow-hidden"
+    >
+      <div ref={trackRef} className="flex w-max gap-5 px-6 md:px-16 will-change-transform">
+        {modules.map((m) => (
+          <ModuleCard key={m.href} mod={m} />
+        ))}
+      </div>
     </div>
   );
 }
 
-function ModuleCard({ mod, index }: { mod: Module; index: number }) {
+function ModuleCard({ mod }: { mod: Module }) {
   const [hovered, setHovered] = useState(false);
 
   const Icon = mod.icon;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.35, delay: 0.05 * index }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      className="w-full"
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="shrink-0 w-[280px] sm:w-[300px] lg:w-[320px]"
     >
       <Link
         href={mod.href}
-        className="group relative flex flex-col rounded-2xl border border-border-gray bg-white/[0.03] p-6 sm:p-7 min-h-[280px] overflow-hidden transition-[border-color,box-shadow] duration-300 hover:border-primary hover:shadow-[0_0_40px_rgba(248,122,19,0.18)]"
+        className="group relative flex min-h-[360px] flex-col overflow-hidden rounded-2xl border border-border-gray bg-white/[0.03] p-6 sm:p-7 transition-[border-color,box-shadow] duration-300 hover:border-primary hover:shadow-[0_0_40px_rgba(248,122,19,0.18)]"
       >
         <motion.div
           initial={false}
@@ -107,7 +142,7 @@ function ModuleCard({ mod, index }: { mod: Module; index: number }) {
             scale: hovered ? 1 : 0.75,
           }}
           transition={{ duration: 0.35, ease: "easeOut" }}
-          className="absolute left-1/2 -bottom-24 w-72 h-72 rounded-full pointer-events-none blur-2xl"
+          className="pointer-events-none absolute -bottom-24 left-1/2 h-72 w-72 rounded-full blur-2xl"
           style={{
             background: `radial-gradient(circle, ${mod.blob} 0%, rgba(0,0,0,0) 70%)`,
             x: "-50%",
@@ -115,22 +150,22 @@ function ModuleCard({ mod, index }: { mod: Module; index: number }) {
         />
 
         <div className="relative flex items-center justify-between">
-          <Icon className="w-5 h-5 text-white/85" strokeWidth={1.6} />
-          <span className="text-xs text-white/40 tracking-widest">
+          <Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />
+          <span className="text-xs tracking-widest text-white/40">
             {mod.number}
           </span>
         </div>
 
-        <span className="relative mt-3 text-primary text-xs uppercase tracking-[0.3em]">
+        <span className="relative mt-3 text-xs uppercase tracking-[0.3em] text-primary">
           {mod.eyebrow}
         </span>
 
-        <p className="relative mt-3 text-sm text-white/75 leading-relaxed">
+        <p className="relative mt-3 text-sm leading-relaxed text-white/75">
           {mod.body}
         </p>
 
         <div className="relative mt-auto flex items-center justify-between pt-8">
-          <span className="text-base sm:text-lg text-white leading-tight pr-2">
+          <span className="pr-2 text-base leading-tight text-white sm:text-lg">
             {mod.title}
           </span>
           <motion.span
@@ -140,18 +175,18 @@ function ModuleCard({ mod, index }: { mod: Module; index: number }) {
               color: hovered ? "#ffffff" : "rgba(255,255,255,0.7)",
             }}
             transition={{ duration: 0.3 }}
-            className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
           >
             <motion.span
               animate={{ x: hovered ? 2 : 0 }}
               transition={{ duration: 0.3 }}
               className="inline-flex"
             >
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="h-4 w-4" />
             </motion.span>
           </motion.span>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
