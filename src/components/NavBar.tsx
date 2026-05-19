@@ -715,6 +715,7 @@ const BurgerIcon = ({ open }: { open: boolean }) => (
       y2="6"
       style={{
         transition: "transform 200ms ease, opacity 200ms ease",
+        transformBox: "fill-box",
         transformOrigin: "center",
         transform: open ? "translate(0,6px) rotate(45deg)" : "none",
       }}
@@ -736,6 +737,7 @@ const BurgerIcon = ({ open }: { open: boolean }) => (
       y2="18"
       style={{
         transition: "transform 200ms ease, opacity 200ms ease",
+        transformBox: "fill-box",
         transformOrigin: "center",
         transform: open ? "translate(0,-6px) rotate(-45deg)" : "none",
       }}
