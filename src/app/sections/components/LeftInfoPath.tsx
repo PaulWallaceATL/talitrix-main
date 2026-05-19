@@ -17,21 +17,16 @@ interface LeftInfoPathProps extends ComponentProps<"div"> {
 // inside the viewport. Reuses .info-line / .info-box / .laser-path
 // classes so InfoPaths' useGSAP picks it up automatically for the
 // line clipPath reveal, info-box blink-in, and infinite laser-pulse.
-const LeftInfoPath = ({
-  Icon,
-  label,
-  defsId,
-  ...props
-}: LeftInfoPathProps) => {
+const LeftInfoPath = ({ Icon, label, defsId, ...props }: LeftInfoPathProps) => {
   const filterId = `laser-glow-${defsId}`;
   const gradientId = `laser-gradient-${defsId}`;
 
   return (
     <div {...props}>
-      <div className="flex items-center gap-3 h-full w-full">
-        <div className="info-box flex flex-col items-center text-center gap-2 w-25 shrink-0">
+      <div className="flex items-center gap-3 h-full w-full left-info">
+        <div className="info-box flex items-center gap-2 shrink-0">
           <div
-            className="size-14 p-2 bg-white/15 rounded-lg"
+            className="size-14 p-2 bg-white/15 rounded-lg shrink-0"
             style={{ boxShadow: infoGlass }}
           >
             <Icon className="size-full text-primary" />
@@ -39,7 +34,7 @@ const LeftInfoPath = ({
           {label}
         </div>
 
-        <div className="flex-1 flex items-center min-w-0">
+        {/* <div className="flex-1 flex items-center min-w-0">
           <svg
             viewBox="0 0 220 20"
             className="info-line w-full overflow-visible"
@@ -61,8 +56,7 @@ const LeftInfoPath = ({
                   <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
-              {/* Bright tail anchored on the right (band side), fading
-                  back toward the label on the left. */}
+             
               <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="#FFFFFF" stopOpacity="1" />
                 <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
@@ -87,7 +81,7 @@ const LeftInfoPath = ({
             <circle cx="4" cy="10" r="3" fill="#D9D9D9" />
             <circle cx="216" cy="10" r="3" fill="#D9D9D9" />
           </svg>
-        </div>
+        </div> */}
       </div>
     </div>
   );

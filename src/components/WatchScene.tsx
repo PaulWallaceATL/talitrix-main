@@ -6,7 +6,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import InfoPaths from "@/app/sections/components/InfoPaths";
 import LeftInfoPath from "@/app/sections/components/LeftInfoPath";
-import { IoFitnessOutline, IoSwapHorizontalOutline } from "react-icons/io5";
+import {
+  IoFitnessOutline,
+  IoLocationOutline,
+  IoSwapHorizontalOutline,
+  IoWifiOutline,
+} from "react-icons/io5";
 import { motion } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -116,7 +121,7 @@ const WatchScene = () => {
             scrub: true,
           },
         });
-        timeline1.to(watch, { x: isMobile ? 0 : -180 }, 0);
+        timeline1.to(watch, { x: isMobile ? 0 : -50 }, 0);
         timeline1.to("#title-h1", { y: isMobile ? 80 : 150, duration: 1 }, 0);
         timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
         timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
@@ -147,28 +152,46 @@ const WatchScene = () => {
           className="absolute z-10 inset-0 w-full h-full"
         />
         <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-sm pointer-events-none" />
-        <LeftInfoPath
-          id="leftInfoPathHealth"
-          Icon={IoFitnessOutline}
-          label={
-            <>
-              Heart Rate <br /> &amp; SpO₂
-            </>
-          }
-          defsId="health"
-          className="hidden lg:block absolute bottom-[42%] left-[18%] z-20 w-100 h-25 text-sm pointer-events-none"
-        />
-        <LeftInfoPath
-          id="leftInfoPathStraps"
-          Icon={IoSwapHorizontalOutline}
-          label={
-            <>
-              Replaceable <br /> Straps
-            </>
-          }
-          defsId="straps"
-          className="hidden lg:block absolute bottom-[20%] left-[18%] z-20 w-100 h-25 text-sm pointer-events-none"
-        />
+        <div
+          className="absolute top-1/2 left-32 2xl:left-64 -translate-y-1/2 z-20 text-sm pointer-events-none hidden lg:block"
+          id="leftInfo"
+        >
+          <div className="relative" id="leftInfoContent">
+            <h3 className="text-3xl font-semibold opacity-40">Features</h3>
+            <div className="flex flex-col gap-10 pl-5 mt-5 ">
+              <LeftInfoPath
+                Icon={IoLocationOutline}
+                label={
+                  <>
+                    Inside & Outside <br /> the Walls
+                  </>
+                }
+                defsId="health"
+                className="hidden lg:block z-20 text-sm pointer-events-none"
+              />
+              <LeftInfoPath
+                Icon={IoSwapHorizontalOutline}
+                label={
+                  <>
+                    Replaceable <br /> Straps
+                  </>
+                }
+                defsId="straps"
+                className="hidden lg:block z-20 text-sm pointer-events-none"
+              />
+              <LeftInfoPath
+                Icon={IoWifiOutline}
+                label={
+                  <>
+                    Connectivity <br /> & Comms
+                  </>
+                }
+                defsId="straps"
+                className="hidden lg:block z-20 text-sm pointer-events-none"
+              />
+            </div>
+          </div>
+        </div>
         <WatchGlow className="absolute w-105 sm:w-150 md:w-200 h-auto left-1/2 top-1/2 -translate-1/2" />
       </motion.div>
     </div>

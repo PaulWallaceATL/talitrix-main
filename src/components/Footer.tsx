@@ -50,7 +50,7 @@ const Footer = () => {
                     aria-label={s.label}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="size-10 rounded-full border border-white/15 bg-white/[0.03] hover:bg-primary/20 hover:border-primary/40 hover:text-primary text-white/75 flex items-center justify-center transition-colors"
+                    className="size-10 rounded-full border border-white/15 bg-white/3 hover:bg-primary/20 hover:border-primary/40 hover:text-primary text-white/75 flex items-center justify-center transition-colors"
                   >
                     <Icon className="size-4" />
                   </a>

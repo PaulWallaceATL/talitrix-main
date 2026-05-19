@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
 import {
+  IoFitnessOutline,
   IoLocationOutline,
   IoShieldCheckmarkOutline,
   IoWifiOutline,
@@ -17,7 +18,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
 
   useGSAP(() => {
     const lines = gsap.utils.toArray<HTMLElement>(".info-line");
-    const info = gsap.utils.toArray<HTMLElement>(".info-box");
+    const info = gsap.utils.toArray<HTMLElement>(".info-box-1");
     const laserPaths = gsap.utils.toArray<SVGPathElement>(".laser-path");
 
     const para = SplitText.create("#explode-p", {
@@ -34,19 +35,16 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     // a tighter '-=10%' / 'top center' window so when the user scrolls
     // back up toward the hero the lines disappear immediately rather
     // than lingering past the section boundary.
-    gsap.from(
-      [sectionRef.current, "#leftInfoPathHealth", "#leftInfoPathStraps"],
-      {
-        opacity: 0,
-        duration: 0.3,
-        scrollTrigger: {
-          trigger: "#exploded",
-          start: "-=10%",
-          end: "top center",
-          scrub: true,
-        },
+    gsap.from([sectionRef.current, "#leftInfoContent"], {
+      opacity: 0,
+      duration: 0.3,
+      scrollTrigger: {
+        trigger: "#exploded",
+        start: "-=10%",
+        end: "top center",
+        scrub: true,
       },
-    );
+    });
 
     gsap.from("#explode-bg", {
       y: 700,
@@ -148,6 +146,28 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
       );
     });
 
+    timeline.from(
+      "#leftInfo",
+      {
+        opacity: 0,
+        x: -30,
+        ease: "power3.inOut",
+        duration: 1,
+      },
+      0.2,
+    );
+    timeline.from(
+      ".left-info",
+      {
+        opacity: 0,
+        y: 50,
+        ease: "power3.inOut",
+        stagger: 0.1,
+        duration: 1,
+      },
+      0.2,
+    );
+
     laserPaths.forEach((path, i) => {
       const length = path.getTotalLength();
       const dashLength = 60;
@@ -212,77 +232,22 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           <circle cx="3" cy="309" r="3" fill="#D9D9D9" />
         </svg>
 
-        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
+        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box info-box-1 w-25">
           <div
             className="size-14 p-2 bg-white/15  rounded-lg"
             style={{ boxShadow: infoGlass }}
           >
-            <IoLocationOutline className="size-full text-primary" />
+            <IoFitnessOutline className="size-full text-primary" />
           </div>
-          Inside & Outside <br /> the Walls
+          Heart Rate <br /> &amp; SpO₂
         </div>
       </div>
       {/* Middle-right callout: copy of the Tamper Proof bent line, anchored
           one step higher so it sits parallel-above the Tamper Proof bend
           (no crossover) and starts at the same right-of-band x position. */}
-      <div className="w-full absolute bottom-[78%] left-[65%]">
-        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
-          <div
-            className="size-14 p-2 bg-white/15  rounded-lg"
-            style={{ boxShadow: infoGlass }}
-          >
-            <IoWifiOutline className="size-full text-primary" />
-          </div>
-          Connectivity <br /> & Comms
-        </div>
-        <svg
-          viewBox="0 0 465 136"
-          className="info-line"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <filter
-              id="laser-glow-3"
-              x="-20%"
-              y="-20%"
-              width="140%"
-              height="140%"
-            >
-              <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <linearGradient id="laser-gradient-3" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
-              <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
-              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M4 133.001H242.95C251.259 133.001 258.858 128.32 262.597 120.9L315.903 15.101C319.642 7.68089 327.241 3 335.55 3H461.5"
-            stroke="#A7A7A7"
-            strokeOpacity="0.4"
-            strokeWidth="2"
-            strokeMiterlimit="1"
-          />
-          <path
-            className="laser-path"
-            d="M4 133.001H242.95C251.259 133.001 258.858 128.32 262.597 120.9L315.903 15.101C319.642 7.68089 327.241 3 335.55 3H461.5"
-            stroke="url(#laser-gradient-3)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            filter="url(#laser-glow-3)"
-          />
-          <circle cx="462" cy="3" r="3" fill="#D9D9D9" />
-          <circle cx="3" cy="133" r="3" fill="#D9D9D9" />
-        </svg>
-      </div>
+
       <div className="w-full absolute bottom-0 left-1/2">
-        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box w-25">
+        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center  info-box-1 w-25">
           <div
             className="size-14 p-2 bg-white/15  rounded-lg"
             style={{ boxShadow: infoGlass }}
