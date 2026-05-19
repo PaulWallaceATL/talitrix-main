@@ -71,26 +71,6 @@ export default function TalitrixOnePage() {
       >
         <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
-          <div className="lg:col-span-5">
-            <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-              The Modules
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-              One platform.
-              <br />
-              <span className="text-white/60">Every module connected.</span>
-            </h2>
-          </div>
-          <div className="lg:col-span-7 lg:pt-10">
-            <p className="text-base sm:text-lg text-white/70 leading-relaxed max-w-2xl">
-              Modular by design. Continuous by intent. Deploy what your agency
-              needs today and extend across the lifecycle as your operation
-              grows.
-            </p>
-          </div>
-        </div>
-
         <PlatformModulesScroller />
       </section>
 

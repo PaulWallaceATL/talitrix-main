@@ -75,15 +75,27 @@ const Footer = () => {
                 {footer.title}
               </h3>
               <div className="flex flex-col gap-5 text-sm">
-                {footer.links.map((link) => (
-                  <Link
-                    href={link.href}
-                    key={link.label}
-                    className="duration-300 transition-colors hover:text-primary"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                {footer.links.map((link) =>
+                  link.external ? (
+                    <a
+                      href={link.href}
+                      key={link.label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="duration-300 transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      key={link.label}
+                      className="duration-300 transition-colors hover:text-primary"
+                    >
+                      {link.label}
+                    </Link>
+                  ),
+                )}
               </div>
             </div>
           ))}
@@ -115,12 +127,14 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex lg:max-w-125 py-6 px-4 sm:px-8 lg:px-16 items-center justify-between w-full border-white/30 border-t lg:border-l lg:border-t-0 h-full">
-          <Link
-            href=""
+          <a
+            href={PAYMENT_PORTAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="duration-300 transition-colors hover:text-primary"
           >
             Payment Portal
-          </Link>
+          </a>
           <Link
             href="/contact"
             className="duration-300 transition-colors hover:text-primary"
@@ -160,6 +174,10 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const PAYMENT_PORTAL_URL =
+  "https://billing.stripe.com/p/login/5kA9Do80vb7zfkc9AA";
+const PARTICIPANT_REGISTRATION_URL = "https://register.talitrix.com/";
 
 const SOCIALS = [
   {
@@ -214,7 +232,7 @@ const FooterLinks = [
     title: "Get Started",
     links: [
       { label: "Request a Briefing", href: "/get-started" },
-      { label: "Participant Registration", href: "/participant-registration" },
+      { label: "Participant Registration", href: PARTICIPANT_REGISTRATION_URL, external: true },
       { label: "Contact Sales", href: "/contact" },
     ],
   },

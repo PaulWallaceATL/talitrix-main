@@ -77,44 +77,77 @@ const modules: Module[] = [
 ];
 
 export default function PlatformModulesScroller() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      const container = containerRef.current;
+      const pin = pinRef.current;
       const track = trackRef.current;
-      if (!container || !track) return;
+      if (!pin || !track) return;
 
       const getScrollDistance = () =>
-        Math.max(0, track.scrollWidth - container.clientWidth);
+        Math.max(0, track.scrollWidth - window.innerWidth);
 
-      gsap.to(track, {
-        x: () => -getScrollDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: container,
-          pin: true,
-          scrub: true,
-          start: "top top",
-          end: () => `+=${getScrollDistance()}`,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
+      gsap.matchMedia().add(
+        {
+          isDesktop: "(min-width: 1024px)",
+          isMobile: "(max-width: 1023px)",
         },
-      });
+        (context) => {
+          const { isDesktop } = context.conditions!;
+          const navOffset = isDesktop ? 96 : 64;
+
+          gsap.to(track, {
+            x: () => -getScrollDistance(),
+            ease: "none",
+            scrollTrigger: {
+              trigger: pin,
+              pin: true,
+              scrub: true,
+              start: `top ${navOffset}px`,
+              end: () => `+=${getScrollDistance()}`,
+              invalidateOnRefresh: true,
+              anticipatePin: 1,
+            },
+          });
+        },
+      );
     },
-    { scope: containerRef },
+    { scope: pinRef },
   );
 
   return (
-    <div
-      ref={containerRef}
-      className="relative -mx-6 md:-mx-16 flex min-h-[420px] md:min-h-[460px] items-center overflow-hidden"
-    >
-      <div ref={trackRef} className="flex w-max gap-5 px-6 md:px-16 will-change-transform">
-        {modules.map((m) => (
-          <ModuleCard key={m.href} mod={m} />
-        ))}
+    <div ref={pinRef}>
+      <div className="relative z-10 mb-12 grid grid-cols-1 gap-10 md:mb-16 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <span className="mb-6 inline-block text-xs uppercase tracking-[0.3em] text-primary">
+            The Modules
+          </span>
+          <h2 className="text-3xl leading-tight sm:text-4xl md:text-5xl">
+            One platform.
+            <br />
+            <span className="text-white/60">Every module connected.</span>
+          </h2>
+        </div>
+        <div className="lg:col-span-7 lg:pt-10">
+          <p className="max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
+            Modular by design. Continuous by intent. Deploy what your agency needs
+            today and extend across the lifecycle as your operation grows.
+          </p>
+        </div>
+      </div>
+
+      <div className="relative left-1/2 flex min-h-[420px] w-screen -translate-x-1/2 items-center overflow-hidden md:min-h-[460px]">
+        <div
+          ref={trackRef}
+          className="flex w-max gap-5 pl-6 will-change-transform md:pl-16"
+        >
+          {modules.map((m) => (
+            <ModuleCard key={m.href} mod={m} />
+          ))}
+          <div aria-hidden className="w-6 shrink-0 md:w-16" />
+        </div>
       </div>
     </div>
   );
@@ -129,7 +162,7 @@ function ModuleCard({ mod }: { mod: Module }) {
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="shrink-0 w-[280px] sm:w-[300px] lg:w-[320px]"
+      className="w-[280px] shrink-0 sm:w-[300px] lg:w-[320px]"
     >
       <Link
         href={mod.href}
