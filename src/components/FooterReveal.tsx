@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-import Footer from "./Footer2";
+import Footer from "./Footer";
 
 gsap.registerPlugin(ScrollTrigger);
 
