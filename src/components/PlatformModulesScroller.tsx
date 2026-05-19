@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import {
@@ -73,35 +73,18 @@ const modules: Module[] = [
 
 export default function PlatformModulesScroller() {
   return (
-    <div className="-mx-6 md:-mx-16">
-      <div className="overflow-x-auto pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div className="flex gap-5 px-6 md:px-16 w-max snap-x snap-mandatory">
-          {modules.map((m, i) => (
-            <ModuleCard key={m.href} mod={m} index={i} />
-          ))}
-        </div>
-      </div>
+    <div className="flex flex-col gap-5">
+      {modules.map((m, i) => (
+        <ModuleCard key={m.href} mod={m} index={i} />
+      ))}
     </div>
   );
 }
 
 function ModuleCard({ mod, index }: { mod: Module; index: number }) {
   const [hovered, setHovered] = useState(false);
-  const [hoverCapable, setHoverCapable] = useState(true);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(hover: hover)");
-    setHoverCapable(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setHoverCapable(e.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
-  // Show body always on touch devices, only on hover for hover-capable devices
-  const reveal = hoverCapable ? hovered : true;
 
   const Icon = mod.icon;
-  const words = mod.body.split(" ");
 
   return (
     <motion.div
@@ -111,17 +94,17 @@ function ModuleCard({ mod, index }: { mod: Module; index: number }) {
       transition={{ duration: 0.35, delay: 0.05 * index }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className="snap-start shrink-0 w-[280px] sm:w-[300px] lg:w-[320px]"
+      className="w-full"
     >
       <Link
         href={mod.href}
-        className="group relative flex flex-col rounded-2xl border border-border-gray bg-white/[0.03] hover:border-primary/40 p-6 sm:p-7 min-h-[360px] overflow-hidden transition-colors"
+        className="group relative flex flex-col rounded-2xl border border-border-gray bg-white/[0.03] p-6 sm:p-7 min-h-[280px] overflow-hidden transition-[border-color,box-shadow] duration-300 hover:border-primary hover:shadow-[0_0_40px_rgba(248,122,19,0.18)]"
       >
         <motion.div
           initial={false}
           animate={{
-            opacity: reveal ? 0.7 : 0,
-            scale: reveal ? 1 : 0.75,
+            opacity: hovered ? 0.7 : 0,
+            scale: hovered ? 1 : 0.75,
           }}
           transition={{ duration: 0.35, ease: "easeOut" }}
           className="absolute left-1/2 -bottom-24 w-72 h-72 rounded-full pointer-events-none blur-2xl"
@@ -142,26 +125,8 @@ function ModuleCard({ mod, index }: { mod: Module; index: number }) {
           {mod.eyebrow}
         </span>
 
-        <p className="relative mt-3 text-sm text-white/75 leading-relaxed flex flex-wrap">
-          {words.map((w, wi) => (
-            <motion.span
-              key={wi}
-              initial={false}
-              animate={{
-                opacity: reveal ? 1 : 0,
-                y: reveal ? 0 : 4,
-                filter: reveal ? "blur(0px)" : "blur(3px)",
-              }}
-              transition={{
-                duration: 0.3,
-                delay: reveal && hoverCapable ? wi * 0.025 : 0,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="inline-block mr-[0.25em]"
-            >
-              {w}
-            </motion.span>
-          ))}
+        <p className="relative mt-3 text-sm text-white/75 leading-relaxed">
+          {mod.body}
         </p>
 
         <div className="relative mt-auto flex items-center justify-between pt-8">
