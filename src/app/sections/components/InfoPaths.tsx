@@ -8,8 +8,11 @@ import {
   IoFitnessOutline,
   IoLocationOutline,
   IoShieldCheckmarkOutline,
+  IoSwapHorizontalOutline,
   IoWifiOutline,
 } from "react-icons/io5";
+import LaserLine from "./LaserLine";
+import styles from "./InfoPaths.module.css";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -35,16 +38,22 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     // a tighter '-=10%' / 'top center' window so when the user scrolls
     // back up toward the hero the lines disappear immediately rather
     // than lingering past the section boundary.
-    gsap.from([sectionRef.current, "#leftInfoContent"], {
-      opacity: 0,
-      duration: 0.3,
-      scrollTrigger: {
-        trigger: "#exploded",
-        start: "-=10%",
-        end: "top center",
-        scrub: true,
+    gsap.from(
+      [
+        sectionRef.current,
+        // "#leftInfoContent", --- IGNORE ---
+      ],
+      {
+        opacity: 0,
+        duration: 0.3,
+        scrollTrigger: {
+          trigger: "#exploded",
+          start: "-=10%",
+          end: "top center",
+          scrub: true,
+        },
       },
-    });
+    );
 
     gsap.from("#explode-bg", {
       y: 700,
@@ -146,27 +155,27 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
       );
     });
 
-    timeline.from(
-      "#leftInfo",
-      {
-        opacity: 0,
-        x: -30,
-        ease: "power3.inOut",
-        duration: 1,
-      },
-      0.2,
-    );
-    timeline.from(
-      ".left-info",
-      {
-        opacity: 0,
-        y: 50,
-        ease: "power3.inOut",
-        stagger: 0.1,
-        duration: 1,
-      },
-      0.2,
-    );
+    // timeline.from(
+    //   "#leftInfo",
+    //   {
+    //     opacity: 0,
+    //     x: -30,
+    //     ease: "power3.inOut",
+    //     duration: 1,
+    //   },
+    //   0.2,
+    // );
+    // timeline.from(
+    //   ".left-info",
+    //   {
+    //     opacity: 0,
+    //     y: 50,
+    //     ease: "power3.inOut",
+    //     stagger: 0.1,
+    //     duration: 1,
+    //   },
+    //   0.2,
+    // );
 
     laserPaths.forEach((path, i) => {
       const length = path.getTotalLength();
@@ -185,129 +194,56 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
   });
   return (
     <div {...props} ref={sectionRef} id="infoPaths">
-      <div className="w-full absolute bottom-1/2">
-        <svg
-          viewBox="0 0 479 315"
-          className="info-line"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <filter
-              id="laser-glow-1"
-              x="-20%"
-              y="-20%"
-              width="140%"
-              height="140%"
-            >
-              <feGaussianBlur stdDeviation="8" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <linearGradient id="laser-gradient-1" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
-              <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
-              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M4 309.005L238.862 313.49C248.225 313.669 256.675 307.901 259.919 299.117L363.978 17.3778C367.169 8.73765 375.405 3.00003 384.615 3.00009L476.5 3.00061"
-            stroke="#A7A7A7"
-            strokeOpacity="0.4"
-            strokeWidth="1.5"
-            strokeMiterlimit="1"
-          />
-          <path
-            className="laser-path"
-            d="M4 309.005L238.862 313.49C248.225 313.669 256.675 307.901 259.919 299.117L363.978 17.3778C367.169 8.73765 375.405 3.00003 384.615 3.00009L476.5 3.00061"
-            stroke="url(#laser-gradient-1)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            filter="url(#laser-glow-1)"
-          />
-          <circle cx="476" cy="3" r="3" fill="#D9D9D9" />
-          <circle cx="3" cy="309" r="3" fill="#D9D9D9" />
-        </svg>
-
-        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center info-box info-box-1 w-25">
-          <div
-            className="size-14 p-2 bg-white/15  rounded-lg"
-            style={{ boxShadow: infoGlass }}
-          >
-            <IoFitnessOutline className="size-full text-primary" />
-          </div>
-          Heart Rate <br /> &amp; SpO₂
-        </div>
+      <div className="w-full absolute bottom-1/2 left-[46%]">
+        <LaserLine
+          defsId="heart-rate"
+          viewBox="0 0 479 173"
+          pathClassName={styles.heartRatePath}
+          startDot={{ cx: 3, cy: 170 }}
+          endDot={{ cx: 475, cy: 1 }}
+          Icon={IoFitnessOutline}
+          label={
+            <>
+              Heart Rate <br /> &amp; SpO₂
+            </>
+          }
+        />
       </div>
-      {/* Middle-right callout: copy of the Tamper Proof bent line, anchored
-          one step higher so it sits parallel-above the Tamper Proof bend
-          (no crossover) and starts at the same right-of-band x position. */}
+      <div className=" w-48 absolute top-[120%] right-full">
+        <LaserLine
+          defsId="replaceStraps"
+          viewBox="0 0 189 63"
+          pathClassName={styles.replaceStraps}
+          startDot={{ cx: 3, cy: 61 }}
+          endDot={{ cx: 186, cy: 3 }}
+          infoBoxClassName="top-full right-full"
+          Icon={IoSwapHorizontalOutline}
+          label={
+            <>
+              Replaceable wrist <br /> &amp; ankle straps
+            </>
+          }
+        />
+      </div>
 
-      <div className="w-full absolute bottom-0 left-1/2">
-        <div className="absolute top-0 -translate-y-7 left-full text-center flex flex-col gap-2 items-center  info-box-1 w-25">
-          <div
-            className="size-14 p-2 bg-white/15  rounded-lg"
-            style={{ boxShadow: infoGlass }}
-          >
-            <IoShieldCheckmarkOutline className="size-full text-primary" />
-          </div>
-          Proximity <br /> Tamper
-        </div>
-        <svg
-          viewBox="0 0 465 136"
-          className="info-line"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <filter
-              id="laser-glow-2"
-              x="-20%"
-              y="-20%"
-              width="140%"
-              height="140%"
-            >
-              <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-
-            <linearGradient id="laser-gradient-2" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#FF6B35" stopOpacity="1" />
-              <stop offset="50%" stopColor="#FF8C42" stopOpacity="1" />
-              <stop offset="100%" stopColor="#FFFFFF" stopOpacity="1" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M4 133.001H242.95C251.259 133.001 258.858 128.32 262.597 120.9L315.903 15.101C319.642 7.68089 327.241 3 335.55 3H461.5"
-            stroke="#A7A7A7"
-            strokeOpacity="0.4"
-            strokeWidth="2"
-            strokeMiterlimit="1"
-          />
-          <path
-            className="laser-path"
-            d="M4 133.001H242.95C251.259 133.001 258.858 128.32 262.597 120.9L315.903 15.101C319.642 7.68089 327.241 3 335.55 3H461.5"
-            stroke="url(#laser-gradient-2)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            filter="url(#laser-glow-2)"
-          />
-          <circle cx="462" cy="3" r="3" fill="#D9D9D9" />
-          <circle cx="3" cy="133" r="3" fill="#D9D9D9" />
-        </svg>
+      <div className="w-[90%] absolute -bottom-5 left-full">
+        <LaserLine
+          defsId="tamper"
+          viewBox="0 0 393 54"
+          pathClassName={styles.tamperPath}
+          startDot={{ cx: 1, cy: 1 }}
+          endDot={{ cx: 389, cy: 52 }}
+          Icon={IoShieldCheckmarkOutline}
+          infoBoxClassName="top-full left-full"
+          label={
+            <>
+              Proximity sensors <br /> for band tamper
+            </>
+          }
+        />
       </div>
     </div>
   );
 };
 
 export default InfoPaths;
-
-const infoGlass =
-  "inset 0px 0px 1.8px rgba(255, 255, 255, 0.98), inset 1px -2px 4.3px rgba(255, 255, 255, 0.44)";

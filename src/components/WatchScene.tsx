@@ -151,8 +151,8 @@ const WatchScene = () => {
           ref={canvasRef}
           className="absolute z-10 inset-0 w-full h-full"
         />
-        <InfoPaths className="hidden lg:block absolute top-1/2 left-[60%] ml-6 -translate-1/2 z-20 w-100 h-50 text-sm pointer-events-none" />
-        <div
+        <InfoPaths className="hidden lg:block absolute top-1/2 left-1/2 ml-6 -translate-1/2 z-20 w-100 h-50 text-sm pointer-events-none bg-amber-200/0" />
+        {/* <div
           className="absolute top-1/2 left-32 2xl:left-64 -translate-y-1/2 z-20 text-sm pointer-events-none hidden lg:block"
           id="leftInfo"
         >
@@ -191,7 +191,7 @@ const WatchScene = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
         <WatchGlow className="absolute w-105 sm:w-150 md:w-200 h-auto left-1/2 top-1/2 -translate-1/2" />
       </motion.div>
     </div>

@@ -1,0 +1,32 @@
+/* Each `*Path` class sets the SVG `d` attribute via CSS so the line
+ * geometry can be tuned per breakpoint without touching the JSX.
+ * The CSS `d` property overrides the path's `d="…"` attribute when
+ * supported (Chrome 108+, Firefox 97+, Safari 16+); the attribute in
+ * JSX remains the SSR / fallback path. */
+
+.heartRatePath {
+  d: path(
+    "M0.019043 169.505L238.433 174.058C245.96 174.202 253.037 170.488 257.194 164.212L358.782 10.8508C362.857 4.69915 369.744 1.00003 377.123 1.00007L472.519 1.00061"
+  );
+}
+
+.replaceStraps {
+  d: path(
+    "M0 61.2661H135.23C142.584 61.2661 149.451 57.5922 153.532 51.475L187.5 0.555176"
+  );
+}
+
+.tamperPath {
+  d: path(
+    "M0.458008 0.88916L95.7176 49.9469C98.8328 51.5512 102.286 52.3882 105.79 52.3882H391.458"
+  );
+}
+
+/* Example responsive override — uncomment and tweak per instance:
+
+@media (max-width: 1023px) {
+  .heartRatePath {
+    d: path("M4 200L100 200L200 50L380 50");
+  }
+}
+*/
