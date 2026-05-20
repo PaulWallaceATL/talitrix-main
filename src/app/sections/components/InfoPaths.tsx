@@ -13,6 +13,9 @@ import {
 } from "react-icons/io5";
 import LaserLine from "./LaserLine";
 import styles from "./InfoPaths.module.css";
+import { MdOutlineSimCard } from "react-icons/md";
+import { BsSim } from "react-icons/bs";
+import { TbDeviceWatchSearch } from "react-icons/tb";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -98,7 +101,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           })
           .to(
             "#explode-h2",
-            { y: isMobile ? -50 : -150, duration: 1, ease: "none" },
+            { y: isMobile ? -50 : -50, duration: 1, ease: "none" },
             0,
           );
       },
@@ -198,6 +201,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
         <LaserLine
           defsId="heart-rate"
           viewBox="0 0 479 173"
+          d="M0.019043 169.505L238.433 174.058C245.96 174.202 253.037 170.488 257.194 164.212L358.782 10.8508C362.857 4.69915 369.744 1.00003 377.123 1.00007L472.519 1.00061"
           pathClassName={styles.heartRatePath}
           startDot={{ cx: 3, cy: 170 }}
           endDot={{ cx: 475, cy: 1 }}
@@ -213,10 +217,29 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           }
         />
       </div>
-      <div className=" w-48 absolute top-[120%] right-full">
+      <div className="w-[80%] absolute -bottom-5 left-full">
+        <LaserLine
+          defsId="tamper"
+          viewBox="0 0 393 54"
+          d="M0.458008 0.88916L85.5903 44.7314C95.3607 49.7631 106.192 52.3882 117.181 52.3882H391.458"
+          pathClassName={styles.tamperPath}
+          startDot={{ cx: 1, cy: 1 }}
+          endDot={{ cx: 389, cy: 52 }}
+          Icon={IoShieldCheckmarkOutline}
+          infoBoxClassName="top-full left-full "
+          label={
+            <>
+              Proximity sensors <br />{" "}
+              <span className="opacity-50">for band tamper</span>
+            </>
+          }
+        />
+      </div>
+      <div className=" w-48 absolute top-[150%] right-[60%]">
         <LaserLine
           defsId="replaceStraps"
           viewBox="0 0 189 63"
+          d="M0 61.2661H135.23C142.584 61.2661 149.451 57.5922 153.532 51.475L187.5 0.555176"
           pathClassName={styles.replaceStraps}
           startDot={{ cx: 3, cy: 61 }}
           endDot={{ cx: 186, cy: 3 }}
@@ -229,20 +252,53 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           }
         />
       </div>
-
-      <div className="w-[90%] absolute -bottom-5 left-full">
+      <div className=" w-48 absolute top-0 right-full translate-x-[-40%] translate-y-12">
         <LaserLine
-          defsId="tamper"
-          viewBox="0 0 393 54"
-          pathClassName={styles.tamperPath}
-          startDot={{ cx: 1, cy: 1 }}
-          endDot={{ cx: 389, cy: 52 }}
-          Icon={IoShieldCheckmarkOutline}
-          infoBoxClassName="top-full left-full "
+          defsId="monitoring"
+          viewBox="0 0 192 158"
+          d="M0 157L62.4858 157C68.2937 157 73.5797 153.647 76.0551 148.393L141.445 9.60658C143.92 4.35261 149.206 0.999802 155.014 0.999802H192"
+          pathClassName={styles.monitoring}
+          startDot={{ cx: 1, cy: 157 }}
+          endDot={{ cx: 191, cy: 1 }}
+          infoBoxClassName="top-full right-full flex-row-reverse text-right"
+          Icon={TbDeviceWatchSearch}
           label={
             <>
-              Proximity sensors <br />{" "}
-              <span className="opacity-50">for band tamper</span>
+              ITW and OTW <br />
+              <span className="opacity-50">Monitoring Capabilities</span>
+            </>
+          }
+        />
+      </div>
+      <div className=" w-48 absolute top-0 right-full translate-x-[-20%] -translate-y-18">
+        <LaserLine
+          defsId="communication"
+          viewBox="0 0 192 62"
+          d="M0 1L49.2873 1C54.8843 1 60.2709 3.13323 64.3502 6.96534L117.65 57.0347C121.729 60.8668 127.116 63 132.713 63L192 63"
+          pathClassName={styles.communication}
+          startDot={{ cx: 1, cy: 1 }}
+          endDot={{ cx: 191, cy: 63 }}
+          infoBoxClassName="top-0 right-full flex-row-reverse text-right"
+          Icon={TbDeviceWatchSearch}
+          label={<>2-Way Communication</>}
+        />
+      </div>
+      <div className=" w-80 absolute bottom-full left-[60%] translate-x-[-40%] translate-y-[-90%]">
+        <LaserLine
+          defsId="sim"
+          viewBox="0 0 320 103"
+          d="M0.848633 104L58.5932 11.3623C62.6107 4.91721 69.6684 1 77.2631 1H320.849"
+          pathClassName={styles.sim}
+          startDot={{ cx: 1, cy: 103 }}
+          endDot={{ cx: 320, cy: 1 }}
+          infoBoxClassName="top-0 left-full "
+          Icon={BsSim}
+          label={
+            <>
+              3-Carrier SIM <br />{" "}
+              <span className="opacity-50">
+                (T-Mobile, AT&T and <br /> Verizon Wireless)
+              </span>
             </>
           }
         />

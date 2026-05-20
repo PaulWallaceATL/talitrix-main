@@ -94,7 +94,9 @@ const LaserLine = ({
           >
             <Icon className="size-full text-primary" />
           </div>
-          <span className="whitespace-nowrap">{label}</span>
+          <span className="whitespace-nowrap h-10 flex flex-col justify-center">
+            {label}
+          </span>
         </div>
       )}
     </>
