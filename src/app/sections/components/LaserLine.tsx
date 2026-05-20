@@ -16,7 +16,7 @@ interface LaserLineProps extends Omit<ComponentProps<"svg">, "id"> {
 }
 
 const defaultInfoBoxClassName =
-  "absolute -translate-y-7 text-center flex flex-col gap-2 items-center info-box info-box-1 w-25";
+  "absolute -translate-y-7 px-2 flex gap-2 items-center info-box info-box-1 w-25";
 
 const infoGlass =
   "inset 0px 0px 1.8px rgba(255, 255, 255, 0.98), inset 1px -2px 4.3px rgba(255, 255, 255, 0.44)";
@@ -89,7 +89,7 @@ const LaserLine = ({
       {Icon && label && (
         <div className={`${infoBoxClassName} ${defaultInfoBoxClassName}`}>
           <div
-            className="size-14 p-2 bg-white/15 rounded-lg"
+            className="size-14 p-2 bg-white/15 rounded-lg shrink-0"
             style={{ boxShadow: infoGlass }}
           >
             <Icon className="size-full text-primary" />

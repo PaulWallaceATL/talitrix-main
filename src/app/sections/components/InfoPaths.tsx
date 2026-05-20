@@ -204,7 +204,11 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           Icon={IoFitnessOutline}
           label={
             <>
-              Heart Rate <br /> &amp; SpO₂
+              Heart Rate &amp;
+              <br /> SpO2 sensors <br />{" "}
+              <span className="opacity-50">
+                for health &amp; wellness <br /> monitoring
+              </span>
             </>
           }
         />
@@ -216,7 +220,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.replaceStraps}
           startDot={{ cx: 3, cy: 61 }}
           endDot={{ cx: 186, cy: 3 }}
-          infoBoxClassName="top-full right-full"
+          infoBoxClassName="top-full right-full flex-row-reverse text-right"
           Icon={IoSwapHorizontalOutline}
           label={
             <>
@@ -234,10 +238,11 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           startDot={{ cx: 1, cy: 1 }}
           endDot={{ cx: 389, cy: 52 }}
           Icon={IoShieldCheckmarkOutline}
-          infoBoxClassName="top-full left-full"
+          infoBoxClassName="top-full left-full "
           label={
             <>
-              Proximity sensors <br /> for band tamper
+              Proximity sensors <br />{" "}
+              <span className="opacity-50">for band tamper</span>
             </>
           }
         />
