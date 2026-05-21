@@ -280,7 +280,11 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           endDot={{ cx: 191, cy: 63 }}
           infoBoxClassName="top-0 right-full flex-row-reverse text-right"
           Icon={TbDeviceWatchSearch}
-          label={<>2-Way Communication</>}
+          label={
+            <>
+              2-Way <br /> Communication
+            </>
+          }
         />
       </div>
       <div className=" w-80 absolute bottom-full left-[60%] translate-x-[-40%] translate-y-[-90%]">
