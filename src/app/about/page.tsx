@@ -106,27 +106,27 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-hidden">
+      <section className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-x-clip">
         <div className="absolute -top-20 right-0 w-[600px] h-[600px] bg-primary/10 blur-[200px] pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12 md:mb-16">
-          <div className="lg:col-span-5">
-            <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-              What we believe
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl leading-tight">
-              Our Foundation.
-            </h2>
-            <p className="text-white/65 mt-6 max-w-md leading-relaxed">
-              The beliefs that shape our technology, guide our decisions, and
-              define our standards.
-            </p>
-          </div>
-        </div>
-
-        <div className="relative z-10">
-          <PrinciplesScroller />
-        </div>
+        <PrinciplesScroller
+          header={
+            <div className="relative z-10 mb-12 grid grid-cols-1 gap-10 md:mb-16 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <span className="mb-6 inline-block text-xs uppercase tracking-[0.3em] text-primary">
+                  What we believe
+                </span>
+                <h2 className="text-3xl leading-tight sm:text-4xl md:text-5xl">
+                  Our Foundation.
+                </h2>
+                <p className="mt-6 max-w-md leading-relaxed text-white/65">
+                  The beliefs that shape our technology, guide our decisions, and
+                  define our standards.
+                </p>
+              </div>
+            </div>
+          }
+        />
       </section>
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
