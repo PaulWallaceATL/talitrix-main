@@ -5,34 +5,6 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 const Footer = () => {
   return (
     <footer className="relative bg-black overflow-hidden">
-      {/*
-       * Mobile-only quick actions. The same links exist in the columns
-       * below + the bordered utility row, but on mobile both are easy to
-       * miss, so surface the two most-requested actions up top.
-       */}
-      <div className="lg:hidden border-b border-white/15 px-4 sm:px-8 py-5 grid grid-cols-2 gap-3">
-        <a
-          href={LOGIN_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center rounded-full border border-primary/50 bg-primary/15 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary/30"
-          style={{
-            boxShadow:
-              "inset -2px -1px 6px rgba(255, 255, 255, 0.18), 0 8px 24px rgba(248, 122, 19, 0.18)",
-          }}
-        >
-          Login
-        </a>
-        <a
-          href={PAYMENT_PORTAL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center rounded-full border border-white/20 bg-white/[0.06] px-4 py-3 text-sm font-semibold text-white transition-colors hover:border-primary/60 hover:text-primary"
-        >
-          Payment Portal
-        </a>
-      </div>
-
       <div className="px-4 sm:px-8 lg:px-16 py-16 flex flex-col gap-16">
         <div className="flex w-full justify-between gap-x-8 sm:gap-x-16 gap-y-16 flex-wrap">
           <div className="flex flex-col justify-between gap-4 text-xl">
