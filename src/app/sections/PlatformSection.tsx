@@ -78,12 +78,12 @@ const PlatformSection = () => {
         });
 
         // Cards begin sliding/rotating later on desktop so the watch has
-        // time to settle into its lower position before they sweep through.
+        // fully settled below the headline before they sweep through.
         // Mobile keeps the rotation starting at 0 since the pin is shorter.
         tl2.to(
           screenRef.current,
-          { rotate: "-12deg" },
-          isMobile ? 0 : 0.35,
+          { rotate: "-12deg", duration: isMobile ? 0.5 : 0.35 },
+          isMobile ? 0 : 0.5,
         );
 
         if (isMobile) {
