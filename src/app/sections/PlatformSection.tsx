@@ -101,12 +101,12 @@ const PlatformSection = () => {
           tl2
             .to(
               "#watchscene",
-              { x: "-22%", y: 110, delay: 0.1, ease: "power4.inOut" },
+              { x: 0, y: 110, delay: 0.1, ease: "power4.inOut" },
               0,
             )
             .to(
               "#watchscene",
-              { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
+              { opacity: 0, duration: 0.5, ease: "power1.in" },
               fadeStart,
             );
         }
