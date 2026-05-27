@@ -48,8 +48,8 @@ const PlatformSection = () => {
       },
       (context) => {
         const isMobile = context.conditions?.isMobile === true;
-        const pinEnd = isMobile ? "+=90%" : "+=300%";
-        const fadeStart = isMobile ? 0.76 : 0.86;
+        const pinEnd = isMobile ? "+=90%" : "+=250%";
+        const fadeStart = isMobile ? 0.76 : 0.8;
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -137,13 +137,7 @@ const PlatformSection = () => {
           tl2
             .to(
               "#watchscene",
-              {
-                x: "-22%",
-                y: 300,
-                duration: 0.7,
-                delay: 0.1,
-                ease: "power3.inOut",
-              },
+              { x: "-22%", y: 230, duration: 0.12, ease: "power2.out" },
               0,
             )
             .to(

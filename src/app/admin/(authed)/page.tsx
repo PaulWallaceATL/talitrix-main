@@ -5,19 +5,27 @@ export const dynamic = "force-dynamic";
 
 async function getCounts() {
   const sb = supabaseAdmin();
-  const [news, contact, getStarted, registration] = await Promise.all([
-    sb.from("news_articles").select("*", { count: "exact", head: true }),
-    sb.from("contact_submissions").select("*", { count: "exact", head: true }),
-    sb
-      .from("get_started_submissions")
-      .select("*", { count: "exact", head: true }),
-    sb
-      .from("participant_registrations")
-      .select("*", { count: "exact", head: true }),
-  ]);
+  const [news, knowledge, contact, getStarted, registration] =
+    await Promise.all([
+      sb.from("news_articles").select("*", { count: "exact", head: true }),
+      sb
+        .from("company_knowledge")
+        .select("*", { count: "exact", head: true })
+        .eq("active", true),
+      sb
+        .from("contact_submissions")
+        .select("*", { count: "exact", head: true }),
+      sb
+        .from("get_started_submissions")
+        .select("*", { count: "exact", head: true }),
+      sb
+        .from("participant_registrations")
+        .select("*", { count: "exact", head: true }),
+    ]);
 
   return {
     news: news.count ?? 0,
+    knowledge: knowledge.count ?? 0,
     contact: contact.count ?? 0,
     getStarted: getStarted.count ?? 0,
     registration: registration.count ?? 0,
@@ -39,6 +47,12 @@ export default async function AdminDashboard() {
       href: "/admin/news",
       count: counts?.news ?? 0,
       cta: "Manage articles",
+    },
+    {
+      label: "Active Knowledge Entries",
+      href: "/admin/knowledge",
+      count: counts?.knowledge ?? 0,
+      cta: "Manage AI knowledge",
     },
     {
       label: "Contact Submissions",

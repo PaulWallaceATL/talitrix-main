@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { supabaseAdmin, type NewsArticle } from "@/lib/supabase";
 import DeleteArticleButton from "./DeleteArticleButton";
-import AutoGeneratePanel from "./AutoGeneratePanel";
+import NewsroomWizard from "./NewsroomWizard";
 
 export const dynamic = "force-dynamic";
 
@@ -56,7 +56,7 @@ export default async function AdminNewsPage() {
       )}
 
       <div className="mb-8 md:mb-10">
-        <AutoGeneratePanel />
+        <NewsroomWizard />
       </div>
 
       {!envError && articles.length === 0 ? (

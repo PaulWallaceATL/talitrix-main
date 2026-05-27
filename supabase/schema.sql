@@ -62,6 +62,28 @@ for each row execute function public.set_updated_at();
 
 alter table public.news_articles enable row level security;
 
+-- ---------- Company knowledge (AI writer rules) ----------------------------
+create table if not exists public.company_knowledge (
+  id          uuid primary key default gen_random_uuid(),
+  title       text not null,
+  body        text not null,
+  kind        text not null default 'general',
+  active      boolean not null default true,
+  sort_order  int not null default 0,
+  created_at  timestamptz not null default now(),
+  updated_at  timestamptz not null default now()
+);
+
+create index if not exists company_knowledge_active_idx
+  on public.company_knowledge (active, sort_order, created_at desc);
+
+drop trigger if exists trg_company_knowledge_updated_at on public.company_knowledge;
+create trigger trg_company_knowledge_updated_at
+before update on public.company_knowledge
+for each row execute function public.set_updated_at();
+
+alter table public.company_knowledge enable row level security;
+
 -- ---------- Contact form submissions ---------------------------------------
 create table if not exists public.contact_submissions (
   id            uuid primary key default gen_random_uuid(),
