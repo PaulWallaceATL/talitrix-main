@@ -126,7 +126,15 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div className="flex lg:max-w-125 py-6 px-4 sm:px-8 lg:px-16 items-center justify-between w-full border-white/30 border-t lg:border-l lg:border-t-0 h-full">
+        <div className="flex lg:max-w-125 py-6 px-4 sm:px-8 lg:px-16 items-center justify-between w-full border-white/30 border-t lg:border-l lg:border-t-0 h-full gap-4 flex-wrap">
+          <a
+            href={LOGIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="duration-300 transition-colors hover:text-primary"
+          >
+            Login
+          </a>
           <a
             href={PAYMENT_PORTAL_URL}
             target="_blank"
@@ -178,6 +186,7 @@ export default Footer;
 const PAYMENT_PORTAL_URL =
   "https://billing.stripe.com/p/login/5kA9Do80vb7zfkc9AA";
 const PARTICIPANT_REGISTRATION_URL = "https://register.talitrix.com/";
+const LOGIN_URL = "https://app.talitrix.com/login";
 
 const SOCIALS = [
   {
@@ -230,6 +239,8 @@ const FooterLinks = [
     title: "Get Started",
     links: [
       { label: "Request a Briefing", href: "/get-started" },
+      { label: "Login", href: LOGIN_URL, external: true },
+      { label: "Payment Portal", href: PAYMENT_PORTAL_URL, external: true },
       { label: "Participant Registration", href: PARTICIPANT_REGISTRATION_URL, external: true },
       { label: "Contact Sales", href: "/contact" },
     ],
