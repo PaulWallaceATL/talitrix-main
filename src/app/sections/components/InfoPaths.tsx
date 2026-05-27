@@ -5,6 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
 import {
+  IoChatbubblesOutline,
   IoFitnessOutline,
   IoLocationOutline,
   IoShieldCheckmarkOutline,
@@ -279,7 +280,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           startDot={{ cx: 1, cy: 1 }}
           endDot={{ cx: 191, cy: 63 }}
           infoBoxClassName="top-0 right-full flex-row-reverse text-right"
-          Icon={TbDeviceWatchSearch}
+          Icon={IoChatbubblesOutline}
           label={
             <>
               Two-Way <br /> Communication
