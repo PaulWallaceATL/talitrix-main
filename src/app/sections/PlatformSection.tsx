@@ -137,12 +137,12 @@ const PlatformSection = () => {
           tl2
             .to(
               "#watchscene",
-              { x: "-22%", y: 230, duration: 0.12, ease: "power2.out" },
+              { x: "-22%", y: 110, delay: 0.1, ease: "power4.inOut" },
               0,
             )
             .to(
               "#watchscene",
-              { x: "-50%", opacity: 0, duration: 0.4, ease: "power1.in" },
+              { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
               fadeStart,
             );
         }
@@ -245,7 +245,7 @@ const PlatformSection = () => {
             </div>
           </div>
         </div>
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-14 lg:pb-16 relative z-20">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-14 lg:pb-40 relative z-20">
           <h2
             className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}
