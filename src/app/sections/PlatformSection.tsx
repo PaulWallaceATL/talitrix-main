@@ -137,7 +137,7 @@ const PlatformSection = () => {
           tl2
             .to(
               "#watchscene",
-              { x: "-22%", y: 170, delay: 0.1, ease: "power4.inOut" },
+              { x: "-22%", y: 110, delay: 0.1, ease: "power4.inOut" },
               0,
             )
             .to(
@@ -158,8 +158,16 @@ const PlatformSection = () => {
             fadeStart,
           )
           .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
-          .to(".platform-cards", { opacity: 0, duration: 0.24 }, fadeStart)
-          .to(cardRef.current, { opacity: 0, duration: 0.24 }, fadeStart);
+          .to(
+            ".platform-cards",
+            { opacity: 0, duration: isMobile ? 0.24 : 0.3 },
+            fadeStart,
+          )
+          .to(
+            cardRef.current,
+            { opacity: 0, duration: isMobile ? 0.24 : 0.3 },
+            fadeStart,
+          );
 
         if (!isMobile) {
           tl2.to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
