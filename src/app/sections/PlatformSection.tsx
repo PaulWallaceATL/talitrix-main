@@ -5,20 +5,20 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Image from "next/image";
+import Link from "next/link";
+import { FiArrowUpRight } from "react-icons/fi";
 import { useRef } from "react";
-import { BOTTOM_CTA_REVEAL_EVENT } from "@/app/sections/BottomCTA";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
-
-const revealBottomCta = () => {
-  window.dispatchEvent(new CustomEvent(BOTTOM_CTA_REVEAL_EVENT));
-};
 
 const PlatformSection = () => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const screenRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const platformRef = useRef<HTMLDivElement>(null);
+  const mobileCtaRef = useRef<HTMLDivElement>(null);
+  const mobileCtaTextRef = useRef<HTMLHeadingElement>(null);
+  const mobileCtaButtonsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const platform = platformRef.current;
@@ -48,36 +48,27 @@ const PlatformSection = () => {
       },
       (context) => {
         const isMobile = context.conditions?.isMobile === true;
+        const pinEnd = isMobile ? "+=90%" : "+=250%";
+        const fadeStart = isMobile ? 0.76 : 0.8;
 
-        const pinEnd = isMobile ? "+=75%" : "+=250%";
-        const fadeStart = isMobile ? 0.72 : 0.8;
-        let bottomCtaRevealed = false;
-        const triggerBottomCtaReveal = () => {
-          if (bottomCtaRevealed) return;
-          bottomCtaRevealed = true;
-          revealBottomCta();
-        };
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: platform,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        });
 
-        const tl = gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: platform,
-              start: "top bottom",
-              end: "bottom bottom",
-              scrub: true,
-            },
-          })
-          .to(["#infoPaths"], { opacity: 0, duration: 0.2, delay: 0.1 }, 0)
-          .to("#explode-h2", { opacity: 0, duration: 0.3 }, 0)
-          .to(
-            "#watchscene",
-            {
-              x: 0,
-              duration: 1,
-              ...(isMobile ? { y: 110, scale: 0.95 } : {}),
-            },
-            0,
-          );
+        tl.to(["#infoPaths"], { opacity: 0, duration: 0.2, delay: 0.1 }, 0).to(
+          "#explode-h2",
+          { opacity: 0, duration: 0.3 },
+          0,
+        );
+
+        if (!isMobile) {
+          tl.to("#watchscene", { x: 0, duration: 1 }, 0);
+        }
 
         const tl2 = gsap.timeline({
           scrollTrigger: {
@@ -87,6 +78,7 @@ const PlatformSection = () => {
             pin: true,
             pinSpacing: true,
             scrub: true,
+            anticipatePin: 1,
           },
         });
 
@@ -100,9 +92,47 @@ const PlatformSection = () => {
           );
           tl2.to(
             "#watchscene",
-            { opacity: 0, scale: 0.85, duration: 0.28, ease: "power1.in" },
+            { opacity: 0, scale: 0.88, duration: 0.24, ease: "power1.in" },
             fadeStart,
           );
+
+          if (mobileCtaTextRef.current && mobileCtaRef.current) {
+            const mobileCtaSplit = SplitText.create(mobileCtaTextRef.current, {
+              type: "words",
+            });
+
+            gsap.set(mobileCtaRef.current, { opacity: 0 });
+            gsap.set(mobileCtaSplit.words, {
+              opacity: 0,
+              y: 16,
+              filter: "blur(6px)",
+            });
+            if (mobileCtaButtonsRef.current) {
+              gsap.set(mobileCtaButtonsRef.current, { opacity: 0, y: 12 });
+            }
+
+            tl2.to(mobileCtaRef.current, { opacity: 1, duration: 0.01 }, fadeStart);
+            tl2.to(
+              mobileCtaSplit.words,
+              {
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                stagger: 0.035,
+                duration: 0.22,
+                ease: "power2.out",
+              },
+              fadeStart,
+            );
+
+            if (mobileCtaButtonsRef.current) {
+              tl2.to(
+                mobileCtaButtonsRef.current,
+                { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" },
+                fadeStart + 0.12,
+              );
+            }
+          }
         } else {
           tl2
             .to(
@@ -118,14 +148,21 @@ const PlatformSection = () => {
         }
 
         tl2
-          .to(h2Ref.current, { y: -300, opacity: 0, duration: 0.5 }, fadeStart)
+          .to(
+            h2Ref.current,
+            {
+              y: isMobile ? -120 : -300,
+              opacity: 0,
+              duration: isMobile ? 0.24 : 0.5,
+            },
+            fadeStart,
+          )
           .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
-          .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
-          .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart)
-          .to(cardRef.current, { opacity: 0, duration: 0.3 }, fadeStart);
+          .to(".platform-cards", { opacity: 0, duration: 0.24 }, fadeStart)
+          .to(cardRef.current, { opacity: 0, duration: 0.24 }, fadeStart);
 
-        if (isMobile) {
-          tl2.call(triggerBottomCtaReveal, undefined, fadeStart);
+        if (!isMobile) {
+          tl2.to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
         }
       },
     );
@@ -218,6 +255,43 @@ const PlatformSection = () => {
               Continuity
             </span>
           </h2>
+        </div>
+
+        {/* Mobile CTA lives inside the pin so it can scrub in with the fade. */}
+        <div
+          ref={mobileCtaRef}
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-30 px-6 pb-10 opacity-0 lg:hidden"
+        >
+          <div className="pointer-events-auto mx-auto flex max-w-md flex-col items-center gap-6 text-center">
+            <h2
+              ref={mobileCtaTextRef}
+              className="text-3xl leading-[1.1] text-white"
+            >
+              Deploy the new standard in your jurisdiction.
+            </h2>
+            <div
+              ref={mobileCtaButtonsRef}
+              className="flex w-full flex-col gap-3"
+            >
+              <Link
+                href="/contact?type=briefing"
+                className="rounded-xl bg-white px-6 py-4 text-base font-semibold text-zinc-800 shadow-[0_10px_40px_rgba(255,255,255,0.08)]"
+              >
+                Request a Briefing
+              </Link>
+              <Link
+                href="/talitrix-one"
+                className="group flex items-center justify-center gap-2 rounded-xl bg-white/5 px-6 py-4 text-base font-semibold backdrop-blur-lg"
+                style={{
+                  boxShadow:
+                    "inset 1px -1px 3px rgba(255, 255, 255, 0.5), inset -3px -1px 5px rgba(255, 255, 255, 0.5)",
+                }}
+              >
+                Explore Talitrix ONE
+                <FiArrowUpRight className="size-5" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
