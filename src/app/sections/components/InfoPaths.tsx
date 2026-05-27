@@ -209,7 +209,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           label={
             <>
               Heart Rate &amp;
-              <br /> SpO2 sensors <br />{" "}
+              <br /> SpO2 Sensors <br />{" "}
               <span className="opacity-50">
                 for health &amp; wellness <br /> monitoring
               </span>
@@ -229,7 +229,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           infoBoxClassName="top-full left-full "
           label={
             <>
-              Proximity sensors <br />{" "}
+              Proximity Sensors <br />{" "}
               <span className="opacity-50">for band tamper</span>
             </>
           }
@@ -247,7 +247,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           Icon={IoSwapHorizontalOutline}
           label={
             <>
-              Replaceable wrist <br /> &amp; ankle straps
+              Replaceable Wrist <br /> &amp; Ankle Straps
             </>
           }
         />
@@ -282,7 +282,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           Icon={TbDeviceWatchSearch}
           label={
             <>
-              2-Way <br /> Communication
+              Two-Way <br /> Communication
             </>
           }
         />
@@ -299,9 +299,9 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           Icon={BsSim}
           label={
             <>
-              3-Carrier SIM <br />{" "}
+              Three Carrier SIM <br />{" "}
               <span className="opacity-50">
-                (T-Mobile, AT&T and <br /> Verizon Wireless)
+                (AT&amp;T, T-Mobile and <br /> Verizon Wireless)
               </span>
             </>
           }
