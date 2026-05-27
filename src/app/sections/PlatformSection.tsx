@@ -137,7 +137,7 @@ const PlatformSection = () => {
           tl2
             .to(
               "#watchscene",
-              { x: "-22%", y: 110, delay: 0.1, ease: "power4.inOut" },
+              { x: "-22%", y: 170, delay: 0.1, ease: "power4.inOut" },
               0,
             )
             .to(
