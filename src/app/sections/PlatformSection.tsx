@@ -11,31 +11,17 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const PlatformSection = () => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
-  const h2bRef = useRef<HTMLHeadingElement>(null);
   const screenRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const platformRef = useRef<HTMLDivElement>(null);
-  const pRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const platform = platformRef.current;
     if (!platform) return;
 
-    // Reveal the section as soon as GSAP is set up — until now it is
-    // hidden via Tailwind's opacity-0 so it cannot flash over the hero
-    // on a fresh page load (the absolute "Intelligence with Purpose"
-    // overlay would otherwise sit at viewport center over Hero).
     gsap.set(platform, { opacity: 1 });
 
     const h2 = SplitText.create(h2Ref.current, {
-      type: "lines",
-      mask: "lines",
-    });
-    const h2b = SplitText.create(h2bRef.current, {
-      type: "lines",
-      mask: "lines",
-    });
-    const p = SplitText.create(pRef.current, {
       type: "lines",
       mask: "lines",
     });
@@ -50,11 +36,6 @@ const PlatformSection = () => {
       },
     });
 
-    // Scroll-driven section animations. One matchMedia handles both
-    // breakpoints: <768px scales the watch on entry; <1024px slides it
-    // fully off-screen during the pin (otherwise it would overlap the
-    // fanned cards). Timelines and their ScrollTriggers are auto-
-    // reverted by gsap.context on breakpoint change.
     gsap.matchMedia().add(
       {
         isDesktop: "(min-width: 1024px)",
@@ -74,14 +55,7 @@ const PlatformSection = () => {
               scrub: true,
             },
           })
-          .to(
-            [
-              "#infoPaths",
-              // "#leftInfoContent", --- IGNORE ---
-            ],
-            { opacity: 0, duration: 0.2, delay: 0.1 },
-            0,
-          )
+          .to(["#infoPaths"], { opacity: 0, duration: 0.2, delay: 0.1 }, 0)
           .to("#explode-h2", { opacity: 0, duration: 0.3 }, 0)
           .to(
             "#watchscene",
@@ -89,26 +63,27 @@ const PlatformSection = () => {
             0,
           );
 
-        const tl2 = gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: platform,
-              start: "top top",
-              end: "+=400%",
-              pin: true,
-              pinSpacing: true,
-              scrub: true,
-            },
-          })
-          .to(screenRef.current, { rotate: "-12deg" }, 0);
+        const tl2 = gsap.timeline({
+          scrollTrigger: {
+            trigger: platform,
+            start: "top top",
+            end: "+=250%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+          },
+        });
+
+        tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
 
         if (isMobile) {
-          tl.to("#watchscene", { y: -150, duration: 1 }, 0);
+          tl.to("#watchscene", { y: 40, duration: 1 }, 0);
 
           tl2.to(
             "#watchscene",
             {
               x: "0%",
+              y: 60,
               opacity: 0,
               scale: 0.8,
               duration: 0.5,
@@ -116,12 +91,11 @@ const PlatformSection = () => {
             },
             0,
           );
-          tl2.to(cardRef.current, { scale: 2.5, y: -250 }, 0.8);
         } else {
           tl2
             .to(
               "#watchscene",
-              { x: "-22%", delay: 0.1, ease: "power4.inOut" },
+              { x: "-22%", y: 110, delay: 0.1, ease: "power4.inOut" },
               0,
             )
             .to(
@@ -129,7 +103,6 @@ const PlatformSection = () => {
               { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
               0.8,
             );
-          tl2.to(cardRef.current, { scale: 2.5, y: -50 }, 0.8);
         }
 
         tl2
@@ -137,15 +110,15 @@ const PlatformSection = () => {
           .to(h2Ref.current, { pointerEvents: "none" }, 0.8)
           .to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8)
           .to(".platform-card-2", { x: -400, duration: 0.3 }, 0.8)
-          .from(h2b.lines, { y: "100%", stagger: 0.2, duration: 0.5 }, 0.9)
-          .from(p.lines, { y: "100%", stagger: 0.1, duration: 0.3 }, 0.9);
+          .to(cardRef.current, { opacity: 0, duration: 0.3 }, 0.8);
       },
     );
   });
+
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
       <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-1/2 lg:top-[55%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-[64%] sm:top-[65%] lg:top-[68%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
             className="flex gap-6 w-250 h-500 origin-bottom rotate-55"
             ref={screenRef}
@@ -215,7 +188,7 @@ const PlatformSection = () => {
             </div>
           </div>
         </div>
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:py-24 relative z-20">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-14 lg:pb-16 relative z-20">
           <h2
             className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}
@@ -226,24 +199,6 @@ const PlatformSection = () => {
             </span>
           </h2>
         </div>
-      </div>
-      <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center bottom-20 lg:top-1/2 left-1/2 w-full max-w-375 -translate-x-1/2 lg:-translate-y-1/2 z-20">
-        <h2
-          className="text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
-          ref={h2bRef}
-        >
-          Intelligence <br /> with{" "}
-          <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
-            Purpose.
-          </span>
-        </h2>
-        <p
-          className="w-full max-w-md lg:w-80 text-base sm:text-lg lg:text-xl"
-          ref={pRef}
-        >
-          Move from reactive supervision to proactive intervention by
-          identifying potential issues before they become operational problems.
-        </p>
       </div>
     </div>
   );
