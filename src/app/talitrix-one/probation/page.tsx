@@ -121,15 +121,12 @@ export default function ProbationPage() {
             blur
           />
         }
-        subtitle="Outside the walls. Same continuous platform."
         body={
           <p>
             ONE Probation brings every probation participant into one
-            connected system — whether they are on electronic monitoring or
-            not. By unifying caseload management, risk tracking, and
-            compliance reporting in a single place, agencies gain clearer
-            visibility across caseloads and more time for the work that
-            drives outcomes.
+            connected system — unifying caseload management, risk tracking,
+            and compliance reporting for clearer visibility and stronger
+            outcomes across every caseload.
           </p>
         }
         background={

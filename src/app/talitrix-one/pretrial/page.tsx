@@ -121,15 +121,12 @@ export default function PretrialPage() {
             blur
           />
         }
-        subtitle="From release to resolution. Same continuous platform."
         body={
           <p>
-            ONE Pre-Trial brings every pre-trial participant — whether they
-            are on electronic monitoring or not — into one connected system.
-            By unifying risk frameworks, conditions tracking, and court-ready
-            documentation in a single place, agencies gain clearer visibility
-            across caseloads and a defensible record behind every release and
-            supervision decision.
+            ONE Pre-Trial brings every pre-trial participant into one
+            connected system — unifying risk frameworks, conditions tracking,
+            and court-ready documentation with a defensible record behind
+            every release decision.
           </p>
         }
         background={
