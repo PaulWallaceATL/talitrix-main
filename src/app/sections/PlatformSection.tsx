@@ -5,8 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Image from "next/image";
-import Link from "next/link";
-import { FiArrowUpRight } from "react-icons/fi";
 import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -16,9 +14,6 @@ const PlatformSection = () => {
   const screenRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const platformRef = useRef<HTMLDivElement>(null);
-  const mobileCtaRef = useRef<HTMLDivElement>(null);
-  const mobileCtaTextRef = useRef<HTMLHeadingElement>(null);
-  const mobileCtaButtonsRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const platform = platformRef.current;
@@ -95,44 +90,6 @@ const PlatformSection = () => {
             { opacity: 0, scale: 0.88, duration: 0.24, ease: "power1.in" },
             fadeStart,
           );
-
-          if (mobileCtaTextRef.current && mobileCtaRef.current) {
-            const mobileCtaSplit = SplitText.create(mobileCtaTextRef.current, {
-              type: "words",
-            });
-
-            gsap.set(mobileCtaRef.current, { opacity: 0 });
-            gsap.set(mobileCtaSplit.words, {
-              opacity: 0,
-              y: 16,
-              filter: "blur(6px)",
-            });
-            if (mobileCtaButtonsRef.current) {
-              gsap.set(mobileCtaButtonsRef.current, { opacity: 0, y: 12 });
-            }
-
-            tl2.to(mobileCtaRef.current, { opacity: 1, duration: 0.01 }, fadeStart);
-            tl2.to(
-              mobileCtaSplit.words,
-              {
-                opacity: 1,
-                y: 0,
-                filter: "blur(0px)",
-                stagger: 0.035,
-                duration: 0.22,
-                ease: "power2.out",
-              },
-              fadeStart,
-            );
-
-            if (mobileCtaButtonsRef.current) {
-              tl2.to(
-                mobileCtaButtonsRef.current,
-                { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" },
-                fadeStart + 0.12,
-              );
-            }
-          }
         } else {
           tl2
             .to(
@@ -263,43 +220,6 @@ const PlatformSection = () => {
               Continuity
             </span>
           </h2>
-        </div>
-
-        {/* Mobile CTA lives inside the pin so it can scrub in with the fade. */}
-        <div
-          ref={mobileCtaRef}
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-30 px-6 pb-10 opacity-0 lg:hidden"
-        >
-          <div className="pointer-events-auto mx-auto flex max-w-md flex-col items-center gap-6 text-center">
-            <h2
-              ref={mobileCtaTextRef}
-              className="text-3xl leading-[1.1] text-white"
-            >
-              Deploy the new standard in your jurisdiction.
-            </h2>
-            <div
-              ref={mobileCtaButtonsRef}
-              className="flex w-full flex-col gap-3"
-            >
-              <Link
-                href="/contact?type=briefing"
-                className="rounded-xl bg-white px-6 py-4 text-base font-semibold text-zinc-800 shadow-[0_10px_40px_rgba(255,255,255,0.08)]"
-              >
-                Request a Briefing
-              </Link>
-              <Link
-                href="/talitrix-one"
-                className="group flex items-center justify-center gap-2 rounded-xl bg-white/5 px-6 py-4 text-base font-semibold backdrop-blur-lg"
-                style={{
-                  boxShadow:
-                    "inset 1px -1px 3px rgba(255, 255, 255, 0.5), inset -3px -1px 5px rgba(255, 255, 255, 0.5)",
-                }}
-              >
-                Explore Talitrix ONE
-                <FiArrowUpRight className="size-5" />
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </div>
