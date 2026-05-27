@@ -19,6 +19,20 @@ const scrollToTopInstant = () => {
   if (document.body) document.body.scrollTop = 0;
 };
 
+/**
+ * Mobile Safari can restore the previous scroll position AFTER React's first
+ * effect runs (and after pageshow fires for bfcache restores). Hammer the
+ * scroll position back to 0 across the next few frames plus a short delay so
+ * any late restoration loses the race.
+ */
+const scrollToTopPersistent = () => {
+  scrollToTopInstant();
+  requestAnimationFrame(scrollToTopInstant);
+  requestAnimationFrame(() => requestAnimationFrame(scrollToTopInstant));
+  window.setTimeout(scrollToTopInstant, 150);
+  window.setTimeout(scrollToTopInstant, 400);
+};
+
 const refreshScrollTrigger = () => {
   // Two RAFs: one for paint, one for layout — gives pinned sections their
   // correct anchor positions after we yank the scroll back to the top.
@@ -44,7 +58,7 @@ const ScrollResetOnLoad = () => {
   // On every (initial mount + client-side navigation) reset to top and
   // re-anchor ScrollTrigger so pinned/scrubbed sections recompute.
   useEffect(() => {
-    scrollToTopInstant();
+    scrollToTopPersistent();
     refreshScrollTrigger();
   }, [pathname]);
 
@@ -53,7 +67,7 @@ const ScrollResetOnLoad = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const onPageShow = (event: PageTransitionEvent) => {
-      scrollToTopInstant();
+      scrollToTopPersistent();
       if (event.persisted) refreshScrollTrigger();
     };
     window.addEventListener("pageshow", onPageShow);
