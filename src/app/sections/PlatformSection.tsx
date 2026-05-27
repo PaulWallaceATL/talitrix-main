@@ -43,8 +43,8 @@ const PlatformSection = () => {
       },
       (context) => {
         const isMobile = context.conditions?.isMobile === true;
-        const pinEnd = isMobile ? "+=90%" : "+=250%";
-        const fadeStart = isMobile ? 0.76 : 0.8;
+        const pinEnd = isMobile ? "+=70%" : "+=250%";
+        const fadeStart = isMobile ? 0.78 : 0.8;
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -77,7 +77,14 @@ const PlatformSection = () => {
           },
         });
 
-        tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
+        // Cards begin sliding/rotating later on desktop so the watch has
+        // time to settle into its lower position before they sweep through.
+        // Mobile keeps the rotation starting at 0 since the pin is shorter.
+        tl2.to(
+          screenRef.current,
+          { rotate: "-12deg" },
+          isMobile ? 0 : 0.35,
+        );
 
         if (isMobile) {
           tl2.to(
@@ -87,7 +94,7 @@ const PlatformSection = () => {
           );
           tl2.to(
             "#watchscene",
-            { opacity: 0, scale: 0.88, duration: 0.24, ease: "power1.in" },
+            { opacity: 0, scale: 0.88, duration: 0.18, ease: "power1.in" },
             fadeStart,
           );
         } else {
@@ -110,19 +117,19 @@ const PlatformSection = () => {
             {
               y: isMobile ? -120 : -300,
               opacity: 0,
-              duration: isMobile ? 0.24 : 0.5,
+              duration: isMobile ? 0.18 : 0.5,
             },
             fadeStart,
           )
           .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
           .to(
             ".platform-cards",
-            { opacity: 0, duration: isMobile ? 0.24 : 0.3 },
+            { opacity: 0, duration: isMobile ? 0.18 : 0.3 },
             fadeStart,
           )
           .to(
             cardRef.current,
-            { opacity: 0, duration: isMobile ? 0.24 : 0.3 },
+            { opacity: 0, duration: isMobile ? 0.18 : 0.3 },
             fadeStart,
           );
 

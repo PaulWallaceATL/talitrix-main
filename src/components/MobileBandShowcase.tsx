@@ -51,7 +51,7 @@ const FEATURES: Feature[] = [
 
 const MobileBandShowcase = () => {
   return (
-    <section className="relative bg-background px-6 pt-16 pb-20 lg:hidden">
+    <section className="relative -mt-12 bg-background px-6 pt-2 pb-16 lg:hidden">
       <div
         className="pointer-events-none absolute -top-32 left-1/2 size-[420px] -translate-x-1/2 rounded-full bg-primary/10 blur-[150px]"
         aria-hidden
