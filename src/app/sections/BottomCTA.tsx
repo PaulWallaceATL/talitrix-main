@@ -5,7 +5,7 @@ import CTAGlowBg from "@/components/CTAGlowBg";
 
 const BottomCTA = () => {
   return (
-    <div className="px-4 sm:px-8 lg:px-16 mb-8 mt-16">
+    <div className="mb-8 mt-4 px-4 sm:mt-16 sm:px-8 lg:mt-16 lg:px-16">
       <div className="overflow-hidden relative pb-60 sm:pb-90 pt-12 sm:pt-16 px-6 sm:px-10 rounded-3xl sm:rounded-4xl flex flex-col gap-10 sm:gap-14 lg:gap-16 items-center">
         <CTAGlowBg />
         <StaggeredText

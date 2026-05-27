@@ -8,7 +8,6 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import PrinciplesScroller from "@/components/PrinciplesScroller";
 import StoryTimeline from "@/components/StoryTimeline";
 import SynapticShift from "@/components/react-bits/synaptic-shift";
-import VideoBlock from "@/components/VideoBlock";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = pageMetadata({
@@ -68,12 +67,6 @@ export default function AboutPage() {
           </CTAButton>
         </div>
       </ShaderHero>
-
-      <VideoBlock
-        eyebrow="Watch"
-        headline="The standard, in motion."
-        body="A walkthrough of the Talitrix ONE platform — the All-In-One Band hardware, the connected dashboards, and the Talitrix Score that ties it all together."
-      />
 
       <section
         id="story-timeline"

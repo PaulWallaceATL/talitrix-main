@@ -72,7 +72,7 @@ export default function ParticipantsPage() {
 
         <div className="relative z-10 px-6 md:px-16 py-20 md:py-24 max-w-7xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            02 · For Participants
+            For Participants
           </span>
           <StaggeredText
             as="h1"

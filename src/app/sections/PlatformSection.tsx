@@ -40,11 +40,11 @@ const PlatformSection = () => {
       {
         isDesktop: "(min-width: 1024px)",
         isMobile: "(max-width: 1023px)",
-        isSmallMobile: "(max-width: 767px)",
       },
       (context) => {
         const isMobile = context.conditions?.isMobile === true;
-        const isSmallMobile = context.conditions?.isSmallMobile === true;
+
+        const pinEnd = isMobile ? "+=100%" : "+=250%";
 
         const tl = gsap
           .timeline({
@@ -59,7 +59,11 @@ const PlatformSection = () => {
           .to("#explode-h2", { opacity: 0, duration: 0.3 }, 0)
           .to(
             "#watchscene",
-            { x: 0, duration: 1, ...(isSmallMobile && { scale: 1.2 }) },
+            {
+              x: 0,
+              duration: 1,
+              ...(isMobile ? { y: 110, scale: 0.95 } : {}),
+            },
             0,
           );
 
@@ -67,7 +71,7 @@ const PlatformSection = () => {
           scrollTrigger: {
             trigger: platform,
             start: "top top",
-            end: "+=250%",
+            end: pinEnd,
             pin: true,
             pinSpacing: true,
             scrub: true,
@@ -77,19 +81,15 @@ const PlatformSection = () => {
         tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
 
         if (isMobile) {
-          tl.to("#watchscene", { y: 40, duration: 1 }, 0);
-
           tl2.to(
             "#watchscene",
-            {
-              x: "0%",
-              y: 60,
-              opacity: 0,
-              scale: 0.8,
-              duration: 0.5,
-              ease: "power1.in",
-            },
+            { x: 0, y: 110, scale: 0.95, ease: "none" },
             0,
+          );
+          tl2.to(
+            "#watchscene",
+            { opacity: 0, scale: 0.85, duration: 0.3, ease: "power1.in" },
+            0.8,
           );
         } else {
           tl2
@@ -118,9 +118,9 @@ const PlatformSection = () => {
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
       <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-[64%] sm:top-[65%] lg:top-[68%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-[62%] sm:top-[65%] lg:top-[68%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
-            className="flex gap-6 w-250 h-500 origin-bottom rotate-55"
+            className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-[50deg] lg:rotate-55"
             ref={screenRef}
           >
             <div className="w-full platform-cards platform-card-2 ">
@@ -150,16 +150,20 @@ const PlatformSection = () => {
             <div className="w-full relative">
               <div className="origin-bottom-left rotate-12 relative ">
                 <div className="relative z-10 " ref={cardRef}>
-                  <div className="top-[36%] absolute w-full flex flex-col items-center gap-2 z-20">
-                    <h3 className="tracking-widest text-center ">TALITRIX</h3>
-                    <div className="size-30 relative">
-                      <div className="top-1/2 left-1/2 -translate-1/2 text-primary text-4xl absolute">
+                  <div className="pointer-events-none absolute top-[36%] z-20 flex w-full flex-col items-center gap-1 sm:gap-2 lg:gap-2">
+                    <h3 className="text-center text-[10px] tracking-widest sm:text-sm lg:text-base">
+                      TALITRIX
+                    </h3>
+                    <div className="relative size-14 sm:size-20 lg:size-30">
+                      <div className="absolute top-1/2 left-1/2 -translate-1/2 text-lg text-primary sm:text-2xl lg:text-4xl">
                         63
                       </div>
                       <svg
                         viewBox="0 0 162 161"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
+                        className="h-full w-full"
+                        aria-hidden
                       >
                         <path
                           d="M161.5 80.5C161.5 124.959 125.459 161 81 161C36.5411 161 0.5 124.959 0.5 80.5C0.5 36.0411 36.5411 0 81 0C125.459 0 161.5 36.0411 161.5 80.5ZM12.1625 80.5C12.1625 118.518 42.9821 149.338 81 149.338C119.018 149.338 149.838 118.518 149.838 80.5C149.838 42.4821 119.018 11.6625 81 11.6625C42.9821 11.6625 12.1625 42.4821 12.1625 80.5Z"

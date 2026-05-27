@@ -100,7 +100,7 @@ export default function AgenciesPage() {
 
         <div className="relative z-10 px-6 md:px-16 py-20 md:py-24 max-w-7xl">
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            01 · For Agencies
+            For Agencies
           </span>
           <StaggeredText
             as="h1"
