@@ -105,7 +105,7 @@ const NAV_TREE: NavItem[] = [
         label: "Agencies",
         href: "/solutions/agencies",
         icon: "shieldStar",
-        desc: "For sheriffs, county leadership, pretrial admin, courts, judges, and DAs.",
+        desc: "For sheriffs, courts, pretrial, probation, and DAs.",
       },
       {
         label: "Participants",
