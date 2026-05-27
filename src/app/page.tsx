@@ -13,7 +13,6 @@ export default function Home() {
         <Hero />
         <ExplodedSection />
         <PlatformSection />
-        <div id="placeholder"></div>
         <BottomCTA />
       </main>
       {/*

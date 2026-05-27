@@ -73,6 +73,9 @@ export interface StaggeredTextProps {
 
   /** Called when exit animation completes */
   onExitComplete?: () => void;
+
+  /** When true, animation only runs via ref.replay() — no IntersectionObserver */
+  manual?: boolean;
 }
 
 /**
@@ -117,6 +120,7 @@ const StaggeredText = forwardRef<StaggeredTextHandle, StaggeredTextProps>(
       exitOnScrollOut = false,
       onAnimationComplete,
       onExitComplete,
+      manual = false,
     },
     ref,
   ) => {
@@ -155,7 +159,7 @@ const StaggeredText = forwardRef<StaggeredTextHandle, StaggeredTextProps>(
     }));
 
     useEffect(() => {
-      if (!rootRef.current) return;
+      if (!rootRef.current || manual) return;
 
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -175,7 +179,7 @@ const StaggeredText = forwardRef<StaggeredTextHandle, StaggeredTextProps>(
       observer.observe(rootRef.current);
 
       return () => observer.disconnect();
-    }, [threshold, rootMargin, exitOnScrollOut, hasEnteredView]);
+    }, [threshold, rootMargin, exitOnScrollOut, hasEnteredView, manual]);
 
     const defaultFrom = useMemo<MotionStyle>(() => {
       const base: MotionStyle = {

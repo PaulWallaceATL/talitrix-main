@@ -6,8 +6,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import Image from "next/image";
 import { useRef } from "react";
+import { BOTTOM_CTA_REVEAL_EVENT } from "@/app/sections/BottomCTA";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
+
+const revealBottomCta = () => {
+  window.dispatchEvent(new CustomEvent(BOTTOM_CTA_REVEAL_EVENT));
+};
 
 const PlatformSection = () => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
@@ -44,7 +49,14 @@ const PlatformSection = () => {
       (context) => {
         const isMobile = context.conditions?.isMobile === true;
 
-        const pinEnd = isMobile ? "+=100%" : "+=250%";
+        const pinEnd = isMobile ? "+=75%" : "+=250%";
+        const fadeStart = isMobile ? 0.72 : 0.8;
+        let bottomCtaRevealed = false;
+        const triggerBottomCtaReveal = () => {
+          if (bottomCtaRevealed) return;
+          bottomCtaRevealed = true;
+          revealBottomCta();
+        };
 
         const tl = gsap
           .timeline({
@@ -88,8 +100,8 @@ const PlatformSection = () => {
           );
           tl2.to(
             "#watchscene",
-            { opacity: 0, scale: 0.85, duration: 0.3, ease: "power1.in" },
-            0.8,
+            { opacity: 0, scale: 0.85, duration: 0.28, ease: "power1.in" },
+            fadeStart,
           );
         } else {
           tl2
@@ -101,16 +113,20 @@ const PlatformSection = () => {
             .to(
               "#watchscene",
               { x: "-50%", opacity: 0, duration: 0.5, ease: "power1.in" },
-              0.8,
+              fadeStart,
             );
         }
 
         tl2
-          .to(h2Ref.current, { y: -300, opacity: 0, duration: 0.5 }, 0.8)
-          .to(h2Ref.current, { pointerEvents: "none" }, 0.8)
-          .to(".platform-cards", { opacity: 0, duration: 0.3 }, 0.8)
-          .to(".platform-card-2", { x: -400, duration: 0.3 }, 0.8)
-          .to(cardRef.current, { opacity: 0, duration: 0.3 }, 0.8);
+          .to(h2Ref.current, { y: -300, opacity: 0, duration: 0.5 }, fadeStart)
+          .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
+          .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
+          .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart)
+          .to(cardRef.current, { opacity: 0, duration: 0.3 }, fadeStart);
+
+        if (isMobile) {
+          tl2.call(triggerBottomCtaReveal, undefined, fadeStart);
+        }
       },
     );
   });

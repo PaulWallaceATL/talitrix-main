@@ -100,7 +100,9 @@ const BandSupervisionSection = () => {
         const ch = canvas.clientHeight;
         const iw = img.naturalWidth;
         const ih = img.naturalHeight;
-        const scale = Math.min(cw / iw, ch / ih);
+        const isMobile = window.innerWidth < 1024;
+        const scaleBoost = isMobile ? 1.28 : 1.12;
+        const scale = Math.min(cw / iw, ch / ih) * scaleBoost;
         const dw = iw * scale;
         const dh = ih * scale;
         const dx = (cw - dw) / 2;
@@ -276,9 +278,9 @@ const BandSupervisionSection = () => {
             ref={stickyRef}
             className="lg:sticky lg:top-0 lg:h-screen flex items-center justify-center"
           >
-            <div className="relative w-full aspect-square max-w-[1500px] mx-auto -ml-6 lg:-ml-32 xl:-ml-48">
+            <div className="relative mx-auto aspect-square w-full max-w-[min(94vw,700px)] sm:max-w-[820px] lg:max-w-[min(96vw,1800px)] lg:-ml-36 xl:-ml-52">
               <div
-                className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.42),rgba(248,122,19,0.1)_45%,transparent_72%)] blur-2xl pointer-events-none"
+                className="absolute inset-[4%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.42),rgba(248,122,19,0.1)_45%,transparent_72%)] blur-2xl pointer-events-none max-lg:inset-[2%]"
                 aria-hidden
               />
               <canvas
