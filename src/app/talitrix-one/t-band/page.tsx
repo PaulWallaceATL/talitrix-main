@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
 import StaggeredText from "@/components/react-bits/staggered-text";
-import BandFeaturesScroller from "@/components/BandFeaturesScroller";
+import BandSupervisionSection from "@/components/BandSupervisionSection";
 import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 
 export const metadata: Metadata = pageMetadata({
@@ -83,31 +83,20 @@ export default function TBandPage() {
         </div>
       </ShaderHero>
 
-      <section
-        id="learn-more"
-        className="relative px-6 md:px-16 py-20 md:py-32 border-b border-border-gray overflow-x-clip scroll-mt-24 lg:scroll-mt-32"
-      >
-        <BandFeaturesScroller
-          header={
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16 mb-12 md:mb-16">
-              <div className="lg:col-span-5">
-                <span className="mb-6 inline-block text-xs uppercase tracking-[0.3em] text-primary">
-                  The Outcome
-                </span>
-                <h2 className="text-3xl leading-tight sm:text-4xl md:text-5xl">
-                  High confidence. Quiet hardware.
-                </h2>
-              </div>
-              <div className="lg:col-span-7 lg:pt-10">
-                <p className="max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-                  The All-In-One Band is engineered so that supervision teams get the
-                  signal they need — and participants get the dignity they deserve.
-                </p>
-              </div>
-            </div>
+      <div id="learn-more" className="scroll-mt-24 lg:scroll-mt-32">
+        <BandSupervisionSection
+          eyebrow="The All-In-One Band"
+          headline={
+            <>
+              One Band.{" "}
+              <span className="text-primary">
+                Built for Every Stage of Supervision.
+              </span>
+            </>
           }
+          body="Built for both Inside the Walls and Outside the Walls supervision — one device that follows the participant from custody operations to community release."
         />
-      </section>
+      </div>
 
       <PlatformContinuitySection />
 

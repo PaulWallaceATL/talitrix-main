@@ -1,0 +1,19 @@
+INSERT INTO public.news_articles (slug, title, category, excerpt, content, featured, published, published_at, meta_title, meta_description, keywords, og_image_url, author_name) VALUES ('ohow6x0lensyc0db1d6ryr6kxwdymn', 'Talitrix Strengthens Presence in Louisiana with Multiple State Contracts and Growth throughout Parishes Statewide', 'Announcement', $t65gt1tcv$ALPHARETTA, GA – October 9, 2025 - Talitrix, creator of the industry’s-first independent GPS wrist wearable in criminal justice, announced its expansion into Louisiana with two major state contracts. In addition, Talitrix is now working with over 12 parishes across the state, furthering its mission to enhance public safety, streamline operations for law enforcement agencies, and support positive outcomes for individuals in the Louisiana justice system.$t65gt1tcv$, $t5t7k8m1a$ALPHARETTA, GA – October 9, 2025 - Talitrix, creator of the industry’s-first independent GPS wrist wearable in criminal justice, announced its expansion into Louisiana with two major state contracts. In addition, Talitrix is now working with over 12 parishes across the state, furthering its mission to enhance public safety, streamline operations for law enforcement agencies, and support positive outcomes for individuals in the Louisiana justice system.
+
+By combining wearable technology with a data-driven platform, Talitrix provides real-time GPS tracking, behavioral analytics, and robust reporting tools that give Louisiana law enforcement and community supervision officers a clearer picture of compliance. These insights not only improve accountability but also help agencies allocate resources more effectively, reduce administrative burdens, and focus on reducing recidivism.
+
+“We are excited about our partnership with Louisiana and look forward to working with state and local leaders to meet the electronic monitoring needs for their communities,” said Micah Gravley, Chief External Affairs Officer at Talitrix. “This is the start of a long-term commitment to supporting public safety and rehabilitation efforts across the state.”
+
+This latest expansion marks another step in Talitrix’s growing national footprint. Already serving jurisdictions across 32 states, Talitrix has earned a reputation as a trusted partner for law enforcement, courts, and corrections agencies. In addition to its GPS wrist technology, Talitrix provides a 24/7 call center, customizable alerts, and scalable reporting systems. These tools are all designed to improve efficiency within the criminal justice system.
+
+“Our Talitrix team is devoted to making a difference in Louisiana and nationwide,” Gravley stated. “Every contract we sign represents more than growth—it represents lives impacted, agencies supported, and communities made safer.”
+
+About Talitrix
+
+Talitrix, the global leader in GPS wrist wearable technology, is transforming the justice system through innovation and accountability. Our industry first wrist-wearable GPS monitoring device delivers real-time behavioral analytics designed to improve compliance, reduce stigma, and enhance public safety. Its platform is trusted by law enforcement, courts, corrections, and community supervision programs nationwide. With a strong foundation in integrity, innovation, and social responsibility, Talitrix remains committed to safer communities and brighter futures.
+
+Talitrix Media Contact:
+
+Micah Gravley: micah@talitrix.com
+
+Madelyn Oliver: madelyn@talitrix.com$t5t7k8m1a$, false, true, '2025-10-09T17:39:41.089Z', 'Talitrix Strengthens Presence in Louisiana with Multiple State Contracts and Growth throughout Parishes Statewide', 'ALPHARETTA, GA – October 9, 2025 - Talitrix, creator of the industry’s-first independent GPS wrist wearable in criminal justice, announced its expansion into Lo', NULL, '/news-images/ohow6x0lensyc0db1d6ryr6kxwdymn.jpg', 'Carter Jarrett');

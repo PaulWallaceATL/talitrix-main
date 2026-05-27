@@ -1,0 +1,7 @@
+INSERT INTO public.news_articles (slug, title, category, excerpt, content, featured, published, published_at, meta_title, meta_description, keywords, og_image_url, author_name) VALUES ('wired-talitrix', 'Talitrix CEO Sits Down with Wired Magazine', 'Announcement', '“May be the most sophisticated monitoring device being deployed in the sprawling web of local jails in the United States”', $t5p8b0yzs$“May be the most sophisticated monitoring device being deployed in the sprawling web of local jails in the United States”
+
+Talitrix CEO Justin Hawkins sits down with Wired Magazine to discuss their Inside the Walls Solution (ITW) in the Fulton County North Annex Jail. In this Matt Burgess interview, Hawkins gives an in depth look at the Talitrix ITW software and hardware solutions that could revolutionize the way prisons and jails are run today. Suicide Prevention via biometric data, Live Time Tracking, and Count Automation are just a few of the technological advancements designed to help solve systemic problems currently plaguing the corrections space.
+
+ Click the link below to read the full interview with Wired Magazine and Talitrix.
+
+ Talitrix Prison-Monitoring System Tracks Inmates Down to Their Heart Rate | WIRED$t5p8b0yzs$, false, true, '2023-06-16T20:05:00.162Z', 'Talitrix CEO Sits Down with Wired Magazine', '“May be the most sophisticated monitoring device being deployed in the sprawling web of local jails in the United States”', NULL, '/news-images/wired-talitrix.png', 'Avery Finley');

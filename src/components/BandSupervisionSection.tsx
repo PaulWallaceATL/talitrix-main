@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import {
   ArrowLeftRight,
   HeartPulse,
@@ -68,7 +68,29 @@ const FRAMES = Array.from(
 const getFrameSrc = (i: number) =>
   `/watch-sequence/${String(i).padStart(4, "0")}.webp`;
 
-const BandSupervisionSection = () => {
+type Props = {
+  eyebrow?: ReactNode;
+  headline?: ReactNode;
+  body?: ReactNode;
+};
+
+const DEFAULT_EYEBROW = "Built with the All-In-One Band";
+const DEFAULT_HEADLINE = (
+  <>
+    One Band.{" "}
+    <span className="text-primary">
+      Built for Every Stage of Supervision.
+    </span>
+  </>
+);
+const DEFAULT_BODY =
+  "Integrated with the Talitrix Jail Management System to support greater flexibility, visibility, and responsiveness throughout the supervision lifecycle.";
+
+const BandSupervisionSection = ({
+  eyebrow = DEFAULT_EYEBROW,
+  headline = DEFAULT_HEADLINE,
+  body = DEFAULT_BODY,
+}: Props = {}) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -256,18 +278,13 @@ const BandSupervisionSection = () => {
         className="relative z-10 px-6 md:px-16 pt-20 md:pt-32 text-center max-w-5xl mx-auto"
       >
         <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-          Built with the All-In-One Band
+          {eyebrow}
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.05]">
-          One Band.{" "}
-          <span className="text-primary">
-            Built for Every Stage of Supervision.
-          </span>
+          {headline}
         </h2>
         <p className="mt-6 text-sm sm:text-base text-white/65 max-w-2xl mx-auto leading-relaxed">
-          Integrated with the Talitrix Jail Management System to support
-          greater flexibility, visibility, and responsiveness throughout the
-          supervision lifecycle.
+          {body}
         </p>
       </div>
 

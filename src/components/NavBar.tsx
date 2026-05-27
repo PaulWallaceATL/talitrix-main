@@ -69,7 +69,7 @@ const NAV_TREE: NavItem[] = [
         label: "All-In-One Band",
         href: "/talitrix-one/t-band",
         icon: "watch",
-        desc: "The first independent wrist-worn GPS monitoring device.",
+        desc: "The first inside-the-walls and outside-the-walls monitoring system.",
       },
       {
         label: "ONE Pre-Trial",
