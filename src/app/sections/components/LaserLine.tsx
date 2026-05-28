@@ -1,11 +1,19 @@
 "use client";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 import type { ComponentProps, ReactNode } from "react";
 import type { IconType } from "react-icons";
+
+// Breakpoint used for the responsive viewBox swap. Must match the
+// `@media` query in InfoPaths.module.css that swaps the path `d`, so
+// the SVG coordinate system and the geometry stay in sync.
+const SM_VIEWBOX_QUERY = "(max-width: 1440px)";
 
 interface LaserLineProps extends Omit<ComponentProps<"svg">, "id"> {
   defsId: string;
   d?: string;
   viewBox?: string;
+  // Used in place of `viewBox` when SM_VIEWBOX_QUERY matches.
+  viewBoxSm?: string;
   pathClassName?: string;
   startDot?: { cx: number; cy: number };
   endDot?: { cx: number; cy: number };
@@ -25,6 +33,7 @@ const LaserLine = ({
   defsId,
   d,
   viewBox,
+  viewBoxSm,
   pathClassName,
   startDot,
   endDot,
@@ -37,14 +46,17 @@ const LaserLine = ({
 }: LaserLineProps) => {
   const filterId = `laser-glow-${defsId}`;
   const gradientId = `laser-gradient-${defsId}`;
+  const isSm = useMediaQuery(SM_VIEWBOX_QUERY);
+  const activeViewBox = isSm && viewBoxSm ? viewBoxSm : viewBox;
 
   return (
     <>
       <svg
-        viewBox={viewBox}
+        viewBox={activeViewBox}
         className={`info-line overflow-visible ${className ?? ""}`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
         {...svgProps}
       >
         <defs>
@@ -89,12 +101,12 @@ const LaserLine = ({
       {Icon && label && (
         <div className={`${infoBoxClassName} ${defaultInfoBoxClassName}`}>
           <div
-            className="size-12 p-2 bg-white/15 rounded-lg shrink-0"
+            className="xl:size-12 size-10 p-2 bg-white/15 rounded-lg shrink-0"
             style={{ boxShadow: infoGlass }}
           >
             <Icon className="size-full text-primary" />
           </div>
-          <span className="whitespace-nowrap h-10 flex flex-col justify-center text-sm">
+          <span className="whitespace-nowrap h-10 flex flex-col justify-center text-xs xl:text-sm">
             {label}
           </span>
         </div>

@@ -233,7 +233,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           }
         />
       </div>
-      <div className=" w-48 absolute top-[150%] right-[60%]">
+      <div className=" w-1/2 absolute top-[150%] right-[60%]">
         <LaserLine
           defsId="replaceStraps"
           viewBox="0 0 189 63"
@@ -250,7 +250,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           }
         />
       </div>
-      <div className=" w-48 absolute top-0 right-full translate-x-[-40%] translate-y-12">
+      <div className=" w-1/2 absolute top-0 right-full translate-x-[-40%] translate-y-12">
         <LaserLine
           defsId="monitoring"
           viewBox="0 0 192 158"
@@ -268,7 +268,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           }
         />
       </div>
-      <div className=" w-48 absolute top-0 right-full translate-x-[-20%] -translate-y-18">
+      <div className=" w-1/2 absolute top-0 right-full translate-x-[-20%] -translate-y-18">
         <LaserLine
           defsId="communication"
           viewBox="0 0 192 62"
@@ -285,7 +285,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           }
         />
       </div>
-      <div className=" w-80 absolute bottom-full left-[60%] translate-x-[-40%] translate-y-[-90%]">
+      <div className=" w-[80%] absolute bottom-full left-[60%] translate-x-[-40%] translate-y-[-90%]">
         <LaserLine
           defsId="sim"
           viewBox="0 0 320 103"
