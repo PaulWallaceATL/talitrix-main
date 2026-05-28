@@ -5,7 +5,7 @@ import type { IconType } from "react-icons";
 interface LaserLineProps extends Omit<ComponentProps<"svg">, "id"> {
   defsId: string;
   d?: string;
-  viewBox: string;
+  viewBox?: string;
   pathClassName?: string;
   startDot?: { cx: number; cy: number };
   endDot?: { cx: number; cy: number };

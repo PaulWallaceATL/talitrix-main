@@ -4,19 +4,16 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useRef } from "react";
+import { BsSim } from "react-icons/bs";
 import {
   IoChatbubblesOutline,
   IoFitnessOutline,
-  IoLocationOutline,
   IoShieldCheckmarkOutline,
   IoSwapHorizontalOutline,
-  IoWifiOutline,
 } from "react-icons/io5";
-import LaserLine from "./LaserLine";
-import styles from "./InfoPaths.module.css";
-import { MdOutlineSimCard } from "react-icons/md";
-import { BsSim } from "react-icons/bs";
 import { TbDeviceWatchSearch } from "react-icons/tb";
+import styles from "./InfoPaths.module.css";
+import LaserLine from "./LaserLine";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -201,7 +198,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
       <div className="w-full absolute bottom-1/2 left-[46%]">
         <LaserLine
           defsId="heart-rate"
-          viewBox="0 0 479 173"
+          viewBox="0 0 479 175"
           d="M0.019043 169.505L238.433 174.058C245.96 174.202 253.037 170.488 257.194 164.212L358.782 10.8508C362.857 4.69915 369.744 1.00003 377.123 1.00007L472.519 1.00061"
           pathClassName={styles.heartRatePath}
           startDot={{ cx: 3, cy: 170 }}

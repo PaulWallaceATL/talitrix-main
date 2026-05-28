@@ -1,18 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import InfoPaths from "@/app/sections/components/InfoPaths";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import InfoPaths from "@/app/sections/components/InfoPaths";
-import LeftInfoPath from "@/app/sections/components/LeftInfoPath";
-import {
-  IoFitnessOutline,
-  IoLocationOutline,
-  IoSwapHorizontalOutline,
-  IoWifiOutline,
-} from "react-icons/io5";
 import { motion } from "motion/react";
+import { useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,6 +27,9 @@ const WatchScene = () => {
     let images: HTMLImageElement[] = [];
     const obj = { frame: 0 };
     let revealed = false;
+    // Lock the height used for scaling so the watch keeps a fixed pixel
+    // size when the viewport height changes (mobile URL bar, devtools, etc.).
+    let scaleHeight = window.innerHeight;
     const reveal = () => {
       if (revealed) return;
       revealed = true;
@@ -49,7 +45,7 @@ const WatchScene = () => {
       const cw = canvas.width;
       const ch = canvas.height;
 
-      const scale = cw < 768 ? 0.5 : cw < 1440 ? 0.7 : ch / ih;
+      const scale = cw < 768 ? 0.5 : cw < 1440 ? 0.7 : scaleHeight / ih;
       const dw = iw * scale;
       const dh = ih * scale;
       const dx = (cw - dw) / 2;
@@ -82,8 +78,6 @@ const WatchScene = () => {
         reveal();
       };
     }
-    // Failsafe: even if the first frame is extremely slow, don't leave the
-    // overlay hidden forever — fade it in after a short window.
     const failSafe = window.setTimeout(reveal, 1200);
 
     gsap.to(obj, {
@@ -171,7 +165,7 @@ const WatchScene = () => {
       >
         <canvas
           ref={canvasRef}
-          className="absolute z-10 inset-0 w-full h-full"
+          className="absolute z-10 inset-0 w-full h-full "
         />
         <InfoPaths className="hidden lg:block absolute top-1/2 left-1/2 ml-6 -translate-1/2 z-20 w-100 h-50 text-sm pointer-events-none bg-amber-200/0" />
         {/* <div

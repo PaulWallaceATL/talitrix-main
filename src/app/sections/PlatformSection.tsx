@@ -87,11 +87,7 @@ const PlatformSection = () => {
         );
 
         if (isMobile) {
-          tl2.to(
-            "#watchscene",
-            { x: 0, y: 110, scale: 0.95, ease: "none" },
-            0,
-          );
+          tl2.to("#watchscene", { x: 0, y: 110, scale: 0.95, ease: "none" }, 0);
           tl2.to(
             "#watchscene",
             { opacity: 0, scale: 0.88, duration: 0.18, ease: "power1.in" },
@@ -145,7 +141,7 @@ const PlatformSection = () => {
       <div className="w-full h-screen relative overflow-hidden">
         <div className="absolute top-[62%] sm:top-[65%] lg:top-[68%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
-            className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-[50deg] lg:rotate-55"
+            className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-50 lg:rotate-55"
             ref={screenRef}
           >
             <div className="w-full platform-cards platform-card-2 ">
