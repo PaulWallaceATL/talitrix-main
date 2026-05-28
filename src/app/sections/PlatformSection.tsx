@@ -87,14 +87,13 @@ const PlatformSection = () => {
         );
 
         if (isMobile) {
+          // Keep the mobile watch at scale 1 throughout the pin so we don't
+          // introduce a scrub-driven scale ramp on top of the y translation
+          // (the combined transform read as glitchy on small viewports).
+          tl2.to("#watchscene", { x: 0, y: 110, ease: "none" }, 0);
           tl2.to(
             "#watchscene",
-            { x: 0, y: 110, scale: 0.95, ease: "none" },
-            0,
-          );
-          tl2.to(
-            "#watchscene",
-            { opacity: 0, scale: 0.88, duration: 0.18, ease: "power1.in" },
+            { opacity: 0, duration: 0.18, ease: "power1.in" },
             fadeStart,
           );
         } else {

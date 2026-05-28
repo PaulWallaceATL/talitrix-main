@@ -1,4 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiArrowUpRight } from "react-icons/fi";
 import {
   IoChatbubblesOutline,
@@ -9,6 +15,8 @@ import {
 import { BsSim } from "react-icons/bs";
 import { TbDeviceWatchSearch } from "react-icons/tb";
 import type { IconType } from "react-icons";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Feature = {
   title: string;
@@ -50,8 +58,42 @@ const FEATURES: Feature[] = [
 ];
 
 const MobileBandShowcase = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useGSAP(
+    () => {
+      const list = listRef.current;
+      if (!list) return;
+      const items = Array.from(
+        list.querySelectorAll<HTMLLIElement>(":scope > li"),
+      );
+      if (items.length === 0) return;
+
+      gsap.set(items, { opacity: 0, y: 28, filter: "blur(8px)" });
+
+      gsap.to(items, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: list,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section className="relative -mt-12 bg-background px-6 pt-2 pb-16 lg:hidden">
+    <section
+      ref={sectionRef}
+      className="relative -mt-12 bg-background px-6 pt-2 pb-16 lg:hidden"
+    >
       <div
         className="pointer-events-none absolute -top-32 left-1/2 size-[420px] -translate-x-1/2 rounded-full bg-primary/10 blur-[150px]"
         aria-hidden
@@ -69,11 +111,14 @@ const MobileBandShowcase = () => {
         </h2>
       </div>
 
-      <ul className="relative z-10 mx-auto mt-10 grid max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
+      <ul
+        ref={listRef}
+        className="relative z-10 mx-auto mt-10 grid max-w-md grid-cols-1 gap-3 sm:grid-cols-2"
+      >
         {FEATURES.map(({ title, body, Icon }) => (
           <li
             key={title}
-            className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-border-gray bg-white/[0.03] p-5"
+            className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-border-gray bg-white/[0.03] p-5 will-change-[opacity,transform,filter]"
             style={{
               boxShadow:
                 "inset 0 0 1.5px rgba(255,255,255,0.4), inset 1px -2px 4px rgba(255,255,255,0.08)",
