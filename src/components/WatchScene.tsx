@@ -80,21 +80,6 @@ const WatchScene = () => {
     }
     const failSafe = window.setTimeout(reveal, 1200);
 
-    gsap.to(obj, {
-      frame: FRAME_COUNT - 1,
-      snap: "frame",
-      ease: "none",
-      onUpdate() {
-        renderFrame(obj.frame);
-      },
-      scrollTrigger: {
-        trigger: "#watch-trigger",
-        start: "top top",
-        end: "+=4500",
-        scrub: true,
-      },
-    });
-
     // Breakpoint-dependent animations live inside matchMedia so they
     // get torn down and rebuilt automatically when the viewport crosses
     // 768px — no stale `isMobile` value, no manual resize wiring.
@@ -106,6 +91,28 @@ const WatchScene = () => {
       },
       (context) => {
         const isMobile = context.conditions?.isMobile === true;
+
+        // Single frame scrub for the entire sequence. Desktop continues to
+        // use the fixed +=4500 distance that the design was tuned to.
+        // Mobile finishes the full sequence by the time the PlatformSection
+        // pin engages so the watch is fully rotated before the cards
+        // explode through it, and so we don't keep scrubbing once the
+        // MobileBandShowcase features start scrolling into view.
+        gsap.to(obj, {
+          frame: FRAME_COUNT - 1,
+          snap: "frame",
+          ease: "none",
+          onUpdate() {
+            renderFrame(obj.frame);
+          },
+          scrollTrigger: {
+            trigger: "#watch-trigger",
+            start: "top top",
+            endTrigger: isMobile ? "#platform-section" : undefined,
+            end: isMobile ? "top top" : "+=4500",
+            scrub: true,
+          },
+        });
 
         const timeline1 = gsap.timeline({
           scrollTrigger: {
@@ -119,28 +126,6 @@ const WatchScene = () => {
         timeline1.to("#title-h1", { y: isMobile ? 80 : 150, duration: 1 }, 0);
         timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
         timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
-
-        // Mobile-only: rotate the watch to a forward-facing frame as the
-        // platform-section pin engages so the band is face-on while the
-        // dashboard cards sweep through it. Desktop uses the natural scrub
-        // (frame ~half-way at this scroll position) which already lands on
-        // a flattering 3/4 angle, so we only nudge mobile.
-        if (isMobile) {
-          gsap.to(obj, {
-            frame: 130,
-            snap: "frame",
-            ease: "none",
-            onUpdate() {
-              renderFrame(obj.frame);
-            },
-            scrollTrigger: {
-              trigger: "#platform-section",
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          });
-        }
       },
     );
 
