@@ -65,8 +65,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     gsap.matchMedia().add("(min-width: 1024px)", () => {
       gsap.from(
         [
-          sectionRef.current,
-          // "#leftInfoContent", --- IGNORE ---
+          sectionRef.current, // "#leftInfoContent", --- IGNORE ---
         ],
         {
           opacity: 0,
@@ -162,7 +161,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
   });
   return (
     <div {...props} ref={sectionRef} id="infoPaths">
-      <div className="w-full absolute bottom-1/2 left-[46%]">
+      <div className="lg:w-full lg:absolute lg:bottom-1/2 lg:left-[46%]">
         <LaserLine
           defsId="heart-rate"
           viewBox="0 0 479 175"
@@ -174,15 +173,16 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           label={
             <>
               Heart Rate &amp;
-              <br /> SpO2 Sensors <br />{" "}
+              <br className="hidden lg:block" /> SpO2 Sensors <br />{" "}
               <span className="opacity-50">
-                for health &amp; wellness <br /> monitoring
+                for health &amp; wellness <br className="hidden lg:block" />{" "}
+                monitoring
               </span>
             </>
           }
         />
       </div>
-      <div className="w-[80%] absolute -bottom-5 left-full">
+      <div className="lg:w-[80%] lg:absolute lg:-bottom-5 lg:left-full">
         <LaserLine
           defsId="tamper"
           viewBox="0 0 393 54"
@@ -191,7 +191,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           startDot={{ cx: 1, cy: 1 }}
           endDot={{ cx: 389, cy: 52 }}
           Icon={IoShieldCheckmarkOutline}
-          infoBoxClassName="top-full left-full "
+          infoBoxClassName="lg:top-full lg:left-full "
           label={
             <>
               Proximity Sensors <br />{" "}
@@ -200,7 +200,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           }
         />
       </div>
-      <div className=" w-1/2 absolute top-[150%] right-[60%]">
+      <div className="lg:w-1/2 lg:absolute lg:top-[150%] lg:right-[60%]">
         <LaserLine
           defsId="replaceStraps"
           viewBox="0 0 189 63"
@@ -208,16 +208,17 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.replaceStraps}
           startDot={{ cx: 3, cy: 61 }}
           endDot={{ cx: 186, cy: 3 }}
-          infoBoxClassName="top-full right-full flex-row-reverse text-right"
+          infoBoxClassName="lg:top-full lg:right-full lg:flex-row-reverse lg:text-right"
           Icon={IoSwapHorizontalOutline}
           label={
             <>
-              Replaceable Wrist <br /> &amp; Ankle Straps
+              Replaceable Wrist <br className="hidden lg:block" /> &amp; Ankle
+              Straps
             </>
           }
         />
       </div>
-      <div className=" w-1/2 absolute top-0 right-full translate-x-[-40%] translate-y-12">
+      <div className=" lg:w-1/2 lg:absolute lg:top-0 lg:right-full lg:translate-x-[-40%] lg:translate-y-12">
         <LaserLine
           defsId="monitoring"
           viewBox="0 0 192 158"
@@ -225,7 +226,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.monitoring}
           startDot={{ cx: 1, cy: 157 }}
           endDot={{ cx: 191, cy: 1 }}
-          infoBoxClassName="top-full right-full flex-row-reverse text-right"
+          infoBoxClassName="lg:top-full lg:right-full lg:flex-row-reverse lg:text-right"
           Icon={TbDeviceWatchSearch}
           label={
             <>
@@ -235,7 +236,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           }
         />
       </div>
-      <div className=" w-1/2 absolute top-0 right-full translate-x-[-20%] -translate-y-18">
+      <div className="lg:w-1/2 lg:absolute lg:top-0 lg:right-full lg:translate-x-[-20%] lg:-translate-y-18">
         <LaserLine
           defsId="communication"
           viewBox="0 0 192 64"
@@ -243,16 +244,16 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.communication}
           startDot={{ cx: 1, cy: 1 }}
           endDot={{ cx: 191, cy: 63 }}
-          infoBoxClassName="top-0 right-full flex-row-reverse text-right"
+          infoBoxClassName="lg:top-0 lg:right-full lg:flex-row-reverse lg:text-right"
           Icon={IoChatbubblesOutline}
           label={
             <>
-              Two-Way <br /> Communication
+              Two-Way <br className="hidden lg:block" /> Communication
             </>
           }
         />
       </div>
-      <div className=" w-[80%] absolute bottom-full left-[60%] translate-x-[-40%] translate-y-[-90%]">
+      <div className="lg:w-[80%] lg:absolute lg:bottom-full lg:left-[60%] lg:translate-x-[-40%] lg:translate-y-[-90%]">
         <LaserLine
           defsId="sim"
           viewBox="0 0 320 103"
@@ -260,13 +261,14 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.sim}
           startDot={{ cx: 1, cy: 103 }}
           endDot={{ cx: 320, cy: 1 }}
-          infoBoxClassName="top-0 left-full "
+          infoBoxClassName="lg:top-0 lg:left-full "
           Icon={BsSim}
           label={
             <>
               Three Carrier SIM <br />{" "}
               <span className="opacity-50">
-                (AT&amp;T, T-Mobile and <br /> Verizon Wireless)
+                (AT&amp;T, T-Mobile and <br className="hidden lg:block" />{" "}
+                Verizon Wireless)
               </span>
             </>
           }

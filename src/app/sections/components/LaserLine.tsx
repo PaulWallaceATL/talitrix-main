@@ -24,7 +24,7 @@ interface LaserLineProps extends Omit<ComponentProps<"svg">, "id"> {
 }
 
 const defaultInfoBoxClassName =
-  "absolute -translate-y-6 px-2 flex gap-2 items-center info-box info-box-1 w-25";
+  "lg:absolute lg:-translate-y-6 lg:px-2 flex lg:gap-2 gap-4 items-center info-box info-box-1 lg:w-25 lg:p-0 p-3 bg-white/5 lg:bg-transparent lg:rounded-none rounded-lg border border-white/20 lg:border-0 h-full";
 
 const infoGlass =
   "inset 0px 0px 1.8px rgba(255, 255, 255, 0.98), inset 1px -2px 4.3px rgba(255, 255, 255, 0.44)";
@@ -53,7 +53,7 @@ const LaserLine = ({
     <>
       <svg
         viewBox={activeViewBox}
-        className={`info-line overflow-visible ${className ?? ""}`}
+        className={`info-line overflow-visible hidden lg:block ${className ?? ""}`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid meet"
@@ -101,12 +101,12 @@ const LaserLine = ({
       {Icon && label && (
         <div className={`${infoBoxClassName} ${defaultInfoBoxClassName}`}>
           <div
-            className="xl:size-12 size-10 p-2 bg-white/15 rounded-lg shrink-0"
+            className="xl:size-12 lg:size-10 size-12 p-2 bg-white/15 rounded-lg shrink-0"
             style={{ boxShadow: infoGlass }}
           >
             <Icon className="size-full text-primary" />
           </div>
-          <span className="whitespace-nowrap h-10 flex flex-col justify-center text-xs xl:text-sm">
+          <span className="lg:whitespace-nowrap lg:h-10 flex flex-col lg:justify-center lg:text-xs xl:text-sm">
             {label}
           </span>
         </div>

@@ -1,39 +1,59 @@
 import Image from "next/image";
+import InfoPaths from "./components/InfoPaths";
 
 const ExplodedSection = () => {
   return (
-    <div
-      className="w-full lg:h-screen py-20 sm:py-20 px-6 sm:px-12 lg:px-16 relative lg:overflow-hidden"
-      id="exploded"
-    >
-      <div className="lg:h-full flex lg:flex-col gap-10 justify-between flex-wrap">
-        <h2
-          className="text-3xl sm:text-4xl h-auto font-semibold max-w-120 relative z-20"
-          id="explode-p"
-        >
-          Modern technology. Human-centered design.
-        </h2>
-        <div className="flex justify-end items-end lg:items-start">
-          <p
-            className="text-xl lg:text-2xl w-full max-w-75  lg:max-w-100 leading-snug text-left lg:text-right relative z-20 lg:opacity-100 opacity-70"
-            id="explode-h2"
+    <div className="relative">
+      <div
+        className="w-full lg:h-screen pb-0 py-20 lg:pb-20 px-6 sm:px-12 lg:px-16 relative lg:overflow-hidden"
+        id="exploded"
+      >
+        <div className="lg:h-full flex lg:flex-col gap-10 justify-between flex-wrap">
+          <h2
+            className="text-3xl sm:text-4xl h-auto font-semibold max-w-120 relative z-20"
+            id="explode-p"
           >
-            One connected system for Inside and Outside the Walls monitoring.
-          </p>
+            Modern technology. Human-centered design.
+          </h2>
+          <div className="flex justify-end items-end lg:items-start">
+            <p
+              className="text-xl lg:text-2xl w-full max-w-75  lg:max-w-100 leading-snug text-left lg:text-right relative z-20 lg:opacity-100 opacity-70"
+              id="explode-h2"
+            >
+              One connected system for Inside and Outside the Walls monitoring.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="w-screen lg:w-200 absolute left-0 top-[-20%]"
+          id="explode-bg"
+        >
+          <SectionBg />
         </div>
       </div>
-      <Image
-        src={"/featue-render.png"}
-        alt="Talitrix One exploded view"
-        className="relative w-full z-20 lg:hidden mx-auto max-w-130 mt-10"
-        width={800}
-        height={800}
-      />
-      <div
-        className="w-screen lg:w-200 absolute left-0 top-[-20%]"
-        id="explode-bg"
-      >
-        <SectionBg />
+      <div className="mt-10 lg:hidden">
+        <Image
+          src={"/featue-render.png"}
+          alt="Talitrix One exploded view"
+          className="relative w-full z-20 mx-auto max-w-130"
+          width={800}
+          height={800}
+        />
+        <div className="flex flex-col gap-4 text-center items-center">
+          <span className="text-xs uppercase tracking-[0.3em] text-primary">
+            Built into the Band
+          </span>
+          <h2 className="text-3xl leading-[1.1] text-white sm:text-4xl max-w-85 sm:max-w-96">
+            Modern technology.{" "}
+            <span className="bg-linear-to-r from-white to-primary bg-clip-text text-transparent">
+              Human-centered design.
+            </span>
+          </h2>
+        </div>
+      </div>
+      <div>
+        <InfoPaths className="lg:fixed lg:top-1/2 lg:left-1/2 lg:ml-6 lg:-translate-1/2 z-20 relative lg:w-60 xl:w-80 2xl:w-100 lg:h-50 text-sm lg:pointer-events-none grid lg:block grid-cols-1 sm:grid-cols-2 gap-4 mx-auto my-14 lg:my-0 px-6" />
       </div>
     </div>
   );
