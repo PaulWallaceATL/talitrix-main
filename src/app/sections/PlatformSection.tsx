@@ -21,21 +21,6 @@ const PlatformSection = () => {
 
     gsap.set(platform, { opacity: 1 });
 
-    const h2 = SplitText.create(h2Ref.current, {
-      type: "lines",
-      mask: "lines",
-    });
-
-    gsap.from(h2.lines, {
-      y: "100%",
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: platform,
-        start: "20% center",
-        toggleActions: "play none none reverse",
-      },
-    });
-
     gsap.matchMedia().add("(min-width: 1024px)", () => {
       const pinEnd = "+=250%";
       const fadeStart = 0.8;
@@ -87,19 +72,45 @@ const PlatformSection = () => {
         .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
         .to(cardRef.current, { opacity: 0, duration: 0.3 }, fadeStart)
         .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
+
+      const h2 = SplitText.create(h2Ref.current, {
+        type: "lines",
+        mask: "lines",
+      });
+
+      gsap.from(h2.lines, {
+        y: "100%",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: platform,
+          start: "20% center",
+          toggleActions: "play none none reverse",
+        },
+      });
     });
   });
 
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
-      <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-1/2 lg:top-[68%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+      <div className="w-full lg:h-screen relative overflow-hidden">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:pt-32 lg:pb-40 relative z-20">
+          <h2
+            className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
+            ref={h2Ref}
+          >
+            One Platform. <br /> Complete{" "}
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
+              Continuity
+            </span>
+          </h2>
+        </div>
+        <div className="lg:absolute lg:top-[68%] lg:h-100 lg:left-1/2 lg:-translate-1/2 z-5">
           <div
-            className="flex gap-6 w-250 h-500 origin-bottom rotate-55"
+            className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start lg:flex-row gap-10  lg:mx-0 lg:max-w-none lg:gap-6 lg:w-250 lg:h-500 lg:origin-bottom lg:rotate-55 mt-10 mb-40 lg:mt-0 lg:mb-0 px-6 lg:px-0"
             ref={screenRef}
           >
-            <div className="w-full platform-cards platform-card-2 ">
-              <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right -rotate-12 overflow-hidden relative">
+            <div className="w-full platform-cards platform-card-2 max-w-85 lg:max-w-none">
+              <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right lg:-rotate-12 overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
                   src={"/platform/one-shield.jpg"}
@@ -110,7 +121,7 @@ const PlatformSection = () => {
                 />
               </div>
             </div>
-            <div className="w-full platform-cards platform-card-2">
+            <div className="w-full platform-cards platform-card-2 max-w-85 lg:max-w-none">
               <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
@@ -122,8 +133,8 @@ const PlatformSection = () => {
                 />
               </div>
             </div>
-            <div className="w-full relative">
-              <div className="origin-bottom-left rotate-12 relative ">
+            <div className="w-full relative max-w-85 lg:max-w-none">
+              <div className="origin-bottom-left lg:rotate-12 relative ">
                 <div className="relative z-10 " ref={cardRef}>
                   <div className="pointer-events-none absolute top-[36%] z-20 flex w-full flex-col items-center gap-1 sm:gap-2 lg:gap-2">
                     <h3 className="text-center text-[10px] tracking-widest sm:text-sm lg:text-base">
@@ -166,17 +177,6 @@ const PlatformSection = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:pt-32 lg:pb-40 relative z-20">
-          <h2
-            className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
-            ref={h2Ref}
-          >
-            One Platform. <br /> Complete{" "}
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
-              Continuity
-            </span>
-          </h2>
         </div>
       </div>
     </div>
