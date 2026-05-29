@@ -4,9 +4,7 @@ import Hero from "./sections/Hero";
 import PlatformSection from "./sections/PlatformSection";
 import FooterReveal from "@/components/FooterReveal";
 import BottomCTA from "./sections/BottomCTA";
-import MobileBandShowcase, {
-  MobileDeployCTA,
-} from "@/components/MobileBandShowcase";
+import { MobileDeployCTA } from "@/components/MobileBandShowcase";
 
 export default function Home() {
   return (
@@ -16,7 +14,6 @@ export default function Home() {
         <Hero />
         <ExplodedSection />
         <PlatformSection />
-        <MobileBandShowcase />
         <MobileDeployCTA />
         <BottomCTA />
       </main>
