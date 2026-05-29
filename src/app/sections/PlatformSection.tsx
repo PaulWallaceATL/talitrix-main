@@ -40,11 +40,15 @@ const PlatformSection = () => {
       {
         isDesktop: "(min-width: 1024px)",
         isMobile: "(max-width: 1023px)",
+        isSmallMobile: "(max-width: 767px)",
       },
       (context) => {
         const isMobile = context.conditions?.isMobile === true;
-        const pinEnd = isMobile ? "+=70%" : "+=250%";
-        const fadeStart = isMobile ? 0.78 : 0.8;
+        const isSmallMobile = context.conditions?.isSmallMobile === true;
+        // Desktop keeps the current tuned scroll path. Mobile uses the
+        // earlier (f726be0) watch + card scroll choreography.
+        const pinEnd = isMobile ? "+=400%" : "+=250%";
+        const fadeStart = 0.8;
 
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -61,8 +65,13 @@ const PlatformSection = () => {
           0,
         );
 
-        if (!isMobile) {
-          tl.to("#watchscene", { x: 0, duration: 1 }, 0);
+        tl.to(
+          "#watchscene",
+          { x: 0, duration: 1, ...(isSmallMobile && { scale: 1.2 }) },
+          0,
+        );
+        if (isMobile) {
+          tl.to("#watchscene", { y: -150, duration: 1 }, 0);
         }
 
         const tl2 = gsap.timeline({
@@ -77,26 +86,37 @@ const PlatformSection = () => {
           },
         });
 
-        // Cards begin sliding/rotating later on desktop so the watch has
-        // fully settled below the headline before they sweep through.
-        // Mobile keeps the rotation starting at 0 since the pin is shorter.
-        tl2.to(
-          screenRef.current,
-          { rotate: "-12deg", duration: isMobile ? 0.5 : 0.35 },
-          isMobile ? 0 : 0.5,
-        );
-
         if (isMobile) {
-          // Keep the mobile watch at scale 1 throughout the pin so we don't
-          // introduce a scrub-driven scale ramp on top of the y translation
-          // (the combined transform read as glitchy on small viewports).
-          tl2.to("#watchscene", { x: 0, y: 110, ease: "none" }, 0);
+          tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
           tl2.to(
             "#watchscene",
-            { opacity: 0, duration: 0.18, ease: "power1.in" },
-            fadeStart,
+            {
+              x: "0%",
+              opacity: 0,
+              scale: 0.8,
+              duration: 0.5,
+              ease: "power1.in",
+            },
+            0,
           );
+          tl2.to(cardRef.current, { scale: 2.5, y: -250 }, fadeStart);
+          tl2
+            .to(
+              h2Ref.current,
+              { y: -300, opacity: 0, duration: 0.5 },
+              fadeStart,
+            )
+            .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
+            .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
+            .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
         } else {
+          // Cards begin sliding/rotating later on desktop so the watch has
+          // fully settled below the headline before they sweep through.
+          tl2.to(
+            screenRef.current,
+            { rotate: "-12deg", duration: 0.35 },
+            0.5,
+          );
           tl2
             .to(
               "#watchscene",
@@ -108,32 +128,16 @@ const PlatformSection = () => {
               { opacity: 0, duration: 0.5, ease: "power1.in" },
               fadeStart,
             );
-        }
-
-        tl2
-          .to(
-            h2Ref.current,
-            {
-              y: isMobile ? -120 : -300,
-              opacity: 0,
-              duration: isMobile ? 0.18 : 0.5,
-            },
-            fadeStart,
-          )
-          .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
-          .to(
-            ".platform-cards",
-            { opacity: 0, duration: isMobile ? 0.18 : 0.3 },
-            fadeStart,
-          )
-          .to(
-            cardRef.current,
-            { opacity: 0, duration: isMobile ? 0.18 : 0.3 },
-            fadeStart,
-          );
-
-        if (!isMobile) {
-          tl2.to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
+          tl2
+            .to(
+              h2Ref.current,
+              { y: -300, opacity: 0, duration: 0.5 },
+              fadeStart,
+            )
+            .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
+            .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
+            .to(cardRef.current, { opacity: 0, duration: 0.3 }, fadeStart)
+            .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
         }
       },
     );
@@ -142,9 +146,9 @@ const PlatformSection = () => {
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
       <div className="w-full h-screen relative overflow-hidden">
-        <div className="absolute top-[62%] sm:top-[65%] lg:top-[68%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+        <div className="absolute top-1/2 lg:top-[68%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
           <div
-            className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-50 lg:rotate-55"
+            className="flex gap-6 w-250 h-500 origin-bottom rotate-55"
             ref={screenRef}
           >
             <div className="w-full platform-cards platform-card-2 ">
@@ -216,7 +220,7 @@ const PlatformSection = () => {
             </div>
           </div>
         </div>
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-14 lg:pb-40 relative z-20">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:pt-32 lg:pb-40 relative z-20">
           <h2
             className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}

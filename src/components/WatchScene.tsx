@@ -29,7 +29,7 @@ const WatchScene = () => {
     let revealed = false;
     // Lock the height used for scaling so the watch keeps a fixed pixel
     // size when the viewport height changes (mobile URL bar, devtools, etc.).
-    let scaleHeight = window.innerHeight;
+    const scaleHeight = window.innerHeight;
     const reveal = () => {
       if (revealed) return;
       revealed = true;
@@ -119,28 +119,6 @@ const WatchScene = () => {
         timeline1.to("#title-h1", { y: isMobile ? 80 : 150, duration: 1 }, 0);
         timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
         timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
-
-        // Mobile-only: rotate the watch to a forward-facing frame as the
-        // platform-section pin engages so the band is face-on while the
-        // dashboard cards sweep through it. Desktop uses the natural scrub
-        // (frame ~half-way at this scroll position) which already lands on
-        // a flattering 3/4 angle, so we only nudge mobile.
-        if (isMobile) {
-          gsap.to(obj, {
-            frame: 130,
-            snap: "frame",
-            ease: "none",
-            onUpdate() {
-              renderFrame(obj.frame);
-            },
-            scrollTrigger: {
-              trigger: "#platform-section",
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          });
-        }
       },
     );
 
