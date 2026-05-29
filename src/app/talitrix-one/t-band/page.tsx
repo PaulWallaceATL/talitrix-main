@@ -13,11 +13,11 @@ export const metadata: Metadata = pageMetadata({
   title:
     "All-In-One Band — Wrist-worn GPS for Modern Supervision | Talitrix ONE",
   description:
-    "The All-In-One Band is the first independent wrist-worn GPS supervision device — 3-Carrier SIM, biometric verification, heart rate and SpO₂ telemetry, 2-way communication, and proximity-based tamper detection.",
+    "The All-In-One Band is the first independent wrist-worn GPS supervision device — Three Carrier SIM, biometric verification, heart rate and SpO₂ telemetry, 2-way communication, and proximity-based tamper detection.",
   socialTitle:
     "All-In-One Band | Talitrix ONE",
   socialDescription:
-    "Wrist-worn GPS supervision with 3-Carrier SIM, biometrics, wellness telemetry, 2-way comms, and proximity tamper detection.",
+    "Wrist-worn GPS supervision with Three Carrier SIM, biometrics, wellness telemetry, 2-way comms, and proximity tamper detection.",
 });
 
 export default function TBandPage() {
@@ -39,8 +39,8 @@ export default function TBandPage() {
         body={
           <p>
             The first independent wrist-worn GPS monitoring device — built for
-            both Inside and Outside the Walls supervision, with 3-Carrier SIM
-            connectivity, biometric sensing, and proximity-based tamper
+            both Inside and Outside the Walls supervision, with Three Carrier
+            SIM connectivity, biometric sensing, and proximity-based tamper
             detection.
           </p>
         }
