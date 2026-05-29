@@ -12,17 +12,17 @@ const channels = [
   },
   {
     label: "Customer Support",
-    value: "support@talitrix.com",
+    value: "CX@talitrix.com",
     body: "Existing customer? Our 24/7 support team is here to help.",
   },
   {
     label: "Press & Media",
-    value: "press@talitrix.com",
+    value: "Communications@talitrix.com",
     body: "Press inquiries, interviews, and media briefings.",
   },
   {
     label: "Partnerships",
-    value: "partners@talitrix.com",
+    value: "Info@talitrix.com",
     body: "Explore integration, channel, and ecosystem partnerships.",
   },
 ];
