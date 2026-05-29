@@ -238,7 +238,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
       <div className=" w-1/2 absolute top-0 right-full translate-x-[-20%] -translate-y-18">
         <LaserLine
           defsId="communication"
-          viewBox="0 0 192 62"
+          viewBox="0 0 192 64"
           d="M0 1L49.2873 1C54.8843 1 60.2709 3.13323 64.3502 6.96534L117.65 57.0347C121.729 60.8668 127.116 63 132.713 63L192 63"
           pathClassName={styles.communication}
           startDot={{ cx: 1, cy: 1 }}

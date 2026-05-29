@@ -1,9 +1,9 @@
-import InfoPaths from "./components/InfoPaths";
+import Image from "next/image";
 
 const ExplodedSection = () => {
   return (
     <div
-      className="w-full h-screen py-20 sm:py-20 px-6 sm:px-12 lg:px-16 relative overflow-hidden"
+      className="w-full lg:h-screen py-20 sm:py-20 px-6 sm:px-12 lg:px-16 relative lg:overflow-hidden"
       id="exploded"
     >
       <div className="lg:h-full flex lg:flex-col gap-10 justify-between flex-wrap">
@@ -13,7 +13,7 @@ const ExplodedSection = () => {
         >
           Modern technology. Human-centered design.
         </h2>
-        <div className="flex justify-end">
+        <div className="flex justify-end items-end lg:items-start">
           <p
             className="text-xl lg:text-2xl w-full max-w-75  lg:max-w-100 leading-snug text-left lg:text-right relative z-20 lg:opacity-100 opacity-70"
             id="explode-h2"
@@ -22,8 +22,17 @@ const ExplodedSection = () => {
           </p>
         </div>
       </div>
-
-      <div className="w-200 absolute left-0 top-[-20%]" id="explode-bg">
+      <Image
+        src={"/featue-render.png"}
+        alt="Talitrix One exploded view"
+        className="relative w-full z-20 lg:hidden mx-auto max-w-130 mt-10"
+        width={800}
+        height={800}
+      />
+      <div
+        className="w-screen lg:w-200 absolute left-0 top-[-20%]"
+        id="explode-bg"
+      >
         <SectionBg />
       </div>
     </div>
