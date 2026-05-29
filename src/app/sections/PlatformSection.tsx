@@ -36,111 +36,58 @@ const PlatformSection = () => {
       },
     });
 
-    gsap.matchMedia().add(
-      {
-        isDesktop: "(min-width: 1024px)",
-        isMobile: "(max-width: 1023px)",
-        isSmallMobile: "(max-width: 767px)",
-      },
-      (context) => {
-        const isMobile = context.conditions?.isMobile === true;
-        const isSmallMobile = context.conditions?.isSmallMobile === true;
-        // Desktop keeps the current tuned scroll path. Mobile uses the
-        // earlier (f726be0) watch + card scroll choreography.
-        const pinEnd = isMobile ? "+=400%" : "+=250%";
-        const fadeStart = 0.8;
+    gsap.matchMedia().add("(min-width: 1024px)", () => {
+      const pinEnd = "+=250%";
+      const fadeStart = 0.8;
 
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: platform,
-            start: "top bottom",
-            end: "bottom bottom",
-            scrub: true,
-          },
-        });
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: platform,
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: true,
+        },
+      });
 
-        tl.to(["#infoPaths"], { opacity: 0, duration: 0.2, delay: 0.1 }, 0).to(
-          "#explode-h2",
-          { opacity: 0, duration: 0.3 },
-          0,
-        );
+      tl.to(["#infoPaths"], { opacity: 0, duration: 0.2, delay: 0.1 }, 0).to(
+        "#explode-h2",
+        { opacity: 0, duration: 0.3 },
+        0,
+      );
 
-        tl.to(
+      tl.to("#watchscene", { x: 0, duration: 1, scale: 1.2 }, 0);
+
+      const tl2 = gsap.timeline({
+        scrollTrigger: {
+          trigger: platform,
+          start: "top top",
+          end: pinEnd,
+          pin: true,
+          pinSpacing: true,
+          scrub: true,
+          anticipatePin: 1,
+        },
+      });
+
+      tl2.to(screenRef.current, { rotate: "-12deg", duration: 0.35 }, 0.5);
+      tl2
+        .to(
           "#watchscene",
-          { x: 0, duration: 1, ...(isSmallMobile && { scale: 1.2 }) },
+          { x: 0, y: 110, delay: 0.1, ease: "power4.inOut" },
           0,
+        )
+        .to(
+          "#watchscene",
+          { opacity: 0, duration: 0.5, ease: "power1.in" },
+          fadeStart,
         );
-        if (isMobile) {
-          tl.to("#watchscene", { y: -150, duration: 1 }, 0);
-        }
-
-        const tl2 = gsap.timeline({
-          scrollTrigger: {
-            trigger: platform,
-            start: "top top",
-            end: pinEnd,
-            pin: true,
-            pinSpacing: true,
-            scrub: true,
-            anticipatePin: 1,
-          },
-        });
-
-        if (isMobile) {
-          tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
-          tl2.to(
-            "#watchscene",
-            {
-              x: "0%",
-              opacity: 0,
-              scale: 0.8,
-              duration: 0.5,
-              ease: "power1.in",
-            },
-            0,
-          );
-          tl2.to(cardRef.current, { scale: 2.5, y: -250 }, fadeStart);
-          tl2
-            .to(
-              h2Ref.current,
-              { y: -300, opacity: 0, duration: 0.5 },
-              fadeStart,
-            )
-            .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
-            .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
-            .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
-        } else {
-          // Cards begin sliding/rotating later on desktop so the watch has
-          // fully settled below the headline before they sweep through.
-          tl2.to(
-            screenRef.current,
-            { rotate: "-12deg", duration: 0.35 },
-            0.5,
-          );
-          tl2
-            .to(
-              "#watchscene",
-              { x: 0, y: 110, delay: 0.1, ease: "power4.inOut" },
-              0,
-            )
-            .to(
-              "#watchscene",
-              { opacity: 0, duration: 0.5, ease: "power1.in" },
-              fadeStart,
-            );
-          tl2
-            .to(
-              h2Ref.current,
-              { y: -300, opacity: 0, duration: 0.5 },
-              fadeStart,
-            )
-            .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
-            .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
-            .to(cardRef.current, { opacity: 0, duration: 0.3 }, fadeStart)
-            .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
-        }
-      },
-    );
+      tl2
+        .to(h2Ref.current, { y: -300, opacity: 0, duration: 0.5 }, fadeStart)
+        .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
+        .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
+        .to(cardRef.current, { opacity: 0, duration: 0.3 }, fadeStart)
+        .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
+    });
   });
 
   return (

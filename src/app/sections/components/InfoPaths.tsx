@@ -39,22 +39,6 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     // a tighter '-=10%' / 'top center' window so when the user scrolls
     // back up toward the hero the lines disappear immediately rather
     // than lingering past the section boundary.
-    gsap.from(
-      [
-        sectionRef.current,
-        // "#leftInfoContent", --- IGNORE ---
-      ],
-      {
-        opacity: 0,
-        duration: 0.3,
-        scrollTrigger: {
-          trigger: "#exploded",
-          start: "-=10%",
-          end: "top center",
-          scrub: true,
-        },
-      },
-    );
 
     gsap.from("#explode-bg", {
       y: 700,
@@ -78,32 +62,52 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     // Pin range and h2 lift are smaller on mobile — the section is
     // shorter and -150 lifts the headline too far off-screen. Wrapped
     // in matchMedia so the pin trigger rebuilds cleanly at 768px.
-    gsap.matchMedia().add(
-      {
-        isDesktop: "(min-width: 768px)",
-        isMobile: "(max-width: 767px)",
-      },
-      (context) => {
-        const isMobile = context.conditions?.isMobile === true;
+    gsap.matchMedia().add("(min-width: 1024px)", () => {
+      gsap.from(
+        [
+          sectionRef.current,
+          // "#leftInfoContent", --- IGNORE ---
+        ],
+        {
+          opacity: 0,
+          duration: 0.3,
+          scrollTrigger: {
+            trigger: "#exploded",
+            start: "-=10%",
+            end: "top center",
+            scrub: true,
+          },
+        },
+      );
 
-        gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: "#exploded",
-              start: "top top",
-              end: isMobile ? "+=90%" : "+=120%",
-              pin: true,
-              pinSpacing: true,
-              scrub: true,
-            },
-          })
-          .to(
-            "#explode-h2",
-            { y: isMobile ? -50 : -50, duration: 1, ease: "none" },
-            0,
-          );
-      },
-    );
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: "#exploded",
+            start: "top top",
+            end: "+=120%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+          },
+        })
+        .to("#explode-h2", { y: -50, duration: 1, ease: "none" }, 0);
+
+      laserPaths.forEach((path, i) => {
+        const length = path.getTotalLength();
+        const dashLength = 60;
+        path.style.strokeDasharray = `${dashLength} ${length}`;
+        path.style.strokeDashoffset = `${dashLength}`;
+
+        gsap.to(path, {
+          strokeDashoffset: -length,
+          duration: 2,
+          repeat: -1,
+          delay: i * 1,
+          ease: "none",
+        });
+      });
+    });
 
     gsap.from(para.lines, {
       y: "100%",
@@ -154,43 +158,6 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
         },
         1.3,
       );
-    });
-
-    // timeline.from(
-    //   "#leftInfo",
-    //   {
-    //     opacity: 0,
-    //     x: -30,
-    //     ease: "power3.inOut",
-    //     duration: 1,
-    //   },
-    //   0.2,
-    // );
-    // timeline.from(
-    //   ".left-info",
-    //   {
-    //     opacity: 0,
-    //     y: 50,
-    //     ease: "power3.inOut",
-    //     stagger: 0.1,
-    //     duration: 1,
-    //   },
-    //   0.2,
-    // );
-
-    laserPaths.forEach((path, i) => {
-      const length = path.getTotalLength();
-      const dashLength = 60;
-      path.style.strokeDasharray = `${dashLength} ${length}`;
-      path.style.strokeDashoffset = `${dashLength}`;
-
-      gsap.to(path, {
-        strokeDashoffset: -length,
-        duration: 2,
-        repeat: -1,
-        delay: i * 1,
-        ease: "none",
-      });
     });
   });
   return (

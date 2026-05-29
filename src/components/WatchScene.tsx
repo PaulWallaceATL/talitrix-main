@@ -80,58 +80,56 @@ const WatchScene = () => {
     }
     const failSafe = window.setTimeout(reveal, 1200);
 
-    gsap.to(obj, {
-      frame: FRAME_COUNT - 1,
-      snap: "frame",
-      ease: "none",
-      onUpdate() {
-        renderFrame(obj.frame);
-      },
-      scrollTrigger: {
-        trigger: "#watch-trigger",
-        start: "top top",
-        end: "+=4500",
-        scrub: true,
-      },
-    });
-
     // Breakpoint-dependent animations live inside matchMedia so they
     // get torn down and rebuilt automatically when the viewport crosses
     // 768px — no stale `isMobile` value, no manual resize wiring.
     const mm = gsap.matchMedia();
-    mm.add(
-      {
-        isDesktop: "(min-width: 768px)",
-        isMobile: "(max-width: 767px)",
-      },
-      (context) => {
-        const isMobile = context.conditions?.isMobile === true;
 
-        const timeline1 = gsap.timeline({
-          scrollTrigger: {
-            trigger: "#watch-trigger",
-            start: "top top",
-            end: "+=100%",
-            scrub: true,
-          },
-        });
-        timeline1.to(watch, { x: isMobile ? 0 : -50 }, 0);
-        timeline1.to("#title-h1", { y: isMobile ? 80 : 150, duration: 1 }, 0);
-        timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
-        timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
-      },
-    );
+    // Frame scrub is desktop-only. Below 1024px the watch holds at the
+    // first frame inside the hero section instead of trying to play a
+    // sequence that can't be read at that size.
+    mm.add("(min-width: 1024px)", () => {
+      gsap.to(obj, {
+        frame: FRAME_COUNT - 1,
+        snap: "frame",
+        ease: "none",
+        onUpdate() {
+          renderFrame(obj.frame);
+        },
+        scrollTrigger: {
+          trigger: "#watch-trigger",
+          start: "top top",
+          end: "+=4500",
+          scrub: true,
+        },
+      });
+      const timeline1 = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#watch-trigger",
+          start: "top top",
+          end: "+=100%",
+          scrub: true,
+        },
+      });
+      timeline1.to(watch, { x: 0 }, 0);
+      timeline1.to("#title-h1", { y: 150, duration: 1 }, 0);
+      timeline1.to("#hero-desc", { y: -100, opacity: 1, duration: 1 }, 0);
+      timeline1.to("#hero-desc", { pointerEvents: "none", delay: 0.1 }, 0);
+    });
 
     return () => {
       mm.revert();
       window.removeEventListener("resize", resize);
       window.clearTimeout(failSafe);
+
+      obj.frame = 0;
+      renderFrame(0);
     };
   });
 
   return (
     <div
-      className="w-full h-full fixed left-0 top-0 z-10 opacity-0 pointer-events-none"
+      className="w-full h-screen absolute lg:fixed left-0 top-0 z-10 opacity-0 pointer-events-none"
       ref={watchRef}
       id="watchscene"
     >
@@ -146,47 +144,6 @@ const WatchScene = () => {
           className="absolute z-10 inset-0 w-full h-full "
         />
         <InfoPaths className="hidden lg:block absolute top-1/2 left-1/2 ml-6 -translate-1/2 z-20 w-60 xl:w-80 2xl:w-100 h-50 text-sm pointer-events-none bg-amber-200/0" />
-
-        {/* <div
-          className="absolute top-1/2 left-32 2xl:left-64 -translate-y-1/2 z-20 text-sm pointer-events-none hidden lg:block"
-          id="leftInfo"
-        >
-          <div className="relative" id="leftInfoContent">
-            <h3 className="text-3xl font-semibold opacity-40">Features</h3>
-            <div className="flex flex-col gap-10 pl-5 mt-5 ">
-              <LeftInfoPath
-                Icon={IoLocationOutline}
-                label={
-                  <>
-                    Inside & Outside <br /> the Walls
-                  </>
-                }
-                defsId="health"
-                className="hidden lg:block z-20 text-sm pointer-events-none"
-              />
-              <LeftInfoPath
-                Icon={IoSwapHorizontalOutline}
-                label={
-                  <>
-                    Replaceable <br /> Straps
-                  </>
-                }
-                defsId="straps"
-                className="hidden lg:block z-20 text-sm pointer-events-none"
-              />
-              <LeftInfoPath
-                Icon={IoWifiOutline}
-                label={
-                  <>
-                    Connectivity <br /> & Comms
-                  </>
-                }
-                defsId="straps"
-                className="hidden lg:block z-20 text-sm pointer-events-none"
-              />
-            </div>
-          </div>
-        </div> */}
         <WatchGlow className="absolute w-105 sm:w-150 md:w-200 h-auto left-1/2 top-1/2 -translate-1/2" />
       </motion.div>
     </div>

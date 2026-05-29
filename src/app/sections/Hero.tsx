@@ -4,7 +4,7 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-screen flex items-center">
+    <div className="relative w-full h-svh flex items-center">
       <Image
         src={"/talitrix-bg.jpg"}
         alt=""

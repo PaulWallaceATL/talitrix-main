@@ -6,16 +6,16 @@ const ExplodedSection = () => {
       className="w-full h-screen py-20 sm:py-20 px-6 sm:px-12 lg:px-16 relative overflow-hidden"
       id="exploded"
     >
-      <div className="h-full flex flex-col gap-10 justify-between ">
+      <div className="lg:h-full flex lg:flex-col gap-10 justify-between flex-wrap">
         <h2
-          className="text-3xl sm:text-4xl font-semibold max-w-120 relative z-20"
+          className="text-3xl sm:text-4xl h-auto font-semibold max-w-120 relative z-20"
           id="explode-p"
         >
           Modern technology. Human-centered design.
         </h2>
         <div className="flex justify-end">
           <p
-            className="text-xl lg:text-2xl w-full max-w-75  lg:max-w-100 leading-snug text-left lg:text-right relative z-20"
+            className="text-xl lg:text-2xl w-full max-w-75  lg:max-w-100 leading-snug text-left lg:text-right relative z-20 lg:opacity-100 opacity-70"
             id="explode-h2"
           >
             One connected system for Inside and Outside the Walls monitoring.
