@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <footer className="relative bg-black overflow-hidden">
       <div className="px-4 sm:px-8 lg:px-16 py-16 flex flex-col gap-16">
-        <div className="flex w-full justify-between gap-x-8 sm:gap-x-16 gap-y-16 flex-wrap">
-          <div className="flex flex-col justify-between gap-4 text-xl">
+        <div className="grid grid-cols-2 w-full gap-x-8 sm:gap-x-16 gap-y-16 lg:flex lg:justify-between lg:flex-wrap">
+          <div className="col-span-2 lg:col-span-1 flex flex-col justify-between gap-4 text-xl">
             <p className="max-w-70">
               3460 Preston Ridge Rd STE 125 Alpharetta, GA 30005
             </p>
@@ -75,8 +75,17 @@ const Footer = () => {
                 {footer.title}
               </h3>
               <div className="flex flex-col gap-5 text-sm">
-                {footer.links.map((link) =>
-                  link.external ? (
+                {footer.links.map((link) => {
+                  const label = link.shortLabel ? (
+                    <>
+                      <span className="lg:hidden">{link.shortLabel}</span>
+                      <span className="hidden lg:inline">{link.label}</span>
+                    </>
+                  ) : (
+                    link.label
+                  );
+
+                  return link.external ? (
                     <a
                       href={link.href}
                       key={link.label}
@@ -84,7 +93,7 @@ const Footer = () => {
                       rel="noopener noreferrer"
                       className="duration-300 transition-colors hover:text-primary"
                     >
-                      {link.label}
+                      {label}
                     </a>
                   ) : (
                     <Link
@@ -92,10 +101,10 @@ const Footer = () => {
                       key={link.label}
                       className="duration-300 transition-colors hover:text-primary"
                     >
-                      {link.label}
+                      {label}
                     </Link>
-                  ),
-                )}
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -206,7 +215,20 @@ const SOCIALS = [
   },
 ];
 
-const FooterLinks = [
+type FooterLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+  /** Shorter label shown on mobile where horizontal space is tight. */
+  shortLabel?: string;
+};
+
+type FooterColumn = {
+  title: string;
+  links: FooterLink[];
+};
+
+const FooterLinks: FooterColumn[] = [
   {
     title: "Platform",
     links: [
@@ -215,6 +237,7 @@ const FooterLinks = [
       { label: "ONE Pre-Trial", href: "/talitrix-one/pretrial" },
       {
         label: "ONE Jail Management System",
+        shortLabel: "ONE Jail Management",
         href: "/talitrix-one/jail-management",
       },
       { label: "ONE Probation", href: "/talitrix-one/probation" },

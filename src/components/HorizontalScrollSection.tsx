@@ -67,7 +67,7 @@ export default function HorizontalScrollSection({ header, children }: Props) {
       {header}
       <div
         ref={cardsRef}
-        className="relative left-1/2 flex min-h-[420px] w-screen -translate-x-1/2 items-center overflow-hidden md:min-h-[460px]"
+        className="relative left-1/2 -ml-[50vw] -mr-[50vw] flex min-h-[420px] w-screen items-center overflow-hidden md:min-h-[460px]"
       >
         <div
           ref={trackRef}
