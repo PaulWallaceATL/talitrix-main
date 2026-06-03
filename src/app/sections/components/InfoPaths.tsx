@@ -213,7 +213,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.replaceStraps}
           startDot={{ cx: 3, cy: 61 }}
           endDot={{ cx: 186, cy: 3 }}
-          infoBoxClassName="lg:top-full lg:right-full lg:flex-row-reverse lg:text-right"
+          infoBoxClassName="lg:top-full lg:right-full lg:flex-row-reverse lg:text-right lg:-translate-y-8 lg:-translate-x-1.5"
           Icon={IoSwapHorizontalOutline}
           label={
             <>
@@ -249,7 +249,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.communication}
           startDot={{ cx: 1, cy: 1 }}
           endDot={{ cx: 191, cy: 63 }}
-          infoBoxClassName="lg:top-0 lg:right-full lg:flex-row-reverse lg:text-right"
+          infoBoxClassName="lg:top-0 lg:right-full lg:flex-row-reverse lg:text-right lg:-translate-x-2"
           Icon={IoChatbubblesOutline}
           label={
             <>
