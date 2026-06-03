@@ -1,0 +1,41 @@
+<svg width="454" height="587" viewBox="0 0 454 587" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <!-- Outer panel (corners rounded by the card's CSS) -->
+  <rect width="454" height="587" fill="#1a1816"/>
+
+  <!-- Header -->
+  <text x="18" y="38" fill="#8c8c8c" font-size="15" font-weight="600" letter-spacing="3">TALITRIX SCORE</text>
+  <circle cx="398" cy="33" r="4.5" fill="#4d4a47"/>
+  <circle cx="416" cy="33" r="4.5" fill="#4d4a47"/>
+  <circle cx="434" cy="33" r="4.5" fill="#f87a13"/>
+
+  <!-- Participants -->
+  <rect x="15" y="64" width="204" height="108" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.07"/>
+  <text x="34" y="102" fill="#b0b0b0" font-size="15" font-weight="500">Participants</text>
+  <g transform="translate(180,86) scale(0.7)" stroke="#9a9a9a" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+    <circle cx="9" cy="7" r="4"/>
+    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+  </g>
+  <text x="32" y="152" fill="#ffffff" font-size="40" font-weight="700">5</text>
+
+  <!-- Violations -->
+  <rect x="235" y="64" width="204" height="108" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.07"/>
+  <text x="254" y="102" fill="#b0b0b0" font-size="15" font-weight="500">Violations</text>
+  <g transform="translate(404,86) scale(0.7)" stroke="#9a9a9a" stroke-width="1.9" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+    <path d="M4 22V15"/>
+  </g>
+  <text x="252" y="152" fill="#ffffff" font-size="40" font-weight="700">0</text>
+
+  <!-- Score widget area (TALITRIX ring + value are a React overlay) -->
+  <rect x="15" y="192" width="424" height="264" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.07"/>
+
+  <!-- Health score -->
+  <rect x="15" y="484" width="424" height="82" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.07"/>
+  <g transform="translate(30,500) scale(0.7)" stroke="#9a9a9a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+  </g>
+  <text x="58" y="516" fill="#b0b0b0" font-size="15" font-weight="500">Health score</text>
+  <text x="32" y="550" fill="#ffffff" font-size="26" font-weight="700">79%</text>
+</svg>

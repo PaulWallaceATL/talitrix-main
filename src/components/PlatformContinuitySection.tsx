@@ -266,8 +266,8 @@ const PlatformContinuitySection = ({ id }: Props) => {
                   </div>
                   <div className="pcs-card">
                     <Image
-                      src="/platform/one-supervisor1.jpg"
-                      alt="ONE Supervisor"
+                      src="/platform/one-score.png"
+                      alt="Talitrix Score"
                       width={462}
                       height={587}
                       className="w-full rounded-2xl"
