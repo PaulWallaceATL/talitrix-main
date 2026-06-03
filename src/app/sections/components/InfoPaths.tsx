@@ -173,7 +173,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.heartRatePath}
           startDot={{ cx: 3, cy: 170 }}
           endDot={{ cx: 475, cy: 1 }}
-          infoBoxClassName="top-0 left-full lg:-translate-y-12"
+          infoBoxClassName="top-0 left-full lg:-translate-y-12 lg:translate-x-2"
           Icon={IoFitnessOutline}
           label={
             <>
@@ -196,7 +196,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           startDot={{ cx: 1, cy: 1 }}
           endDot={{ cx: 389, cy: 52 }}
           Icon={IoShieldCheckmarkOutline}
-          infoBoxClassName="lg:top-full lg:left-full "
+          infoBoxClassName="lg:top-full lg:left-full lg:translate-x-2"
           label={
             <>
               Proximity Sensors <br />{" "}
@@ -266,7 +266,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.sim}
           startDot={{ cx: 1, cy: 103 }}
           endDot={{ cx: 320, cy: 1 }}
-          infoBoxClassName="lg:top-0 lg:left-full lg:-translate-y-12"
+          infoBoxClassName="lg:top-0 lg:left-full lg:-translate-y-12 lg:translate-x-2"
           Icon={BsSim}
           label={
             <>
