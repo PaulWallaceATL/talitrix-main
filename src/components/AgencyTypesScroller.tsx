@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 import ScrollHoverCard from "@/components/ScrollHoverCard";
+import FeatureStack from "@/components/FeatureStack";
 import { ICONS, type CapabilityIconName } from "@/lib/icon-registry";
 
 export type AgencyType = {
@@ -57,22 +58,42 @@ type Props = {
 
 export default function AgencyTypesScroller({ header }: Props) {
   return (
-    <HorizontalScrollSection header={header}>
-      {types.map((type) => {
-        const Icon = ICONS[type.icon] ?? ICONS.sparkles;
+    <>
+      {/* Mobile: orange feature stack */}
+      <div className="lg:hidden">
+        {header}
+        <FeatureStack
+          items={types.map((type) => ({
+            title: type.title,
+            body: type.body,
+            eyebrow: type.eyebrow,
+            Icon: ICONS[type.icon] ?? ICONS.sparkles,
+          }))}
+        />
+      </div>
 
-        return (
-          <ScrollHoverCard
-            key={type.title}
-            icon={<Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />}
-            number={type.number}
-            eyebrow={type.eyebrow}
-            body={type.body}
-            title={type.title}
-            footer="number"
-          />
-        );
-      })}
-    </HorizontalScrollSection>
+      {/* Desktop: horizontal scroller */}
+      <div className="hidden lg:block">
+        <HorizontalScrollSection header={header} desktopOnly>
+          {types.map((type) => {
+            const Icon = ICONS[type.icon] ?? ICONS.sparkles;
+
+            return (
+              <ScrollHoverCard
+                key={type.title}
+                icon={
+                  <Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />
+                }
+                number={type.number}
+                eyebrow={type.eyebrow}
+                body={type.body}
+                title={type.title}
+                footer="number"
+              />
+            );
+          })}
+        </HorizontalScrollSection>
+      </div>
+    </>
   );
 }

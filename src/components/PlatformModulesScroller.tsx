@@ -2,6 +2,7 @@
 
 import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 import ScrollHoverCard from "@/components/ScrollHoverCard";
+import FeatureStack from "@/components/FeatureStack";
 import {
   Watch,
   Scale,
@@ -86,23 +87,43 @@ const header = (
 
 export default function PlatformModulesScroller() {
   return (
-    <HorizontalScrollSection header={header}>
-      {modules.map((mod) => {
-        const Icon = mod.icon;
+    <>
+      {/* Mobile: orange feature stack */}
+      <div className="lg:hidden">
+        {header}
+        <FeatureStack
+          items={modules.map((mod) => ({
+            title: mod.title,
+            body: mod.body,
+            eyebrow: mod.eyebrow,
+            Icon: mod.icon,
+          }))}
+        />
+      </div>
 
-        return (
-          <ScrollHoverCard
-            key={mod.href}
-            href={mod.href}
-            icon={<Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />}
-            number={mod.number}
-            eyebrow={mod.eyebrow}
-            body={mod.body}
-            title={mod.title}
-            footer="arrow"
-          />
-        );
-      })}
-    </HorizontalScrollSection>
+      {/* Desktop: horizontal scroller */}
+      <div className="hidden lg:block">
+        <HorizontalScrollSection header={header} desktopOnly>
+          {modules.map((mod) => {
+            const Icon = mod.icon;
+
+            return (
+              <ScrollHoverCard
+                key={mod.href}
+                href={mod.href}
+                icon={
+                  <Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />
+                }
+                number={mod.number}
+                eyebrow={mod.eyebrow}
+                body={mod.body}
+                title={mod.title}
+                footer="arrow"
+              />
+            );
+          })}
+        </HorizontalScrollSection>
+      </div>
+    </>
   );
 }
