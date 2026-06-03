@@ -231,7 +231,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.monitoring}
           startDot={{ cx: 1, cy: 157 }}
           endDot={{ cx: 191, cy: 1 }}
-          infoBoxClassName="lg:top-full lg:right-full lg:flex-row-reverse lg:text-right lg:-translate-y-14 lg:-translate-x-2"
+          infoBoxClassName="lg:top-full lg:right-full lg:flex-row-reverse lg:text-right lg:-translate-y-16 lg:-translate-x-2"
           Icon={TbDeviceWatchSearch}
           label={
             <>
