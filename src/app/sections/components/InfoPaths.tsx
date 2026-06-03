@@ -32,6 +32,10 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     const h2 = SplitText.create("#explode-h2", {
       type: "lines",
       mask: "lines",
+      // #explode-h2 is a <p>; aria-label is prohibited on paragraphs, so skip
+      // SplitText's automatic aria handling (the visible line spans stay
+      // readable to screen readers without the invalid attribute).
+      aria: "none",
     });
 
     // Fade in/out the right-side InfoPaths AND both left-side callouts
