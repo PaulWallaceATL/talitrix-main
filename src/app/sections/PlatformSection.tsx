@@ -125,8 +125,8 @@ const PlatformSection = () => {
               <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
-                  src={"/platform/one-gaurdian.jpg"}
-                  alt="ONE Guardian dashboard preview"
+                  src={"/platform/one-band.png"}
+                  alt="All-In-One Band dashboard preview"
                   width={462}
                   height={587}
                   className="w-full rounded-2xl relative z-10"

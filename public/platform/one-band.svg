@@ -1,0 +1,79 @@
+<svg width="462" height="587" viewBox="0 0 462 587" fill="none" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bandScreen" x1="231" y1="68" x2="231" y2="326" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#171c20"/>
+      <stop offset="0.55" stop-color="#11161a"/>
+      <stop offset="1" stop-color="#0d1114"/>
+    </linearGradient>
+    <linearGradient id="bandSheen" x1="231" y1="68" x2="231" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="bandStreets" width="40" height="36" patternUnits="userSpaceOnUse">
+      <path d="M0 0H40M0 0V36" stroke="#7d8b97" stroke-opacity="0.10" stroke-width="1"/>
+    </pattern>
+    <clipPath id="bandMapClip">
+      <rect x="18" y="68" width="426" height="258" rx="16"/>
+    </clipPath>
+    <path id="bandPin" d="M0,-12 C6.63,-12 12,-6.63 12,0 C12,7.5 3,15 0,20 C-3,15 -12,7.5 -12,0 C-12,-6.63 -6.63,-12 0,-12 Z"/>
+  </defs>
+
+  <!-- Outer panel (corners rounded by the card's CSS) -->
+  <rect width="462" height="587" fill="#1b1917"/>
+
+  <!-- Header -->
+  <text x="20" y="40" fill="#8c8c8c" font-size="15" font-weight="600" letter-spacing="3">ALL-IN-ONE BAND</text>
+  <circle cx="404" cy="34" r="4.5" fill="#4d4a47"/>
+  <circle cx="422" cy="34" r="4.5" fill="#f87a13"/>
+  <circle cx="440" cy="34" r="4.5" fill="#4d4a47"/>
+
+  <!-- Map -->
+  <rect x="18" y="68" width="426" height="258" rx="16" fill="url(#bandScreen)"/>
+  <g clip-path="url(#bandMapClip)">
+    <rect x="18" y="68" width="426" height="258" fill="url(#bandStreets)"/>
+    <!-- A couple of brighter main streets -->
+    <path d="M18 214 H444" stroke="#7d8b97" stroke-opacity="0.16" stroke-width="2"/>
+    <path d="M258 68 V326" stroke="#7d8b97" stroke-opacity="0.16" stroke-width="2"/>
+    <path d="M120 68 V326" stroke="#7d8b97" stroke-opacity="0.12" stroke-width="1.5"/>
+    <rect x="18" y="68" width="426" height="258" fill="url(#bandSheen)"/>
+
+    <!-- Route (orange accent) -->
+    <path d="M158,208 L194,208 L218,184 L260,184 L286,212 L330,212"
+      stroke="#f87a13" stroke-opacity="0.25" stroke-width="9" fill="none"
+      stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M158,208 L194,208 L218,184 L260,184 L286,212 L330,212"
+      stroke="#f87a13" stroke-width="3" fill="none"
+      stroke-linejoin="round" stroke-linecap="round"/>
+
+    <!-- Pin 2 (left) -->
+    <g transform="translate(158,188)">
+      <use href="#bandPin" fill="#1b1f23" stroke="#f87a13" stroke-width="2"/>
+      <text x="0" y="4" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">2</text>
+    </g>
+    <!-- Pin 1 (right) -->
+    <g transform="translate(330,192)">
+      <use href="#bandPin" fill="#1b1f23" stroke="#f87a13" stroke-width="2"/>
+      <text x="0" y="4" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">1</text>
+    </g>
+  </g>
+  <rect x="18.5" y="68.5" width="425" height="257" rx="15.5" fill="none" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <!-- Heart rate -->
+  <rect x="18" y="348" width="207" height="100" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.07"/>
+  <text x="40" y="388" fill="#9a9a9a" font-size="13" font-weight="600" letter-spacing="1">HEART RATE</text>
+  <text x="38" y="430" fill="#ffffff" font-size="38" font-weight="700">72</text>
+  <text x="92" y="430" fill="#9a9a9a" font-size="16" font-weight="500">bpm</text>
+
+  <!-- Battery -->
+  <rect x="237" y="348" width="207" height="100" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.07"/>
+  <text x="259" y="388" fill="#9a9a9a" font-size="13" font-weight="600" letter-spacing="1">BATTERY</text>
+  <text x="257" y="430" fill="#ffffff" font-size="38" font-weight="700">86</text>
+  <text x="312" y="430" fill="#9a9a9a" font-size="16" font-weight="500">%</text>
+
+  <!-- Geofence -->
+  <rect x="18" y="472" width="426" height="84" rx="16" fill="#ffffff" fill-opacity="0.03" stroke="#ffffff" stroke-opacity="0.07"/>
+  <path d="M37 504 H43 L46 496 L50 512 L53 504 H59" stroke="#9a9a9a" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="68" y="509" fill="#9a9a9a" font-size="15" font-weight="500">Geofence</text>
+  <text x="424" y="509" fill="#3ad17a" font-size="16" font-weight="600" text-anchor="end">OK</text>
+  <text x="38" y="542" fill="#ffffff" font-size="26" font-weight="700">4km</text>
+</svg>
