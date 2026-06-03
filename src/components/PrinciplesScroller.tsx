@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import HorizontalScrollSection from "@/components/HorizontalScrollSection";
 import ScrollHoverCard from "@/components/ScrollHoverCard";
+import FeatureStack from "@/components/FeatureStack";
 
 type Principle = {
   number: string;
@@ -72,22 +73,42 @@ type Props = {
 
 export default function PrinciplesScroller({ header }: Props) {
   return (
-    <HorizontalScrollSection header={header}>
-      {principles.map((principle) => {
-        const Icon = principle.icon;
+    <>
+      {/* Mobile: orange feature stack */}
+      <div className="lg:hidden">
+        {header}
+        <FeatureStack
+          items={principles.map((principle) => ({
+            title: principle.title,
+            body: principle.body,
+            eyebrow: principle.eyebrow,
+            Icon: principle.icon,
+          }))}
+        />
+      </div>
 
-        return (
-          <ScrollHoverCard
-            key={principle.title}
-            icon={<Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />}
-            number={principle.number}
-            eyebrow={principle.eyebrow}
-            body={principle.body}
-            title={principle.title}
-            footer="number"
-          />
-        );
-      })}
-    </HorizontalScrollSection>
+      {/* Desktop: horizontal scroller */}
+      <div className="hidden lg:block">
+        <HorizontalScrollSection header={header} desktopOnly>
+          {principles.map((principle) => {
+            const Icon = principle.icon;
+
+            return (
+              <ScrollHoverCard
+                key={principle.title}
+                icon={
+                  <Icon className="h-5 w-5 text-white/85" strokeWidth={1.6} />
+                }
+                number={principle.number}
+                eyebrow={principle.eyebrow}
+                body={principle.body}
+                title={principle.title}
+                footer="number"
+              />
+            );
+          })}
+        </HorizontalScrollSection>
+      </div>
+    </>
   );
 }
