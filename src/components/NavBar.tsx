@@ -285,8 +285,9 @@ const NavBar = () => {
             <Image
               src={"/talitrix-logo.svg"}
               alt="Talitrix Logo"
-              width={188}
-              height={24}
+              width={197}
+              height={32}
+              priority
               className="object-contain h-5 lg:h-6 w-auto"
             />
           </Link>
