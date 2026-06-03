@@ -236,8 +236,8 @@ const PlatformContinuitySection = ({ id }: Props) => {
           >
             <div className="w-full pcs-card">
               <Image
-                src="/platform/one-shield.jpg"
-                alt="ONE Shield"
+                src="/platform/one-jms.png"
+                alt="ONE JMS incident breakdown"
                 width={462}
                 height={587}
                 className="w-full rounded-2xl origin-bottom-right -rotate-12"

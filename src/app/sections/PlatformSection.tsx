@@ -113,8 +113,8 @@ const PlatformSection = () => {
               <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right lg:-rotate-12 overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
-                  src={"/platform/one-shield.jpg"}
-                  alt="ONE Shield dashboard preview"
+                  src={"/platform/one-jms.png"}
+                  alt="ONE JMS incident breakdown preview"
                   width={462}
                   height={587}
                   className="w-full rounded-2xl relative z-10"
