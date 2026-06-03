@@ -15,6 +15,15 @@
     <clipPath id="bandMapClip">
       <rect x="18" y="68" width="426" height="258" rx="16"/>
     </clipPath>
+    <radialGradient id="bandVignetteGrad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(244 198) scale(178 96)">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.4" stop-color="#ffffff"/>
+      <stop offset="0.75" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <mask id="bandGridMask">
+      <rect x="18" y="68" width="426" height="258" fill="url(#bandVignetteGrad)"/>
+    </mask>
     <path id="bandPin" d="M0,-12 C6.63,-12 12,-6.63 12,0 C12,7.5 3,15 0,20 C-3,15 -12,7.5 -12,0 C-12,-6.63 -6.63,-12 0,-12 Z"/>
   </defs>
 
@@ -30,11 +39,14 @@
   <!-- Map -->
   <rect x="18" y="68" width="426" height="258" rx="16" fill="url(#bandScreen)"/>
   <g clip-path="url(#bandMapClip)">
-    <rect x="18" y="68" width="426" height="258" fill="url(#bandStreets)"/>
-    <!-- A couple of brighter main streets -->
-    <path d="M18 214 H444" stroke="#7d8b97" stroke-opacity="0.16" stroke-width="2"/>
-    <path d="M258 68 V326" stroke="#7d8b97" stroke-opacity="0.16" stroke-width="2"/>
-    <path d="M120 68 V326" stroke="#7d8b97" stroke-opacity="0.12" stroke-width="1.5"/>
+    <!-- Grid is masked by an elliptical vignette so it only reads around the route -->
+    <g mask="url(#bandGridMask)">
+      <rect x="18" y="68" width="426" height="258" fill="url(#bandStreets)"/>
+      <!-- A couple of brighter main streets -->
+      <path d="M18 214 H444" stroke="#7d8b97" stroke-opacity="0.16" stroke-width="2"/>
+      <path d="M258 68 V326" stroke="#7d8b97" stroke-opacity="0.16" stroke-width="2"/>
+      <path d="M120 68 V326" stroke="#7d8b97" stroke-opacity="0.12" stroke-width="1.5"/>
+    </g>
     <rect x="18" y="68" width="426" height="258" fill="url(#bandSheen)"/>
 
     <!-- Route (orange accent) -->
