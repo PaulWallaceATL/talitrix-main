@@ -63,12 +63,16 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
     // shorter and -150 lifts the headline too far off-screen. Wrapped
     // in matchMedia so the pin trigger rebuilds cleanly at 768px.
     gsap.matchMedia().add("(min-width: 1024px)", () => {
-      gsap.from(
-        [
-          sectionRef.current, // "#leftInfoContent", --- IGNORE ---
-        ],
+      // Desktop InfoPaths is fixed + centered, so it would paint over the
+      // hero on first load before this scroll fade kicks in. The element
+      // starts at `lg:opacity-0` (see ExplodedSection) to avoid that flash;
+      // fromTo with an explicit end keeps the scroll-driven reveal intact
+      // regardless of the CSS initial state.
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0 },
         {
-          opacity: 0,
+          opacity: 1,
           duration: 0.3,
           scrollTrigger: {
             trigger: "#exploded",

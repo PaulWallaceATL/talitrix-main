@@ -53,7 +53,7 @@ const ExplodedSection = () => {
         </div>
       </div>
       <div>
-        <InfoPaths className="lg:fixed lg:top-1/2 lg:left-1/2 lg:ml-6 lg:-translate-1/2 z-20 relative lg:w-60 xl:w-80 2xl:w-100 lg:h-50 text-sm lg:pointer-events-none grid lg:block grid-cols-1 sm:grid-cols-2 gap-4 mx-auto my-14 lg:my-0 px-6" />
+        <InfoPaths className="lg:fixed lg:top-1/2 lg:left-1/2 lg:ml-6 lg:-translate-1/2 lg:opacity-0 z-20 relative lg:w-60 xl:w-80 2xl:w-100 lg:h-50 text-sm lg:pointer-events-none grid lg:block grid-cols-1 sm:grid-cols-2 gap-4 mx-auto my-14 lg:my-0 px-6" />
       </div>
     </div>
   );
