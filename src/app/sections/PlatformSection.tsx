@@ -137,11 +137,11 @@ const PlatformSection = () => {
               <div className="origin-bottom-left lg:rotate-12 relative ">
                 <div className="relative z-10 " ref={cardRef}>
                   <div className="pointer-events-none absolute top-[36%] z-20 flex w-full flex-col items-center gap-1 sm:gap-2 lg:gap-2">
-                    <h3 className="text-center text-[10px] tracking-widest sm:text-sm lg:text-base">
+                    <h3 className="text-center text-sm tracking-widest lg:text-base">
                       TALITRIX
                     </h3>
-                    <div className="relative size-14 sm:size-20 lg:size-30">
-                      <div className="absolute top-1/2 left-1/2 -translate-1/2 text-lg text-primary sm:text-2xl lg:text-4xl">
+                    <div className="relative size-32 lg:size-30">
+                      <div className="absolute top-1/2 left-1/2 -translate-1/2 text-3xl text-primary lg:text-4xl">
                         63
                       </div>
                       <svg

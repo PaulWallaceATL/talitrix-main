@@ -70,7 +70,10 @@ const Footer = () => {
             </div>
           </div>
           {FooterLinks.map((footer) => (
-            <div className="flex flex-col gap-5" key={footer.title}>
+            <div
+              className={`flex flex-col gap-5 ${footer.orderClass ?? ""}`}
+              key={footer.title}
+            >
               <h3 className="text-primary text-xl font-semibold uppercase">
                 {footer.title}
               </h3>
@@ -226,11 +229,14 @@ type FooterLink = {
 type FooterColumn = {
   title: string;
   links: FooterLink[];
+  /** Mobile grid ordering (reset to DOM order at lg via lg:order-none). */
+  orderClass?: string;
 };
 
 const FooterLinks: FooterColumn[] = [
   {
     title: "Platform",
+    orderClass: "order-1 lg:order-none",
     links: [
       { label: "Talitrix ONE", href: "/talitrix-one" },
       { label: "All-In-One Band", href: "/talitrix-one/t-band" },
@@ -246,6 +252,7 @@ const FooterLinks: FooterColumn[] = [
   },
   {
     title: "Solutions",
+    orderClass: "order-3 lg:order-none",
     links: [
       { label: "Agencies", href: "/solutions/agencies" },
       { label: "Participants", href: "/solutions/participants" },
@@ -253,6 +260,7 @@ const FooterLinks: FooterColumn[] = [
   },
   {
     title: "Company",
+    orderClass: "order-4 lg:order-none",
     links: [
       { label: "About", href: "/about" },
       { label: "News", href: "/news" },
@@ -260,6 +268,7 @@ const FooterLinks: FooterColumn[] = [
   },
   {
     title: "Get Started",
+    orderClass: "order-2 lg:order-none",
     links: [
       { label: "Request a Briefing", href: "/get-started" },
       { label: "Login", href: LOGIN_URL, external: true },
