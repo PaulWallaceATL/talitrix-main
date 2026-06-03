@@ -173,7 +173,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.heartRatePath}
           startDot={{ cx: 3, cy: 170 }}
           endDot={{ cx: 475, cy: 1 }}
-          infoBoxClassName="top-0 left-full lg:-translate-y-12 lg:translate-x-2"
+          infoBoxClassName="top-0 left-full lg:-translate-y-14 lg:translate-x-2"
           Icon={IoFitnessOutline}
           label={
             <>
@@ -231,7 +231,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.monitoring}
           startDot={{ cx: 1, cy: 157 }}
           endDot={{ cx: 191, cy: 1 }}
-          infoBoxClassName="lg:top-full lg:right-full lg:flex-row-reverse lg:text-right"
+          infoBoxClassName="lg:top-full lg:right-full lg:flex-row-reverse lg:text-right lg:-translate-y-14 lg:-translate-x-2"
           Icon={TbDeviceWatchSearch}
           label={
             <>
@@ -266,7 +266,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.sim}
           startDot={{ cx: 1, cy: 103 }}
           endDot={{ cx: 320, cy: 1 }}
-          infoBoxClassName="lg:top-0 lg:left-full lg:-translate-y-12 lg:translate-x-2"
+          infoBoxClassName="lg:top-0 lg:left-full lg:-translate-y-10 lg:translate-x-2"
           Icon={BsSim}
           label={
             <>
