@@ -45,17 +45,13 @@ const PlatformContinuitySection = ({ id }: Props) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const watchRef = useRef<HTMLDivElement>(null);
   const watchCanvasRef = useRef<HTMLCanvasElement>(null);
-  const placeholderRef = useRef<HTMLDivElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
-  const h2bRef = useRef<HTMLHeadingElement>(null);
-  const pRef = useRef<HTMLParagraphElement>(null);
 
   useGSAP(
     () => {
       const platform = platformRef.current;
-      const placeholder = placeholderRef.current;
       const canvas = watchCanvasRef.current;
-      if (!platform || !placeholder) return;
+      if (!platform) return;
 
       // Reveal: until now the section is opacity-0 so it cannot flash
       // over surrounding content on first paint.
@@ -120,7 +116,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
           scrollTrigger: {
             trigger: platform,
             start: "top top",
-            end: "+=400%",
+            end: "+=250%",
             scrub: 0.4,
           },
         });
@@ -133,14 +129,6 @@ const PlatformContinuitySection = ({ id }: Props) => {
       }
 
       const h2Split = SplitText.create(h2Ref.current, {
-        type: "lines",
-        mask: "lines",
-      });
-      const h2bSplit = SplitText.create(h2bRef.current, {
-        type: "lines",
-        mask: "lines",
-      });
-      const pSplit = SplitText.create(pRef.current, {
         type: "lines",
         mask: "lines",
       });
@@ -161,7 +149,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
         scrollTrigger: {
           trigger: platform,
           start: "top top",
-          end: "+=400%",
+          end: "+=250%",
           pin: true,
           pinSpacing: true,
           scrub: true,
@@ -193,25 +181,12 @@ const PlatformContinuitySection = ({ id }: Props) => {
         },
         0.8,
       );
-      tl2.to(cardRef.current, { scale: 2.5, y: -50 }, 0.8);
+      // Fade the Talitrix Score card out with the rest (no scale-up /
+      // "explode") so this mirrors the homepage's 3-card beat.
+      tl2.to(cardRef.current, { opacity: 0, duration: 0.3 }, 0.8);
       tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
       tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
       tl2.to(".pcs-card", { opacity: 0, duration: 0.3 }, 0.8);
-
-      // Reveal Intelligence with Purpose + paragraph only AFTER the
-      // All-In-One Band has fully faded out AND the supervisor / Talitrix score
-      // card has scrolled almost to the top of the viewport. Anchored
-      // at top 60% of the placeholder (well past pin end) so on mobile
-      // the text reveal does not overlap the still-large score.
-      const tl3 = gsap.timeline({
-        scrollTrigger: {
-          trigger: placeholder,
-          start: "top 60%",
-          toggleActions: "play none none reverse",
-        },
-      });
-      tl3.from(h2bSplit.lines, { y: "100%", stagger: 0.2 }, 0);
-      tl3.from(pSplit.lines, { y: "100%", stagger: 0.2 }, 0);
 
       return () => {
         watchCleanup?.();
@@ -221,7 +196,6 @@ const PlatformContinuitySection = ({ id }: Props) => {
   );
 
   return (
-    <>
     <div
       ref={platformRef}
       id={id}
@@ -311,37 +285,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
           </h2>
         </div>
       </div>
-
-      {/* Intelligence with Purpose — revealed at end of the pin.
-          Mobile sits in the lower portion of the section so it does
-          not collide with the scaled-up score; desktop keeps the
-          centered split layout. */}
-      <div className="flex flex-col lg:flex-row gap-6 lg:gap-0 lg:justify-between px-6 sm:px-12 lg:px-16 absolute items-start lg:items-center top-[72%] lg:top-1/2 left-1/2 w-full max-w-[1500px] -translate-x-1/2 lg:-translate-y-1/2 z-20">
-        <h2
-          ref={h2bRef}
-          className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
-        >
-          Intelligence <br /> with{" "}
-          <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
-            Purpose.
-          </span>
-        </h2>
-        <p
-          ref={pRef}
-          className="w-full max-w-md lg:w-80 text-base sm:text-lg lg:text-xl"
-        >
-          Move from reactive supervision to proactive intervention by
-          identifying potential issues before they become operational problems.
-        </p>
-      </div>
     </div>
-
-      {/* Trigger marker for tl3 — sits OUTSIDE platformRef so it does not get
-          pinned, and therefore can only enter the viewport after the
-          PlatformSection pin has finished and the All-In-One Band has fully faded out.
-          Mirrors the homepage's #placeholder placement. */}
-      <div ref={placeholderRef} className="h-px w-full" aria-hidden />
-    </>
   );
 };
 
