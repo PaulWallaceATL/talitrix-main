@@ -3,6 +3,10 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  /* Always reserve the vertical scrollbar gutter so the fixed header (and any
+     full-width / centered content) doesn't shift horizontally between the
+     first paint and when the scrollbar appears. */
+  scrollbar-gutter: stable;
 }
 
 :root {
