@@ -71,8 +71,7 @@ const PlatformSection = () => {
         .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
         .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
         .to(cardRef.current, { opacity: 0, duration: 0.3 }, fadeStart)
-        .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart)
-        .to(cardRef.current, { x: -400, duration: 0.3 }, fadeStart);
+        .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
 
       const h2 = SplitText.create(h2Ref.current, {
         type: "lines",
@@ -134,7 +133,7 @@ const PlatformSection = () => {
                 />
               </div>
             </div>
-            <div className="w-full relative max-w-85 lg:max-w-none">
+            <div className="w-full relative max-w-85 lg:max-w-none platform-card-2">
               <div className="origin-bottom-left lg:rotate-12 relative ">
                 <div className="relative z-10 " ref={cardRef}>
                   <div className="pointer-events-none absolute top-[36%] z-20 flex w-full flex-col items-center gap-1 sm:gap-2 lg:gap-2">
