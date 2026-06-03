@@ -1,5 +1,6 @@
 "use client";
 import { useMediaQuery } from "@/lib/useMediaQuery";
+import { cn } from "@/lib/utils";
 import type { ComponentProps, ReactNode } from "react";
 import type { IconType } from "react-icons";
 
@@ -99,7 +100,7 @@ const LaserLine = ({
       </svg>
 
       {Icon && label && (
-        <div className={`${infoBoxClassName} ${defaultInfoBoxClassName}`}>
+        <div className={cn(defaultInfoBoxClassName, infoBoxClassName)}>
           <div
             className="xl:size-12 lg:size-10 size-12 p-2 bg-white/15 rounded-lg shrink-0"
             style={{ boxShadow: infoGlass }}

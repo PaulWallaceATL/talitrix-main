@@ -173,6 +173,7 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.heartRatePath}
           startDot={{ cx: 3, cy: 170 }}
           endDot={{ cx: 475, cy: 1 }}
+          infoBoxClassName="top-0 left-full lg:-translate-y-12"
           Icon={IoFitnessOutline}
           label={
             <>
@@ -265,11 +266,11 @@ const InfoPaths = ({ ...props }: React.ComponentProps<"div">) => {
           pathClassName={styles.sim}
           startDot={{ cx: 1, cy: 103 }}
           endDot={{ cx: 320, cy: 1 }}
-          infoBoxClassName="lg:top-0 lg:left-full "
+          infoBoxClassName="lg:top-0 lg:left-full lg:-translate-y-12"
           Icon={BsSim}
           label={
             <>
-              Three Carrier SIM <br />{" "}
+              3-Carrier SIM <br />{" "}
               <span className="opacity-50">
                 (AT&amp;T, T-Mobile and <br className="hidden lg:block" />{" "}
                 Verizon Wireless)
