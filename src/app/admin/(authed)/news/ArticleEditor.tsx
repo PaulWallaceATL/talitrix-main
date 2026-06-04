@@ -7,6 +7,7 @@ import type { NewsArticle } from "@/lib/supabase";
 
 const CATEGORIES = [
   "Announcement",
+  "Press Release",
   "Platform",
   "Field Report",
   "Perspective",
@@ -50,6 +51,8 @@ export default function ArticleEditor({ mode, article }: Props) {
     (article?.keywords ?? []).join(", "),
   );
   const [ogImageUrl, setOgImageUrl] = useState(article?.og_image_url ?? "");
+  const [ogUploadPending, setOgUploadPending] = useState(false);
+  const [ogUploadError, setOgUploadError] = useState<string | null>(null);
   const [authorName, setAuthorName] = useState(
     article?.author_name ?? "Talitrix Editorial",
   );
@@ -145,6 +148,36 @@ export default function ArticleEditor({ mode, article }: Props) {
     } catch (err) {
       setError(err instanceof Error ? err.message : "Save failed.");
       setPending(false);
+    }
+  };
+
+  const onOgImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setOgUploadError(null);
+    setOgUploadPending(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      if (slug.trim()) fd.append("slug", slug.trim());
+      const res = await fetch("/api/admin/news/upload-image", {
+        method: "POST",
+        body: fd,
+      });
+      const j = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(
+          typeof j.error === "string" ? j.error : "Upload failed.",
+        );
+      }
+      if (typeof j.url === "string") setOgImageUrl(j.url);
+    } catch (err) {
+      setOgUploadError(
+        err instanceof Error ? err.message : "Upload failed.",
+      );
+    } finally {
+      setOgUploadPending(false);
+      e.target.value = "";
     }
   };
 
@@ -412,17 +445,69 @@ export default function ArticleEditor({ mode, article }: Props) {
             </span>
           </label>
 
-          <label className="flex flex-col gap-2">
-            <span className="text-xs uppercase tracking-widest text-white/60">
-              Social Image URL (Open Graph)
-            </span>
-            <input
-              value={ogImageUrl}
-              onChange={(e) => setOgImageUrl(e.target.value)}
-              className={inputClass}
-              placeholder="https://… (1200×630 recommended). Defaults to /og-image.png"
-            />
-          </label>
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-1">
+              <span className="text-xs uppercase tracking-widest text-white/60">
+                Social Image (Open Graph)
+              </span>
+              <p className="text-xs text-white/45 leading-relaxed">
+                Recommended size:{" "}
+                <span className="text-white/70">1200 × 630 pixels</span> (1.91:1
+                aspect ratio). Used for link previews on social platforms and in
+                search results. If empty, the site default{" "}
+                <span className="text-white/50">/og-image.png</span> is used.
+              </p>
+            </div>
+
+            {ogImageUrl ? (
+              <div className="relative rounded-xl overflow-hidden border border-border-gray bg-black/40">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={ogImageUrl}
+                  alt="Social preview"
+                  className="w-full aspect-[1200/630] object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setOgImageUrl("")}
+                  className="absolute top-2 right-2 px-3 py-1.5 rounded-lg bg-black/70 border border-white/20 text-xs text-white/90 hover:bg-black/90 transition-colors"
+                >
+                  Remove
+                </button>
+              </div>
+            ) : null}
+
+            <label className="flex flex-col gap-2">
+              <span className="text-xs text-white/50">Upload image</span>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                disabled={ogUploadPending}
+                onChange={onOgImageUpload}
+                className="block w-full text-sm text-white/70 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:bg-primary/25 file:text-primary file:text-sm file:font-medium hover:file:bg-primary/40 file:cursor-pointer disabled:opacity-50"
+              />
+              <span className="text-xs text-white/40">
+                PNG, JPEG, or WebP · max 5 MB
+              </span>
+            </label>
+
+            {ogUploadError && (
+              <p className="text-sm text-red-400">{ogUploadError}</p>
+            )}
+            {ogUploadPending && (
+              <p className="text-sm text-white/50">Uploading…</p>
+            )}
+
+            <label className="flex flex-col gap-2">
+              <span className="text-xs text-white/50">Or paste image URL</span>
+              <input
+                value={ogImageUrl}
+                onChange={(e) => setOgImageUrl(e.target.value)}
+                className={inputClass}
+                placeholder="https://…"
+              />
+            </label>
+          </div>
         </fieldset>
 
         <div className="flex flex-wrap gap-5 sm:gap-8">

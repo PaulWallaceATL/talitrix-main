@@ -7,6 +7,7 @@ import type { NewsArticle } from "@/lib/supabase";
 
 const CATEGORIES = [
   "All",
+  "Press Release",
   "Platform",
   "Field Report",
   "Perspective",

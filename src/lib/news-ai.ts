@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const CATEGORIES = [
   "Announcement",
+  "Press Release",
   "Platform",
   "Field Report",
   "Perspective",
