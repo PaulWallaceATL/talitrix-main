@@ -54,24 +54,40 @@ const PlatformSection = () => {
         },
       });
 
-      tl2.to(screenRef.current, { rotate: "-12deg", duration: 0.35 }, 0.5);
+      tl2.to(screenRef.current, { rotate: "-20deg", duration: 1 }, 0.2);
+
+      tl2.to(h2Ref.current, { scale: 0.8, y: -50, ease: "power4.inOut" }, 0);
+      tl2.to(
+        "#watchscene",
+        { scale: 0.9, y: -30, delay: 0.1, ease: "power4.inOut" },
+        0,
+      );
+      // .to("#watchscene", { opacity: 0, y: -200, duration: 0.5 }, fadeStart);
       tl2
-        .to(
-          "#watchscene",
-          { x: 0, y: 110, delay: 0.1, ease: "power4.inOut" },
-          0,
-        )
-        .to(
-          "#watchscene",
-          { opacity: 0, duration: 0.5, ease: "power1.in" },
-          fadeStart,
-        );
-      tl2
-        .to(h2Ref.current, { y: -300, opacity: 0, duration: 0.5 }, fadeStart)
+        // .to(h2Ref.current, { y: -300, opacity: 0, duration: 0.5 }, fadeStart)
         .to(h2Ref.current, { pointerEvents: "none" }, fadeStart)
-        .to(".platform-cards", { opacity: 0, duration: 0.3 }, fadeStart)
-        .to(cardRef.current, { opacity: 0, duration: 0.3 }, fadeStart)
-        .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
+        .to(
+          [".platform-cards", cardRef.current],
+          { opacity: 0, duration: 0.3 },
+          0.9,
+        );
+
+      // .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
+      gsap.fromTo(
+        "#watchscene",
+        { opacity: 1, y: -30 },
+        {
+          opacity: 0,
+          y: -200,
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: "#b-cta",
+            start: "top bottom",
+            end: "+=300px",
+            scrub: true,
+          },
+        },
+      );
 
       const h2 = SplitText.create(h2Ref.current, {
         type: "lines",
@@ -104,7 +120,7 @@ const PlatformSection = () => {
             </span>
           </h2>
         </div>
-        <div className="lg:absolute lg:top-[68%] lg:h-100 lg:left-1/2 lg:-translate-1/2 z-5">
+        <div className="lg:absolute lg:top-[55%] lg:h-100 lg:left-1/2 lg:-translate-1/2 z-5">
           <div
             className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start lg:flex-row gap-10  lg:mx-0 lg:max-w-none lg:gap-6 lg:w-250 lg:h-500 lg:origin-bottom lg:rotate-55 mt-10 mb-40 lg:mt-0 lg:mb-0 px-6 lg:px-0"
             ref={screenRef}
