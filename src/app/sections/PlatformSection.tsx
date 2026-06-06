@@ -59,7 +59,7 @@ const PlatformSection = () => {
       tl2.to(h2Ref.current, { scale: 0.8, y: -50, ease: "power4.inOut" }, 0);
       tl2.to(
         "#watchscene",
-        { scale: 0.9, y: -30, delay: 0.1, ease: "power4.inOut" },
+        { scale: 0.9, y: 100, delay: 0.1, ease: "power4.inOut" },
         0,
       );
       // .to("#watchscene", { opacity: 0, y: -200, duration: 0.5 }, fadeStart);
@@ -75,7 +75,7 @@ const PlatformSection = () => {
       // .to(".platform-card-2", { x: -400, duration: 0.3 }, fadeStart);
       gsap.fromTo(
         "#watchscene",
-        { opacity: 1, y: -30 },
+        { opacity: 1, y: 100 },
         {
           opacity: 0,
           y: -200,
