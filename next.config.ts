@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
   // used are bundled, cutting unused JavaScript and main-thread parse cost.
   experimental: {
     optimizePackageImports: ["react-icons", "lucide-react", "motion"],
+    // Inline the route's CSS directly into the HTML <head> instead of
+    // linking external render-blocking stylesheets. Removes the blocking
+    // CSS round-trips PageSpeed flags (~430ms) with no visual change.
+    inlineCss: true,
   },
   // Strip console.log/debug/info from production client bundles while keeping
   // error + warn for diagnostics. Purely a build-time size/CPU saving.
