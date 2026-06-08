@@ -11,6 +11,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Build-time only optimizations. These change how the bundle is produced —
+  // not how anything renders, animates, or behaves at runtime.
+  //
+  // optimizePackageImports rewrites barrel imports (e.g. `react-icons/io5`,
+  // `motion/react`) to per-symbol paths so only the icons/utilities actually
+  // used are bundled, cutting unused JavaScript and main-thread parse cost.
+  experimental: {
+    optimizePackageImports: ["react-icons", "lucide-react", "motion"],
+  },
+  // Strip console.log/debug/info from production client bundles while keeping
+  // error + warn for diagnostics. Purely a build-time size/CPU saving.
+  compiler: {
+    removeConsole: { exclude: ["error", "warn"] },
+  },
   async redirects() {
     return [
       // Solutions pages consolidated to two audiences (Agencies + Participants).
