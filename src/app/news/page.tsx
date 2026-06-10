@@ -102,8 +102,14 @@ export default async function NewsPage() {
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-background/40 to-background pointer-events-none" />
 
         <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-28 max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 lg:items-center">
-            <div className={featured ? "lg:col-span-5" : "max-w-3xl"}>
+          <div
+            className={`grid grid-cols-1 gap-8 lg:gap-10 lg:items-center ${
+              featured
+                ? "lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]"
+                : "max-w-3xl"
+            }`}
+          >
+            <div className="min-w-0">
               <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
                 News
               </span>
@@ -116,14 +122,14 @@ export default async function NewsPage() {
                 delay={70}
                 blur
               />
-              <p className="text-lg sm:text-xl text-white/80 max-w-xl leading-relaxed">
+              <p className="text-lg sm:text-xl text-white/80 leading-relaxed">
                 Announcements, briefings, and perspective from the team setting
                 the new standard in monitoring and supervision technology.
               </p>
             </div>
 
             {featured && (
-              <div className="lg:col-span-7">
+              <div className="min-w-0">
                 <Link
                   href={`/news/${featured.slug}`}
                   className="group block relative rounded-2xl overflow-hidden"
@@ -140,21 +146,21 @@ export default async function NewsPage() {
                     />
                   </div>
 
-                  <div className="relative z-10 flex flex-col sm:flex-row gap-5 sm:gap-6 border border-border-gray rounded-2xl p-5 sm:p-6 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.05] transition-colors">
+                  <div className="relative z-10 flex flex-col gap-4 border border-border-gray rounded-2xl p-4 sm:p-5 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.05] transition-colors">
                     {featured.og_image_url && (
-                      <div className="relative w-full sm:w-44 md:w-52 shrink-0 aspect-[16/10] sm:aspect-[4/3] rounded-xl overflow-hidden border border-border-gray">
+                      <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-border-gray">
                         <Image
                           src={featured.og_image_url}
                           alt={featured.title}
                           fill
                           priority
-                          sizes="(max-width: 640px) 100vw, 208px"
+                          sizes="(max-width: 1024px) 100vw, 40vw"
                           className="object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                       </div>
                     )}
-                    <div className="flex flex-col justify-center gap-3 min-w-0">
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-[0.25em]">
+                    <div className="flex flex-col gap-2 min-w-0">
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] sm:text-xs uppercase tracking-[0.2em]">
                         <span className="text-primary">
                           Featured · {featured.category}
                         </span>
@@ -162,13 +168,13 @@ export default async function NewsPage() {
                           {fmt(featured.published_at)}
                         </span>
                       </div>
-                      <h2 className="text-xl sm:text-2xl md:text-3xl leading-snug group-hover:text-primary transition-colors">
+                      <h2 className="text-lg sm:text-xl leading-snug line-clamp-3 group-hover:text-primary transition-colors">
                         {featured.title}
                       </h2>
-                      <p className="text-white/65 text-sm sm:text-base leading-relaxed line-clamp-2">
+                      <p className="text-white/65 text-sm leading-relaxed line-clamp-2">
                         {featured.excerpt}
                       </p>
-                      <span className="text-primary text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                      <span className="text-primary text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all pt-1">
                         Read the announcement
                         <span>→</span>
                       </span>

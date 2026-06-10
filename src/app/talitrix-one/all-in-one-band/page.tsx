@@ -23,7 +23,7 @@ export default function AllInOneBandPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
-        contentClassName="lg:max-w-2xl xl:max-w-3xl"
+        contentClassName="lg:max-w-[58%] xl:max-w-[56%]"
         eyebrow="The Hardware"
         title={
           <StaggeredText
@@ -58,19 +58,20 @@ export default function AllInOneBandPage() {
               aria-hidden
             />
 
-            {/* All-In-One Band hero image — anchored to the right edge so it
-                never overlaps the headline. Hidden below lg so the hero text
-                gets full width on tablet and mobile. */}
-            <div className="hidden lg:flex absolute inset-y-0 left-[62%] xl:left-[64%] 2xl:left-[66%] right-0 items-center justify-end pr-[3%] xl:pr-[5%] pointer-events-none">
-              <div className="relative w-full max-w-[720px] xl:max-w-[840px] 2xl:max-w-[960px] aspect-square">
-                <Image
-                  src="/watch-sequence/0188.webp"
-                  alt="Talitrix All-In-One Band, 3/4 angled view"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 0px, min(38vw, 960px)"
-                  className="object-contain object-right"
-                />
+            {/* All-In-One Band hero image — right 40% column, scaled up so the
+                device reads large without crossing into the text column. */}
+            <div className="hidden lg:flex absolute inset-y-0 left-[60%] w-[40%] items-center justify-center overflow-hidden pointer-events-none">
+              <div className="relative w-full max-w-[min(40vw,900px)] aspect-square">
+                <div className="absolute inset-0 scale-[2.5] origin-[58%_50%]">
+                  <Image
+                    src="/watch-sequence/0188.webp"
+                    alt="Talitrix All-In-One Band, 3/4 angled view"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 0px, min(40vw, 900px)"
+                    className="object-contain"
+                  />
+                </div>
               </div>
             </div>
           </div>
