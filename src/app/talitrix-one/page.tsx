@@ -27,7 +27,7 @@ export default function TalitrixOnePage() {
         title={
           <StaggeredText
             as="h1"
-            text={"Talitrix ONE.\nOne Platform. End-to-End."}
+            text={"TalitrixONE.\nOne Platform. End-to-End."}
             className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
