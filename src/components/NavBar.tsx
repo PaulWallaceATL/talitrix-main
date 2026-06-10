@@ -59,7 +59,6 @@ const NAV_TREE: NavItem[] = [
   {
     label: "Platform",
     href: "/talitrix-one",
-    menuEyebrow: "The TalitrixONE Platform",
     children: [
       {
         label: "Platform Overview",
