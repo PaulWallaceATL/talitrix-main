@@ -7,6 +7,7 @@ type ShaderHeroProps = {
   body?: React.ReactNode;
   background: React.ReactNode;
   align?: "left" | "center";
+  contentClassName?: string;
   children?: React.ReactNode;
 };
 
@@ -17,6 +18,7 @@ const ShaderHero = ({
   body,
   background,
   align = "left",
+  contentClassName = "",
   children,
 }: ShaderHeroProps) => {
   return (
@@ -27,7 +29,7 @@ const ShaderHero = ({
       <div
         className={`relative z-10 w-full px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl ${
           align === "center" ? "mx-auto text-center" : ""
-        }`}
+        } ${contentClassName}`}
       >
         {eyebrow && (
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">

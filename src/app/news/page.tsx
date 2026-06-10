@@ -101,87 +101,85 @@ export default async function NewsPage() {
         </div>
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-background/40 to-background pointer-events-none" />
 
-        <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-32 max-w-7xl">
-          <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            News
-          </span>
-          <StaggeredText
-            as="h1"
-            text={"Field reports.\nFrom the new standard."}
-            className="text-4xl sm:text-5xl md:text-7xl leading-[1.05] mb-6"
-            segmentBy="words"
-            duration={0.7}
-            delay={70}
-            blur
-          />
-          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-3xl leading-relaxed">
-            Announcements, briefings, and perspective from the team setting
-            the new standard in monitoring and supervision technology.
-          </p>
+        <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-28 max-w-7xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 lg:items-center">
+            <div className={featured ? "lg:col-span-5" : "max-w-3xl"}>
+              <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
+                News
+              </span>
+              <StaggeredText
+                as="h1"
+                text={"Industry News &\nTalitrix Updates"}
+                className="text-4xl sm:text-5xl md:text-6xl xl:text-7xl leading-[1.05] mb-6"
+                segmentBy="words"
+                duration={0.7}
+                delay={70}
+                blur
+              />
+              <p className="text-lg sm:text-xl text-white/80 max-w-xl leading-relaxed">
+                Announcements, briefings, and perspective from the team setting
+                the new standard in monitoring and supervision technology.
+              </p>
+            </div>
+
+            {featured && (
+              <div className="lg:col-span-7">
+                <Link
+                  href={`/news/${featured.slug}`}
+                  className="group block relative rounded-2xl overflow-hidden"
+                >
+                  <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
+                    <FrameBorder
+                      color="#f87a13"
+                      backgroundColor="#000000"
+                      speed={0.7}
+                      borderWidth={0.06}
+                      noiseStrength={0.5}
+                      intensity={1.4}
+                      opacity={0.85}
+                    />
+                  </div>
+
+                  <div className="relative z-10 flex flex-col sm:flex-row gap-5 sm:gap-6 border border-border-gray rounded-2xl p-5 sm:p-6 bg-white/[0.03] backdrop-blur-md hover:bg-white/[0.05] transition-colors">
+                    {featured.og_image_url && (
+                      <div className="relative w-full sm:w-44 md:w-52 shrink-0 aspect-[16/10] sm:aspect-[4/3] rounded-xl overflow-hidden border border-border-gray">
+                        <Image
+                          src={featured.og_image_url}
+                          alt={featured.title}
+                          fill
+                          priority
+                          sizes="(max-width: 640px) 100vw, 208px"
+                          className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-col justify-center gap-3 min-w-0">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-[0.25em]">
+                        <span className="text-primary">
+                          Featured · {featured.category}
+                        </span>
+                        <span className="text-white/45 normal-case tracking-normal">
+                          {fmt(featured.published_at)}
+                        </span>
+                      </div>
+                      <h2 className="text-xl sm:text-2xl md:text-3xl leading-snug group-hover:text-primary transition-colors">
+                        {featured.title}
+                      </h2>
+                      <p className="text-white/65 text-sm sm:text-base leading-relaxed line-clamp-2">
+                        {featured.excerpt}
+                      </p>
+                      <span className="text-primary text-sm inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Read the announcement
+                        <span>→</span>
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </section>
-
-      {featured && (
-        <section className="relative px-6 md:px-16 py-16 md:py-24 border-b border-border-gray overflow-hidden">
-          <div className="absolute -top-40 -right-32 w-[700px] h-[700px] bg-primary/10 blur-[200px] pointer-events-none" />
-
-          <Link
-            href={`/news/${featured.slug}`}
-            className="relative z-10 block group"
-          >
-            <div className="relative rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
-                <FrameBorder
-                  color="#f87a13"
-                  backgroundColor="#000000"
-                  speed={0.7}
-                  borderWidth={0.06}
-                  noiseStrength={0.5}
-                  intensity={1.4}
-                  opacity={0.85}
-                />
-              </div>
-
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 border border-border-gray rounded-2xl p-6 sm:p-8 md:p-12 bg-white/[0.02] backdrop-blur-md hover:bg-white/[0.04] transition-colors">
-                <div className="lg:col-span-3 flex flex-col gap-3">
-                  <span className="text-primary text-xs uppercase tracking-[0.3em]">
-                    Featured · {featured.category}
-                  </span>
-                  <span className="text-white/50 text-sm">
-                    {fmt(featured.published_at)}
-                  </span>
-                </div>
-                <div className="lg:col-span-9 flex flex-col gap-6">
-                  {featured.og_image_url && (
-                    <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-border-gray">
-                      <Image
-                        src={featured.og_image_url}
-                        alt={featured.title}
-                        fill
-                        priority
-                        sizes="(max-width: 1024px) 100vw, 800px"
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      />
-                    </div>
-                  )}
-                  <h2 className="text-2xl sm:text-3xl md:text-5xl leading-tight group-hover:text-primary transition-colors">
-                    {featured.title}
-                  </h2>
-                  <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-3xl">
-                    {featured.excerpt}
-                  </p>
-                  <div className="pt-2">
-                    <span className="text-primary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                      Read the announcement
-                      <span>→</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </section>
-      )}
 
       {others.length === 0 && !featured ? (
         <section className="relative px-6 md:px-16 py-16 md:py-24 border-b border-border-gray">

@@ -23,6 +23,7 @@ export default function AllInOneBandPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
+        contentClassName="lg:max-w-2xl xl:max-w-3xl"
         eyebrow="The Hardware"
         title={
           <StaggeredText
@@ -49,25 +50,25 @@ export default function AllInOneBandPage() {
                 right so it sits behind the band image and never bleeds
                 across the hero text on the left. */}
             <div
-              className="absolute inset-0 bg-[radial-gradient(circle_at_72%_50%,rgba(248,122,19,0.32),transparent_55%)] pointer-events-none"
+              className="absolute inset-0 bg-[radial-gradient(circle_at_82%_50%,rgba(248,122,19,0.32),transparent_55%)] pointer-events-none"
               aria-hidden
             />
             <div
-              className="absolute top-1/2 right-[8%] -translate-y-1/2 w-[540px] h-[540px] rounded-full bg-primary/25 blur-[150px] pointer-events-none"
+              className="absolute top-1/2 right-[4%] -translate-y-1/2 w-[540px] h-[540px] rounded-full bg-primary/25 blur-[150px] pointer-events-none"
               aria-hidden
             />
 
-            {/* All-In-One Band hero image — right half of the hero, capped so
-                it stays on-screen on ultra-wide viewports. Hidden below lg so
-                the hero text gets full width on tablet and mobile. */}
-            <div className="hidden lg:flex absolute inset-y-0 right-0 w-[min(62%,1170px)] items-center justify-end pr-[2%] pointer-events-none">
-              <div className="relative w-full max-w-[1010px] xl:max-w-[1170px] aspect-square">
+            {/* All-In-One Band hero image — anchored to the right edge so it
+                never overlaps the headline. Hidden below lg so the hero text
+                gets full width on tablet and mobile. */}
+            <div className="hidden lg:flex absolute inset-y-0 left-[62%] xl:left-[64%] 2xl:left-[66%] right-0 items-center justify-end pr-[3%] xl:pr-[5%] pointer-events-none">
+              <div className="relative w-full max-w-[720px] xl:max-w-[840px] 2xl:max-w-[960px] aspect-square">
                 <Image
                   src="/watch-sequence/0188.webp"
                   alt="Talitrix All-In-One Band, 3/4 angled view"
                   fill
                   priority
-                  sizes="(max-width: 1024px) 0px, min(62vw, 1170px)"
+                  sizes="(max-width: 1024px) 0px, min(38vw, 960px)"
                   className="object-contain object-right"
                 />
               </div>
