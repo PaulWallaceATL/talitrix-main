@@ -251,7 +251,7 @@ const FooterLinks: FooterColumn[] = [
     ],
   },
   {
-    title: "Solutions",
+    title: "Use Cases",
     orderClass: "order-3 lg:order-none",
     links: [
       { label: "Agencies", href: "/solutions/agencies" },
