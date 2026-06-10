@@ -23,6 +23,7 @@ type NavItem = {
   href: string;
   desc?: string;
   icon?: IconName;
+  menuEyebrow?: string;
   children?: NavItem[];
 };
 
@@ -58,9 +59,10 @@ const NAV_TREE: NavItem[] = [
   {
     label: "Platform",
     href: "/talitrix-one",
+    menuEyebrow: "The TalitrixONE Platform",
     children: [
       {
-        label: "Talitrix ONE",
+        label: "Platform Overview",
         href: "/talitrix-one",
         icon: "stack",
         desc: "The unified hardware, software, and intelligence ecosystem.",
@@ -98,7 +100,7 @@ const NAV_TREE: NavItem[] = [
     ],
   },
   {
-    label: "Solutions",
+    label: "Use Cases",
     href: "/solutions/agencies",
     children: [
       {
@@ -125,7 +127,7 @@ const MENU_CTAS: Record<string, MenuCta> = {
     ctaLabel: "Contact Sales",
     ctaHref: "/contact",
   },
-  Solutions: {
+  "Use Cases": {
     eyebrow: "Find the right fit for your role",
     headline: "Talk to our team about your operation.",
     ctaLabel: "Contact Sales",
@@ -418,7 +420,7 @@ const NavBar = () => {
           >
             <div className="px-8 pt-7 pb-5">
               <span className="text-xs uppercase tracking-[0.3em] text-white/50">
-                {activeMenuItem.label}
+                {activeMenuItem.menuEyebrow ?? activeMenuItem.label}
               </span>
             </div>
 

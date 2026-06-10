@@ -101,11 +101,15 @@ export default async function NewsPage() {
         </div>
         <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-background/40 to-background pointer-events-none" />
 
-        <div className="relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-28 max-w-7xl">
+        <div
+          className={`relative z-10 px-6 md:px-16 pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-28 ${
+            featured ? "w-full" : "max-w-7xl"
+          }`}
+        >
           <div
-            className={`grid grid-cols-1 gap-8 lg:gap-10 lg:items-center ${
+            className={`grid grid-cols-1 gap-8 lg:items-center ${
               featured
-                ? "lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]"
+                ? "lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-16"
                 : "max-w-3xl"
             }`}
           >
@@ -129,10 +133,10 @@ export default async function NewsPage() {
             </div>
 
             {featured && (
-              <div className="min-w-0 flex items-center justify-center">
+              <div className="min-w-0 flex items-center justify-center lg:justify-end">
                 <Link
                   href={`/news/${featured.slug}`}
-                  className="group block relative rounded-2xl overflow-hidden w-full max-w-md sm:max-w-lg lg:max-w-none lg:w-[calc(100%+1.5rem)]"
+                  className="group block relative rounded-2xl overflow-hidden w-full max-w-md sm:max-w-lg lg:max-w-none"
                 >
                   <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
                     <FrameBorder
