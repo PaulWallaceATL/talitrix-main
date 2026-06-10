@@ -11,13 +11,12 @@ import PlatformContinuitySection from "@/components/PlatformContinuitySection";
 export const metadata: Metadata = pageMetadata({
   path: "/talitrix-one/t-band",
   title:
-    "All-In-One Band — Wrist-worn GPS for Modern Supervision | Talitrix ONE",
+    "All-In-One Band — Inside and Outside the Walls | Talitrix ONE",
   description:
-    "The All-In-One Band is the first independent wrist-worn GPS supervision device — Three Carrier SIM, biometric verification, heart rate and SpO₂ telemetry, 2-way communication, and proximity-based tamper detection.",
-  socialTitle:
-    "All-In-One Band | Talitrix ONE",
+    "The All-In-One Band is the first independent wrist-worn GPS monitoring device — built for Inside and Outside the Walls supervision with Three Carrier SIM connectivity, biometric sensing, and proximity-based tamper detection.",
+  socialTitle: "All-In-One Band | Talitrix ONE",
   socialDescription:
-    "Wrist-worn GPS supervision with Three Carrier SIM, biometrics, wellness telemetry, 2-way comms, and proximity tamper detection.",
+    "Wrist-worn GPS for Inside and Outside the Walls supervision — Three Carrier SIM, biometrics, wellness telemetry, and tamper detection.",
 });
 
 export default function TBandPage() {
@@ -28,7 +27,7 @@ export default function TBandPage() {
         title={
           <StaggeredText
             as="h1"
-            text={"All-In-One Band.\nDignity by Design."}
+            text={"All-In-One Band.\nInside and Outside the Walls."}
             className="text-4xl sm:text-5xl md:text-7xl leading-[1.05]"
             segmentBy="words"
             duration={0.7}
@@ -58,19 +57,20 @@ export default function TBandPage() {
               aria-hidden
             />
 
-            {/* All-In-One Band hero image, anchored to the right of the
-                hero so it doesn't overlap the headline / body / CTAs.
-                Hidden below lg so the hero text gets full width on
-                tablet and mobile. */}
-            <div className="hidden lg:block absolute top-1/2 right-[-30%] xl:right-[-20%] -translate-y-1/2 w-[1100px] xl:w-[1300px] aspect-square pointer-events-none">
-              <Image
-                src="/watch-sequence/0188.webp"
-                alt="Talitrix All-In-One Band, 3/4 angled view"
-                fill
-                priority
-                sizes="(max-width: 1024px) 0px, 560px"
-                className="object-contain"
-              />
+            {/* All-In-One Band hero image — right half of the hero, capped so
+                it stays on-screen on ultra-wide viewports. Hidden below lg so
+                the hero text gets full width on tablet and mobile. */}
+            <div className="hidden lg:flex absolute inset-y-0 right-0 w-[min(48%,900px)] items-center justify-end pr-[2%] pointer-events-none">
+              <div className="relative w-full max-w-[780px] xl:max-w-[900px] aspect-square">
+                <Image
+                  src="/watch-sequence/0188.webp"
+                  alt="Talitrix All-In-One Band, 3/4 angled view"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 0px, min(48vw, 900px)"
+                  className="object-contain object-right"
+                />
+              </div>
             </div>
           </div>
         }
