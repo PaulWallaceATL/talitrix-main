@@ -67,7 +67,7 @@ const NAV_TREE: NavItem[] = [
       },
       {
         label: "All-In-One Band",
-        href: "/talitrix-one/t-band",
+        href: "/talitrix-one/all-in-one-band",
         icon: "watch",
         desc: "Monitoring inside and outside the walls.",
       },

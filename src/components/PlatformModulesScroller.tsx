@@ -23,7 +23,7 @@ type Module = {
 
 const modules: Module[] = [
   {
-    href: "/talitrix-one/t-band",
+    href: "/talitrix-one/all-in-one-band",
     number: "01",
     eyebrow: "Hardware",
     title: "All-In-One Band",

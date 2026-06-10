@@ -239,7 +239,7 @@ const FooterLinks: FooterColumn[] = [
     orderClass: "order-1 lg:order-none",
     links: [
       { label: "Talitrix ONE", href: "/talitrix-one" },
-      { label: "All-In-One Band", href: "/talitrix-one/t-band" },
+      { label: "All-In-One Band", href: "/talitrix-one/all-in-one-band" },
       { label: "ONE Pre-Trial", href: "/talitrix-one/pretrial" },
       {
         label: "ONE Jail Management System",

@@ -58,6 +58,11 @@ const nextConfig: NextConfig = {
         destination: "/talitrix-one/pretrial",
         permanent: true,
       },
+      {
+        source: "/talitrix-one/t-band",
+        destination: "/talitrix-one/all-in-one-band",
+        permanent: true,
+      },
     ];
   },
 };

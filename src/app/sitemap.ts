@@ -19,7 +19,7 @@ const STATIC_ROUTES: Array<{
     priority: 0.85,
   },
   { path: "/talitrix-one", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/talitrix-one/t-band", changeFrequency: "monthly", priority: 0.85 },
+  { path: "/talitrix-one/all-in-one-band", changeFrequency: "monthly", priority: 0.85 },
   {
     path: "/talitrix-one/jail-management",
     changeFrequency: "monthly",

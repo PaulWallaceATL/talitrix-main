@@ -91,7 +91,7 @@ export default function ParticipantsPage() {
             <CTAButton href="/participant-registration">
               Begin Registration
             </CTAButton>
-            <CTAButton href="/talitrix-one/t-band" variant="secondary">
+            <CTAButton href="/talitrix-one/all-in-one-band" variant="secondary">
               Learn about the All in ONE Band
             </CTAButton>
           </div>
