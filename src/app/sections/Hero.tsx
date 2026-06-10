@@ -20,7 +20,7 @@ const Hero = () => {
         <div id="title-h1" className="relative z-1">
           <StaggeredText
             as="h1"
-            text={"The Standard for\nModern Supervision."}
+            text={"One Connected System.\nInside and Outside the Walls."}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center justify-center leading-[1.1]"
             segmentBy="words"
             duration={0.7}
@@ -32,7 +32,7 @@ const Hero = () => {
 
         <div className="max-w-72 relative z-20" id="hero-desc">
           <p className="text-xl text-white/75">
-            A single, unified ecosystem. Inside the walls and out.
+            The standard for modern supervision
           </p>
           <Link
             href="/talitrix-one"

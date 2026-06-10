@@ -129,10 +129,10 @@ export default async function NewsPage() {
             </div>
 
             {featured && (
-              <div className="min-w-0">
+              <div className="min-w-0 flex items-center justify-center">
                 <Link
                   href={`/news/${featured.slug}`}
-                  className="group block relative rounded-2xl overflow-hidden"
+                  className="group block relative rounded-2xl overflow-hidden w-full max-w-md sm:max-w-lg lg:max-w-none lg:w-[calc(100%+1.5rem)]"
                 >
                   <div className="absolute inset-0 z-0 opacity-25 pointer-events-none">
                     <FrameBorder

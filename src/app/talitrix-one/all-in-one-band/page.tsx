@@ -106,7 +106,7 @@ export default function AllInOneBandPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
         <div className="relative z-10 max-w-4xl">
           <h2 className="text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-6 sm:mb-8">
-            The wrist. The standard.
+            Dignity by Design
           </h2>
           <p className="text-white/70 text-lg sm:text-xl leading-relaxed mb-8 sm:mb-10 max-w-2xl">
             See the All-In-One Band in person — and how it integrates across the full
