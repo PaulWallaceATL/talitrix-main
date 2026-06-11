@@ -21,7 +21,7 @@ const Hero = () => {
           <StaggeredText
             as="h1"
             text={"One Connected System.\nInside and Outside the Walls."}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center justify-center leading-[1.1]"
+            className="text-[clamp(1.375rem,6vw,2.5rem)] sm:text-5xl md:text-6xl lg:text-7xl text-center justify-center leading-[1.1] whitespace-nowrap sm:whitespace-pre-wrap"
             segmentBy="words"
             duration={0.7}
             direction="bottom"
@@ -31,7 +31,7 @@ const Hero = () => {
         </div>
 
         <div className="max-w-72 relative z-20" id="hero-desc">
-          <p className="text-xl text-white/75">
+          <p className="whitespace-nowrap text-[clamp(0.875rem,4.6vw,1.25rem)] sm:text-xl text-white/75">
             The standard for modern supervision
           </p>
           <Link

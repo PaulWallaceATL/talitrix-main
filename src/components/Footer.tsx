@@ -238,7 +238,7 @@ const FooterLinks: FooterColumn[] = [
     title: "Platform",
     orderClass: "order-1 lg:order-none",
     links: [
-      { label: "Platform Overview", href: "/talitrix-one" },
+      { label: "TalitrixONE Overview", href: "/talitrix-one" },
       { label: "All-In-One Band", href: "/talitrix-one/all-in-one-band" },
       { label: "ONE Pre-Trial", href: "/talitrix-one/pretrial" },
       {
@@ -251,7 +251,7 @@ const FooterLinks: FooterColumn[] = [
     ],
   },
   {
-    title: "Use Cases",
+    title: "Who We Serve",
     orderClass: "order-3 lg:order-none",
     links: [
       { label: "Agencies", href: "/solutions/agencies" },
