@@ -63,21 +63,21 @@ const isChildActive = (
 const NAV_TREE: NavItem[] = [
   { label: "About", href: "/about" },
   {
-    label: "Platform",
+    label: "TalitrixONE",
     href: "/talitrix-one",
     stacked: true,
     children: [
       {
-        label: "Platform Overview",
+        label: "TalitrixONE Overview",
         href: "/talitrix-one",
         icon: "stack",
-        desc: "The unified hardware, software, and intelligence ecosystem.",
+        desc: "One connected ecosystem for every stage of supervision.",
       },
       {
         label: "All-In-One Band",
         href: "/talitrix-one/all-in-one-band",
         icon: "watch",
-        desc: "Monitoring inside and outside the walls.",
+        desc: "One band designed for supervision inside and outside the walls.",
         indent: true,
         tag: "Hardware",
       },
@@ -85,7 +85,7 @@ const NAV_TREE: NavItem[] = [
         label: "ONE Pre-Trial",
         href: "/talitrix-one/pretrial",
         icon: "route",
-        desc: "Pre-trial supervision in one connected system.",
+        desc: "Where monitoring and supervision begins.",
         indent: true,
         tag: "Module",
       },
@@ -93,7 +93,7 @@ const NAV_TREE: NavItem[] = [
         label: "ONE Jail Management System",
         href: "/talitrix-one/jail-management",
         icon: "facility",
-        desc: "The custody lifecycle on one connected system.",
+        desc: "The operational hub inside the walls.",
         indent: true,
         tag: "Module",
       },
@@ -101,7 +101,7 @@ const NAV_TREE: NavItem[] = [
         label: "ONE Probation",
         href: "/talitrix-one/probation",
         icon: "team",
-        desc: "End-to-end community supervision in a single platform.",
+        desc: "End-to-end community supervision in one connected platform.",
         indent: true,
         tag: "Module",
       },
@@ -109,7 +109,7 @@ const NAV_TREE: NavItem[] = [
         label: "Talitrix Score",
         href: "/talitrix-one/score",
         icon: "pulse",
-        desc: "Behavioral intelligence and defensible data.",
+        desc: "Data-driven insights designed to support better outcomes.",
         indent: true,
         tag: "Intelligence",
       },
@@ -138,16 +138,16 @@ const NAV_TREE: NavItem[] = [
 ];
 
 const MENU_CTAS: Record<string, MenuCta> = {
-  Platform: {
-    eyebrow: "See the platform in action",
+  TalitrixONE: {
+    eyebrow: "See the TalitrixONE platform in action",
     headline: "Tailored briefings for your agency.",
-    ctaLabel: "Contact Sales",
+    ctaLabel: "Talk to Our Team",
     ctaHref: "/contact",
   },
   "Who We Serve": {
-    eyebrow: "Find the right fit",
+    eyebrow: "See the TalitrixONE platform in action",
     headline: "Talk to our team about your operation.",
-    ctaLabel: "Contact Sales",
+    ctaLabel: "Talk to Our Team",
     ctaHref: "/contact",
   },
 };
