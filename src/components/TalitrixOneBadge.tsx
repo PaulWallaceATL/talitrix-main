@@ -5,7 +5,7 @@ import Image from "next/image";
  * each module is visually branded as part of the TalitrixONE ecosystem.
  */
 const TalitrixOneBadge = () => (
-  <div className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] backdrop-blur-md px-5 py-2.5 mb-6">
+  <div className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] backdrop-blur-md px-5 py-2.5">
     <Image
       src="/talitrixone-logo.png"
       alt="TalitrixONE"

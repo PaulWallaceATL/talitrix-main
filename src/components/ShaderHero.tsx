@@ -34,11 +34,19 @@ const ShaderHero = ({
           align === "center" ? "mx-auto text-center" : ""
         } ${contentClassName}`}
       >
-        {badge && <div>{badge}</div>}
-        {eyebrow && (
-          <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
-            {eyebrow}
-          </span>
+        {(badge || eyebrow) && (
+          <div
+            className={`flex flex-wrap items-center gap-x-4 gap-y-3 mb-6 ${
+              align === "center" ? "justify-center" : ""
+            }`}
+          >
+            {badge}
+            {eyebrow && (
+              <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary">
+                {eyebrow}
+              </span>
+            )}
+          </div>
         )}
         <div className="text-4xl sm:text-5xl md:text-7xl leading-[1.05] mb-6">
           {title}

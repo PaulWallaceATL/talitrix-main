@@ -8,7 +8,7 @@ const ExplodedSection = () => {
         className="w-full lg:h-screen pb-0 py-20 lg:pb-20 px-6 sm:px-12 lg:px-16 relative lg:overflow-hidden"
         id="exploded"
       >
-        <div className="lg:h-full flex lg:flex-col gap-10 justify-between flex-wrap">
+        <div className="lg:h-full hidden lg:flex lg:flex-col gap-10 justify-between flex-wrap">
           <h2
             className="text-3xl sm:text-4xl h-auto font-semibold max-w-120 relative z-20"
             id="explode-p"
@@ -32,15 +32,8 @@ const ExplodedSection = () => {
           <SectionBg />
         </div>
       </div>
-      <div className="mt-10 lg:hidden">
-        <Image
-          src={"/featue-render.png"}
-          alt="Talitrix One exploded view"
-          className="relative w-full z-20 mx-auto max-w-130"
-          width={800}
-          height={800}
-        />
-        <div className="flex flex-col gap-4 text-center items-center">
+      <div className="lg:hidden">
+        <div className="flex flex-col gap-4 text-center items-center px-6">
           <span className="text-xs uppercase tracking-[0.3em] text-primary">
             Built into the Band
           </span>
@@ -50,10 +43,20 @@ const ExplodedSection = () => {
               Human-centered design.
             </span>
           </h2>
+          <p className="text-lg leading-snug text-white/70 max-w-85 sm:max-w-96">
+            One connected system for Inside and Outside the Walls monitoring.
+          </p>
         </div>
+        <Image
+          src={"/featue-render.png"}
+          alt="Talitrix One exploded view"
+          className="relative w-full z-20 mx-auto max-w-130"
+          width={800}
+          height={800}
+        />
       </div>
       <div>
-        <InfoPaths className="lg:fixed lg:top-1/2 lg:left-1/2 lg:ml-6 lg:-translate-1/2 lg:opacity-0 z-20 relative lg:w-60 xl:w-80 2xl:w-100 lg:h-50 text-sm lg:pointer-events-none grid lg:block grid-cols-1 sm:grid-cols-2 gap-4 mx-auto my-14 lg:my-0 px-6" />
+        <InfoPaths className="lg:fixed lg:top-1/2 lg:left-1/2 lg:ml-6 lg:-translate-1/2 lg:opacity-0 z-20 relative lg:w-60 xl:w-80 2xl:w-100 lg:h-50 text-sm lg:pointer-events-none grid lg:block grid-cols-1 sm:grid-cols-2 gap-4 mx-auto mt-0 mb-14 lg:my-0 px-6" />
       </div>
     </div>
   );
