@@ -1,6 +1,8 @@
 import React from "react";
 
 type ShaderHeroProps = {
+  /** Small graphic (e.g. TalitrixONE logo pill) shown above the eyebrow */
+  badge?: React.ReactNode;
   eyebrow?: string;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -12,6 +14,7 @@ type ShaderHeroProps = {
 };
 
 const ShaderHero = ({
+  badge,
   eyebrow,
   title,
   subtitle,
@@ -31,6 +34,7 @@ const ShaderHero = ({
           align === "center" ? "mx-auto text-center" : ""
         } ${contentClassName}`}
       >
+        {badge && <div>{badge}</div>}
         {eyebrow && (
           <span className="inline-block text-xs uppercase tracking-[0.3em] text-primary mb-6">
             {eyebrow}

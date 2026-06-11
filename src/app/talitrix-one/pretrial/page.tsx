@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
+import TalitrixOneBadge from "@/components/TalitrixOneBadge";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import AuroraBlur from "@/components/react-bits/aurora-blur";
 import CapabilitiesScroller from "@/components/CapabilitiesScroller";
@@ -109,6 +110,7 @@ export default function PretrialPage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
+        badge={<TalitrixOneBadge />}
         eyebrow="ONE Pre-Trial"
         title={
           <StaggeredText

@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
+import TalitrixOneBadge from "@/components/TalitrixOneBadge";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import HalftoneWave from "@/components/react-bits/halftone-wave";
 import SimpleGraph from "@/components/react-bits/simple-graph";
@@ -124,6 +125,7 @@ export default function TalitrixScorePage() {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
+        badge={<TalitrixOneBadge />}
         eyebrow="The Talitrix Score"
         title={
           <StaggeredText

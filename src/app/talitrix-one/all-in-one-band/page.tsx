@@ -4,6 +4,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import ShaderHero from "@/components/ShaderHero";
+import TalitrixOneBadge from "@/components/TalitrixOneBadge";
 import StaggeredText from "@/components/react-bits/staggered-text";
 import BandSupervisionSection from "@/components/BandSupervisionSection";
 import PlatformContinuitySection from "@/components/PlatformContinuitySection";
@@ -24,6 +25,7 @@ export default function AllInOneBandPage() {
     <main className="bg-background text-foreground min-h-screen">
       <ShaderHero
         contentClassName="lg:max-w-[58%] xl:max-w-[56%]"
+        badge={<TalitrixOneBadge />}
         eyebrow="The Hardware"
         title={
           <StaggeredText
