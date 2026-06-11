@@ -480,8 +480,8 @@ const NavBar = () => {
             </div>
 
             {activeCta && (
-              <div className="border-t border-white/10 bg-white/2 px-8 py-5 flex flex-wrap items-center justify-between gap-4">
-                <div className="flex flex-col min-w-0">
+              <div className="border-t border-white/10 bg-white/2 px-8 py-5 flex items-center justify-between gap-4">
+                <div className="flex flex-col min-w-0 shrink">
                   <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
                     {activeCta.eyebrow}
                   </span>
@@ -492,7 +492,7 @@ const NavBar = () => {
                 <Link
                   href={activeCta.ctaHref}
                   onClick={() => setOpenMenu(null)}
-                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm bg-primary/15 hover:bg-primary/30 border border-primary/40 text-primary transition-colors whitespace-nowrap"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full px-5 py-2.5 text-sm bg-primary/15 hover:bg-primary/30 border border-primary/40 text-primary transition-colors whitespace-nowrap"
                 >
                   {activeCta.ctaLabel}
                   <span aria-hidden>→</span>
