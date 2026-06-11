@@ -63,7 +63,7 @@ const isChildActive = (
 const NAV_TREE: NavItem[] = [
   { label: "About", href: "/about" },
   {
-    label: "TalitrixONE",
+    label: "Platform",
     href: "/talitrix-one",
     stacked: true,
     children: [
@@ -138,7 +138,7 @@ const NAV_TREE: NavItem[] = [
 ];
 
 const MENU_CTAS: Record<string, MenuCta> = {
-  TalitrixONE: {
+  Platform: {
     eyebrow: "See the TalitrixONE platform in action",
     headline: "Tailored briefings for your agency.",
     ctaLabel: "Talk to Our Team",
