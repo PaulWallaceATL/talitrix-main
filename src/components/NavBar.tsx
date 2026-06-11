@@ -168,8 +168,10 @@ const NavBar = () => {
     null,
   );
   const [lastPathname, setLastPathname] = useState(pathname);
+  const [menuLeft, setMenuLeft] = useState<number | null>(null);
 
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const triggerRefs = useRef<Record<string, HTMLElement | null>>({});
 
   if (pathname !== lastPathname) {
     setLastPathname(pathname);
@@ -264,13 +266,27 @@ const NavBar = () => {
     }, 200);
   };
 
+  // Align the dropdown's left edge with its trigger, clamped so the
+  // panel never overflows the right edge of the viewport.
+  const measureMenuLeft = (label: string) => {
+    const trigger = triggerRefs.current[label];
+    if (!trigger || typeof window === "undefined") return;
+    const item = NAV_TREE.find((i) => i.label === label);
+    const vw = window.innerWidth;
+    const panelWidth = Math.min(0.94 * vw, item?.stacked ? 600 : 1080);
+    const rawLeft = trigger.getBoundingClientRect().left;
+    setMenuLeft(Math.max(16, Math.min(rawLeft, vw - panelWidth - 16)));
+  };
+
   const onTriggerEnter = (label: string) => {
     cancelClose();
+    measureMenuLeft(label);
     setOpenMenu(label);
   };
 
   const onTriggerClick = (label: string) => {
     cancelClose();
+    measureMenuLeft(label);
     setOpenMenu((cur) => (cur === label ? null : label));
   };
 
@@ -323,6 +339,9 @@ const NavBar = () => {
               return (
                 <div
                   key={item.label}
+                  ref={(el) => {
+                    triggerRefs.current[item.label] = el;
+                  }}
                   className="h-full flex items-center"
                   onMouseEnter={() => onTriggerEnter(item.label)}
                 >
@@ -418,9 +437,10 @@ const NavBar = () => {
       {activeMenuItem && (
         <div
           id={`mega-${activeMenuItem.label.toLowerCase()}`}
-          className={`hidden lg:block fixed left-1/2 -translate-x-1/2 top-24 z-50 transition-transform duration-300 ${
+          className={`hidden lg:block fixed top-24 z-50 transition-transform duration-300 ${
             headerHidden ? "translate-y-[-200%]" : ""
-          }`}
+          } ${menuLeft === null ? "left-1/2 -translate-x-1/2" : ""}`}
+          style={menuLeft === null ? undefined : { left: menuLeft }}
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
           role="menu"
