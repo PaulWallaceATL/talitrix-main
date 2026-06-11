@@ -26,6 +26,10 @@ type NavItem = {
   menuEyebrow?: string;
   /** Render the mega menu items in a single stacked column */
   stacked?: boolean;
+  /** Indent this item under the entry above it (stacked menus only) */
+  indent?: boolean;
+  /** Small category tag shown next to the label, e.g. Hardware / Module */
+  tag?: string;
   children?: NavItem[];
 };
 
@@ -61,6 +65,7 @@ const NAV_TREE: NavItem[] = [
   {
     label: "Platform",
     href: "/talitrix-one",
+    stacked: true,
     children: [
       {
         label: "Platform Overview",
@@ -73,30 +78,40 @@ const NAV_TREE: NavItem[] = [
         href: "/talitrix-one/all-in-one-band",
         icon: "watch",
         desc: "Monitoring inside and outside the walls.",
+        indent: true,
+        tag: "Hardware",
       },
       {
         label: "ONE Pre-Trial",
         href: "/talitrix-one/pretrial",
         icon: "route",
         desc: "Pre-trial supervision in one connected system.",
+        indent: true,
+        tag: "Module",
       },
       {
         label: "ONE Jail Management System",
         href: "/talitrix-one/jail-management",
         icon: "facility",
         desc: "The custody lifecycle on one connected system.",
+        indent: true,
+        tag: "Module",
       },
       {
         label: "ONE Probation",
         href: "/talitrix-one/probation",
         icon: "team",
         desc: "End-to-end community supervision in a single platform.",
+        indent: true,
+        tag: "Module",
       },
       {
         label: "Talitrix Score",
         href: "/talitrix-one/score",
         icon: "pulse",
         desc: "Behavioral intelligence and defensible data.",
+        indent: true,
+        tag: "Intelligence",
       },
     ],
   },
@@ -130,7 +145,7 @@ const MENU_CTAS: Record<string, MenuCta> = {
     ctaHref: "/contact",
   },
   "Who We Serve": {
-    eyebrow: "Find the right fit for your role",
+    eyebrow: "Find the right fit",
     headline: "Talk to our team about your operation.",
     ctaLabel: "Contact Sales",
     ctaHref: "/contact",
@@ -416,7 +431,7 @@ const NavBar = () => {
           <div
             className={`relative ${
               activeMenuItem.stacked
-                ? "w-[min(94vw,520px)]"
+                ? "w-[min(94vw,600px)]"
                 : "w-[min(94vw,1080px)]"
             } rounded-b-2xl border border-white/15 bg-black/50 backdrop-blur-2xl overflow-hidden`}
             style={{
@@ -448,8 +463,8 @@ const NavBar = () => {
                     onClick={() => setOpenMenu(null)}
                     role="menuitem"
                     className={`group flex items-start gap-4 p-4 rounded-xl transition-colors ${
-                      childActive ? "bg-primary/10" : "hover:bg-white/4"
-                    }`}
+                      child.indent ? "ml-7" : ""
+                    } ${childActive ? "bg-primary/10" : "hover:bg-white/4"}`}
                   >
                     <span
                       className={`shrink-0 size-10 rounded-xl flex items-center justify-center border transition-colors ${
@@ -461,12 +476,19 @@ const NavBar = () => {
                       {child.icon && <NavIcon name={child.icon} />}
                     </span>
                     <span className="flex flex-col gap-0.5 min-w-0">
-                      <span
-                        className={`text-base leading-snug ${
-                          childActive ? "text-primary" : "text-white"
-                        }`}
-                      >
-                        {child.label}
+                      <span className="flex items-center gap-2">
+                        <span
+                          className={`text-base leading-snug ${
+                            childActive ? "text-primary" : "text-white"
+                          }`}
+                        >
+                          {child.label}
+                        </span>
+                        {child.tag && (
+                          <span className="shrink-0 text-[10px] uppercase tracking-[0.15em] text-primary/80 border border-primary/30 bg-primary/[0.08] rounded-full px-2 py-0.5">
+                            {child.tag}
+                          </span>
+                        )}
                       </span>
                       {child.desc && (
                         <span className="text-sm text-white/55 leading-snug">
@@ -564,6 +586,8 @@ const NavBar = () => {
                                 href={child.href}
                                 onClick={() => setDrawerOpen(false)}
                                 className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
+                                  child.indent ? "ml-5" : ""
+                                } ${
                                   childActive
                                     ? "bg-primary/10"
                                     : "hover:bg-white/4"
@@ -581,14 +605,21 @@ const NavBar = () => {
                                   )}
                                 </span>
                                 <span className="flex flex-col gap-0.5 min-w-0">
-                                  <span
-                                    className={`text-base leading-snug ${
-                                      childActive
-                                        ? "text-primary"
-                                        : "text-white"
-                                    }`}
-                                  >
-                                    {child.label}
+                                  <span className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                                    <span
+                                      className={`text-base leading-snug ${
+                                        childActive
+                                          ? "text-primary"
+                                          : "text-white"
+                                      }`}
+                                    >
+                                      {child.label}
+                                    </span>
+                                    {child.tag && (
+                                      <span className="shrink-0 text-[10px] uppercase tracking-[0.15em] text-primary/80 border border-primary/30 bg-primary/[0.08] rounded-full px-2 py-0.5">
+                                        {child.tag}
+                                      </span>
+                                    )}
                                   </span>
                                   {child.desc && (
                                     <span className="text-xs text-white/55 leading-snug">
