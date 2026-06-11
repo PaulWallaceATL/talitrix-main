@@ -55,6 +55,16 @@ Add the following in **Vercel → Project → Settings → Environment Variables
 | `OPENAI_MODEL`      | _Optional_ — defaults to `gpt-4o`                                          | Text model. Override to `gpt-4o-mini` for cheaper drafts, or a newer model when one ships.                                                              |
 | `OPENAI_IMAGE_MODEL`| _Optional_ — defaults to `gpt-image-1`                                     | Image model used by the one-click auto-generator. Falls back to `dall-e-3` if you set it that way.                                                      |
 
+### Required for lead email notifications (Contact + Get Started forms)
+
+| Name               | Value / notes                                                                 |
+| ------------------ | ----------------------------------------------------------------------------- |
+| `RESEND_API_KEY`   | Resend → API Keys. Also accepts `RESEND` if that is what you named it in Vercel. |
+| `RESEND_FROM`      | _Optional_ — verified sender, e.g. `Talitrix Website <notifications@talitrix.com>`. Defaults to `notifications@talitrix.com`. |
+| `LEADS_TO_EMAIL`   | _Optional_ — defaults to `bdleads@talitrix.com`.                             |
+
+Submissions are always saved to Supabase first; Resend delivers a copy to the leads inbox. If email fails, the form still succeeds and the error is logged in Vercel.
+
 ### Strongly recommended for SEO
 
 | Name                   | Value                                                              | Why                                                                                                                                                                  |

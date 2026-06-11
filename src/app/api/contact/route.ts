@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sendLeadEmail } from "@/lib/lead-email";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export const runtime = "nodejs";
@@ -69,6 +70,26 @@ export async function POST(req: Request) {
         { status: 500 },
       );
     }
+
+    try {
+      await sendLeadEmail({
+        kind: "briefing",
+        type,
+        firstName,
+        lastName,
+        email,
+        title,
+        agency,
+        agencyType,
+        phone: str(body.phone, 60),
+        caseload: str(body.caseload, 200),
+        interest,
+        timeline,
+        message: str(body.message, 5000),
+      });
+    } catch (emailError) {
+      console.error("briefing lead email failed", emailError);
+    }
   } else {
     const message = str(body.message, 5000);
     if (!message) {
@@ -78,12 +99,15 @@ export async function POST(req: Request) {
       );
     }
 
+    const phone = str(body.phone, 60);
+    const organization = str(body.organization, 200);
+
     const { error } = await sb.from("contact_submissions").insert({
       first_name: firstName,
       last_name: lastName,
       email,
-      phone: str(body.phone, 60),
-      organization: str(body.organization, 200),
+      phone,
+      organization,
       inquiry_type: type,
       message,
     });
@@ -94,6 +118,21 @@ export async function POST(req: Request) {
         { error: "Could not save submission." },
         { status: 500 },
       );
+    }
+
+    try {
+      await sendLeadEmail({
+        kind: "contact",
+        type,
+        firstName,
+        lastName,
+        email,
+        phone,
+        organization,
+        message,
+      });
+    } catch (emailError) {
+      console.error("contact lead email failed", emailError);
     }
   }
 
