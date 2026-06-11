@@ -139,13 +139,13 @@ const NAV_TREE: NavItem[] = [
 
 const MENU_CTAS: Record<string, MenuCta> = {
   Platform: {
-    eyebrow: "See the TalitrixONE platform in action",
+    eyebrow: "See the Platform In Action",
     headline: "Tailored briefings for your agency.",
     ctaLabel: "Talk to Our Team",
     ctaHref: "/contact",
   },
   "Who We Serve": {
-    eyebrow: "See the TalitrixONE platform in action",
+    eyebrow: "See the Platform In Action",
     headline: "Talk to our team about your operation.",
     ctaLabel: "Talk to Our Team",
     ctaHref: "/contact",
