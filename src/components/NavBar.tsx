@@ -24,6 +24,8 @@ type NavItem = {
   desc?: string;
   icon?: IconName;
   menuEyebrow?: string;
+  /** Render the mega menu items in a single stacked column */
+  stacked?: boolean;
   children?: NavItem[];
 };
 
@@ -99,8 +101,9 @@ const NAV_TREE: NavItem[] = [
     ],
   },
   {
-    label: "Use Cases",
+    label: "Who We Serve",
     href: "/solutions/agencies",
+    stacked: true,
     children: [
       {
         label: "Agencies",
@@ -126,7 +129,7 @@ const MENU_CTAS: Record<string, MenuCta> = {
     ctaLabel: "Contact Sales",
     ctaHref: "/contact",
   },
-  "Use Cases": {
+  "Who We Serve": {
     eyebrow: "Find the right fit for your role",
     headline: "Talk to our team about your operation.",
     ctaLabel: "Contact Sales",
@@ -411,7 +414,11 @@ const NavBar = () => {
           <div className="absolute -top-3 left-0 right-0 h-3" aria-hidden />
 
           <div
-            className="relative w-[min(94vw,1080px)] rounded-b-2xl border border-white/15 bg-black/50 backdrop-blur-2xl overflow-hidden"
+            className={`relative ${
+              activeMenuItem.stacked
+                ? "w-[min(94vw,520px)]"
+                : "w-[min(94vw,1080px)]"
+            } rounded-b-2xl border border-white/15 bg-black/50 backdrop-blur-2xl overflow-hidden`}
             style={{
               boxShadow:
                 "0 30px 80px rgba(0, 0, 0, 0.6), 0 8px 30px rgba(248, 122, 19, 0.08)",
@@ -423,7 +430,11 @@ const NavBar = () => {
               </span>
             </div>
 
-            <div className="px-4 pb-3 grid md:grid-cols-2 gap-x-4 gap-y-1">
+            <div
+              className={`px-4 pb-3 grid gap-x-4 gap-y-1 ${
+                activeMenuItem.stacked ? "grid-cols-1" : "md:grid-cols-2"
+              }`}
+            >
               {activeMenuItem.children!.map((child) => {
                 const childActive = isChildActive(
                   child,
