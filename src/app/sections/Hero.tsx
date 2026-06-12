@@ -16,12 +16,15 @@ const Hero = () => {
         sizes="100vw"
         className="w-full h-full absolute top-0 left-0 object-cover"
       />
-      <div className="px-2 sm:px-6 text-center max-h-190 pt-16 sm:pt-20 pb-12 sm:pb-16 mt-16 sm:mt-24 flex flex-col gap-16 sm:gap-24 lg:gap-36 justify-between h-full items-center w-full">
-        <div id="title-h1" className="relative z-1 mt-20 sm:mt-0">
+      <div className="relative px-0 sm:px-6 text-center max-h-190 pt-16 sm:pt-20 pb-12 sm:pb-16 mt-16 sm:mt-24 flex flex-col justify-end sm:justify-between h-full items-center w-full">
+        <div
+          id="title-h1"
+          className="absolute left-1/2 z-20 w-[90vw] max-w-[90vw] -translate-x-1/2 top-[23vh] sm:static sm:w-auto sm:max-w-none sm:translate-x-0 sm:top-auto"
+        >
           <StaggeredText
             as="h1"
             text={"One Connected System.\nInside and Outside the Walls."}
-            className="text-[clamp(1.5rem,7.2vw,2.75rem)] sm:text-5xl md:text-6xl lg:text-7xl text-center justify-center leading-[1.1] whitespace-nowrap sm:whitespace-pre-wrap"
+            className="w-full text-[clamp(1.75rem,9.4vw,2.85rem)] sm:text-5xl md:text-6xl lg:text-7xl text-center justify-center leading-[1.08] whitespace-nowrap sm:whitespace-pre-wrap"
             segmentBy="words"
             duration={0.7}
             direction="bottom"
