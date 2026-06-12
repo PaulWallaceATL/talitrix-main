@@ -49,7 +49,8 @@ const WatchScene = () => {
       const dw = iw * scale;
       const dh = ih * scale;
       const dx = (cw - dw) / 2;
-      const dy = (ch - dh) / 2;
+      const dy =
+        cw < 768 ? (ch - dh) / 2 + ch * 0.07 : (ch - dh) / 2;
 
       ctx.clearRect(0, 0, cw, ch);
       ctx.drawImage(img, dx, dy, dw, dh);
