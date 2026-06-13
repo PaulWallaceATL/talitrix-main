@@ -19,17 +19,23 @@ const FooterReveal = () => {
     // collapses to auto height and the footer just follows <main> in
     // normal flow — no scroll-driven translate, no extra spacer pull.
     gsap.matchMedia().add("(min-width: 768px)", () => {
+      // Lift is a fraction of the *viewport* height, not the footer's own
+      // height. A footer taller than the viewport would otherwise need more
+      // scroll travel than exists to bring its top back into view, clipping
+      // the top rows on short viewports. Keeping the lift below the viewport
+      // height guarantees every row is reachable as you scroll.
       gsap.fromTo(
         wrapRef.current,
-        { y: "-80%" },
+        { y: () => -window.innerHeight * 0.4 },
         {
           y: 0,
           ease: "none",
           scrollTrigger: {
             trigger: spacerRef.current,
             start: "top bottom",
-            end: "top top",
+            end: "bottom bottom",
             scrub: true,
+            invalidateOnRefresh: true,
           },
         },
       );
@@ -37,7 +43,7 @@ const FooterReveal = () => {
   });
 
   return (
-    <div ref={spacerRef} className="">
+    <div ref={spacerRef}>
       <div
         ref={wrapRef}
         className="bottom-0 left-0 right-0 z-0 md:will-change-transform"

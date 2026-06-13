@@ -4,7 +4,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="relative bg-black overflow-hidden">
+    <footer className="relative bg-black overflow-hidden md:max-h-screen">
       <div className="px-4 sm:px-8 lg:px-16 py-16 flex flex-col gap-16">
         <div className="grid grid-cols-2 w-full gap-x-8 sm:gap-x-16 gap-y-16 lg:flex lg:justify-between lg:flex-wrap">
           <div className="col-span-2 lg:col-span-1 flex flex-col justify-between gap-4 text-xl">
