@@ -109,7 +109,7 @@ const PlatformSection = () => {
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
       <div className="w-full lg:h-screen relative overflow-hidden">
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:pt-32 lg:pb-40 relative z-20">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:pt-32 lg:pb-40 relative z-0">
           <h2
             className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}
