@@ -27,9 +27,9 @@ const WatchScene = () => {
     let images: HTMLImageElement[] = [];
     const obj = { frame: 0 };
     let revealed = false;
-    // Lock the height used for scaling so the watch keeps a fixed pixel
-    // size when the viewport height changes (mobile URL bar, devtools, etc.).
-    const scaleHeight = window.innerHeight;
+    // Fixed render height so the watch is a constant size and never scales
+    // with the viewport height.
+    const scaleHeight = 850;
     const reveal = () => {
       if (revealed) return;
       revealed = true;
@@ -49,8 +49,7 @@ const WatchScene = () => {
       const dw = iw * scale;
       const dh = ih * scale;
       const dx = (cw - dw) / 2;
-      const dy =
-        cw < 768 ? (ch - dh) / 2 + ch * 0.07 : (ch - dh) / 2;
+      const dy = cw < 768 ? (ch - dh) / 2 + ch * 0.07 : (ch - dh) / 2;
 
       ctx.clearRect(0, 0, cw, ch);
       ctx.drawImage(img, dx, dy, dw, dh);
