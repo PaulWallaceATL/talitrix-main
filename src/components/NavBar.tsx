@@ -33,6 +33,17 @@ type NavItem = {
   children?: NavItem[];
 };
 
+type NavMenuSection = {
+  eyebrow: string;
+  column: "left" | "right";
+  items: NavItem[];
+};
+
+type NavMenuItem = NavItem & {
+  overview?: NavItem;
+  sections?: NavMenuSection[];
+};
+
 type MenuCta = {
   eyebrow: string;
   headline: string;
@@ -60,58 +71,85 @@ const isChildActive = (
   return !moreSpecific;
 };
 
-const NAV_TREE: NavItem[] = [
+const getMenuLinks = (item: NavMenuItem): NavItem[] => {
+  if (item.sections) {
+    const links = item.overview ? [item.overview] : [];
+    return links.concat(item.sections.flatMap((section) => section.items));
+  }
+  return item.children ?? [];
+};
+
+const NAV_TREE: NavMenuItem[] = [
   { label: "About", href: "/about" },
   {
     label: "Platform",
     href: "/talitrix-one",
-    stacked: true,
-    children: [
+    overview: {
+      label: "TalitrixONE Overview",
+      href: "/talitrix-one",
+      icon: "stack",
+      desc: "One connected ecosystem supporting ITW and OTW electronic monitoring and community supervision.",
+    },
+    sections: [
       {
-        label: "TalitrixONE Overview",
-        href: "/talitrix-one",
-        icon: "stack",
-        desc: "One connected ecosystem for every stage of supervision.",
+        eyebrow: "Inside the Walls",
+        column: "left",
+        items: [
+          {
+            label: "ONE Jail Management System",
+            href: "/talitrix-one/jail-management",
+            icon: "facility",
+            desc: "Facility operations and management",
+            tag: "ITW",
+          },
+          {
+            label: "Individual Monitoring",
+            href: "/talitrix-one/all-in-one-band",
+            icon: "watch",
+            desc: "Inside-the-walls monitoring with the Talitrix All-In-One band.",
+            tag: "Hardware",
+          },
+        ],
       },
       {
-        label: "All-In-One Band",
-        href: "/talitrix-one/all-in-one-band",
-        icon: "watch",
-        desc: "One band designed for supervision inside and outside the walls.",
-        indent: true,
-        tag: "Hardware",
+        eyebrow: "Outside the Walls",
+        column: "left",
+        items: [
+          {
+            label: "ONE Pre-Trial",
+            href: "/talitrix-one/pretrial",
+            icon: "route",
+            desc: "Where electronic monitoring and supervision begins.",
+            tag: "OTW",
+          },
+          {
+            label: "ONE Probation",
+            href: "/talitrix-one/probation",
+            icon: "team",
+            desc: "End-to-end electronic monitoring solutions for community supervision.",
+            tag: "OTW",
+          },
+        ],
       },
       {
-        label: "ONE Pre-Trial",
-        href: "/talitrix-one/pretrial",
-        icon: "route",
-        desc: "Where monitoring and supervision begins.",
-        indent: true,
-        tag: "Module",
-      },
-      {
-        label: "ONE Jail Management System",
-        href: "/talitrix-one/jail-management",
-        icon: "facility",
-        desc: "The operational hub inside the walls.",
-        indent: true,
-        tag: "Module",
-      },
-      {
-        label: "ONE Probation",
-        href: "/talitrix-one/probation",
-        icon: "team",
-        desc: "End-to-end community supervision in one connected platform.",
-        indent: true,
-        tag: "Module",
-      },
-      {
-        label: "Talitrix Score",
-        href: "/talitrix-one/score",
-        icon: "pulse",
-        desc: "Data-driven insights designed to support better outcomes.",
-        indent: true,
-        tag: "Intelligence",
+        eyebrow: "Hardware + Intelligence",
+        column: "right",
+        items: [
+          {
+            label: "All-In-One Band",
+            href: "/talitrix-one/all-in-one-band",
+            icon: "watch",
+            desc: "One band designed for ITW and OTW electronic monitoring and supervision.",
+            tag: "Hardware",
+          },
+          {
+            label: "Talitrix Score",
+            href: "/talitrix-one/score",
+            icon: "pulse",
+            desc: "Data-driven insights designed to support better outcomes.",
+            tag: "Intelligence",
+          },
+        ],
       },
     ],
   },
@@ -139,7 +177,7 @@ const NAV_TREE: NavItem[] = [
 
 const MENU_CTAS: Record<string, MenuCta> = {
   Platform: {
-    eyebrow: "See the Platform In Action",
+    eyebrow: "See TalitrixONE In Action",
     headline: "Tailored briefings for your agency.",
     ctaLabel: "Talk to Our Team",
     ctaHref: "/contact",
@@ -273,7 +311,10 @@ const NavBar = () => {
     if (!trigger || typeof window === "undefined") return;
     const item = NAV_TREE.find((i) => i.label === label);
     const vw = window.innerWidth;
-    const panelWidth = Math.min(0.94 * vw, item?.stacked ? 600 : 1080);
+    const panelWidth = Math.min(
+      0.94 * vw,
+      item?.sections ? 1080 : item?.stacked ? 600 : 1080,
+    );
     const rawLeft = trigger.getBoundingClientRect().left;
     setMenuLeft(Math.max(16, Math.min(rawLeft, vw - panelWidth - 16)));
   };
@@ -290,15 +331,16 @@ const NavBar = () => {
     setOpenMenu((cur) => (cur === label ? null : label));
   };
 
-  const isPathInGroup = (item: NavItem) => {
-    if (!item.children) return pathname === item.href;
-    return item.children.some(
+  const isPathInGroup = (item: NavMenuItem) => {
+    const links = getMenuLinks(item);
+    if (links.length === 0) return pathname === item.href;
+    return links.some(
       (c) => pathname === c.href || pathname?.startsWith(`${c.href}/`),
     );
   };
 
   const activeMenuItem = NAV_TREE.find(
-    (i) => i.label === openMenu && i.children,
+    (i) => i.label === openMenu && (i.children || i.sections),
   );
   const activeCta = activeMenuItem ? MENU_CTAS[activeMenuItem.label] : null;
 
@@ -335,7 +377,7 @@ const NavBar = () => {
           {NAV_TREE.map((item) => {
             const isActive = isPathInGroup(item);
             const isOpen = openMenu === item.label;
-            if (item.children) {
+            if (item.children || item.sections) {
               return (
                 <div
                   key={item.label}
@@ -465,81 +507,35 @@ const NavBar = () => {
               </span>
             </div>
 
-            <div
-              className={`px-4 pb-3 grid gap-x-4 gap-y-1 ${
-                activeMenuItem.stacked ? "grid-cols-1" : "md:grid-cols-2"
-              }`}
-            >
-              {activeMenuItem.children!.map((child) => {
-                const childActive = isChildActive(
-                  child,
-                  activeMenuItem.children!,
-                  pathname,
-                );
-                return (
-                  <Link
-                    key={child.href}
-                    href={child.href}
-                    onClick={() => setOpenMenu(null)}
-                    role="menuitem"
-                    className={`group flex items-start gap-4 p-4 rounded-xl transition-colors ${
-                      child.indent ? "ml-7" : ""
-                    } ${childActive ? "bg-primary/10" : "hover:bg-white/4"}`}
-                  >
-                    <span
-                      className={`shrink-0 size-10 rounded-xl flex items-center justify-center border transition-colors ${
-                        childActive
-                          ? "bg-primary/20 border-primary/50 text-primary"
-                          : "bg-primary/10 border-primary/25 text-primary group-hover:bg-primary/15 group-hover:border-primary/40"
-                      }`}
-                    >
-                      {child.icon && <NavIcon name={child.icon} />}
-                    </span>
-                    <span className="flex flex-col gap-0.5 min-w-0">
-                      <span className="flex items-center gap-2">
-                        <span
-                          className={`text-base leading-snug ${
-                            childActive ? "text-primary" : "text-white"
-                          }`}
-                        >
-                          {child.label}
-                        </span>
-                        {child.tag && (
-                          <span className="shrink-0 text-[10px] uppercase tracking-[0.15em] text-primary/80 border border-primary/30 bg-primary/[0.08] rounded-full px-2 py-0.5">
-                            {child.tag}
-                          </span>
-                        )}
-                      </span>
-                      {child.desc && (
-                        <span className="text-sm text-white/55 leading-snug">
-                          {child.desc}
-                        </span>
-                      )}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-
-            {activeCta && (
-              <div className="border-t border-white/10 bg-white/2 px-8 py-5 flex items-center justify-between gap-4">
-                <div className="flex flex-col min-w-0 shrink">
-                  <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
-                    {activeCta.eyebrow}
-                  </span>
-                  <span className="text-sm text-white/85 mt-1">
-                    {activeCta.headline}
-                  </span>
-                </div>
-                <Link
-                  href={activeCta.ctaHref}
-                  onClick={() => setOpenMenu(null)}
-                  className="inline-flex shrink-0 items-center gap-2 rounded-full px-5 py-2.5 text-sm bg-primary/15 hover:bg-primary/30 border border-primary/40 text-primary transition-colors whitespace-nowrap"
+            {activeMenuItem.sections ? (
+              <PlatformMegaMenu
+                item={activeMenuItem}
+                pathname={pathname}
+                cta={activeCta}
+                onNavigate={() => setOpenMenu(null)}
+              />
+            ) : (
+              <>
+                <div
+                  className={`px-4 pb-3 grid gap-x-4 gap-y-1 ${
+                    activeMenuItem.stacked ? "grid-cols-1" : "md:grid-cols-2"
+                  }`}
                 >
-                  {activeCta.ctaLabel}
-                  <span aria-hidden>→</span>
-                </Link>
-              </div>
+                  {activeMenuItem.children!.map((child) => (
+                    <MenuLink
+                      key={`${child.href}-${child.label}`}
+                      child={child}
+                      siblings={activeMenuItem.children!}
+                      pathname={pathname}
+                      onNavigate={() => setOpenMenu(null)}
+                    />
+                  ))}
+                </div>
+
+                {activeCta && (
+                  <MenuCtaFooter cta={activeCta} onNavigate={() => setOpenMenu(null)} />
+                )}
+              </>
             )}
           </div>
         </div>
@@ -566,7 +562,7 @@ const NavBar = () => {
         >
           <nav className="flex flex-col">
             {NAV_TREE.map((item) => {
-              if (item.children) {
+              if (item.children || item.sections) {
                 const sectionOpen = openMobileSection === item.label;
                 const groupActive = isPathInGroup(item);
                 const cta = MENU_CTAS[item.label];
@@ -594,62 +590,49 @@ const NavBar = () => {
                     >
                       <div className="overflow-hidden">
                         <div className="flex flex-col px-3 pb-4 gap-1">
-                          {item.children.map((child) => {
-                            const childActive = isChildActive(
-                              child,
-                              item.children!,
-                              pathname,
-                            );
-                            return (
-                              <Link
-                                key={child.href}
-                                href={child.href}
-                                onClick={() => setDrawerOpen(false)}
-                                className={`flex items-start gap-3 p-3 rounded-xl transition-colors ${
-                                  child.indent ? "ml-5" : ""
-                                } ${
-                                  childActive
-                                    ? "bg-primary/10"
-                                    : "hover:bg-white/4"
-                                }`}
-                              >
-                                <span
-                                  className={`shrink-0 size-9 rounded-lg flex items-center justify-center border ${
-                                    childActive
-                                      ? "bg-primary/20 border-primary/50 text-primary"
-                                      : "bg-primary/10 border-primary/25 text-primary"
-                                  }`}
-                                >
-                                  {child.icon && (
-                                    <NavIcon name={child.icon} size={18} />
-                                  )}
-                                </span>
-                                <span className="flex flex-col gap-0.5 min-w-0">
-                                  <span className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                                    <span
-                                      className={`text-base leading-snug ${
-                                        childActive
-                                          ? "text-primary"
-                                          : "text-white"
-                                      }`}
-                                    >
-                                      {child.label}
-                                    </span>
-                                    {child.tag && (
-                                      <span className="shrink-0 text-[10px] uppercase tracking-[0.15em] text-primary/80 border border-primary/30 bg-primary/[0.08] rounded-full px-2 py-0.5">
-                                        {child.tag}
-                                      </span>
-                                    )}
-                                  </span>
-                                  {child.desc && (
-                                    <span className="text-xs text-white/55 leading-snug">
-                                      {child.desc}
-                                    </span>
-                                  )}
-                                </span>
-                              </Link>
-                            );
-                          })}
+                          {item.sections ? (
+                            <>
+                              {item.overview && (
+                                <MenuLink
+                                  child={item.overview}
+                                  siblings={getMenuLinks(item)}
+                                  pathname={pathname}
+                                  onNavigate={() => setDrawerOpen(false)}
+                                  compact
+                                />
+                              )}
+                              {item.sections.map((section) => (
+                                <div key={section.eyebrow} className="mt-3">
+                                  <p className="px-3 pb-2 text-[11px] uppercase tracking-[0.25em] text-primary">
+                                    {section.eyebrow}
+                                  </p>
+                                  <div className="flex flex-col gap-1">
+                                    {section.items.map((child) => (
+                                      <MenuLink
+                                        key={`${child.href}-${child.label}`}
+                                        child={child}
+                                        siblings={getMenuLinks(item)}
+                                        pathname={pathname}
+                                        onNavigate={() => setDrawerOpen(false)}
+                                        compact
+                                      />
+                                    ))}
+                                  </div>
+                                </div>
+                              ))}
+                            </>
+                          ) : (
+                            item.children!.map((child) => (
+                              <MenuLink
+                                key={`${child.href}-${child.label}`}
+                                child={child}
+                                siblings={item.children!}
+                                pathname={pathname}
+                                onNavigate={() => setDrawerOpen(false)}
+                                compact
+                              />
+                            ))
+                          )}
 
                           {cta && (
                             <Link
@@ -808,6 +791,200 @@ const BurgerIcon = ({ open }: { open: boolean }) => (
     />
   </svg>
 );
+
+const MenuLink = ({
+  child,
+  siblings,
+  pathname,
+  onNavigate,
+  compact = false,
+}: {
+  child: NavItem;
+  siblings: NavItem[];
+  pathname: string | null;
+  onNavigate: () => void;
+  compact?: boolean;
+}) => {
+  const childActive = isChildActive(child, siblings, pathname);
+  const iconSize = compact ? 18 : 20;
+  const iconBox = compact ? "size-9 rounded-lg" : "size-10 rounded-xl";
+  const padding = compact ? "p-3" : "p-4";
+  const indent = !compact && child.indent ? "ml-7" : compact ? "" : "";
+  const descClass = compact
+    ? "text-xs text-white/55 leading-snug"
+    : "text-sm text-white/55 leading-snug";
+
+  return (
+    <Link
+      href={child.href}
+      onClick={onNavigate}
+      role="menuitem"
+      className={`group flex items-start ${compact ? "gap-3" : "gap-4"} ${padding} rounded-xl transition-colors ${indent} ${
+        childActive ? "bg-primary/10" : "hover:bg-white/4"
+      }`}
+    >
+      <span
+        className={`shrink-0 ${iconBox} flex items-center justify-center border transition-colors ${
+          childActive
+            ? "bg-primary/20 border-primary/50 text-primary"
+            : "bg-primary/10 border-primary/25 text-primary group-hover:bg-primary/15 group-hover:border-primary/40"
+        }`}
+      >
+        {child.icon && <NavIcon name={child.icon} size={iconSize} />}
+      </span>
+      <span className="flex flex-col gap-0.5 min-w-0">
+        <span
+          className={`flex ${compact ? "flex-wrap" : ""} items-center gap-2`}
+        >
+          <span
+            className={`text-base leading-snug ${
+              childActive ? "text-primary" : "text-white"
+            }`}
+          >
+            {child.label}
+          </span>
+          {child.tag && (
+            <span className="shrink-0 text-[10px] uppercase tracking-[0.15em] text-primary/80 border border-primary/30 bg-primary/[0.08] rounded-full px-2 py-0.5">
+              {child.tag}
+            </span>
+          )}
+        </span>
+        {child.desc && (
+          <span className={descClass}>{child.desc}</span>
+        )}
+      </span>
+    </Link>
+  );
+};
+
+const MenuCtaFooter = ({
+  cta,
+  onNavigate,
+  boxed = false,
+}: {
+  cta: MenuCta;
+  onNavigate: () => void;
+  boxed?: boolean;
+}) => {
+  if (boxed) {
+    return (
+      <div className="rounded-xl border border-white/15 bg-white/[0.03] p-5 flex flex-col gap-4">
+        <div className="flex flex-col min-w-0">
+          <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
+            {cta.eyebrow}
+          </span>
+          <span className="text-sm text-white/85 mt-1">{cta.headline}</span>
+        </div>
+        <Link
+          href={cta.ctaHref}
+          onClick={onNavigate}
+          className="inline-flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-sm bg-primary/15 hover:bg-primary/30 border border-primary/40 text-primary transition-colors whitespace-nowrap"
+        >
+          {cta.ctaLabel}
+          <span aria-hidden>→</span>
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="border-t border-white/10 bg-white/2 px-8 py-5 flex items-center justify-between gap-4">
+      <div className="flex flex-col min-w-0 shrink">
+        <span className="text-xs uppercase tracking-[0.25em] text-primary/80">
+          {cta.eyebrow}
+        </span>
+        <span className="text-sm text-white/85 mt-1">{cta.headline}</span>
+      </div>
+      <Link
+        href={cta.ctaHref}
+        onClick={onNavigate}
+        className="inline-flex shrink-0 items-center gap-2 rounded-full px-5 py-2.5 text-sm bg-primary/15 hover:bg-primary/30 border border-primary/40 text-primary transition-colors whitespace-nowrap"
+      >
+        {cta.ctaLabel}
+        <span aria-hidden>→</span>
+      </Link>
+    </div>
+  );
+};
+
+const PlatformMegaMenu = ({
+  item,
+  pathname,
+  cta,
+  onNavigate,
+}: {
+  item: NavMenuItem;
+  pathname: string | null;
+  cta: MenuCta | null;
+  onNavigate: () => void;
+}) => {
+  const siblings = getMenuLinks(item);
+  const leftSections =
+    item.sections?.filter((section) => section.column === "left") ?? [];
+  const rightSections =
+    item.sections?.filter((section) => section.column === "right") ?? [];
+
+  return (
+    <div className="px-4 pb-6">
+      {item.overview && (
+        <MenuLink
+          child={item.overview}
+          siblings={siblings}
+          pathname={pathname}
+          onNavigate={onNavigate}
+        />
+      )}
+
+      <div className="mt-2 grid md:grid-cols-2 gap-x-6 gap-y-6">
+        <div className="flex flex-col gap-6">
+          {leftSections.map((section) => (
+            <div key={section.eyebrow}>
+              <p className="px-4 pb-2 text-[11px] uppercase tracking-[0.25em] text-primary">
+                {section.eyebrow}
+              </p>
+              <div className="flex flex-col gap-1">
+                {section.items.map((child) => (
+                  <MenuLink
+                    key={`${child.href}-${child.label}`}
+                    child={child}
+                    siblings={siblings}
+                    pathname={pathname}
+                    onNavigate={onNavigate}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-6">
+          {rightSections.map((section) => (
+            <div key={section.eyebrow}>
+              <p className="px-4 pb-2 text-[11px] uppercase tracking-[0.25em] text-primary">
+                {section.eyebrow}
+              </p>
+              <div className="flex flex-col gap-1">
+                {section.items.map((child) => (
+                  <MenuLink
+                    key={`${child.href}-${child.label}`}
+                    child={child}
+                    siblings={siblings}
+                    pathname={pathname}
+                    onNavigate={onNavigate}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+
+          {cta && (
+            <MenuCtaFooter cta={cta} onNavigate={onNavigate} boxed />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const NavIcon = ({ name, size = 20 }: { name: IconName; size?: number }) => {
   const common = {
