@@ -304,16 +304,21 @@ const NavBar = () => {
     }, 200);
   };
 
-  // Align the dropdown's left edge with its trigger, clamped so the
-  // panel never overflows the right edge of the viewport.
+  // Wide sectioned menus (Platform) center on the viewport; smaller menus
+  // align their left edge with the trigger, clamped inside the viewport.
   const measureMenuLeft = (label: string) => {
+    const item = NAV_TREE.find((i) => i.label === label);
+    if (item?.sections) {
+      setMenuLeft(null);
+      return;
+    }
+
     const trigger = triggerRefs.current[label];
     if (!trigger || typeof window === "undefined") return;
-    const item = NAV_TREE.find((i) => i.label === label);
     const vw = window.innerWidth;
     const panelWidth = Math.min(
       0.94 * vw,
-      item?.sections ? 1080 : item?.stacked ? 600 : 1080,
+      item?.stacked ? 600 : 1080,
     );
     const rawLeft = trigger.getBoundingClientRect().left;
     setMenuLeft(Math.max(16, Math.min(rawLeft, vw - panelWidth - 16)));
