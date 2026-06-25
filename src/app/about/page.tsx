@@ -8,6 +8,7 @@ import StaggeredText from "@/components/react-bits/staggered-text";
 import PrinciplesScroller from "@/components/PrinciplesScroller";
 import StoryTimeline from "@/components/StoryTimeline";
 import SynapticShift from "@/components/react-bits/synaptic-shift";
+import CareersSection from "@/components/CareersSection";
 import { orangeAurora, blackSky } from "@/components/AuroraPresets";
 
 export const metadata: Metadata = pageMetadata({
@@ -121,6 +122,8 @@ export default function AboutPage() {
           }
         />
       </section>
+
+      <CareersSection />
 
       <section className="relative px-6 md:px-16 py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent pointer-events-none" />
