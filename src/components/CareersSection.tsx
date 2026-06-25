@@ -15,7 +15,7 @@ const CareersSection = () => {
           sizes="(max-width: 1280px) 100vw, 1280px"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-white/60" aria-hidden />
+        <div className="absolute inset-0 bg-black/70" aria-hidden />
 
         <div className="relative z-10 flex min-h-[560px] flex-col p-6 md:min-h-[640px] md:p-10 lg:grid lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-1 items-end lg:col-span-7">
@@ -23,10 +23,10 @@ const CareersSection = () => {
               <span className="mb-4 inline-block text-xs uppercase tracking-[0.3em] text-primary">
                 Careers
               </span>
-              <h2 className="text-4xl leading-[1.05] text-black sm:text-5xl md:text-6xl">
+              <h2 className="text-4xl leading-[1.05] text-white sm:text-5xl md:text-6xl">
                 Join Our Team.
               </h2>
-              <p className="mt-4 max-w-md text-base leading-relaxed text-black/70 md:text-lg">
+              <p className="mt-4 max-w-md text-base leading-relaxed text-white/70 md:text-lg">
                 Help us build the standard for modern supervision — technology
                 designed around people, dignity, and better outcomes.
               </p>
@@ -34,7 +34,7 @@ const CareersSection = () => {
           </div>
 
           <div className="mt-8 flex w-full flex-col gap-4 lg:col-span-5 lg:mt-0 lg:justify-end">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-black/10 shadow-[0_20px_60px_rgba(0,0,0,0.12)] sm:aspect-[16/11]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.35)] sm:aspect-[16/11]">
               <Image
                 src="/about/office-exterior.png"
                 alt="Talitrix office building in Alpharetta, Georgia"
@@ -47,26 +47,26 @@ const CareersSection = () => {
               </span>
             </div>
 
-            <div className="rounded-2xl border border-white/50 bg-white/35 p-6 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] sm:p-7">
-              <p className="text-[11px] uppercase tracking-[0.25em] text-black/45">
+            <div className="rounded-2xl border border-white/15 bg-black/45 p-6 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] sm:p-7">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-white/45">
                 Our team
               </p>
 
               <div className="mt-5 space-y-5">
                 <div>
-                  <p className="text-3xl font-medium leading-none text-black sm:text-4xl">
+                  <p className="text-3xl font-medium leading-none text-white sm:text-4xl">
                     30+
                   </p>
-                  <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-black/50">
+                  <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-white/50">
                     Team members and counting
                   </p>
                 </div>
 
                 <div>
-                  <p className="text-3xl font-medium leading-none text-black sm:text-4xl">
+                  <p className="text-3xl font-medium leading-none text-white sm:text-4xl">
                     2020
                   </p>
-                  <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-black/50">
+                  <p className="mt-2 text-[11px] uppercase tracking-[0.2em] text-white/50">
                     Founded
                   </p>
                 </div>
