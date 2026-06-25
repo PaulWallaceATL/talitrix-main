@@ -21,7 +21,7 @@ const PlatformSection = () => {
 
     gsap.set(platform, { opacity: 1 });
 
-    gsap.matchMedia().add("(min-width: 1024px)", () => {
+    gsap.matchMedia().add("(min-width: 1280px)", () => {
       const pinEnd = "+=250%";
       const fadeStart = 0.8;
 
@@ -108,8 +108,8 @@ const PlatformSection = () => {
 
   return (
     <div ref={platformRef} id="platform-section" className="relative opacity-0">
-      <div className="w-full lg:h-screen relative overflow-hidden">
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 lg:pt-32 lg:pb-40 relative z-0">
+      <div className="w-full xl:h-screen relative overflow-hidden">
+        <div className="text-center px-6 sm:px-12 lg:px-16 pt-16 sm:pt-20 xl:pt-32 xl:pb-40 relative z-0">
           <h2
             className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
             ref={h2Ref}
@@ -120,13 +120,13 @@ const PlatformSection = () => {
             </span>
           </h2>
         </div>
-        <div className="lg:absolute lg:top-[55%] lg:h-100 lg:left-1/2 lg:-translate-1/2 z-5">
+        <div className="xl:absolute xl:top-[55%] xl:h-100 xl:left-1/2 xl:-translate-1/2 z-5">
           <div
-            className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-start lg:flex-row gap-10  lg:mx-0 lg:max-w-none lg:gap-6 lg:w-250 lg:h-500 lg:origin-bottom lg:rotate-55 mt-10 mb-40 lg:mt-0 lg:mb-0 px-6 lg:px-0"
+            className="flex flex-wrap xl:flex-nowrap justify-center xl:justify-start xl:flex-row gap-10 xl:mx-0 xl:max-w-none xl:gap-6 xl:w-250 xl:h-500 xl:origin-bottom xl:rotate-55 mt-10 mb-40 xl:mt-0 xl:mb-0 px-6 xl:px-0"
             ref={screenRef}
           >
-            <div className="w-full platform-cards platform-card-2 max-w-85 lg:max-w-none">
-              <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right lg:-rotate-12 overflow-hidden relative">
+            <div className="w-full platform-cards platform-card-2 max-w-85 xl:max-w-none">
+              <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right xl:-rotate-12 overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
                   src={"/platform/one-jms.png"}
@@ -137,7 +137,7 @@ const PlatformSection = () => {
                 />
               </div>
             </div>
-            <div className="w-full platform-cards platform-card-2 max-w-85 lg:max-w-none">
+            <div className="w-full platform-cards platform-card-2 max-w-85 xl:max-w-none">
               <div className="p-1 rounded-3xl shadow-lg shadow-primary/45 origin-bottom-right overflow-hidden relative">
                 <div className="size-96 bg-radial blur-xl rounded-full absolute -top-30 from-white from-30% to-55% to-primary"></div>
                 <Image
@@ -149,15 +149,15 @@ const PlatformSection = () => {
                 />
               </div>
             </div>
-            <div className="w-full relative max-w-85 lg:max-w-none platform-card-2">
-              <div className="origin-bottom-left lg:rotate-12 relative ">
+            <div className="w-full relative max-w-85 xl:max-w-none platform-card-2">
+              <div className="origin-bottom-left xl:rotate-12 relative ">
                 <div className="relative z-10 " ref={cardRef}>
-                  <div className="pointer-events-none absolute top-[36%] z-20 flex w-full flex-col items-center gap-1 sm:gap-2 lg:gap-2">
-                    <h3 className="text-center text-sm tracking-widest lg:text-base">
+                  <div className="pointer-events-none absolute top-[36%] z-20 flex w-full flex-col items-center gap-1 sm:gap-2 xl:gap-2">
+                    <h3 className="text-center text-sm tracking-widest xl:text-base">
                       TALITRIX
                     </h3>
-                    <div className="relative size-32 lg:size-30">
-                      <div className="absolute top-1/2 left-1/2 -translate-1/2 text-3xl text-primary lg:text-4xl">
+                    <div className="relative size-32 xl:size-30">
+                      <div className="absolute top-1/2 left-1/2 -translate-1/2 text-3xl text-primary xl:text-4xl">
                         63
                       </div>
                       <svg

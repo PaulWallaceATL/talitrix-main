@@ -57,83 +57,11 @@ const PlatformContinuitySection = ({ id }: Props) => {
       // over surrounding content on first paint.
       gsap.set(platform, { opacity: 1 });
 
-      // ---------------------------------------------------------------
-      // Watch frame scrub — paints the rotating All-In-One Band into the canvas
-      // as the pin scrolls, mirroring the homepage's WatchScene rotation
-      // during the PlatformSection beat.
-      // ---------------------------------------------------------------
-      const ctx = canvas?.getContext("2d");
-      let watchCleanup: (() => void) | undefined;
-      if (canvas && ctx) {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        const images: HTMLImageElement[] = WATCH_FRAMES.map((idx) => {
-          const img = new window.Image();
-          img.src = watchFrameSrc(idx);
-          return img;
-        });
-        const obj = { frame: 0 };
-
-        const drawFrame = (index: number) => {
-          const img = images[Math.round(index)];
-          if (!img?.complete || !img.naturalWidth) return;
-          const cw = canvas.clientWidth;
-          const ch = canvas.clientHeight;
-          const iw = img.naturalWidth;
-          const ih = img.naturalHeight;
-          const scale = Math.min(cw / iw, ch / ih);
-          const dw = iw * scale;
-          const dh = ih * scale;
-          const dx = (cw - dw) / 2;
-          const dy = (ch - dh) / 2;
-          ctx.clearRect(0, 0, cw, ch);
-          ctx.drawImage(img, dx, dy, dw, dh);
-        };
-
-        const resize = () => {
-          const rect = canvas.getBoundingClientRect();
-          canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-          canvas.height = Math.max(1, Math.floor(rect.height * dpr));
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-          drawFrame(obj.frame);
-        };
-        resize();
-        window.addEventListener("resize", resize);
-
-        const first = images[0];
-        if (first.complete && first.naturalWidth) {
-          drawFrame(0);
-        } else {
-          first.addEventListener("load", () => drawFrame(obj.frame), {
-            once: true,
-          });
-        }
-
-        const frameTween = gsap.to(obj, {
-          frame: images.length - 1,
-          ease: "none",
-          snap: "frame",
-          onUpdate: () => drawFrame(obj.frame),
-          scrollTrigger: {
-            trigger: platform,
-            start: "top top",
-            end: "+=250%",
-            scrub: 0.4,
-          },
-        });
-
-        watchCleanup = () => {
-          window.removeEventListener("resize", resize);
-          frameTween.scrollTrigger?.kill();
-          frameTween.kill();
-        };
-      }
-
       const h2Split = SplitText.create(h2Ref.current, {
         type: "lines",
         mask: "lines",
       });
 
-      // h2 reveal as the section enters
       gsap.from(h2Split.lines, {
         y: "100%",
         stagger: 0.2,
@@ -144,52 +72,110 @@ const PlatformContinuitySection = ({ id }: Props) => {
         },
       });
 
-      // Pinned scroll choreography — mirrors the homepage's tl2.
-      const tl2 = gsap.timeline({
-        scrollTrigger: {
-          trigger: platform,
-          start: "top top",
-          end: "+=250%",
-          pin: true,
-          pinSpacing: true,
-          scrub: true,
-        },
-      });
-      tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
-      tl2.to(
-        watchRef.current,
-        { x: "-22%", delay: 0.1, ease: "power4.inOut" },
-        0,
-      );
-      // Mobile only: shorten the watch fade so it fully completes
-      // within the pin (0.8 + 0.2 = 1.0). Desktop's 0.5 duration ends
-      // past the timeline (1.3) and leaves the watch ~60% visible at
-      // pin end — which on mobile, where w-[225vw] makes the wrapper
-      // huge, peeks back into view as the section scrolls past.
-      const isMobileWatch =
-        typeof window !== "undefined" &&
-        window.matchMedia("(max-width: 639px)").matches;
-      const watchFadeDuration = isMobileWatch ? 0.2 : 0.5;
+      const mm = gsap.matchMedia();
+      let watchCleanup: (() => void) | undefined;
 
-      tl2.to(
-        watchRef.current,
-        {
-          x: "-50%",
-          opacity: 0,
-          duration: watchFadeDuration,
-          ease: "power1.in",
-        },
-        0.8,
-      );
-      // Fade the Talitrix Score card out with the rest (no scale-up /
-      // "explode") so this mirrors the homepage's 3-card beat.
-      tl2.to(cardRef.current, { opacity: 0, duration: 0.3 }, 0.8);
-      tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
-      tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
-      tl2.to(".pcs-card", { opacity: 0, duration: 0.3 }, 0.8);
+      mm.add("(min-width: 1280px)", () => {
+        const ctx = canvas?.getContext("2d");
+        if (canvas && ctx) {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          const images: HTMLImageElement[] = WATCH_FRAMES.map((idx) => {
+            const img = new window.Image();
+            img.src = watchFrameSrc(idx);
+            return img;
+          });
+          const obj = { frame: 0 };
+
+          const drawFrame = (index: number) => {
+            const img = images[Math.round(index)];
+            if (!img?.complete || !img.naturalWidth) return;
+            const cw = canvas.clientWidth;
+            const ch = canvas.clientHeight;
+            const iw = img.naturalWidth;
+            const ih = img.naturalHeight;
+            const scale = Math.min(cw / iw, ch / ih);
+            const dw = iw * scale;
+            const dh = ih * scale;
+            const dx = (cw - dw) / 2;
+            const dy = (ch - dh) / 2;
+            ctx.clearRect(0, 0, cw, ch);
+            ctx.drawImage(img, dx, dy, dw, dh);
+          };
+
+          const resize = () => {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+            canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            drawFrame(obj.frame);
+          };
+          resize();
+          window.addEventListener("resize", resize);
+
+          const first = images[0];
+          if (first.complete && first.naturalWidth) {
+            drawFrame(0);
+          } else {
+            first.addEventListener("load", () => drawFrame(obj.frame), {
+              once: true,
+            });
+          }
+
+          const frameTween = gsap.to(obj, {
+            frame: images.length - 1,
+            ease: "none",
+            snap: "frame",
+            onUpdate: () => drawFrame(obj.frame),
+            scrollTrigger: {
+              trigger: platform,
+              start: "top top",
+              end: "+=250%",
+              scrub: 0.4,
+            },
+          });
+
+          watchCleanup = () => {
+            window.removeEventListener("resize", resize);
+            frameTween.scrollTrigger?.kill();
+            frameTween.kill();
+          };
+        }
+
+        const tl2 = gsap.timeline({
+          scrollTrigger: {
+            trigger: platform,
+            start: "top top",
+            end: "+=250%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+          },
+        });
+        tl2.to(screenRef.current, { rotate: "-12deg" }, 0);
+        tl2.to(
+          watchRef.current,
+          { x: "-22%", delay: 0.1, ease: "power4.inOut" },
+          0,
+        );
+        tl2.to(
+          watchRef.current,
+          {
+            x: "-50%",
+            opacity: 0,
+            duration: 0.5,
+            ease: "power1.in",
+          },
+          0.8,
+        );
+        tl2.to(cardRef.current, { opacity: 0, duration: 0.3 }, 0.8);
+        tl2.to(h2Ref.current, { y: -200, opacity: 0, duration: 0.5 }, 0.8);
+        tl2.to(h2Ref.current, { pointerEvents: "none" }, 0.8);
+        tl2.to(".pcs-card", { opacity: 0, duration: 0.3 }, 0.8);
+      });
 
       return () => {
         watchCleanup?.();
+        mm.revert();
       };
     },
     { scope: platformRef },
@@ -201,12 +187,75 @@ const PlatformContinuitySection = ({ id }: Props) => {
       id={id}
       className="relative opacity-0 bg-background border-b border-border-gray"
     >
-      <div className="w-full h-screen relative overflow-hidden">
-        {/* Fanned card stack */}
-        <div className="absolute top-[64%] sm:top-[65%] lg:top-[68%] h-60 sm:h-80 lg:h-100 left-1/2 -translate-1/2 z-5">
+      <div className="w-full relative overflow-hidden xl:h-screen">
+        <div className="relative z-20 px-6 pt-24 pb-12 text-center sm:px-12 sm:pt-28 sm:pb-14 xl:px-16 xl:pt-32 xl:pb-16">
+          <h2
+            ref={h2Ref}
+            className="pb-2 text-3xl leading-[1.15] font-semibold sm:text-5xl xl:text-6xl"
+          >
+            One Platform. <br /> Complete{" "}
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
+              Continuity
+            </span>
+          </h2>
+        </div>
+
+        <div className="xl:hidden px-6 pb-20">
+          <div className="mt-10 flex flex-wrap justify-center gap-10">
+            <div className="w-full max-w-85">
+              <div className="relative overflow-hidden rounded-3xl p-1 shadow-lg shadow-primary/45">
+                <div className="absolute -top-30 size-96 rounded-full bg-radial from-white from-30% to-55% to-primary blur-xl" />
+                <Image
+                  src="/platform/one-jms.png"
+                  alt="ONE JMS incident breakdown"
+                  width={462}
+                  height={587}
+                  className="relative z-10 w-full rounded-2xl"
+                />
+              </div>
+            </div>
+            <div className="w-full max-w-85">
+              <div className="relative overflow-hidden rounded-3xl p-1 shadow-lg shadow-primary/45">
+                <div className="absolute -top-30 size-96 rounded-full bg-radial from-white from-30% to-55% to-primary blur-xl" />
+                <Image
+                  src="/platform/one-band.png"
+                  alt="All-In-One Band"
+                  width={462}
+                  height={587}
+                  className="relative z-10 w-full rounded-2xl"
+                />
+              </div>
+            </div>
+            <div className="relative w-full max-w-85">
+              <div className="relative">
+                <div className="pointer-events-none absolute top-[36%] z-20 flex w-full flex-col items-center gap-1 sm:gap-2">
+                  <h3 className="text-center text-sm tracking-widest">TALITRIX</h3>
+                  <div className="relative size-32">
+                    <div className="absolute top-1/2 left-1/2 -translate-1/2 text-3xl text-primary">
+                      63
+                    </div>
+                    <ScoreRing />
+                  </div>
+                </div>
+                <div className="relative overflow-hidden rounded-3xl p-1 shadow-lg shadow-primary/45">
+                  <div className="absolute -top-30 size-96 rounded-full bg-radial from-white from-30% to-55% to-primary blur-xl" />
+                  <Image
+                    src="/platform/one-score.png"
+                    alt="Talitrix Score"
+                    width={462}
+                    height={587}
+                    className="relative z-10 w-full rounded-2xl"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute top-[68%] left-1/2 z-5 hidden h-100 -translate-1/2 xl:block">
           <div
             ref={screenRef}
-            className="flex gap-3 sm:gap-4 lg:gap-6 w-[150vw] sm:w-[120vw] lg:w-250 h-[300vw] sm:h-[200vw] lg:h-500 origin-bottom rotate-55"
+            className="flex h-500 w-250 origin-bottom rotate-55 gap-6"
           >
             <div className="w-full pcs-card">
               <Image
@@ -214,7 +263,7 @@ const PlatformContinuitySection = ({ id }: Props) => {
                 alt="ONE JMS incident breakdown"
                 width={462}
                 height={587}
-                className="w-full rounded-2xl origin-bottom-right -rotate-12"
+                className="w-full origin-bottom-right -rotate-12 rounded-2xl"
               />
             </div>
             <div className="w-full pcs-card">
@@ -226,13 +275,15 @@ const PlatformContinuitySection = ({ id }: Props) => {
                 className="w-full rounded-2xl"
               />
             </div>
-            <div className="w-full relative">
-              <div className="origin-bottom-left rotate-12 relative">
+            <div className="relative w-full">
+              <div className="relative origin-bottom-left rotate-12">
                 <div className="relative" ref={cardRef}>
-                  <div className="top-[36%] absolute w-full flex flex-col items-center gap-1 sm:gap-2">
-                    <h3 className="tracking-widest text-center text-[10px] sm:text-sm lg:text-base">TALITRIX</h3>
-                    <div className="size-14 sm:size-20 lg:size-30 relative">
-                      <div className="top-1/2 left-1/2 -translate-1/2 text-primary text-lg sm:text-2xl lg:text-4xl absolute">
+                  <div className="absolute top-[36%] flex w-full flex-col items-center gap-2">
+                    <h3 className="text-center text-base tracking-widest">
+                      TALITRIX
+                    </h3>
+                    <div className="relative size-30">
+                      <div className="absolute top-1/2 left-1/2 -translate-1/2 text-4xl text-primary">
                         63
                       </div>
                       <ScoreRing />
@@ -253,13 +304,9 @@ const PlatformContinuitySection = ({ id }: Props) => {
           </div>
         </div>
 
-        {/* Local All-In-One Band canvas (replaces homepage's global #watchscene).
-            Sized to match the on-screen footprint of the homepage canvas
-            so the watch dominates the cards as it does there, and
-            scrubs through the same rotation arc as the pin scrolls. */}
         <div
           ref={watchRef}
-          className="absolute left-1/2 top-[64%] sm:top-[65%] lg:top-[68%] -translate-1/2 z-10 w-[225vw] sm:w-[85vw] md:w-[1200px] lg:w-[1500px] aspect-square pointer-events-none"
+          className="pointer-events-none absolute top-[68%] left-1/2 z-10 hidden aspect-square w-[1500px] -translate-1/2 xl:block"
         >
           <div
             className="absolute inset-[20%] rounded-full bg-[radial-gradient(circle_at_center,rgba(248,122,19,0.5),rgba(248,122,19,0.12)_45%,transparent_72%)] blur-3xl"
@@ -267,22 +314,9 @@ const PlatformContinuitySection = ({ id }: Props) => {
           />
           <canvas
             ref={watchCanvasRef}
-            className="relative w-full h-full"
+            className="relative h-full w-full"
             aria-label="Talitrix All-In-One Band rotating as you scroll"
           />
-        </div>
-
-        {/* Heading — fades out at progress 0.8 */}
-        <div className="text-center px-6 sm:px-12 lg:px-16 pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-14 lg:pb-16 relative z-20">
-          <h2
-            ref={h2Ref}
-            className="text-3xl sm:text-5xl lg:text-6xl font-semibold leading-[1.15] pb-2"
-          >
-            One Platform. <br /> Complete{" "}
-            <span className="bg-clip-text text-transparent bg-linear-to-r from-white to-primary">
-              Continuity
-            </span>
-          </h2>
         </div>
       </div>
     </div>
