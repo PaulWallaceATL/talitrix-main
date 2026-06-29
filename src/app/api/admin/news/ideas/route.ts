@@ -113,9 +113,10 @@ You are a research analyst. Use web search to gather a short briefing on the cur
       researchUsed: Boolean(researchNotes),
     });
   } catch (err) {
-    const message =
-      err instanceof Error ? err.message : "Idea generation failed.";
     console.error("Idea generation failed", err);
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Idea generation failed. Please try again." },
+      { status: 500 },
+    );
   }
 }

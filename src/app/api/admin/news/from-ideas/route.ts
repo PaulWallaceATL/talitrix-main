@@ -63,9 +63,11 @@ export async function POST(req: Request) {
     const raw = await req.json();
     parsed = BodySchema.parse(raw);
   } catch (err) {
-    const message =
-      err instanceof Error ? err.message : "Invalid request body.";
-    return NextResponse.json({ error: message }, { status: 400 });
+    console.error("from-ideas invalid request body", err);
+    return NextResponse.json(
+      { error: "Invalid request body." },
+      { status: 400 },
+    );
   }
 
   const ideas = parsed.ideas;
@@ -146,10 +148,12 @@ export async function POST(req: Request) {
       if (insertErr) throw insertErr;
       return { ok: true as const, article: inserted };
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Article failed.";
       console.error(`from-ideas article ${i + 1} failed`, err);
-      return { ok: false as const, error: message, idea };
+      return {
+        ok: false as const,
+        error: "Article generation failed.",
+        idea,
+      };
     }
   });
 

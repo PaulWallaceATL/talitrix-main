@@ -25,6 +25,32 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: { exclude: ["error", "warn"] },
   },
+  async headers() {
+    return [
+      {
+        // Pragmatic security headers applied to every route. No CSP here on
+        // purpose — the site relies on inline scripts (scroll reset, JSON-LD)
+        // and WebGL/GSAP that a strict policy would break without nonces.
+        source: "/:path*",
+        headers: [
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       // Solutions pages consolidated to two audiences (Agencies + Participants).

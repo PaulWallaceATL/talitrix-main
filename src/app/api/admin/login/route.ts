@@ -5,10 +5,18 @@ import {
   checkAdminPassword,
   createSessionToken,
 } from "@/lib/admin-auth";
+import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
+  const limit = checkRateLimit(req, {
+    key: "admin-login",
+    limit: 10,
+    windowMs: 5 * 60_000,
+  });
+  if (!limit.ok) return rateLimitResponse(limit.retryAfter);
+
   let body: { password?: string };
   try {
     body = (await req.json()) as { password?: string };

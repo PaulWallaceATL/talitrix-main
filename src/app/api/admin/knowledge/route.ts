@@ -24,7 +24,10 @@ export async function GET() {
 
   if (error) {
     console.error(error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Could not load knowledge entries." },
+      { status: 500 },
+    );
   }
   return NextResponse.json({ entries: data ?? [] });
 }
@@ -72,7 +75,10 @@ export async function POST(req: Request) {
 
   if (error) {
     console.error(error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Could not create knowledge entry." },
+      { status: 500 },
+    );
   }
   return NextResponse.json({ entry: data });
 }

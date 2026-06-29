@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { sendLeadEmail } from "@/lib/lead-email";
 import { supabaseAdmin } from "@/lib/supabase";
+import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -14,6 +15,13 @@ function str(v: unknown, max = 2000): string | null {
 const BRIEFING_TYPES = new Set(["briefing", "sales"]);
 
 export async function POST(req: Request) {
+  const limit = checkRateLimit(req, {
+    key: "contact",
+    limit: 5,
+    windowMs: 60_000,
+  });
+  if (!limit.ok) return rateLimitResponse(limit.retryAfter);
+
   let body: Record<string, unknown>;
   try {
     body = (await req.json()) as Record<string, unknown>;

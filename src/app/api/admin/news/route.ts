@@ -34,7 +34,10 @@ export async function GET() {
 
   if (error) {
     console.error(error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Could not load articles." },
+      { status: 500 },
+    );
   }
   return NextResponse.json({ articles: data ?? [] });
 }
@@ -107,7 +110,10 @@ export async function POST(req: Request) {
         { status: 409 },
       );
     }
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Could not create article." },
+      { status: 500 },
+    );
   }
 
   return NextResponse.json({ article: data });

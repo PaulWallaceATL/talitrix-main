@@ -28,7 +28,11 @@ export async function DELETE(_req: Request, ctx: Ctx) {
 
   const { error } = await supabaseAdmin().from(table).delete().eq("id", id);
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error(error);
+    return NextResponse.json(
+      { error: "Could not delete submission." },
+      { status: 500 },
+    );
   }
   return NextResponse.json({ ok: true });
 }

@@ -77,9 +77,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ article: object });
   } catch (err) {
-    const message =
-      err instanceof Error ? err.message : "Generation failed.";
     console.error("AI generation failed", err);
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Generation failed. Please try again." },
+      { status: 500 },
+    );
   }
 }

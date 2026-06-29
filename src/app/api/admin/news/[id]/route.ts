@@ -36,7 +36,11 @@ export async function GET(_req: Request, ctx: Ctx) {
     .maybeSingle();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error(error);
+    return NextResponse.json(
+      { error: "Could not load article." },
+      { status: 500 },
+    );
   }
   if (!data) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -115,13 +119,17 @@ export async function PATCH(req: Request, ctx: Ctx) {
     .single();
 
   if (error) {
+    console.error(error);
     if (error.code === "23505") {
       return NextResponse.json(
         { error: "An article with that slug already exists." },
         { status: 409 },
       );
     }
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Could not update article." },
+      { status: 500 },
+    );
   }
   return NextResponse.json({ article: data });
 }
@@ -138,7 +146,11 @@ export async function DELETE(_req: Request, ctx: Ctx) {
     .eq("id", id);
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error(error);
+    return NextResponse.json(
+      { error: "Could not delete article." },
+      { status: 500 },
+    );
   }
   return NextResponse.json({ ok: true });
 }
