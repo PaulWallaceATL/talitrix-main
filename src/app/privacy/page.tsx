@@ -379,6 +379,36 @@ export default function PrivacyPage() {
                 or decline cookies. If you choose to decline cookies, certain
                 features of our website may not function properly as a result.
               </p>
+              <H3>Data Retention Policy.</H3>
+              <p>
+                Talitrix retains customer, participant, monitoring, system, and
+                related operational data for a minimum period of seven (7)
+                years, unless a longer retention period is required by contract,
+                applicable law, court order, agency policy, litigation hold,
+                audit requirement, or other legal or regulatory obligation.
+                Talitrix maintains retained data in accordance with applicable
+                security, access control, confidentiality, and data integrity
+                standards to support government partner operations, historical
+                reporting, compliance review, legal proceedings, and authorized
+                agency requests.
+              </p>
+              <H3>Data Deletion Process Policy.</H3>
+              <p>
+                Talitrix does not independently delete participant, offender,
+                case, monitoring, or related user data upon request because such
+                data is owned, controlled, and governed by Talitrix&rsquo;s
+                government partners and criminal justice clients, including
+                sheriffs&rsquo; offices, courts, judges, police departments,
+                probation departments, correctional agencies, and other
+                authorized criminal justice entities. Any request for deletion,
+                removal, modification, or restriction of such data must be
+                submitted to and authorized by the applicable government agency
+                or client that owns or controls the data. Talitrix will only
+                process deletion or modification requests when properly directed
+                by the authorized government partner, subject to applicable
+                laws, contractual obligations, retention requirements, court
+                orders, audit obligations, and preservation requirements.
+              </p>
 
               <H2 id="updates">Updates to Our Privacy Notice</H2>
               <p>
